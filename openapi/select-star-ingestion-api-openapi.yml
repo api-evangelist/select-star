@@ -1,0 +1,391 @@
+openapi: 3.0.3
+info:
+  title: Select Star Metadata bi ingestion API
+  version: 1.0.0
+  x-role-system:
+    description: This API uses role-based access control
+    roles:
+      admin: Full access to all operations
+      data_manager: Can modify data and configurations
+      user: Read-only access to most resources
+  description: API for interacting with the Select Star system
+  termsOfService: https://www.selectstar.com/terms-of-service
+  contact:
+    email: support@selectstar.com
+  license:
+    name: All Rights Reserved
+tags:
+- name: ingestion
+paths:
+  /v1/ingestion/dbt/:
+    post:
+      operationId: ingestion_dbt_create
+      description: "\n        Kick off dbt ingestion using the provided `manifest.json` and `catalog.json`\n\n        If the dbt data's ingestion settings\n        * is Sync Docs, then the `catalog.json` is optional\n        * is New Data Source, then the `catalog.json` is required\n\n        You may send `manifest.json` as `manifest_file`.\n        You may send `catalog.json` as `catalog_file`.\n        You may send `run_results.json` as `run_results_file`.\n\n        Example:\n\n            curl --location --request POST 'https://api.production.selectstar.com/v1/ingestion/dbt/' \\\n                --header 'Authorization: Token ...' \\\n                --form 'data_source=\"...\"' \\\n                --form 'manifest_file=@\"/path/to/manifest.json\"' \\\n                --form 'catalog_file=@\"/path/to/catalog.json\"' \\\n                --form 'run_results_file=@\"/path/to/run_results.json\"'\n\n        \n\n**Required Role:** Data Manager or Admin"
+      summary: Kick off dbt ingestion
+      tags:
+      - ingestion
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ManifestJsonRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ManifestJsonRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ManifestJsonRequest'
+        required: true
+      security:
+      - JWTAuthentication: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManifestJsonSerializerOutput'
+          description: ''
+      x-role-requirements: Data Manager or Admin
+  /v1/ingestion/dbt/{guid}/ingest/:
+    get:
+      operationId: ingestion_dbt_ingest_retrieve
+      description: 'Start dbt ingestion for the given data source
+
+
+        **Required Role:** Admin (or RBAC policy)'
+      summary: Start dbt ingestion
+      parameters:
+      - in: path
+        name: guid
+        schema:
+          type: string
+          pattern: ^([a-zA-z]{2}_[a-zA-Z0-9]{22})|me|default|([a-zA-z]{2}_[a-zA-Z0-9]{22}).personal$
+        required: true
+      tags:
+      - ingestion
+      security:
+      - JWTAuthentication: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataSource'
+          description: ''
+      x-role-requirements: Admin (or RBAC policy)
+components:
+  schemas:
+    ConnectionStatusEnum:
+      enum:
+      - OK
+      - WA
+      - UN
+      - ER
+      type: string
+      description: '* `OK` - Correct
+
+        * `WA` - Warning
+
+        * `UN` - Unknown
+
+        * `ER` - Error'
+    DataSource:
+      type: object
+      properties:
+        guid:
+          type: string
+          readOnly: true
+        type:
+          $ref: '#/components/schemas/Type6b6Enum'
+        name:
+          type: string
+          maxLength: 100
+        keypair:
+          $ref: '#/components/schemas/KeyPair'
+        last_ingested_on:
+          type: string
+          format: date-time
+          nullable: true
+        last_fully_ingested_on:
+          type: string
+          format: date-time
+          readOnly: true
+        is_ingesting:
+          type: boolean
+          readOnly: true
+        is_syncing_paused:
+          type: boolean
+          readOnly: true
+        connection_status:
+          $ref: '#/components/schemas/ConnectionStatusEnum'
+        connection_error_message:
+          type: string
+          description: Exception message if health check failed
+        is_mode_discovery_db_added:
+          type: boolean
+          readOnly: true
+        external_uuid:
+          type: string
+          nullable: true
+          description: UUID used for running aws cloudformation.
+          maxLength: 64
+        iam_principal:
+          type: string
+          nullable: true
+          description: IAM Principal used for running aws cloudformation.
+          maxLength: 64
+        cloudformation_url:
+          type: object
+          additionalProperties:
+            type: string
+          nullable: true
+          readOnly: true
+        is_credentials_setup_incomplete:
+          type: boolean
+          readOnly: true
+        processed_through:
+          $ref: '#/components/schemas/ProcessedThrough'
+        data_types:
+          allOf:
+          - $ref: '#/components/schemas/BaseType'
+          readOnly: true
+      required:
+      - cloudformation_url
+      - data_types
+      - guid
+      - is_credentials_setup_incomplete
+      - is_ingesting
+      - is_mode_discovery_db_added
+      - is_syncing_paused
+      - last_fully_ingested_on
+      - name
+      - type
+    ProcessedThrough:
+      type: object
+      properties:
+        start_time:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcessedThroughEntry'
+      required:
+      - start_time
+    KeyPair:
+      type: object
+      properties:
+        public_key:
+          type: string
+          nullable: true
+          maxLength: 1000
+    ManifestJsonRequest:
+      type: object
+      properties:
+        data_source:
+          type: string
+          minLength: 1
+          description: the guid of the data source you want to update
+        dbt_project:
+          type: string
+          minLength: 1
+          writeOnly: true
+          description: the guid of the dbt project you want to update. (REQUIRED if you have multiple dbt projects in the same data source)
+        manifest:
+          type: string
+          writeOnly: true
+          minLength: 1
+          description: the contents of the catalog.json file, use `catalog_file` instead
+          deprecated: true
+        catalog:
+          type: string
+          writeOnly: true
+          minLength: 1
+          description: the contents of the manifest.json file, use `manifest_file` instead
+          deprecated: true
+        manifest_file:
+          type: string
+          format: binary
+          writeOnly: true
+          description: the manifest.json file encoded in `utf8` (mutually exclusive with manifest)
+        catalog_file:
+          type: string
+          format: binary
+          writeOnly: true
+          description: the catalog.json file encoded in `utf8` (mutually exclusive with catalog)
+        run_results_file:
+          type: string
+          format: binary
+          writeOnly: true
+          description: the run_results.json file encoded in `utf8`
+      required:
+      - data_source
+    ProcessedThroughEntry:
+      type: object
+      properties:
+        key:
+          type: string
+          readOnly: true
+        date:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - date
+      - key
+    Type6b6Enum:
+      enum:
+      - airflow
+      - aws_s3
+      - bigquery
+      - data_studio
+      - databricks
+      - db_agent
+      - db2
+      - dbt
+      - fivetran
+      - glue
+      - hex
+      - looker
+      - metabase
+      - mode
+      - monte_carlo
+      - mssql
+      - mysql
+      - omni
+      - openlineage
+      - oracle
+      - periscope
+      - postgres
+      - power_bi
+      - quicksight
+      - redshift
+      - salesforce
+      - salesforce_crma
+      - sigma
+      - snowflake
+      - tableau
+      - thoughtspot
+      - trial
+      - trial_redshift
+      type: string
+      description: '* `airflow` - Airflow
+
+        * `aws_s3` - AWS S3
+
+        * `bigquery` - BigQuery
+
+        * `data_studio` - Looker Studio
+
+        * `databricks` - Databricks
+
+        * `db_agent` - DB Agent
+
+        * `db2` - DB2
+
+        * `dbt` - dbt
+
+        * `fivetran` - Fivetran
+
+        * `glue` - Glue
+
+        * `hex` - Hex
+
+        * `looker` - Looker
+
+        * `metabase` - Metabase
+
+        * `mode` - Mode
+
+        * `monte_carlo` - Monte Carlo
+
+        * `mssql` - MS SQL
+
+        * `mysql` - MySQL
+
+        * `omni` - Omni BI
+
+        * `openlineage` - Open Lineage
+
+        * `oracle` - Oracle
+
+        * `periscope` - Periscope
+
+        * `postgres` - PostgreSQL
+
+        * `power_bi` - Power BI
+
+        * `quicksight` - QuickSight
+
+        * `redshift` - Redshift
+
+        * `salesforce` - Salesforce
+
+        * `salesforce_crma` - Salesforce Analytics
+
+        * `sigma` - Sigma
+
+        * `snowflake` - Snowflake
+
+        * `tableau` - Tableau
+
+        * `thoughtspot` - ThoughtSpot
+
+        * `trial` - Trial
+
+        * `trial_redshift` - Trial Redshift'
+    BaseType:
+      type: object
+      description: 'Base Serializer to inject the following `type` information:
+
+        - Object Type: Model Name of the Object: Table, Dashboard, ReportQuery
+
+        - Data Source Type: snowflake, databricks etc.
+
+        - Data Type: Additional type like tile, visual, card etc.'
+      properties:
+        object_type:
+          type: string
+          nullable: true
+          readOnly: true
+        data_source_type:
+          type: string
+          nullable: true
+          readOnly: true
+        data_type:
+          type: string
+          nullable: true
+          readOnly: true
+        external_database_type:
+          type: string
+          nullable: true
+          readOnly: true
+      required:
+      - data_source_type
+      - data_type
+      - external_database_type
+      - object_type
+    ManifestJsonSerializerOutput:
+      type: object
+      properties:
+        data_source:
+          type: string
+          description: the guid of the data source you updated
+        dbt_project:
+          type: string
+          description: the guid of the dbt project you updated
+      required:
+      - data_source
+      - dbt_project
+  securitySchemes:
+    JWTAuthentication:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Token-based authentication with required prefix "Token"
+externalDocs:
+  description: Select Star API reference documentation
+  url: https://docs.selectstar.com/select-star-api

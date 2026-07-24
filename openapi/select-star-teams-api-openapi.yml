@@ -1,0 +1,983 @@
+openapi: 3.0.3
+info:
+  title: Select Star Metadata bi teams API
+  version: 1.0.0
+  x-role-system:
+    description: This API uses role-based access control
+    roles:
+      admin: Full access to all operations
+      data_manager: Can modify data and configurations
+      user: Read-only access to most resources
+  description: API for interacting with the Select Star system
+  termsOfService: https://www.selectstar.com/terms-of-service
+  contact:
+    email: support@selectstar.com
+  license:
+    name: All Rights Reserved
+tags:
+- name: teams
+paths:
+  /v1/teams/:
+    get:
+      operationId: teams_list
+      description: 'List all teams within the organization along with sample users (access: all users)
+
+
+        **Required Role:** Viewer or higher'
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - teams
+      security:
+      - JWTAuthentication: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedTeamWithSampleMembersList'
+          description: ''
+      x-role-requirements: Viewer or higher
+    post:
+      operationId: teams_create
+      description: 'Create a team within the organization (access: admin only)
+
+
+        **Required Role:** Admin'
+      tags:
+      - teams
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TeamRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TeamRequest'
+        required: true
+      security:
+      - JWTAuthentication: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+          description: ''
+      x-role-requirements: Admin
+  /v1/teams/{guid}/:
+    get:
+      operationId: teams_retrieve
+      description: 'Get a team given a guid (access: all users)
+
+
+        **Required Role:** Viewer or higher'
+      parameters:
+      - in: path
+        name: guid
+        schema:
+          type: string
+          pattern: ^([a-zA-z]{2}_[a-zA-Z0-9]{22})|me|default|([a-zA-z]{2}_[a-zA-Z0-9]{22}).personal$
+        required: true
+      tags:
+      - teams
+      security:
+      - JWTAuthentication: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamWithMembers'
+          description: ''
+      x-role-requirements: Viewer or higher
+    patch:
+      operationId: teams_partial_update
+      description: 'Update the team within the organization (access: admin only)
+
+
+        **Required Role:** Admin'
+      parameters:
+      - in: path
+        name: guid
+        schema:
+          type: string
+          pattern: ^([a-zA-z]{2}_[a-zA-Z0-9]{22})|me|default|([a-zA-z]{2}_[a-zA-Z0-9]{22}).personal$
+        required: true
+      tags:
+      - teams
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedTeamUpdateRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedTeamUpdateRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedTeamUpdateRequest'
+      security:
+      - JWTAuthentication: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamUpdate'
+          description: ''
+      x-role-requirements: Admin
+    delete:
+      operationId: teams_destroy
+      description: 'Remove a team from the organization (access: admin only)
+
+
+        **Required Role:** Admin'
+      parameters:
+      - in: path
+        name: guid
+        schema:
+          type: string
+          pattern: ^([a-zA-z]{2}_[a-zA-Z0-9]{22})|me|default|([a-zA-z]{2}_[a-zA-Z0-9]{22}).personal$
+        required: true
+      tags:
+      - teams
+      security:
+      - JWTAuthentication: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+      x-role-requirements: Admin
+  /v1/teams/{guid}/transfer-users/:
+    patch:
+      operationId: teams_transfer_users_partial_update
+      description: 'Manage Organization Teams
+
+
+        **Required Role:** Admin'
+      parameters:
+      - in: path
+        name: guid
+        schema:
+          type: string
+          pattern: ^([a-zA-z]{2}_[a-zA-Z0-9]{22})|me|default|([a-zA-z]{2}_[a-zA-Z0-9]{22}).personal$
+        required: true
+      tags:
+      - teams
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedTeamUsersTransferRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedTeamUsersTransferRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedTeamUsersTransferRequest'
+      security:
+      - JWTAuthentication: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamUsersTransfer'
+          description: ''
+      x-role-requirements: Admin
+components:
+  schemas:
+    TeamUsersTransfer:
+      type: object
+      properties:
+        guid:
+          type: string
+          readOnly: true
+      required:
+      - guid
+    UseAvatarInitialsEnum:
+      enum:
+      - english
+      - korean
+      type: string
+      description: '* `english` - english
+
+        * `korean` - korean'
+    TeamUpdate:
+      type: object
+      properties:
+        guid:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+          nullable: true
+          description: Active description
+        richtext_description:
+          type: string
+          nullable: true
+          description: Richtext formatted description. Can be in Slatejs or Draftjs format.
+        settings:
+          $ref: '#/components/schemas/TeamSetting'
+      required:
+      - guid
+      - name
+    TeamWithMembers:
+      type: object
+      properties:
+        guid:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+          nullable: true
+          description: Active description
+        richtext_description:
+          type: string
+          nullable: true
+          description: Richtext formatted description. Can be in Slatejs or Draftjs format.
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        organization:
+          $ref: '#/components/schemas/Organization'
+        settings:
+          $ref: '#/components/schemas/TeamSetting'
+        data_types:
+          allOf:
+          - $ref: '#/components/schemas/BaseType'
+          readOnly: true
+      required:
+      - data_types
+      - guid
+      - name
+    TeamUsersTransferSerializer.GuidReferenceField.new_teamRequest:
+      type: string
+      description: GUID
+    UserSetting:
+      type: object
+      properties:
+        enable_email_notifications:
+          type: boolean
+          description: Whether this user wants an email notification or not
+        enable_slack_notifications:
+          type: boolean
+          description: Whether this user wants a slack notification or not
+        enable_notifications_for_schema_changes:
+          type: boolean
+          description: Whether this user wants a slack notification for schema changes or not
+        enable_notifications_for_metadata_changes:
+          type: boolean
+          description: Whether this user wants a slack notification for metadata changes or not
+        enable_discussions_notifications:
+          type: boolean
+          description: Whether this user wants a notification for new discussions or not
+        enable_favorites_notifications_for_schema_changes:
+          type: boolean
+          description: Whether this user wants a schema change notification for favorited items or not
+        enable_favorites_notifications_for_metadata_changes:
+          type: boolean
+          description: Whether this user wants a metadata change notification for favorited items or not
+        enable_favorites_notifications_for_discussions:
+          type: boolean
+          description: Whether this user wants a discussion notification for favorited items or not
+        default_database_table_column_order:
+          allOf:
+          - $ref: '#/components/schemas/DefaultDatabaseTableColumnOrderEnum'
+          description: 'Database table column order. There are several different ways to order columns
+
+
+            * `popularity` - popularity
+
+            * `column_ordinal_position` - column_ordinal_position
+
+            * `alphabetical` - alphabetical'
+        default_table_dashboard_tab:
+          allOf:
+          - $ref: '#/components/schemas/DefaultTableDashboardTabEnum'
+          description: 'Default tab for table / dashboard page
+
+
+            * `overview` - overview
+
+            * `columns_charts` - columns_charts'
+    PatchedTeamUpdateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        description:
+          type: string
+          nullable: true
+          description: Active description
+        richtext_description:
+          type: string
+          nullable: true
+          description: Richtext formatted description. Can be in Slatejs or Draftjs format.
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/ListSerializer.GuidReferenceField.Request'
+          writeOnly: true
+        settings:
+          $ref: '#/components/schemas/TeamSettingRequest'
+    ListSerializer.GuidReferenceField.Request:
+      type: string
+      description: GUID
+    TeamSettingRequest:
+      type: object
+      properties:
+        enable_notifications_for_schema_changes:
+          type: boolean
+          description: Whether this team should get notification for schema changes or not
+        enable_notifications_for_metadata_changes:
+          type: boolean
+          description: Whether this team should get notification for metadata changes or not
+        slack_channels_for_notifications:
+          type: array
+          items:
+            type: string
+            minLength: 1
+            maxLength: 1024
+          nullable: true
+          description: The list of Slack Channels this team will send notifications to
+        emails_for_notifications:
+          type: array
+          items:
+            type: string
+            format: email
+            minLength: 1
+            maxLength: 254
+            pattern: '@(?!gmail\.|hotmail\.|yahoo\.|live\.|qq\.|naver\.|protonmail\.|yopmail\.|pokemail\.|bvhrs\.|idrct\.|caraparcal\.|tryninja.io|mailinator.com|ontimeusemail\.|outlook\.|icloud\.|mail\.|instasmail\.|nevyxus\.|bvhrk\.|cazlq\.)'
+          nullable: true
+          description: The list of emails this team will send notifications to. Can contain emails from outside the Select Star
+    DefaultTableDashboardTabEnum:
+      enum:
+      - overview
+      - columns_charts
+      type: string
+      description: '* `overview` - overview
+
+        * `columns_charts` - columns_charts'
+    UserLite:
+      type: object
+      properties:
+        guid:
+          type: string
+          readOnly: true
+        first_name:
+          type: string
+          readOnly: true
+        last_name:
+          type: string
+          readOnly: true
+        team:
+          allOf:
+          - $ref: '#/components/schemas/TeamShortcut'
+          readOnly: true
+        email:
+          type: string
+          format: email
+          readOnly: true
+          title: Email address
+        avatar:
+          type: string
+          format: uri
+          readOnly: true
+          nullable: true
+        is_active:
+          type: boolean
+          readOnly: true
+      required:
+      - avatar
+      - email
+      - first_name
+      - guid
+      - is_active
+      - last_name
+      - team
+    Organization:
+      type: object
+      properties:
+        guid:
+          type: string
+          maxLength: 25
+        name:
+          type: string
+          maxLength: 100
+        trial_ends_at:
+          type: string
+          format: date
+          nullable: true
+          description: If this organization has been created for a trial purpose
+        subscription_ends_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date at which this organization's subscription ends at if it has a subscription
+        is_onboarding_complete:
+          type: boolean
+          description: If this organization has gone through the onboarding.
+        created_on:
+          type: string
+          format: date-time
+          readOnly: true
+        settings:
+          $ref: '#/components/schemas/OrganizationSettings'
+      required:
+      - created_on
+      - name
+      - settings
+    PatchedTeamUsersTransferRequest:
+      type: object
+      properties:
+        new_team:
+          allOf:
+          - $ref: '#/components/schemas/TeamUsersTransferSerializer.GuidReferenceField.new_teamRequest'
+          writeOnly: true
+    TeamWithSampleMembers:
+      type: object
+      properties:
+        guid:
+          type: string
+          maxLength: 25
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+          nullable: true
+          description: Active description
+        richtext_description:
+          type: string
+          nullable: true
+          description: Richtext formatted description. Can be in Slatejs or Draftjs format.
+        sample_users:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserLite'
+          readOnly: true
+        members_count:
+          type: integer
+          readOnly: true
+        data_types:
+          allOf:
+          - $ref: '#/components/schemas/BaseType'
+          readOnly: true
+      required:
+      - data_types
+      - members_count
+      - name
+      - sample_users
+    BaseType:
+      type: object
+      description: 'Base Serializer to inject the following `type` information:
+
+        - Object Type: Model Name of the Object: Table, Dashboard, ReportQuery
+
+        - Data Source Type: snowflake, databricks etc.
+
+        - Data Type: Additional type like tile, visual, card etc.'
+      properties:
+        object_type:
+          type: string
+          nullable: true
+          readOnly: true
+        data_source_type:
+          type: string
+          nullable: true
+          readOnly: true
+        data_type:
+          type: string
+          nullable: true
+          readOnly: true
+        external_database_type:
+          type: string
+          nullable: true
+          readOnly: true
+      required:
+      - data_source_type
+      - data_type
+      - external_database_type
+      - object_type
+    User:
+      type: object
+      properties:
+        guid:
+          type: string
+          readOnly: true
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+          pattern: ''
+          description: Email address of the user. Only corporate email addresses are allowed.
+        avatar:
+          type: string
+          format: uri
+          readOnly: true
+          nullable: true
+        team:
+          allOf:
+          - $ref: '#/components/schemas/TeamShortcut'
+          readOnly: true
+        last_login:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        last_activity:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        is_invitation_pending:
+          readOnly: true
+        is_active:
+          type: boolean
+          readOnly: true
+        is_verified:
+          type: boolean
+          readOnly: true
+          description: Whether the user has verified email or not
+        is_agreed_to_terms:
+          type: boolean
+        settings:
+          $ref: '#/components/schemas/UserSetting'
+        created_on:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - avatar
+      - created_on
+      - email
+      - first_name
+      - guid
+      - is_active
+      - is_agreed_to_terms
+      - is_invitation_pending
+      - is_verified
+      - last_activity
+      - last_login
+      - last_name
+      - team
+    DefaultDatabaseTableColumnOrderEnum:
+      enum:
+      - popularity
+      - column_ordinal_position
+      - alphabetical
+      type: string
+      description: '* `popularity` - popularity
+
+        * `column_ordinal_position` - column_ordinal_position
+
+        * `alphabetical` - alphabetical'
+    TeamSetting:
+      type: object
+      properties:
+        enable_notifications_for_schema_changes:
+          type: boolean
+          description: Whether this team should get notification for schema changes or not
+        enable_notifications_for_metadata_changes:
+          type: boolean
+          description: Whether this team should get notification for metadata changes or not
+        slack_channels_for_notifications:
+          type: array
+          items:
+            type: string
+            maxLength: 1024
+          nullable: true
+          description: The list of Slack Channels this team will send notifications to
+        emails_for_notifications:
+          type: array
+          items:
+            type: string
+            format: email
+            maxLength: 254
+            pattern: '@(?!gmail\.|hotmail\.|yahoo\.|live\.|qq\.|naver\.|protonmail\.|yopmail\.|pokemail\.|bvhrs\.|idrct\.|caraparcal\.|tryninja.io|mailinator.com|ontimeusemail\.|outlook\.|icloud\.|mail\.|instasmail\.|nevyxus\.|bvhrk\.|cazlq\.)'
+          nullable: true
+          description: The list of emails this team will send notifications to. Can contain emails from outside the Select Star
+    OrganizationSettings:
+      type: object
+      properties:
+        allow_email_password_authentication:
+          type: boolean
+          readOnly: true
+          title: Allow email/password authentication
+          description: When disabled, users will be forced to use "Sign in with Google" or WorkOS SSO
+        automated_pii:
+          type: boolean
+          readOnly: true
+          description: A feature flag to enable Automated PII Detection (Beta)
+        enable_cost_analysis:
+          type: boolean
+          readOnly: true
+          description: A feature flag to enable access to cost analysis. Each data source's ingestion configuration changes may be required to ensure data ingestion for cost analysis.In order to turn the cost analysis on, use Enable Cost Analysis command. For detailed information, about this specific flag reach out to Engineering.
+        enable_max_level_in_lineage_tags:
+          type: boolean
+          readOnly: true
+          description: A feature flag to decide whether limit the number of levels in lineage tags
+        popularity_timeframe:
+          type: integer
+          readOnly: true
+          nullable: true
+          description: Use a number between 30-90 indicating the number of days to calculate popularity. If this is null, it uses the default setting of starting with 30 days and then automatically increasing up to 90 days.
+        separate_schemata:
+          type: boolean
+          readOnly: true
+          description: Check if the schemata should show separated from the tables. When it's false, table names display as schema_name.table_name.
+        show_previews:
+          type: boolean
+          readOnly: true
+        show_schemata_page:
+          type: boolean
+          readOnly: true
+          description: Check for showing the schemata page when clicked on menu sidebar
+        show_sidebar_search:
+          type: boolean
+          readOnly: true
+          description: Check for showing/removing the sidebar search. This is per organization
+        use_ai_customization_settings:
+          type: boolean
+          readOnly: true
+          description: A feature flag to enable AI Customization Settings
+        use_ai_customization_settings_data_access:
+          type: boolean
+          readOnly: true
+          description: A feature flag to enable AI Customization Settings data access
+        use_ai_descriptions:
+          type: boolean
+          readOnly: true
+        use_avatar_initials:
+          allOf:
+          - $ref: '#/components/schemas/UseAvatarInitialsEnum'
+          readOnly: true
+          description: 'Enables the alternative avatar initials generation. This comes from a need for Korean customers
+
+
+            * `english` - english
+
+            * `korean` - korean'
+        use_client_api:
+          type: boolean
+          readOnly: true
+          description: Enables Client API
+        use_cortex_analyst:
+          type: boolean
+          readOnly: true
+          description: Enables the Snowflake Cortex Analyst feature
+        use_custom_attributes_search:
+          type: boolean
+          readOnly: true
+          title: Enable searching on custom attributes
+          description: A feature flag to enable searching for objects using their custom attributes text.
+        use_data_quality_tab:
+          type: boolean
+          readOnly: true
+          description: Enables the Data Quality tab
+        use_data_quality_upstream_issues:
+          type: boolean
+          readOnly: true
+          description: Enables the Data Quality Upstream Issues tab
+        use_discussions:
+          type: boolean
+          readOnly: true
+          description: Enables discussion feature for this organization
+        use_downstream_notifications:
+          type: boolean
+          readOnly: true
+          title: Enable Downstream Notifications
+          description: A feature flag to enable downstream notifications from comments
+        use_fivetran:
+          type: boolean
+          readOnly: true
+          description: Enables the Fivetran Integration.
+        use_db_agent:
+          type: boolean
+          readOnly: true
+          description: Enables access to the DB Agent integration
+        use_group_label:
+          type: boolean
+          readOnly: true
+          description: Looker - Use group_label instead of model label
+        use_impact_score:
+          type: boolean
+          readOnly: true
+          description: Enables the Impact Score feature, including calculation
+        use_incidents_ingestion_for_monte_carlo:
+          type: boolean
+          readOnly: true
+          description: Enables the Incidents ingestion for Monte Carlo integration. When turned off incidents information is gather on the fly during our requests.
+        use_llm_chatbot:
+          type: boolean
+          readOnly: true
+        use_metric_generation:
+          type: boolean
+          readOnly: true
+        use_new_layout:
+          type: boolean
+          readOnly: true
+          description: Enables the new layout
+        use_new_mentions:
+          type: boolean
+          readOnly: true
+          title: Enable New Mentions approach
+          description: A feature flag to enable New Mentions per org
+        use_rbac:
+          type: boolean
+          readOnly: true
+          description: Enables RBAC with full enforcement. If the flag is turned on, it overrides whatever is set in use_rbac_data_propagation In order to turn the RBAC on, use Enable RBAC command. For detailed information, about this specific flag reach out to Engineering.
+        use_rbac_in_lineage:
+          type: boolean
+          readOnly: true
+          description: Enables RBAC in Lineage for customers using PBAC. This flag is used to enable RBAC specifically for the Lineage feature. The flag is ignored when use_rbac flag is turned off.
+        use_relevant_lineage:
+          type: boolean
+          readOnly: true
+          description: Enables relevant lineage
+        use_schema_change_detection:
+          type: boolean
+          readOnly: true
+          description: A feature flag to enable schema change detection
+        use_schema_change_notification:
+          type: boolean
+          readOnly: true
+          description: Enables the schema change notification feature
+        use_serial_tables_detection:
+          type: boolean
+          readOnly: true
+          description: Enables the serial tables detection during QL ingestion. This process set the `serial_table_frequency` column in the Table.
+        use_show_more_button:
+          type: boolean
+          readOnly: true
+          description: A feature flag to decide whether show more button is visible for long descriptions or to show full description by default
+        use_similar_tables_in_suggested_tags:
+          type: boolean
+          readOnly: true
+          description: Enables usage of similar tables propagation in suggested tag propagation
+        use_slack_chatbot:
+          type: boolean
+          readOnly: true
+          description: Enables the slack chatbot feature for Select Star Slack integration
+        use_suggested_tags:
+          type: boolean
+          readOnly: true
+        use_suggestion_propagation:
+          type: boolean
+          readOnly: true
+          description: Enables suggestion propagation
+        use_user_lists:
+          type: boolean
+          readOnly: true
+          title: Enable User Lists
+          description: A feature flag to enable User Lists
+        enable_ai_features:
+          type: boolean
+          readOnly: true
+          description: Enable AI features
+        use_natural_language_search:
+          type: boolean
+          readOnly: true
+        use_salesforce_crma:
+          type: boolean
+          readOnly: true
+          description: Enables the Salesforce CRMA Integration.
+        use_omni:
+          type: boolean
+          readOnly: true
+          description: Enables the Omni Integration.
+        use_viewer_client_api_tokens:
+          type: boolean
+          readOnly: true
+          description: Allows viewers to create and use ClientAPITokens. When disabled, only users with higher roles can create and use API tokens.
+        use_semantic_model:
+          type: boolean
+          readOnly: true
+          description: Enable Semantic Models feature for this organization.
+        use_ai_automations:
+          type: boolean
+          readOnly: true
+          description: Enable AI Automations features for this organization.
+        use_openlineage:
+          type: boolean
+          readOnly: true
+          description: Enables the Open Lineage Integration.
+        use_ai_evaluations:
+          type: boolean
+          readOnly: true
+          description: Enable AI evaluations features for this organization.
+        auto_document_empty_pages:
+          type: boolean
+          readOnly: true
+      required:
+      - allow_email_password_authentication
+      - auto_document_empty_pages
+      - automated_pii
+      - enable_ai_features
+      - enable_cost_analysis
+      - enable_max_level_in_lineage_tags
+      - popularity_timeframe
+      - separate_schemata
+      - show_previews
+      - show_schemata_page
+      - show_sidebar_search
+      - use_ai_automations
+      - use_ai_customization_settings
+      - use_ai_customization_settings_data_access
+      - use_ai_descriptions
+      - use_ai_evaluations
+      - use_avatar_initials
+      - use_client_api
+      - use_cortex_analyst
+      - use_custom_attributes_search
+      - use_data_quality_tab
+      - use_data_quality_upstream_issues
+      - use_db_agent
+      - use_discussions
+      - use_downstream_notifications
+      - use_fivetran
+      - use_group_label
+      - use_impact_score
+      - use_incidents_ingestion_for_monte_carlo
+      - use_llm_chatbot
+      - use_metric_generation
+      - use_natural_language_search
+      - use_new_layout
+      - use_new_mentions
+      - use_omni
+      - use_openlineage
+      - use_rbac
+      - use_rbac_in_lineage
+      - use_relevant_lineage
+      - use_salesforce_crma
+      - use_schema_change_detection
+      - use_schema_change_notification
+      - use_semantic_model
+      - use_serial_tables_detection
+      - use_show_more_button
+      - use_similar_tables_in_suggested_tags
+      - use_slack_chatbot
+      - use_suggested_tags
+      - use_suggestion_propagation
+      - use_user_lists
+      - use_viewer_client_api_tokens
+    TeamShortcut:
+      type: object
+      properties:
+        guid:
+          type: string
+        name:
+          type: string
+      required:
+      - guid
+      - name
+    PaginatedTeamWithSampleMembersList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/TeamWithSampleMembers'
+    TeamRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        description:
+          type: string
+          nullable: true
+          description: Active description
+        richtext_description:
+          type: string
+          nullable: true
+          description: Richtext formatted description. Can be in Slatejs or Draftjs format.
+      required:
+      - name
+    Team:
+      type: object
+      properties:
+        guid:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+          nullable: true
+          description: Active description
+        richtext_description:
+          type: string
+          nullable: true
+          description: Richtext formatted description. Can be in Slatejs or Draftjs format.
+        members_count:
+          type: integer
+          readOnly: true
+      required:
+      - guid
+      - members_count
+      - name
+  securitySchemes:
+    JWTAuthentication:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Token-based authentication with required prefix "Token"
+externalDocs:
+  description: Select Star API reference documentation
+  url: https://docs.selectstar.com/select-star-api

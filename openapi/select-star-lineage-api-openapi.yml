@@ -1,0 +1,1047 @@
+openapi: 3.0.3
+info:
+  title: Select Star Metadata bi lineage API
+  version: 1.0.0
+  x-role-system:
+    description: This API uses role-based access control
+    roles:
+      admin: Full access to all operations
+      data_manager: Can modify data and configurations
+      user: Read-only access to most resources
+  description: API for interacting with the Select Star system
+  termsOfService: https://www.selectstar.com/terms-of-service
+  contact:
+    email: support@selectstar.com
+  license:
+    name: All Rights Reserved
+tags:
+- name: lineage
+paths:
+  /v1/lineage/{guid}/:
+    get:
+      operationId: lineage_retrieve
+      description: 'Calculates lineage for given metadata object.
+
+
+        **Required Role:** Authenticated User with Active Organization'
+      parameters:
+      - in: query
+        name: dbt_links
+        schema:
+          type: boolean
+          default: false
+        description: Include dbt links in the lineage response
+      - in: query
+        name: direction
+        schema:
+          type: string
+          enum:
+          - all
+          - left
+          - right
+          default: all
+        description: Can be used to specify which direction of lineage to load only. If this field is skipped, source & downstream lineage will be calculated.
+      - in: query
+        name: enable_description
+        schema:
+          type: boolean
+          default: false
+        description: Include description in the lineage response
+      - in: query
+        name: enable_tags
+        schema:
+          type: boolean
+          default: false
+        description: Include tags in the lineage response. This will alter the response slightly to include non-null list of tag guids along with a tags legend.
+      - in: query
+        name: filter_nodes
+        schema:
+          type: string
+          enum:
+          - biconnection
+          - column
+          - dashboard
+          - dashboardelement
+          - explore
+          - explorefield
+          - lookmlfield
+          - lookmlview
+          - powerbicolumn
+          - powerbidataset
+          - powerbitable
+          - reportquery
+          - table
+          - tableaucolumn
+          - tableaudatasource
+          - tableaufield
+          - tableautable
+          - tableauview
+        description: A list of nodes that need to be filtered out of the response type
+      - in: query
+        name: group_by_data_source
+        schema:
+          type: boolean
+          default: false
+        description: Group lineage by data source
+      - in: path
+        name: guid
+        schema:
+          type: string
+          pattern: ^([a-zA-z]{2}_[a-zA-Z0-9]{22})|me|default|([a-zA-z]{2}_[a-zA-Z0-9]{22}).personal$
+        required: true
+      - in: query
+        name: include_borderline_edges
+        schema:
+          type: boolean
+          default: false
+        description: Include borderline edges. Borderline edges - edges of which one node is part of this traversal, but the other one isn't
+      - in: query
+        name: include_edge_jobs
+        schema:
+          type: boolean
+          default: false
+        description: Include the jobs (DAG/Spark) inside the edge objects responsible for the creation of those edges
+      - in: query
+        name: include_impact_score
+        schema:
+          type: boolean
+          default: false
+        description: Include impact score in the lineage response
+      - in: query
+        name: include_table_borderline_edges
+        schema:
+          type: boolean
+          default: false
+        description: Include borderline edges linked to tables. Borderline edges - edges of which one node is part of this traversal, but the other one isn't
+      - in: query
+        name: looker_db_lineage
+        schema:
+          type: boolean
+          default: true
+        description: Include Looker <-> DB lineage
+      - in: query
+        name: looker_view_lineage
+        schema:
+          type: boolean
+          default: true
+        description: Include looker fields in the lineage calculation
+      - in: query
+        name: max_depth
+        schema:
+          type: string
+          default: '1'
+        description: Can be used to specify max depth of lineage to load. `max` is a special value that is used as alias for 20. (1 by default)
+      - in: query
+        name: mode
+        schema:
+          type: string
+          enum:
+          - all
+          - column
+          - table
+          default: all
+        description: Can be used to limit lineage calculation to table or column only. This should reduce payload size as well as computation time but is not fully supported in all Lineage objects (e.g. Looker Lineage doesn't support it fully).
+      - in: query
+        name: mode_lineage
+        schema:
+          type: boolean
+          default: true
+        description: Include Mode lineage
+      - in: query
+        name: relevant_columns
+        schema:
+          type: string
+        description: Comma-separated list of root node children GUIDs specifying relevant columns for lineage traversal. When provided, lineage of other root node columns will be ignored. Requires `relevant_lineage` to be enabled.
+      - in: query
+        name: relevant_lineage
+        schema:
+          type: boolean
+          default: false
+        description: when `relevant_lineage` is enabled, we only use edges between columns to traverse the graph. Relevant table nodes and edges are still returned in the response, but they are not used for traversal.
+      - in: query
+        name: tableau_table_lineage
+        schema:
+          type: boolean
+          default: true
+        description: Include Tableau lineage
+      - in: query
+        name: usage_type
+        schema:
+          type: string
+          enum:
+          - aggregated
+          - asis
+          - filter
+          - none
+          - transformed
+        description: Include the usage type for each edge related to every node in the response. Use `-` to exclude
+      tags:
+      - lineage
+      security:
+      - JWTAuthentication: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lineage'
+          description: ''
+      x-role-requirements: Authenticated User with Active Organization
+  /v1/lineage/manual/edges/:
+    get:
+      operationId: lineage_manual_edges_list
+      description: 'Get all manual lineage edges
+
+
+        **Required Role:** Admin (or RBAC policy)'
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - lineage
+      security:
+      - JWTAuthentication: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedManualLineageEdgeList'
+          description: ''
+      x-role-requirements: Admin (or RBAC policy)
+    post:
+      operationId: lineage_manual_edges_create
+      description: 'Create a new Manual Lineage Edge.
+
+        It is needed to specify at least the `guid` for source and target nodes (`source_node` and `target_node`).
+
+        The `guid` corresponds to the actual `column` or `table` that is the source or target of the edge.
+
+        Also `usage` can be specified. If no `usage` is given, or it is given with `null` value, the edge will be created with `null` usage.
+
+
+
+        **Required Role:** Admin (or RBAC policy)'
+      tags:
+      - lineage
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateManualLineageEdgeRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreateManualLineageEdgeRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CreateManualLineageEdgeRequest'
+        required: true
+      security:
+      - JWTAuthentication: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManualLineageEdge'
+          description: ''
+      x-role-requirements: Admin (or RBAC policy)
+  /v1/lineage/manual/edges/{source_guid}/{target_guid}/:
+    get:
+      operationId: lineage_manual_edges_retrieve
+      description: 'Get a single manual lineage edge given source and target guid and optional usage
+
+
+        **Required Role:** Admin (or RBAC policy)'
+      parameters:
+      - in: path
+        name: source_guid
+        schema:
+          type: string
+          pattern: ^([a-zA-z]{2}_[a-zA-Z0-9]{22})|me|default|([a-zA-z]{2}_[a-zA-Z0-9]{22}).personal$
+        required: true
+      - in: path
+        name: target_guid
+        schema:
+          type: string
+          pattern: ^([a-zA-z]{2}_[a-zA-Z0-9]{22})|me|default|([a-zA-z]{2}_[a-zA-Z0-9]{22}).personal$
+        required: true
+      tags:
+      - lineage
+      security:
+      - JWTAuthentication: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManualLineageEdge'
+          description: ''
+      x-role-requirements: Admin (or RBAC policy)
+    patch:
+      operationId: lineage_manual_edges_partial_update
+      description: 'Update an existing Manual Lineage Edge.
+
+        Use the path parameters to specify uniquely the edge to update.
+
+        Use the request body to specify the parameters you want to update.
+
+        In any update case, a new edge with the given parameters will be created, and the old one will be deleted.
+
+
+
+        **Required Role:** Admin (or RBAC policy)'
+      parameters:
+      - in: path
+        name: source_guid
+        schema:
+          type: string
+          pattern: ^([a-zA-z]{2}_[a-zA-Z0-9]{22})|me|default|([a-zA-z]{2}_[a-zA-Z0-9]{22}).personal$
+        required: true
+      - in: path
+        name: target_guid
+        schema:
+          type: string
+          pattern: ^([a-zA-z]{2}_[a-zA-Z0-9]{22})|me|default|([a-zA-z]{2}_[a-zA-Z0-9]{22}).personal$
+        required: true
+      tags:
+      - lineage
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUpdateManualLineageEdgeRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedUpdateManualLineageEdgeRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUpdateManualLineageEdgeRequest'
+      security:
+      - JWTAuthentication: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManualLineageEdge'
+          description: ''
+      x-role-requirements: Admin (or RBAC policy)
+    delete:
+      operationId: lineage_manual_edges_destroy
+      description: 'Delete a single manual lineage edge.
+
+
+        **Required Role:** Admin (or RBAC policy)'
+      parameters:
+      - in: path
+        name: source_guid
+        schema:
+          type: string
+          pattern: ^([a-zA-z]{2}_[a-zA-Z0-9]{22})|me|default|([a-zA-z]{2}_[a-zA-Z0-9]{22}).personal$
+        required: true
+      - in: path
+        name: target_guid
+        schema:
+          type: string
+          pattern: ^([a-zA-z]{2}_[a-zA-Z0-9]{22})|me|default|([a-zA-z]{2}_[a-zA-Z0-9]{22}).personal$
+        required: true
+      tags:
+      - lineage
+      security:
+      - JWTAuthentication: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+      x-role-requirements: Admin (or RBAC policy)
+  /v1/lineage/manual/edges/{source_guid}/{target_guid}/{usage}/:
+    get:
+      operationId: lineage_manual_edges_retrieve_2
+      description: 'Get a single manual lineage edge given source and target guid and optional usage
+
+
+        **Required Role:** Admin (or RBAC policy)'
+      parameters:
+      - in: path
+        name: source_guid
+        schema:
+          type: string
+          pattern: ^([a-zA-z]{2}_[a-zA-Z0-9]{22})|me|default|([a-zA-z]{2}_[a-zA-Z0-9]{22}).personal$
+        required: true
+      - in: path
+        name: target_guid
+        schema:
+          type: string
+          pattern: ^([a-zA-z]{2}_[a-zA-Z0-9]{22})|me|default|([a-zA-z]{2}_[a-zA-Z0-9]{22}).personal$
+        required: true
+      - in: path
+        name: usage
+        schema:
+          type: string
+          pattern: ^(asis|transformed|aggregated|filter)$
+        required: true
+      tags:
+      - lineage
+      security:
+      - JWTAuthentication: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManualLineageEdge'
+          description: ''
+      x-role-requirements: Admin (or RBAC policy)
+    patch:
+      operationId: lineage_manual_edges_partial_update_2
+      description: 'Update an existing Manual Lineage Edge.
+
+        Use the path parameters to specify uniquely the edge to update.
+
+        Use the request body to specify the parameters you want to update.
+
+        In any update case, a new edge with the given parameters will be created, and the old one will be deleted.
+
+
+
+        **Required Role:** Admin (or RBAC policy)'
+      parameters:
+      - in: path
+        name: source_guid
+        schema:
+          type: string
+          pattern: ^([a-zA-z]{2}_[a-zA-Z0-9]{22})|me|default|([a-zA-z]{2}_[a-zA-Z0-9]{22}).personal$
+        required: true
+      - in: path
+        name: target_guid
+        schema:
+          type: string
+          pattern: ^([a-zA-z]{2}_[a-zA-Z0-9]{22})|me|default|([a-zA-z]{2}_[a-zA-Z0-9]{22}).personal$
+        required: true
+      - in: path
+        name: usage
+        schema:
+          type: string
+          pattern: ^(asis|transformed|aggregated|filter)$
+        required: true
+      tags:
+      - lineage
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUpdateManualLineageEdgeRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedUpdateManualLineageEdgeRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUpdateManualLineageEdgeRequest'
+      security:
+      - JWTAuthentication: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManualLineageEdge'
+          description: ''
+      x-role-requirements: Admin (or RBAC policy)
+    delete:
+      operationId: lineage_manual_edges_destroy_2
+      description: 'Delete a single manual lineage edge.
+
+
+        **Required Role:** Admin (or RBAC policy)'
+      parameters:
+      - in: path
+        name: source_guid
+        schema:
+          type: string
+          pattern: ^([a-zA-z]{2}_[a-zA-Z0-9]{22})|me|default|([a-zA-z]{2}_[a-zA-Z0-9]{22}).personal$
+        required: true
+      - in: path
+        name: target_guid
+        schema:
+          type: string
+          pattern: ^([a-zA-z]{2}_[a-zA-Z0-9]{22})|me|default|([a-zA-z]{2}_[a-zA-Z0-9]{22}).personal$
+        required: true
+      - in: path
+        name: usage
+        schema:
+          type: string
+          pattern: ^(asis|transformed|aggregated|filter)$
+        required: true
+      tags:
+      - lineage
+      security:
+      - JWTAuthentication: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+      x-role-requirements: Admin (or RBAC policy)
+components:
+  schemas:
+    LineageNode:
+      type: object
+      properties:
+        node:
+          type: string
+        node_type:
+          type: string
+          maxLength: 255
+      required:
+      - node
+      - node_type
+    ManualLineageEdge:
+      type: object
+      properties:
+        usage:
+          allOf:
+          - $ref: '#/components/schemas/UsageType'
+          readOnly: true
+          nullable: true
+        source_node:
+          $ref: '#/components/schemas/LineageNode'
+        target_node:
+          $ref: '#/components/schemas/LineageNode'
+      required:
+      - source_node
+      - target_node
+      - usage
+    TablePopularity:
+      type: object
+      properties:
+        timeframe:
+          type: integer
+          readOnly: true
+          default: 90
+        user_count:
+          type: integer
+          readOnly: true
+        service_query_count:
+          type: integer
+          readOnly: true
+        popularity:
+          type: integer
+          readOnly: true
+          description: Popularity score for this object from 0-100
+        query_count:
+          type: integer
+      required:
+      - popularity
+      - query_count
+      - service_query_count
+      - timeframe
+      - user_count
+    TargetDataSourceTypeEnum:
+      enum:
+      - airflow
+      - aws_s3
+      - bigquery
+      - data_studio
+      - databricks
+      - db_agent
+      - db2
+      - dbt
+      - fivetran
+      - glue
+      - hex
+      - looker
+      - metabase
+      - mode
+      - monte_carlo
+      - mssql
+      - mysql
+      - omni
+      - openlineage
+      - oracle
+      - periscope
+      - postgres
+      - power_bi
+      - quicksight
+      - redshift
+      - salesforce
+      - salesforce_crma
+      - sigma
+      - snowflake
+      - tableau
+      - thoughtspot
+      - trial
+      - trial_redshift
+      type: string
+      description: '* `airflow` - Airflow
+
+        * `aws_s3` - AWS S3
+
+        * `bigquery` - BigQuery
+
+        * `data_studio` - Looker Studio
+
+        * `databricks` - Databricks
+
+        * `db_agent` - DB Agent
+
+        * `db2` - DB2
+
+        * `dbt` - dbt
+
+        * `fivetran` - Fivetran
+
+        * `glue` - Glue
+
+        * `hex` - Hex
+
+        * `looker` - Looker
+
+        * `metabase` - Metabase
+
+        * `mode` - Mode
+
+        * `monte_carlo` - Monte Carlo
+
+        * `mssql` - MS SQL
+
+        * `mysql` - MySQL
+
+        * `omni` - Omni BI
+
+        * `openlineage` - Open Lineage
+
+        * `oracle` - Oracle
+
+        * `periscope` - Periscope
+
+        * `postgres` - PostgreSQL
+
+        * `power_bi` - Power BI
+
+        * `quicksight` - QuickSight
+
+        * `redshift` - Redshift
+
+        * `salesforce` - Salesforce
+
+        * `salesforce_crma` - Salesforce Analytics
+
+        * `sigma` - Sigma
+
+        * `snowflake` - Snowflake
+
+        * `tableau` - Tableau
+
+        * `thoughtspot` - ThoughtSpot
+
+        * `trial` - Trial
+
+        * `trial_redshift` - Trial Redshift'
+    PaginatedManualLineageEdgeList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManualLineageEdge'
+    UsageType:
+      enum:
+      - asis
+      - transformed
+      - aggregated
+      - filter
+      type: string
+      description: '* `asis` - UsageType.asis
+
+        * `transformed` - UsageType.transformed
+
+        * `aggregated` - UsageType.aggregated
+
+        * `filter` - UsageType.filter'
+    CreateManualLineageEdgeRequest:
+      type: object
+      properties:
+        usage:
+          allOf:
+          - $ref: '#/components/schemas/UsageType'
+          nullable: true
+          description: 'Only for column level lineage. For Table level lineage, this value will always be set to null
+
+
+            * `asis` - UsageType.asis
+
+            * `transformed` - UsageType.transformed
+
+            * `aggregated` - UsageType.aggregated
+
+            * `filter` - UsageType.filter'
+        source_node:
+          type: string
+          minLength: 1
+        target_node:
+          type: string
+          minLength: 1
+        create_automatic_related_lineage_edges:
+          type: boolean
+          writeOnly: true
+          default: true
+          description: Boolean to specify whether to create column level edges for matching name if table level source and target guids are given
+      required:
+      - source_node
+      - target_node
+    ColumnLineage:
+      type: object
+      description: "Use as serializer mixin after ModelSerializer:\n\n    class ...Serializer(..., serializers.ModelSerializer, TypeSerializer):"
+      properties:
+        data_types:
+          allOf:
+          - $ref: '#/components/schemas/BaseType'
+          readOnly: true
+        key:
+          type: string
+        object_type:
+          type: string
+        guid:
+          type: string
+        component_identifier:
+          type: integer
+          default: 1
+        table_guid:
+          type: string
+        ordinal:
+          type: integer
+        name:
+          type: string
+        full_name:
+          type: string
+        description:
+          type: string
+        data_type:
+          type: string
+        data_source_type:
+          type: string
+        popularity:
+          $ref: '#/components/schemas/ColumnPopularity'
+        impact_score:
+          type: integer
+        impacted_object_count:
+          type: integer
+        breadcrumbs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Breadcrumb'
+          default: []
+        is_hidden:
+          type: boolean
+        is_nested:
+          type: boolean
+        source_edges:
+          type: object
+          additionalProperties: {}
+          readOnly: true
+        target_edges:
+          type: object
+          additionalProperties: {}
+          readOnly: true
+        rank:
+          type: integer
+          default: 0
+        source_column_guids:
+          type: array
+          items:
+            type: string
+        target_column_guids:
+          type: array
+          items:
+            type: string
+        source_table_guids:
+          type: array
+          items:
+            type: string
+        linked_objs:
+          type: array
+          items:
+            type: string
+      required:
+      - data_source_type
+      - data_type
+      - data_types
+      - full_name
+      - guid
+      - key
+      - name
+      - object_type
+      - ordinal
+      - source_edges
+      - table_guid
+      - target_edges
+    Breadcrumb:
+      type: object
+      properties:
+        guid:
+          type: string
+          maxLength: 25
+        target_guid:
+          type: string
+          maxLength: 256
+        target_name:
+          type: string
+          readOnly: true
+        target_object_type:
+          type: string
+        target_data_type:
+          type: string
+        target_data_source_guid:
+          type: string
+          nullable: true
+          readOnly: true
+        target_data_source_type:
+          allOf:
+          - $ref: '#/components/schemas/TargetDataSourceTypeEnum'
+          nullable: true
+        ordinal:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          description: Ordering of breadcrumb within the table
+      required:
+      - target_data_source_guid
+      - target_data_type
+      - target_guid
+      - target_name
+      - target_object_type
+    TableLineage:
+      type: object
+      description: "Use as serializer mixin after ModelSerializer:\n\n    class ...Serializer(..., serializers.ModelSerializer, TypeSerializer):"
+      properties:
+        data_types:
+          allOf:
+          - $ref: '#/components/schemas/BaseType'
+          readOnly: true
+        source_edges:
+          type: object
+          additionalProperties: {}
+          readOnly: true
+        target_edges:
+          type: object
+          additionalProperties: {}
+          readOnly: true
+        key:
+          type: string
+        object_type:
+          type: string
+        guid:
+          type: string
+        name:
+          type: string
+        component_identifier:
+          type: integer
+          default: 1
+        full_name:
+          type: string
+        description:
+          type: string
+        rank:
+          type: integer
+          default: 0
+        data_type:
+          type: string
+        data_source_type:
+          type: string
+        columns:
+          type: array
+          items:
+            type: string
+        source_table_guids:
+          type: array
+          items:
+            type: string
+          deprecated: true
+        target_table_guids:
+          type: array
+          items:
+            type: string
+          deprecated: true
+        popularity:
+          $ref: '#/components/schemas/TablePopularity'
+        impact_score:
+          type: integer
+        impacted_object_count:
+          type: integer
+        tag_guids:
+          type: array
+          items:
+            type: string
+        linked_objs:
+          type: array
+          items:
+            type: string
+        query:
+          type: string
+        breadcrumbs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Breadcrumb'
+          default: []
+        is_implicit:
+          type: boolean
+        is_hidden:
+          type: boolean
+      required:
+      - columns
+      - data_source_type
+      - data_type
+      - data_types
+      - full_name
+      - guid
+      - key
+      - name
+      - object_type
+      - source_edges
+      - source_table_guids
+      - target_edges
+      - target_table_guids
+    Lineage:
+      type: object
+      properties:
+        table_lineage:
+          type: array
+          items:
+            $ref: '#/components/schemas/TableLineage'
+        column_lineage:
+          type: array
+          items:
+            $ref: '#/components/schemas/ColumnLineage'
+      required:
+      - column_lineage
+      - table_lineage
+    BaseType:
+      type: object
+      description: 'Base Serializer to inject the following `type` information:
+
+        - Object Type: Model Name of the Object: Table, Dashboard, ReportQuery
+
+        - Data Source Type: snowflake, databricks etc.
+
+        - Data Type: Additional type like tile, visual, card etc.'
+      properties:
+        object_type:
+          type: string
+          nullable: true
+          readOnly: true
+        data_source_type:
+          type: string
+          nullable: true
+          readOnly: true
+        data_type:
+          type: string
+          nullable: true
+          readOnly: true
+        external_database_type:
+          type: string
+          nullable: true
+          readOnly: true
+      required:
+      - data_source_type
+      - data_type
+      - external_database_type
+      - object_type
+    ColumnPopularity:
+      type: object
+      properties:
+        timeframe:
+          type: integer
+          readOnly: true
+          default: 90
+        user_count:
+          type: integer
+          readOnly: true
+        service_query_count:
+          type: integer
+          readOnly: true
+        popularity:
+          type: integer
+          readOnly: true
+          description: Popularity score for this object from 0-100
+        query_count:
+          type: integer
+      required:
+      - popularity
+      - query_count
+      - service_query_count
+      - timeframe
+      - user_count
+    PatchedUpdateManualLineageEdgeRequest:
+      type: object
+      properties:
+        usage:
+          allOf:
+          - $ref: '#/components/schemas/UsageType'
+          nullable: true
+          description: 'Only for column level lineage. For Table level lineage, this value will always be set to null
+
+
+            * `asis` - UsageType.asis
+
+            * `transformed` - UsageType.transformed
+
+            * `aggregated` - UsageType.aggregated
+
+            * `filter` - UsageType.filter'
+        source_node:
+          type: string
+          minLength: 1
+        target_node:
+          type: string
+          minLength: 1
+        create_automatic_related_lineage_edges:
+          type: boolean
+          writeOnly: true
+          default: true
+          description: Boolean to specify whether to create column level edges for matching name if table level source and target guids are given
+  securitySchemes:
+    JWTAuthentication:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Token-based authentication with required prefix "Token"
+externalDocs:
+  description: Select Star API reference documentation
+  url: https://docs.selectstar.com/select-star-api

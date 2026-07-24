@@ -1,0 +1,611 @@
+openapi: 3.0.3
+info:
+  title: Select Star Metadata bi custom-attributes-with-value API
+  version: 1.0.0
+  x-role-system:
+    description: This API uses role-based access control
+    roles:
+      admin: Full access to all operations
+      data_manager: Can modify data and configurations
+      user: Read-only access to most resources
+  description: API for interacting with the Select Star system
+  termsOfService: https://www.selectstar.com/terms-of-service
+  contact:
+    email: support@selectstar.com
+  license:
+    name: All Rights Reserved
+tags:
+- name: custom-attributes-with-value
+paths:
+  /v1/custom-attributes-with-value/{item_guid}/:
+    get:
+      operationId: custom_attributes_with_value_list
+      description: 'The GUID in the path is for the object that the custom attribute is assigned to (like a table, column, etc).
+
+        This endpoint returns all the custom attributes tied to this object, along with their corresponding values.
+
+
+        **Required Role:** Viewer or higher'
+      parameters:
+      - name: asset_type
+        required: false
+        in: query
+        description: 'A comma separated value for asset type in form: data_source_type,object_type,data_type'
+        schema:
+          type: string
+      - name: data_source_types
+        required: false
+        in: query
+        description: A list of comma separated types to filter these custom attributes for.
+        schema:
+          type: string
+      - name: data_types
+        required: false
+        in: query
+        description: A list of comma separated types to filter these custom attributes for.
+        schema:
+          type: string
+      - in: path
+        name: item_guid
+        schema:
+          type: string
+          pattern: ^([a-zA-z]{2}_[a-zA-Z0-9]{22})|me|default|([a-zA-z]{2}_[a-zA-Z0-9]{22}).personal$
+        required: true
+      - name: object_types
+        required: false
+        in: query
+        description: A list of comma separated types to filter these custom attributes for.
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - custom-attributes-with-value
+      security:
+      - JWTAuthentication: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedCustomAttributeWithValueList'
+          description: ''
+      x-role-requirements: Viewer or higher
+components:
+  schemas:
+    CustomAttributeObjectType:
+      enum:
+      - database
+      - schema
+      - table
+      - column
+      - explore
+      - lookmlmodel
+      - lookmlview
+      - lookmlfield
+      - explorefield
+      - tableaudatasource
+      - tableautable
+      - tableauview
+      - tableaufield
+      - bifolder
+      - dashboard
+      - dashboardelement
+      - metabasetable
+      - powerbicolumn
+      - reportquery
+      - thoughtspotcolumn
+      - thoughtspottable
+      - bicolumn
+      - bidashboardelement
+      - bidataset
+      - bitable
+      - notebook
+      - job
+      type: string
+      description: '* `database` - database
+
+        * `schema` - schema
+
+        * `table` - table
+
+        * `column` - column
+
+        * `explore` - explore
+
+        * `lookmlmodel` - lookmlmodel
+
+        * `lookmlview` - lookmlview
+
+        * `lookmlfield` - lookmlfield
+
+        * `explorefield` - explorefield
+
+        * `tableaudatasource` - tableaudatasource
+
+        * `tableautable` - tableautable
+
+        * `tableauview` - tableauview
+
+        * `tableaufield` - tableaufield
+
+        * `bifolder` - bifolder
+
+        * `dashboard` - dashboard
+
+        * `dashboardelement` - dashboardelement
+
+        * `metabasetable` - metabasetable
+
+        * `powerbicolumn` - powerbicolumn
+
+        * `reportquery` - reportquery
+
+        * `thoughtspotcolumn` - thoughtspotcolumn
+
+        * `thoughtspottable` - thoughtspottable
+
+        * `bicolumn` - bicolumn
+
+        * `bidashboardelement` - bidashboardelement
+
+        * `bidataset` - bidataset
+
+        * `bitable` - bitable
+
+        * `notebook` - notebook
+
+        * `job` - job
+
+        * `` - empty'
+    DataSourceTypesEnum:
+      enum:
+      - airflow
+      - aws_s3
+      - bigquery
+      - data_studio
+      - databricks
+      - db_agent
+      - db2
+      - dbt
+      - fivetran
+      - glue
+      - hex
+      - looker
+      - metabase
+      - mode
+      - monte_carlo
+      - mssql
+      - mysql
+      - omni
+      - openlineage
+      - oracle
+      - periscope
+      - postgres
+      - power_bi
+      - quicksight
+      - redshift
+      - salesforce
+      - salesforce_crma
+      - sigma
+      - snowflake
+      - tableau
+      - thoughtspot
+      - trial
+      - trial_redshift
+      type: string
+      description: '* `airflow` - Airflow
+
+        * `aws_s3` - AWS S3
+
+        * `bigquery` - BigQuery
+
+        * `data_studio` - Looker Studio
+
+        * `databricks` - Databricks
+
+        * `db_agent` - DB Agent
+
+        * `db2` - DB2
+
+        * `dbt` - dbt
+
+        * `fivetran` - Fivetran
+
+        * `glue` - Glue
+
+        * `hex` - Hex
+
+        * `looker` - Looker
+
+        * `metabase` - Metabase
+
+        * `mode` - Mode
+
+        * `monte_carlo` - Monte Carlo
+
+        * `mssql` - MS SQL
+
+        * `mysql` - MySQL
+
+        * `omni` - Omni BI
+
+        * `openlineage` - Open Lineage
+
+        * `oracle` - Oracle
+
+        * `periscope` - Periscope
+
+        * `postgres` - PostgreSQL
+
+        * `power_bi` - Power BI
+
+        * `quicksight` - QuickSight
+
+        * `redshift` - Redshift
+
+        * `salesforce` - Salesforce
+
+        * `salesforce_crma` - Salesforce Analytics
+
+        * `sigma` - Sigma
+
+        * `snowflake` - Snowflake
+
+        * `tableau` - Tableau
+
+        * `thoughtspot` - ThoughtSpot
+
+        * `trial` - Trial
+
+        * `trial_redshift` - Trial Redshift'
+    CustomAttributeRetrieveValue:
+      type: object
+      properties:
+        guid:
+          type: string
+          maxLength: 25
+        data_source:
+          type: string
+          readOnly: true
+          description: The data source guid
+        organization:
+          type: string
+          readOnly: true
+          description: The organization guid
+        custom_attribute:
+          allOf:
+          - $ref: '#/components/schemas/CustomAttributeLite'
+          readOnly: true
+        item:
+          type: string
+        value:
+          type: string
+          nullable: true
+          description: The value of the attribute
+        richtext_value:
+          type: string
+          nullable: true
+          description: The richtext formatted value of the attribute
+      required:
+      - custom_attribute
+      - data_source
+      - item
+      - organization
+    CustomAttributeLite:
+      type: object
+      properties:
+        guid:
+          type: string
+          readOnly: true
+        type:
+          allOf:
+          - $ref: '#/components/schemas/CustomAttributeType'
+          readOnly: true
+          description: 'Custom Attribute type, either category or status
+
+
+            * `text` - text'
+        name:
+          type: string
+          readOnly: true
+          description: Custom attribute display name
+      required:
+      - guid
+      - name
+      - type
+    TeamShortcut:
+      type: object
+      properties:
+        guid:
+          type: string
+        name:
+          type: string
+      required:
+      - guid
+      - name
+    DataTypesEnum:
+      enum:
+      - column
+      - tile
+      - page
+      - card
+      - element
+      - dashboard
+      - report
+      - metric
+      - visual
+      - worksheet
+      - one_to_one_logical
+      - sql_view
+      - question
+      - model
+      - table
+      type: string
+      description: '* `column` - column
+
+        * `tile` - tile
+
+        * `page` - page
+
+        * `card` - card
+
+        * `element` - element
+
+        * `dashboard` - dashboard
+
+        * `report` - report
+
+        * `metric` - metric
+
+        * `visual` - visual
+
+        * `worksheet` - worksheet
+
+        * `one_to_one_logical` - one_to_one_logical
+
+        * `sql_view` - sql_view
+
+        * `question` - question
+
+        * `model` - model
+
+        * `table` - table
+
+        * `` - empty'
+    CustomAttributeType:
+      enum:
+      - text
+      type: string
+      description: '* `text` - text'
+    PaginatedCustomAttributeWithValueList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttributeWithValue'
+    UserLite:
+      type: object
+      properties:
+        guid:
+          type: string
+          readOnly: true
+        first_name:
+          type: string
+          readOnly: true
+        last_name:
+          type: string
+          readOnly: true
+        team:
+          allOf:
+          - $ref: '#/components/schemas/TeamShortcut'
+          readOnly: true
+        email:
+          type: string
+          format: email
+          readOnly: true
+          title: Email address
+        avatar:
+          type: string
+          format: uri
+          readOnly: true
+          nullable: true
+        is_active:
+          type: boolean
+          readOnly: true
+      required:
+      - avatar
+      - email
+      - first_name
+      - guid
+      - is_active
+      - last_name
+      - team
+    CustomAttributeWithValue:
+      type: object
+      properties:
+        guid:
+          type: string
+          readOnly: true
+        type:
+          allOf:
+          - $ref: '#/components/schemas/CustomAttributeType'
+          readOnly: true
+          description: 'Custom Attribute type, either category or status
+
+
+            * `text` - text'
+        name:
+          type: string
+          readOnly: true
+          description: Custom attribute display name
+        created_by:
+          allOf:
+          - $ref: '#/components/schemas/UserLite'
+          readOnly: true
+        data_source_types:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataSourceTypesEnum'
+          readOnly: true
+          description: List of data source types CA applies to. Positions correspond with object_types and data_types fields
+        object_types:
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/CustomAttributeObjectType'
+            description: 'Object type of an asset
+
+
+              * `database` - database
+
+              * `schema` - schema
+
+              * `table` - table
+
+              * `column` - column
+
+              * `explore` - explore
+
+              * `lookmlmodel` - lookmlmodel
+
+              * `lookmlview` - lookmlview
+
+              * `lookmlfield` - lookmlfield
+
+              * `explorefield` - explorefield
+
+              * `tableaudatasource` - tableaudatasource
+
+              * `tableautable` - tableautable
+
+              * `tableauview` - tableauview
+
+              * `tableaufield` - tableaufield
+
+              * `bifolder` - bifolder
+
+              * `dashboard` - dashboard
+
+              * `dashboardelement` - dashboardelement
+
+              * `metabasetable` - metabasetable
+
+              * `powerbicolumn` - powerbicolumn
+
+              * `reportquery` - reportquery
+
+              * `thoughtspotcolumn` - thoughtspotcolumn
+
+              * `thoughtspottable` - thoughtspottable
+
+              * `bicolumn` - bicolumn
+
+              * `bidashboardelement` - bidashboardelement
+
+              * `bidataset` - bidataset
+
+              * `bitable` - bitable
+
+              * `notebook` - notebook
+
+              * `job` - job
+
+              * `` - empty'
+          readOnly: true
+          description: List of object types CA applies to. Positions correspond with data_source_types and data_types fields
+        data_types:
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/DataTypesEnum'
+            description: 'Data type of an asset
+
+
+              * `column` - column
+
+              * `tile` - tile
+
+              * `page` - page
+
+              * `card` - card
+
+              * `element` - element
+
+              * `dashboard` - dashboard
+
+              * `report` - report
+
+              * `metric` - metric
+
+              * `visual` - visual
+
+              * `worksheet` - worksheet
+
+              * `one_to_one_logical` - one_to_one_logical
+
+              * `sql_view` - sql_view
+
+              * `question` - question
+
+              * `model` - model
+
+              * `table` - table
+
+              * `` - empty'
+          readOnly: true
+          description: List of data types CA applies to. Positions correspond with data_source_types and object_types fields
+        value:
+          allOf:
+          - $ref: '#/components/schemas/CustomAttributeRetrieveValue'
+          readOnly: true
+      required:
+      - created_by
+      - data_source_types
+      - data_types
+      - guid
+      - name
+      - object_types
+      - type
+      - value
+  securitySchemes:
+    JWTAuthentication:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Token-based authentication with required prefix "Token"
+externalDocs:
+  description: Select Star API reference documentation
+  url: https://docs.selectstar.com/select-star-api

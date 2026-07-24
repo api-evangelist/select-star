@@ -1,0 +1,386 @@
+openapi: 3.0.3
+info:
+  title: Select Star Metadata bi custom-attribute-values API
+  version: 1.0.0
+  x-role-system:
+    description: This API uses role-based access control
+    roles:
+      admin: Full access to all operations
+      data_manager: Can modify data and configurations
+      user: Read-only access to most resources
+  description: API for interacting with the Select Star system
+  termsOfService: https://www.selectstar.com/terms-of-service
+  contact:
+    email: support@selectstar.com
+  license:
+    name: All Rights Reserved
+tags:
+- name: custom-attribute-values
+paths:
+  /v1/custom-attribute-values/:
+    get:
+      operationId: custom_attribute_values_list
+      description: "This endpoint retrieves a list of all values for a specific custom attribute.\n      If a list of object GUIDs is provided (via the 'items' parameter),\n      it will return all values for that custom attribute across the provided objects.\n\n**Required Role:** Viewer or higher"
+      parameters:
+      - name: asset_type
+        required: false
+        in: query
+        description: 'A comma separated value for asset type in form: data_source_type,object_type,data_type'
+        schema:
+          type: string
+      - name: custom_attributes
+        required: false
+        in: query
+        description: A comma separated list of custom attribute guids to get their custom attribute values.
+        schema:
+          type: string
+          pattern: ^(ca)_(?P<guid>[23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{22})$
+      - name: datasources
+        required: false
+        in: query
+        description: Filter custom attributes values by a data source guid
+        schema:
+          type: string
+          pattern: ^(ds)_(?P<guid>[23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{22})$
+      - name: items
+        required: false
+        in: query
+        description: Filter custom attributes values by a item guids, that values are assigned for
+        schema:
+          type: string
+          pattern: ^(co|ta|cl|db|jb|de|le|ef|lf|lm|lv|rq|da|dn|fl|mt|bl|tf|ts|tt|tv|st|sc|zd|zc|ze|zt)_(?P<guid>[23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{22})$
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - custom-attribute-values
+      security:
+      - JWTAuthentication: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedCustomAttributeRetrieveValueList'
+          description: ''
+      x-role-requirements: Viewer or higher
+    post:
+      operationId: custom_attribute_values_create
+      description: "Use this endpoint when you need to assign a value to a specific custom attribute tied to a specific object.\n        This endpoint is used to update a custom attribute's value as it applies to a specific object.\n        It's meant for individual updates, modifying only one custom attribute value at a time.\n        Default behavior dictates, that values are plaintext.\n        However, you can create a rich text value by using richtext_value field.\n        In that case the richtext_value should follow SlateJS specification.\n\n**Required Role:** Data Manager or higher"
+      tags:
+      - custom-attribute-values
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomAttributeValueRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CustomAttributeValueRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CustomAttributeValueRequest'
+        required: true
+      security:
+      - JWTAuthentication: []
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomAttributeValue'
+          description: ''
+      x-role-requirements: Data Manager or higher
+  /v1/custom-attribute-values/{guid}/:
+    get:
+      operationId: custom_attribute_values_retrieve
+      description: "This endpoint is for reading the value of a custom attribute itself.\n          The GUID in the URL corresponds to the value of the custom attribute, which is linked to its textual\n          content and the object it is attached to.\n\n**Required Role:** Viewer or higher"
+      parameters:
+      - in: path
+        name: guid
+        schema:
+          type: string
+          pattern: ^([a-zA-z]{2}_[a-zA-Z0-9]{22})|me|default|([a-zA-z]{2}_[a-zA-Z0-9]{22}).personal$
+        required: true
+      tags:
+      - custom-attribute-values
+      security:
+      - JWTAuthentication: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomAttributeRetrieveValue'
+          description: ''
+      x-role-requirements: Viewer or higher
+    patch:
+      operationId: custom_attribute_values_partial_update
+      description: "This endpoint is designed for modifying an existing\n                value and/or rich text value of a custom attribute on a particular object.\n\n**Required Role:** Data Manager or higher"
+      parameters:
+      - in: path
+        name: guid
+        schema:
+          type: string
+          pattern: ^([a-zA-z]{2}_[a-zA-Z0-9]{22})|me|default|([a-zA-z]{2}_[a-zA-Z0-9]{22}).personal$
+        required: true
+      tags:
+      - custom-attribute-values
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedCustomAttributeValueRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedCustomAttributeValueRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedCustomAttributeValueRequest'
+      security:
+      - JWTAuthentication: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomAttributeValue'
+          description: ''
+      x-role-requirements: Data Manager or higher
+    delete:
+      operationId: custom_attribute_values_destroy
+      description: 'This endpoint will delete a custom attribute value from an object
+
+
+        **Required Role:** Data Manager or higher'
+      parameters:
+      - name: asset_type
+        required: false
+        in: query
+        description: 'A comma separated value for asset type in form: data_source_type,object_type,data_type'
+        schema:
+          type: string
+      - name: custom_attributes
+        required: false
+        in: query
+        description: A comma separated list of custom attribute guids to get their custom attribute values.
+        schema:
+          type: string
+          pattern: ^(ca)_(?P<guid>[23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{22})$
+      - name: datasources
+        required: false
+        in: query
+        description: Filter custom attributes values by a data source guid
+        schema:
+          type: string
+          pattern: ^(ds)_(?P<guid>[23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{22})$
+      - in: path
+        name: guid
+        schema:
+          type: string
+          pattern: ^([a-zA-z]{2}_[a-zA-Z0-9]{22})|me|default|([a-zA-z]{2}_[a-zA-Z0-9]{22}).personal$
+        required: true
+      - name: items
+        required: false
+        in: query
+        description: Filter custom attributes values by a item guids, that values are assigned for
+        schema:
+          type: string
+          pattern: ^(co|ta|cl|db|jb|de|le|ef|lf|lm|lv|rq|da|dn|fl|mt|bl|tf|ts|tt|tv|st|sc|zd|zc|ze|zt)_(?P<guid>[23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{22})$
+      tags:
+      - custom-attribute-values
+      security:
+      - JWTAuthentication: []
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+      x-role-requirements: Data Manager or higher
+components:
+  schemas:
+    PatchedCustomAttributeValueRequest:
+      type: object
+      properties:
+        guid:
+          type: string
+          minLength: 1
+          maxLength: 25
+        custom_attribute:
+          type: string
+          writeOnly: true
+          minLength: 1
+          description: GUID of a Custom Attribute
+        item:
+          type: string
+          minLength: 1
+        value:
+          type: string
+          nullable: true
+          description: The value of the attribute
+        richtext_value:
+          type: string
+          nullable: true
+          description: The richtext formatted value of the attribute
+    CustomAttributeRetrieveValue:
+      type: object
+      properties:
+        guid:
+          type: string
+          maxLength: 25
+        data_source:
+          type: string
+          readOnly: true
+          description: The data source guid
+        organization:
+          type: string
+          readOnly: true
+          description: The organization guid
+        custom_attribute:
+          allOf:
+          - $ref: '#/components/schemas/CustomAttributeLite'
+          readOnly: true
+        item:
+          type: string
+        value:
+          type: string
+          nullable: true
+          description: The value of the attribute
+        richtext_value:
+          type: string
+          nullable: true
+          description: The richtext formatted value of the attribute
+      required:
+      - custom_attribute
+      - data_source
+      - item
+      - organization
+    CustomAttributeLite:
+      type: object
+      properties:
+        guid:
+          type: string
+          readOnly: true
+        type:
+          allOf:
+          - $ref: '#/components/schemas/CustomAttributeType'
+          readOnly: true
+          description: 'Custom Attribute type, either category or status
+
+
+            * `text` - text'
+        name:
+          type: string
+          readOnly: true
+          description: Custom attribute display name
+      required:
+      - guid
+      - name
+      - type
+    CustomAttributeValue:
+      type: object
+      properties:
+        guid:
+          type: string
+          maxLength: 25
+        data_source:
+          type: string
+          readOnly: true
+          description: The data source guid
+        organization:
+          type: string
+          readOnly: true
+          description: The organization guid
+        item:
+          type: string
+        value:
+          type: string
+          nullable: true
+          description: The value of the attribute
+        richtext_value:
+          type: string
+          nullable: true
+          description: The richtext formatted value of the attribute
+      required:
+      - data_source
+      - item
+      - organization
+    CustomAttributeType:
+      enum:
+      - text
+      type: string
+      description: '* `text` - text'
+    PaginatedCustomAttributeRetrieveValueList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttributeRetrieveValue'
+    CustomAttributeValueRequest:
+      type: object
+      properties:
+        guid:
+          type: string
+          minLength: 1
+          maxLength: 25
+        custom_attribute:
+          type: string
+          writeOnly: true
+          minLength: 1
+          description: GUID of a Custom Attribute
+        item:
+          type: string
+          minLength: 1
+        value:
+          type: string
+          nullable: true
+          description: The value of the attribute
+        richtext_value:
+          type: string
+          nullable: true
+          description: The richtext formatted value of the attribute
+      required:
+      - custom_attribute
+      - item
+  securitySchemes:
+    JWTAuthentication:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Token-based authentication with required prefix "Token"
+externalDocs:
+  description: Select Star API reference documentation
+  url: https://docs.selectstar.com/select-star-api

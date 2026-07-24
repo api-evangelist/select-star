@@ -1,0 +1,800 @@
+openapi: 3.0.3
+info:
+  title: Select Star Metadata bi data-metrics API
+  version: 1.0.0
+  x-role-system:
+    description: This API uses role-based access control
+    roles:
+      admin: Full access to all operations
+      data_manager: Can modify data and configurations
+      user: Read-only access to most resources
+  description: API for interacting with the Select Star system
+  termsOfService: https://www.selectstar.com/terms-of-service
+  contact:
+    email: support@selectstar.com
+  license:
+    name: All Rights Reserved
+tags:
+- name: data-metrics
+paths:
+  /v1/data-metrics/activities/:
+    get:
+      operationId: data_metrics_activities_list
+      description: '*Beta version - Subject to Changes*
+
+
+        Endpoint for the individual Activity list
+
+
+        **Required Role:** Admin'
+      parameters:
+      - name: data_source
+        required: false
+        in: query
+        description: Search for activities given a data source name
+        schema:
+          type: string
+      - name: end_date
+        required: true
+        in: query
+        description: 'The end date of the date filter. The end date has to be set to equal or later than start date. The maximum date range limit user can set is equal to 90 days. Format: YYYY-MM-DD'
+        schema:
+          type: string
+      - name: message
+        required: false
+        in: query
+        description: Search for activities given a description
+        schema:
+          type: string
+      - name: order
+        required: false
+        in: query
+        description: Specify the ordering for the results. A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order.
+        schema:
+          type: string
+          enum:
+          - -activity_type
+          - -message
+          - -performed_on
+          - -target_data_source
+          - -target_full_name
+          - -target_name
+          - -user
+          - activity_type
+          - message
+          - performed_on
+          - target_data_source
+          - target_full_name
+          - target_name
+          - user
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - name: search_all
+        required: false
+        in: query
+        description: Search for activities given a user, activity type or target name
+        schema:
+          type: string
+      - name: start_date
+        required: true
+        in: query
+        description: 'The start date of the date filter. The start date has to be set to before or equal than end date. The maximum date range limit user can set is equal to 90 days. Format: YYYY-MM-DD'
+        schema:
+          type: string
+      - name: target
+        required: false
+        in: query
+        description: Search for activities given a target name
+        schema:
+          type: string
+      - name: target_full_name
+        required: false
+        in: query
+        description: Search for schema changes given a target full name
+        schema:
+          type: string
+      - name: type
+        required: false
+        in: query
+        description: Search for activities given an activity type
+        schema:
+          type: string
+      - name: types
+        required: false
+        in: query
+        description: Specify the type of activity to filter for the results.
+        schema:
+          type: string
+          enum:
+          - add
+          - comment
+          - create
+          - delete
+          - favorite
+          - notify
+          - pinned
+          - remove
+          - tagged
+          - unfavorite
+          - unpinned
+          - untagged
+          - update
+          - view
+      - name: user
+        required: false
+        in: query
+        description: Search by 'user' using first name, last name, or email
+        schema:
+          type: string
+      tags:
+      - data-metrics
+      security:
+      - JWTAuthentication: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedActivityAnalyticsList'
+          description: ''
+      x-role-requirements: Admin
+  /v1/data-metrics/activities/schema_changes/:
+    get:
+      operationId: schema_changes_get
+      description: '*Beta version - Subject to Changes*
+
+
+        List endpoint for Schema Changes
+
+
+        **Required Role:** Admin'
+      parameters:
+      - name: data_source
+        required: false
+        in: query
+        description: Search for activities given a data source name
+        schema:
+          type: string
+      - name: end_date
+        required: true
+        in: query
+        description: 'The end date of the date filter. The end date has to be set to equal or later than start date. The maximum date range limit user can set is equal to 90 days. Format: YYYY-MM-DD'
+        schema:
+          type: string
+      - name: message
+        required: false
+        in: query
+        description: Search for activities given a description
+        schema:
+          type: string
+      - name: order
+        required: false
+        in: query
+        description: Specify the ordering for the results. A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order.
+        schema:
+          type: string
+          enum:
+          - -activity_type
+          - -message
+          - -performed_on
+          - -target_data_source
+          - -target_full_name
+          - -target_name
+          - -user
+          - activity_type
+          - message
+          - performed_on
+          - target_data_source
+          - target_full_name
+          - target_name
+          - user
+      - name: search_all
+        required: false
+        in: query
+        description: Search for activities given a user, activity type or target name
+        schema:
+          type: string
+      - name: start_date
+        required: true
+        in: query
+        description: 'The start date of the date filter. The start date has to be set to before or equal than end date. The maximum date range limit user can set is equal to 90 days. Format: YYYY-MM-DD'
+        schema:
+          type: string
+      - name: target
+        required: false
+        in: query
+        description: Search for activities given a target name
+        schema:
+          type: string
+      - name: target_full_name
+        required: false
+        in: query
+        description: Search for schema changes given a target full name
+        schema:
+          type: string
+      - name: type
+        required: false
+        in: query
+        description: Search for activities given an activity type
+        schema:
+          type: string
+      - name: types
+        required: false
+        in: query
+        description: Specify the type of activity to filter for the results.
+        schema:
+          type: string
+          enum:
+          - add
+          - comment
+          - create
+          - delete
+          - favorite
+          - notify
+          - pinned
+          - remove
+          - tagged
+          - unfavorite
+          - unpinned
+          - untagged
+          - update
+          - view
+      - name: user
+        required: false
+        in: query
+        description: Search by 'user' using first name, last name, or email
+        schema:
+          type: string
+      tags:
+      - data-metrics
+      security:
+      - JWTAuthentication: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivitySchemaChanges'
+          description: ''
+      x-role-requirements: Admin
+components:
+  schemas:
+    UserActivityAnalytics:
+      type: object
+      properties:
+        first_name:
+          type: string
+          readOnly: true
+        last_name:
+          type: string
+          readOnly: true
+        email:
+          type: string
+          readOnly: true
+        guid:
+          type: string
+          readOnly: true
+        avatar:
+          type: string
+          readOnly: true
+      required:
+      - avatar
+      - email
+      - first_name
+      - guid
+      - last_name
+    BaseDataSource:
+      type: object
+      properties:
+        guid:
+          type: string
+          maxLength: 25
+        type:
+          $ref: '#/components/schemas/Type6b6Enum'
+        name:
+          type: string
+          maxLength: 100
+      required:
+      - name
+      - type
+    ActivityAnalytics:
+      type: object
+      properties:
+        target:
+          type: string
+          readOnly: true
+        target_name:
+          type: string
+          readOnly: true
+        target_object_type:
+          type: string
+          readOnly: true
+        target_data_type:
+          type: string
+          readOnly: true
+        target_parent_guid:
+          type: string
+          readOnly: true
+        performed_on:
+          type: string
+          format: date-time
+          readOnly: true
+        activity_type:
+          type: string
+          readOnly: true
+        user:
+          $ref: '#/components/schemas/UserActivityAnalytics'
+        data_types:
+          allOf:
+          - $ref: '#/components/schemas/BaseType'
+          readOnly: true
+        field:
+          type: string
+          readOnly: true
+          nullable: true
+          description: The field of the class the activity pertains to. Can be null in instances such as view
+        message:
+          allOf:
+          - $ref: '#/components/schemas/ActivityMessage'
+          readOnly: true
+        data:
+          type: string
+          readOnly: true
+          nullable: true
+          description: Extra data stored for the activity (e.g. pre- or post-update field value)
+      required:
+      - activity_type
+      - data
+      - data_types
+      - field
+      - message
+      - performed_on
+      - target
+      - target_data_type
+      - target_name
+      - target_object_type
+      - target_parent_guid
+      - user
+    TargetDataSourceTypeEnum:
+      enum:
+      - airflow
+      - aws_s3
+      - bigquery
+      - data_studio
+      - databricks
+      - db_agent
+      - db2
+      - dbt
+      - fivetran
+      - glue
+      - hex
+      - looker
+      - metabase
+      - mode
+      - monte_carlo
+      - mssql
+      - mysql
+      - omni
+      - openlineage
+      - oracle
+      - periscope
+      - postgres
+      - power_bi
+      - quicksight
+      - redshift
+      - salesforce
+      - salesforce_crma
+      - sigma
+      - snowflake
+      - tableau
+      - thoughtspot
+      - trial
+      - trial_redshift
+      type: string
+      description: '* `airflow` - Airflow
+
+        * `aws_s3` - AWS S3
+
+        * `bigquery` - BigQuery
+
+        * `data_studio` - Looker Studio
+
+        * `databricks` - Databricks
+
+        * `db_agent` - DB Agent
+
+        * `db2` - DB2
+
+        * `dbt` - dbt
+
+        * `fivetran` - Fivetran
+
+        * `glue` - Glue
+
+        * `hex` - Hex
+
+        * `looker` - Looker
+
+        * `metabase` - Metabase
+
+        * `mode` - Mode
+
+        * `monte_carlo` - Monte Carlo
+
+        * `mssql` - MS SQL
+
+        * `mysql` - MySQL
+
+        * `omni` - Omni BI
+
+        * `openlineage` - Open Lineage
+
+        * `oracle` - Oracle
+
+        * `periscope` - Periscope
+
+        * `postgres` - PostgreSQL
+
+        * `power_bi` - Power BI
+
+        * `quicksight` - QuickSight
+
+        * `redshift` - Redshift
+
+        * `salesforce` - Salesforce
+
+        * `salesforce_crma` - Salesforce Analytics
+
+        * `sigma` - Sigma
+
+        * `snowflake` - Snowflake
+
+        * `tableau` - Tableau
+
+        * `thoughtspot` - ThoughtSpot
+
+        * `trial` - Trial
+
+        * `trial_redshift` - Trial Redshift'
+    ActivityMessageData:
+      type: object
+      properties:
+        object_type:
+          type: string
+          nullable: true
+        data:
+          type: object
+          oneOf:
+          - type: object
+            properties:
+              first_name:
+                type: string
+              last_name:
+                type: string
+              guid:
+                type: string
+              avatar:
+                type: string
+                nullable: true
+          - type: object
+            properties:
+              guid:
+                type: string
+              name:
+                type: string
+              data_types:
+                type: object
+              parent_guid:
+                type: string
+                nullable: true
+          - type: object
+            properties:
+              guid:
+                type: string
+              name:
+                type: string
+              data_types:
+                type: object
+          readOnly: true
+          nullable: true
+      required:
+      - data
+      - object_type
+    PaginatedActivityAnalyticsList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ActivityAnalytics'
+    ActivitySchemaChanges:
+      type: object
+      properties:
+        guid:
+          type: string
+          readOnly: true
+        target:
+          type: string
+          readOnly: true
+        target_name:
+          type: string
+        target_parent_guid:
+          type: string
+        target_data_source:
+          $ref: '#/components/schemas/BaseDataSource'
+        performed_on:
+          type: string
+          format: date-time
+          readOnly: true
+        breadcrumbs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Breadcrumb'
+        message:
+          allOf:
+          - $ref: '#/components/schemas/ActivityMessage'
+          readOnly: true
+        data:
+          type: string
+          readOnly: true
+          nullable: true
+          description: Extra data stored for the activity (e.g. pre- or post-update field value)
+        data_types:
+          allOf:
+          - $ref: '#/components/schemas/BaseType'
+          readOnly: true
+      required:
+      - breadcrumbs
+      - data
+      - data_types
+      - guid
+      - message
+      - performed_on
+      - target
+      - target_data_source
+      - target_name
+      - target_parent_guid
+    ActivityMessage:
+      type: object
+      description: 'Activity Message Serializer is written to handle the
+
+        different types of messages that possible for activity
+
+        to display.
+
+        For this serializer to work, context must be passed in
+
+        with the key.
+
+        target_data_source.type.value'
+      properties:
+        template:
+          type: string
+        values:
+          $ref: '#/components/schemas/ActivityMessageValue'
+      required:
+      - template
+      - values
+    ActivityMessageValue:
+      type: object
+      properties:
+        user:
+          allOf:
+          - $ref: '#/components/schemas/ActivityMessageData'
+          nullable: true
+        target:
+          allOf:
+          - $ref: '#/components/schemas/ActivityMessageData'
+          nullable: true
+        parent:
+          allOf:
+          - $ref: '#/components/schemas/ActivityMessageData'
+          nullable: true
+    Breadcrumb:
+      type: object
+      properties:
+        guid:
+          type: string
+          maxLength: 25
+        target_guid:
+          type: string
+          maxLength: 256
+        target_name:
+          type: string
+          readOnly: true
+        target_object_type:
+          type: string
+        target_data_type:
+          type: string
+        target_data_source_guid:
+          type: string
+          nullable: true
+          readOnly: true
+        target_data_source_type:
+          allOf:
+          - $ref: '#/components/schemas/TargetDataSourceTypeEnum'
+          nullable: true
+        ordinal:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          description: Ordering of breadcrumb within the table
+      required:
+      - target_data_source_guid
+      - target_data_type
+      - target_guid
+      - target_name
+      - target_object_type
+    Type6b6Enum:
+      enum:
+      - airflow
+      - aws_s3
+      - bigquery
+      - data_studio
+      - databricks
+      - db_agent
+      - db2
+      - dbt
+      - fivetran
+      - glue
+      - hex
+      - looker
+      - metabase
+      - mode
+      - monte_carlo
+      - mssql
+      - mysql
+      - omni
+      - openlineage
+      - oracle
+      - periscope
+      - postgres
+      - power_bi
+      - quicksight
+      - redshift
+      - salesforce
+      - salesforce_crma
+      - sigma
+      - snowflake
+      - tableau
+      - thoughtspot
+      - trial
+      - trial_redshift
+      type: string
+      description: '* `airflow` - Airflow
+
+        * `aws_s3` - AWS S3
+
+        * `bigquery` - BigQuery
+
+        * `data_studio` - Looker Studio
+
+        * `databricks` - Databricks
+
+        * `db_agent` - DB Agent
+
+        * `db2` - DB2
+
+        * `dbt` - dbt
+
+        * `fivetran` - Fivetran
+
+        * `glue` - Glue
+
+        * `hex` - Hex
+
+        * `looker` - Looker
+
+        * `metabase` - Metabase
+
+        * `mode` - Mode
+
+        * `monte_carlo` - Monte Carlo
+
+        * `mssql` - MS SQL
+
+        * `mysql` - MySQL
+
+        * `omni` - Omni BI
+
+        * `openlineage` - Open Lineage
+
+        * `oracle` - Oracle
+
+        * `periscope` - Periscope
+
+        * `postgres` - PostgreSQL
+
+        * `power_bi` - Power BI
+
+        * `quicksight` - QuickSight
+
+        * `redshift` - Redshift
+
+        * `salesforce` - Salesforce
+
+        * `salesforce_crma` - Salesforce Analytics
+
+        * `sigma` - Sigma
+
+        * `snowflake` - Snowflake
+
+        * `tableau` - Tableau
+
+        * `thoughtspot` - ThoughtSpot
+
+        * `trial` - Trial
+
+        * `trial_redshift` - Trial Redshift'
+    BaseType:
+      type: object
+      description: 'Base Serializer to inject the following `type` information:
+
+        - Object Type: Model Name of the Object: Table, Dashboard, ReportQuery
+
+        - Data Source Type: snowflake, databricks etc.
+
+        - Data Type: Additional type like tile, visual, card etc.'
+      properties:
+        object_type:
+          type: string
+          nullable: true
+          readOnly: true
+        data_source_type:
+          type: string
+          nullable: true
+          readOnly: true
+        data_type:
+          type: string
+          nullable: true
+          readOnly: true
+        external_database_type:
+          type: string
+          nullable: true
+          readOnly: true
+      required:
+      - data_source_type
+      - data_type
+      - external_database_type
+      - object_type
+  securitySchemes:
+    JWTAuthentication:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Token-based authentication with required prefix "Token"
+externalDocs:
+  description: Select Star API reference documentation
+  url: https://docs.selectstar.com/select-star-api

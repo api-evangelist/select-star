@@ -1,0 +1,439 @@
+openapi: 3.0.3
+info:
+  title: Select Star Metadata bi scim API
+  version: 1.0.0
+  x-role-system:
+    description: This API uses role-based access control
+    roles:
+      admin: Full access to all operations
+      data_manager: Can modify data and configurations
+      user: Read-only access to most resources
+  description: API for interacting with the Select Star system
+  termsOfService: https://www.selectstar.com/terms-of-service
+  contact:
+    email: support@selectstar.com
+  license:
+    name: All Rights Reserved
+tags:
+- name: scim
+paths:
+  /scim/v2/Me:
+    get:
+      operationId: scim_v2_Me_retrieve
+      description: 'Manage Users with a SCIM compliant API.
+
+
+        **Required Role:** Admin'
+      tags:
+      - scim
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/scim+json:
+              schema:
+                $ref: '#/components/schemas/SCIMUser'
+          description: ''
+      x-role-requirements: Admin
+    put:
+      operationId: scim_v2_Me_update
+      description: 'Manage Users with a SCIM compliant API.
+
+
+        **Required Role:** Admin'
+      tags:
+      - scim
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SCIMUserUpdateRequest'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/scim+json:
+              schema:
+                $ref: '#/components/schemas/SCIMUser'
+          description: ''
+      x-role-requirements: Admin
+  /scim/v2/ResourceTypes:
+    get:
+      operationId: scim_v2_ResourceTypes_retrieve
+      tags:
+      - scim
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          description: No response body
+      description: '**Required Role:** Authenticated User with Active Organization'
+      x-role-requirements: Authenticated User with Active Organization
+  /scim/v2/ServiceProviderConfig:
+    get:
+      operationId: scim_v2_ServiceProviderConfig_retrieve
+      tags:
+      - scim
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          description: No response body
+      description: '**Required Role:** Authenticated User with Active Organization'
+      x-role-requirements: Authenticated User with Active Organization
+  /scim/v2/Users:
+    get:
+      operationId: scim_v2_Users_list
+      description: 'Manage Users with a SCIM compliant API.
+
+
+        **Required Role:** Admin'
+      parameters:
+      - in: query
+        name: count
+        schema:
+          type: integer
+        description: Non-negative integer. Specifies the desired maximum number of query results per page, e.g., 10. A negative value SHALL be interpreted as "0". A value of "0" indicates that no resource results are to be returned except for "totalResults".
+      - in: query
+        name: page
+        schema:
+          type: integer
+        description: Deprecated. Use startIndex instead.
+      - in: query
+        name: page_size
+        schema:
+          type: integer
+        description: Deprecated. Use count instead.
+      - in: query
+        name: startIndex
+        schema:
+          type: integer
+        description: The 1-based index of the first query result.
+      - in: query
+        name: userName
+        schema:
+          type: string
+        description: A string that is matched against the "userName" or "email" attributes of a User.
+      tags:
+      - scim
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/scim+json:
+              schema:
+                $ref: '#/components/schemas/SCIMUserListResponse'
+          description: ''
+      x-role-requirements: Admin
+    post:
+      operationId: scim_v2_Users_create
+      description: 'Manage Users with a SCIM compliant API.
+
+
+        **Required Role:** Admin'
+      tags:
+      - scim
+      requestBody:
+        content:
+          application/scim+json:
+            schema:
+              $ref: '#/components/schemas/SCIMUserCreateRequest'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/scim+json:
+              schema:
+                $ref: '#/components/schemas/SCIMUser'
+          description: ''
+      x-role-requirements: Admin
+  /scim/v2/Users/{guid}:
+    get:
+      operationId: scim_v2_Users_retrieve
+      description: 'Manage Users with a SCIM compliant API.
+
+
+        **Required Role:** Admin'
+      parameters:
+      - in: path
+        name: guid
+        schema:
+          type: string
+          pattern: ^([a-zA-z]{2}_[a-zA-Z0-9]{22})|me|default|([a-zA-z]{2}_[a-zA-Z0-9]{22}).personal$
+        required: true
+      tags:
+      - scim
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/scim+json:
+              schema:
+                $ref: '#/components/schemas/SCIMUser'
+          description: ''
+      x-role-requirements: Admin
+    put:
+      operationId: scim_v2_Users_update
+      description: 'Manage Users with a SCIM compliant API.
+
+
+        **Required Role:** Admin'
+      parameters:
+      - in: path
+        name: guid
+        schema:
+          type: string
+          pattern: ^([a-zA-z]{2}_[a-zA-Z0-9]{22})|me|default|([a-zA-z]{2}_[a-zA-Z0-9]{22}).personal$
+        required: true
+      tags:
+      - scim
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SCIMUserUpdateRequest'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/scim+json:
+              schema:
+                $ref: '#/components/schemas/SCIMUser'
+          description: ''
+      x-role-requirements: Admin
+    delete:
+      operationId: scim_v2_Users_destroy
+      description: 'Manage Users with a SCIM compliant API.
+
+
+        **Required Role:** Admin'
+      parameters:
+      - in: path
+        name: guid
+        schema:
+          type: string
+          pattern: ^([a-zA-z]{2}_[a-zA-Z0-9]{22})|me|default|([a-zA-z]{2}_[a-zA-Z0-9]{22}).personal$
+        required: true
+      tags:
+      - scim
+      security:
+      - tokenAuth: []
+      responses:
+        '204':
+          description: No response body
+      x-role-requirements: Admin
+components:
+  schemas:
+    SCIMUser:
+      type: object
+      properties:
+        schemas:
+          type: array
+          items:
+            type: string
+          readOnly: true
+        meta:
+          type: object
+          additionalProperties: {}
+          readOnly: true
+        id:
+          type: string
+          readOnly: true
+        userName:
+          type: string
+          pattern: '@(?!gmail\.|hotmail\.|yahoo\.|live\.|qq\.|naver\.|protonmail\.|yopmail\.|pokemail\.|bvhrs\.|idrct\.|caraparcal\.|tryninja.io|mailinator.com|ontimeusemail\.|outlook\.|icloud\.|mail\.|instasmail\.|nevyxus\.|bvhrk\.|cazlq\.)'
+        name:
+          type: object
+          properties:
+            givenName:
+              type: string
+            familyName:
+              type: string
+          description: 'The components of the user''s real name. Returned as a complex type with the following sub-attributes: `familyName`, `givenName`.'
+        emails:
+          type: array
+          items:
+            type: object
+            properties:
+              value:
+                type: string
+                format: email
+              primary:
+                type: boolean
+          readOnly: true
+          description: 'Email of the user. Returned as a list of objects with the following attributes: `value` and `primary`.'
+        active:
+          type: boolean
+        lastLogin:
+          type: string
+          format: date-time
+          readOnly: true
+        role:
+          type: string
+          description: The role of the user. One of 'user', 'admin' or 'data_manager'
+        team:
+          allOf:
+          - $ref: '#/components/schemas/Team'
+          nullable: true
+      required:
+      - active
+      - emails
+      - id
+      - lastLogin
+      - meta
+      - name
+      - schemas
+      - userName
+    SCIMUserListResponse:
+      type: object
+      properties:
+        schemas:
+          type: array
+          items:
+            type: string
+            maxLength: 255
+        totalResults:
+          type: integer
+          nullable: true
+        startIndex:
+          type: integer
+          nullable: true
+        itemsPerPage:
+          type: integer
+          nullable: true
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/SCIMUser'
+      required:
+      - itemsPerPage
+      - resources
+      - schemas
+      - startIndex
+      - totalResults
+    SCIMUserUpdateRequest:
+      type: object
+      properties:
+        userName:
+          type: string
+          minLength: 1
+          pattern: '@(?!gmail\.|hotmail\.|yahoo\.|live\.|qq\.|naver\.|protonmail\.|yopmail\.|pokemail\.|bvhrs\.|idrct\.|caraparcal\.|tryninja.io|mailinator.com|ontimeusemail\.|outlook\.|icloud\.|mail\.|instasmail\.|nevyxus\.|bvhrk\.|cazlq\.)'
+        name:
+          type: object
+          properties:
+            givenName:
+              type: string
+            familyName:
+              type: string
+          description: 'The components of the user''s real name. Returned as a complex type with the following sub-attributes: `familyName`, `givenName`.'
+        active:
+          type: boolean
+        role:
+          type: string
+          minLength: 1
+          description: The role of the user. One of 'user', 'admin' or 'data_manager'
+        team:
+          allOf:
+          - $ref: '#/components/schemas/TeamRequest'
+          nullable: true
+      required:
+      - active
+      - name
+      - userName
+    SCIMUserCreateRequest:
+      type: object
+      properties:
+        userName:
+          type: string
+          minLength: 1
+          pattern: '@(?!gmail\.|hotmail\.|yahoo\.|live\.|qq\.|naver\.|protonmail\.|yopmail\.|pokemail\.|bvhrs\.|idrct\.|caraparcal\.|tryninja.io|mailinator.com|ontimeusemail\.|outlook\.|icloud\.|mail\.|instasmail\.|nevyxus\.|bvhrk\.|cazlq\.)'
+        password:
+          type: string
+          writeOnly: true
+          minLength: 1
+        name:
+          type: object
+          properties:
+            givenName:
+              type: string
+            familyName:
+              type: string
+          description: 'The components of the user''s real name. Returned as a complex type with the following sub-attributes: `familyName`, `givenName`.'
+        active:
+          type: boolean
+        role:
+          type: string
+          minLength: 1
+          description: The role of the user. One of 'user', 'admin' or 'data_manager'
+        team:
+          allOf:
+          - $ref: '#/components/schemas/TeamRequest'
+          nullable: true
+      required:
+      - active
+      - name
+      - password
+      - userName
+    TeamRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        description:
+          type: string
+          nullable: true
+          description: Active description
+        richtext_description:
+          type: string
+          nullable: true
+          description: Richtext formatted description. Can be in Slatejs or Draftjs format.
+      required:
+      - name
+    Team:
+      type: object
+      properties:
+        guid:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+          nullable: true
+          description: Active description
+        richtext_description:
+          type: string
+          nullable: true
+          description: Richtext formatted description. Can be in Slatejs or Draftjs format.
+        members_count:
+          type: integer
+          readOnly: true
+      required:
+      - guid
+      - members_count
+      - name
+  securitySchemes:
+    JWTAuthentication:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Token-based authentication with required prefix "Token"
+externalDocs:
+  description: Select Star API reference documentation
+  url: https://docs.selectstar.com/select-star-api

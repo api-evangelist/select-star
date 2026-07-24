@@ -1,0 +1,673 @@
+openapi: 3.0.3
+info:
+  title: Select Star Metadata bi search API
+  version: 1.0.0
+  x-role-system:
+    description: This API uses role-based access control
+    roles:
+      admin: Full access to all operations
+      data_manager: Can modify data and configurations
+      user: Read-only access to most resources
+  description: API for interacting with the Select Star system
+  termsOfService: https://www.selectstar.com/terms-of-service
+  contact:
+    email: support@selectstar.com
+  license:
+    name: All Rights Reserved
+tags:
+- name: search
+paths:
+  /v1/search/:
+    get:
+      operationId: search_list
+      description: 'Search
+
+
+        **Required Role:** Authenticated User with Active Organization'
+      parameters:
+      - in: query
+        name: collections
+        schema:
+          type: string
+        description: A comma separated list of collection GUIDs. The search results will only contain items from any of the given collections.
+      - in: query
+        name: custom_attributes_search
+        schema:
+          type: boolean
+          default: false
+        description: When set to true, if the search term refers to a custom attribute name or value, then the results will contain all items that have that custom attribute. For example, if the search term contains `business` then it gets all items with a custom attribute named `business` or with a custom attribute with a value containing the word `business`.
+      - in: query
+        name: data_source_types
+        schema:
+          type: string
+        description: A comma separated list of data source types. The search results will only contain items from any of the given data source types.
+      - in: query
+        name: dbt_tags
+        schema:
+          type: string
+        description: A comma separated list of dbt tag GUIDs. The search results will only contain items tagged by any of the given tags.
+      - in: query
+        name: guids
+        schema:
+          type: string
+        description: A comma separated list of GUIDs to search for. When provided, other search parameters cannot be specified.
+      - in: query
+        name: include
+        schema:
+          type: string
+          enum:
+          - aws_s3_buckets
+          - aws_s3_objects
+          - collections
+          - columns
+          - comments
+          - dashboard_elements
+          - data-sources
+          - data_studio_dashboards
+          - data_studio_folders
+          - databases
+          - databricks_folders
+          - databricks_notebooks
+          - dbt-folders
+          - dbt-tests
+          - documents
+          - ds-users
+          - explore_fields
+          - explores
+          - hex_dashboards
+          - hex_folders
+          - hex_reports
+          - jobs
+          - looker_dashboards
+          - looker_folders
+          - looker_groups
+          - looker_looks
+          - lookml_fields
+          - lookml_models
+          - lookml_views
+          - metabase_cards
+          - metabase_dashboards
+          - metabase_fields
+          - metabase_folders
+          - metabase_metrics
+          - metabase_questions
+          - metrics
+          - mode_queries
+          - mode_reports
+          - mode_spaces
+          - omni_bicolumns
+          - omni_bidashboardelements
+          - omni_bidatasets
+          - omni_dashboards
+          - omni_folders
+          - omni_reports
+          - periscope_dashboards
+          - periscope_folders
+          - power_bi_columns
+          - power_bi_dashboards
+          - power_bi_dataflows
+          - power_bi_datasets
+          - power_bi_folders
+          - power_bi_pages
+          - power_bi_reports
+          - power_bi_tiles
+          - power_bi_visuals
+          - quicksight_bicolumns
+          - quicksight_bidashboardelements
+          - quicksight_bidatasets
+          - quicksight_dashboards
+          - quicksight_folders
+          - quicksight_reports
+          - salesforce_crma_bicolumns
+          - salesforce_crma_bidashboardelements
+          - salesforce_crma_bidatasets
+          - salesforce_crma_dashboards
+          - salesforce_crma_folders
+          - salesforce_crma_reports
+          - schemata
+          - sigma_dashboards
+          - sigma_elements
+          - sigma_folders
+          - tableau_data_sources
+          - tableau_fields
+          - tableau_projects
+          - tableau_views
+          - tableau_workbooks
+          - tables
+          - tags
+          - teams
+          - terms
+          - thoughtspot_answers
+          - thoughtspot_columns
+          - thoughtspot_data_folders
+          - thoughtspot_folders
+          - thoughtspot_liveboards
+          - thoughtspot_tables
+          - thoughtspot_views
+          - thoughtspot_worksheets
+          - users
+        description: A comma separated list of object types to filter on. If specified, the search results will only contain objects whose types are specified. For example, if the filter is `include=tables,databases` then the search results will only contain tables and databases.
+      - in: query
+        name: no_exact_on_fuzzy
+        schema:
+          type: boolean
+          default: true
+        description: When set to true, exact matching will be turned off when no_fuzzy=false, and all search results will match the search terms fuzzily. No effect if no_fuzzy=true.
+      - in: query
+        name: no_external_tags
+        schema:
+          type: boolean
+          default: false
+      - in: query
+        name: no_fuzzy
+        schema:
+          type: boolean
+          default: false
+        description: When set to true, fuzzy search won't be used. All search results will match the search terms exactly
+      - in: query
+        name: no_popularity
+        schema:
+          type: boolean
+          default: false
+        description: When set to true, popularity won't be returned
+      - name: order
+        required: false
+        in: query
+        description: "Specify the ordering for the results. \n\n A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order. \n\nNote: Order is case-sensitive."
+        schema:
+          type: string
+          enum:
+          - _score
+          - description
+          - name
+          - popularity
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: query
+        name: popularity
+        schema:
+          type: string
+        description: 'An inclusive range of values that popularity must fall between. The syntax of this query must match the following regex: `\d{3}-\d{3}`'
+      - in: query
+        name: q
+        schema:
+          type: string
+          minLength: 1
+          default: ''
+          maxLength: 1000
+        description: The terms to search on
+      - in: query
+        name: search_fields
+        schema:
+          type: string
+      - in: query
+        name: status_tags
+        schema:
+          type: string
+        description: A comma separated list of status tag GUIDs. The search results will only contain items tagged by any of the given tags.
+      - in: query
+        name: tags_search
+        schema:
+          type: boolean
+          default: false
+        description: When set to true, if the search term refers to a tag name, then the results will contain all items that are tagged with that tag. For example, if the search term contains `pii` and `tags_search` is enabled, then the results will contain all items that tagged as `pii`
+      tags:
+      - search
+      security:
+      - JWTAuthentication: []
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedSearchResultList'
+          description: ''
+      x-role-requirements: Authenticated User with Active Organization
+components:
+  schemas:
+    SearchResultCollection:
+      type: object
+      properties:
+        guid:
+          type: string
+        name:
+          type: string
+        icon:
+          type: string
+        emoji:
+          type: string
+        color_scheme:
+          type: string
+        breadcrumbs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Breadcrumb'
+          readOnly: true
+      required:
+      - breadcrumbs
+      - color_scheme
+      - emoji
+      - guid
+      - icon
+      - name
+    SearchResultCustomAttribute:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+      required:
+      - name
+      - value
+    SearchResult:
+      type: object
+      properties:
+        data_types:
+          allOf:
+          - $ref: '#/components/schemas/BaseType'
+          readOnly: true
+        object_type:
+          type: string
+          readOnly: true
+        guid:
+          type: string
+        name:
+          type: string
+        search_name:
+          type: string
+          description: 'Returns search name based on a new field called search_name_v1.
+
+            If search_name_v1 is not present, it returns the old search_name field.
+
+
+            This is to support the new search_name field that is being added to the indexes.'
+          readOnly: true
+        description:
+          type: string
+          default: ''
+        suggested_description:
+          type: string
+          default: ''
+        field_type:
+          type: string
+        looker_field_type:
+          type: string
+        data_type:
+          type: string
+        table_type:
+          $ref: '#/components/schemas/TableTypeEnum'
+        email:
+          type: string
+        is_invitation_pending:
+          type: boolean
+        user_guid:
+          type: string
+        table_guid:
+          type: string
+        explore_guid:
+          type: string
+        field_guid:
+          type: string
+        popularity:
+          type: integer
+        database_name:
+          type: string
+        schema_name:
+          type: string
+        table_name:
+          type: string
+        score:
+          type: number
+          format: double
+        parent_guid:
+          type: string
+        parent_object_type:
+          type: string
+        is_active:
+          type: boolean
+        avatar:
+          type: string
+          nullable: true
+          readOnly: true
+        data_source_type:
+          type: string
+        url:
+          type: string
+        tagged_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchResultTaggedItems'
+          readOnly: true
+        collections:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchResultCollection'
+          readOnly: true
+        breadcrumbs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Breadcrumb'
+          readOnly: true
+        custom_attribute_values:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchResultCustomAttribute'
+          readOnly: true
+        icon:
+          type: string
+        color:
+          type: string
+        team:
+          $ref: '#/components/schemas/SearchResultTeam'
+        emoji:
+          type: string
+        color_scheme:
+          type: string
+      required:
+      - avatar
+      - breadcrumbs
+      - collections
+      - custom_attribute_values
+      - data_types
+      - guid
+      - name
+      - object_type
+      - score
+      - search_name
+      - tagged_items
+    SearchResultTeam:
+      type: object
+      properties:
+        guid:
+          type: string
+        name:
+          type: string
+      required:
+      - guid
+      - name
+    TargetDataSourceTypeEnum:
+      enum:
+      - airflow
+      - aws_s3
+      - bigquery
+      - data_studio
+      - databricks
+      - db_agent
+      - db2
+      - dbt
+      - fivetran
+      - glue
+      - hex
+      - looker
+      - metabase
+      - mode
+      - monte_carlo
+      - mssql
+      - mysql
+      - omni
+      - openlineage
+      - oracle
+      - periscope
+      - postgres
+      - power_bi
+      - quicksight
+      - redshift
+      - salesforce
+      - salesforce_crma
+      - sigma
+      - snowflake
+      - tableau
+      - thoughtspot
+      - trial
+      - trial_redshift
+      type: string
+      description: '* `airflow` - Airflow
+
+        * `aws_s3` - AWS S3
+
+        * `bigquery` - BigQuery
+
+        * `data_studio` - Looker Studio
+
+        * `databricks` - Databricks
+
+        * `db_agent` - DB Agent
+
+        * `db2` - DB2
+
+        * `dbt` - dbt
+
+        * `fivetran` - Fivetran
+
+        * `glue` - Glue
+
+        * `hex` - Hex
+
+        * `looker` - Looker
+
+        * `metabase` - Metabase
+
+        * `mode` - Mode
+
+        * `monte_carlo` - Monte Carlo
+
+        * `mssql` - MS SQL
+
+        * `mysql` - MySQL
+
+        * `omni` - Omni BI
+
+        * `openlineage` - Open Lineage
+
+        * `oracle` - Oracle
+
+        * `periscope` - Periscope
+
+        * `postgres` - PostgreSQL
+
+        * `power_bi` - Power BI
+
+        * `quicksight` - QuickSight
+
+        * `redshift` - Redshift
+
+        * `salesforce` - Salesforce
+
+        * `salesforce_crma` - Salesforce Analytics
+
+        * `sigma` - Sigma
+
+        * `snowflake` - Snowflake
+
+        * `tableau` - Tableau
+
+        * `thoughtspot` - ThoughtSpot
+
+        * `trial` - Trial
+
+        * `trial_redshift` - Trial Redshift'
+    SearchResultTag:
+      type: object
+      properties:
+        guid:
+          type: string
+        type:
+          type: string
+        name:
+          type: string
+        icon:
+          type: string
+        color:
+          type: string
+        visible:
+          type: boolean
+        breadcrumbs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Breadcrumb'
+          readOnly: true
+        links_to:
+          type: string
+      required:
+      - breadcrumbs
+      - color
+      - guid
+      - icon
+      - name
+      - type
+    PaginatedSearchResultList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchResult'
+    SearchResultTaggedItems:
+      type: object
+      properties:
+        tag:
+          $ref: '#/components/schemas/SearchResultTag'
+        kind:
+          type: string
+      required:
+      - kind
+      - tag
+    Breadcrumb:
+      type: object
+      properties:
+        guid:
+          type: string
+          maxLength: 25
+        target_guid:
+          type: string
+          maxLength: 256
+        target_name:
+          type: string
+          readOnly: true
+        target_object_type:
+          type: string
+        target_data_type:
+          type: string
+        target_data_source_guid:
+          type: string
+          nullable: true
+          readOnly: true
+        target_data_source_type:
+          allOf:
+          - $ref: '#/components/schemas/TargetDataSourceTypeEnum'
+          nullable: true
+        ordinal:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          description: Ordering of breadcrumb within the table
+      required:
+      - target_data_source_guid
+      - target_data_type
+      - target_guid
+      - target_name
+      - target_object_type
+    TableTypeEnum:
+      enum:
+      - table
+      - view
+      - materialized_view
+      - external_table
+      - dynamic_table
+      - incremental
+      - ephemeral
+      - source
+      - seed
+      - model
+      type: string
+      description: '* `table` - table
+
+        * `view` - view
+
+        * `materialized_view` - materialized_view
+
+        * `external_table` - external_table
+
+        * `dynamic_table` - dynamic_table
+
+        * `incremental` - dbt_incremental
+
+        * `ephemeral` - dbt_ephemeral
+
+        * `source` - dbt_source
+
+        * `seed` - dbt_seed
+
+        * `model` - dbt_model_legacy'
+    BaseType:
+      type: object
+      description: 'Base Serializer to inject the following `type` information:
+
+        - Object Type: Model Name of the Object: Table, Dashboard, ReportQuery
+
+        - Data Source Type: snowflake, databricks etc.
+
+        - Data Type: Additional type like tile, visual, card etc.'
+      properties:
+        object_type:
+          type: string
+          nullable: true
+          readOnly: true
+        data_source_type:
+          type: string
+          nullable: true
+          readOnly: true
+        data_type:
+          type: string
+          nullable: true
+          readOnly: true
+        external_database_type:
+          type: string
+          nullable: true
+          readOnly: true
+      required:
+      - data_source_type
+      - data_type
+      - external_database_type
+      - object_type
+  securitySchemes:
+    JWTAuthentication:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Token-based authentication with required prefix "Token"
+externalDocs:
+  description: Select Star API reference documentation
+  url: https://docs.selectstar.com/select-star-api
