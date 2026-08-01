@@ -1,0 +1,22 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/select-star-openapi.yml
+api: Select Star Metadata API
+skills:
+- name: select-star-trace-lineage
+  file: select-star-trace-lineage.md
+  description: Find a table or column and trace its column-level data lineage.
+  operations:
+  - search_list
+  - tables_list
+  - tables_retrieve
+  - lineage_retrieve
+- name: select-star-tag-and-document
+  file: select-star-tag-and-document.md
+  description: Update an asset's description and apply governance tags.
+  operations:
+  - search_list
+  - metadata_retrieve
+  - metadata_partial_update
+  - tags_list
+  - tags_items_partial_update

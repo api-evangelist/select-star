@@ -1,0 +1,76 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/select-star-openapi.yml
+description: >-
+  Entity-relationship graph for the Select Star Metadata API, derived from the
+  OpenAPI component schemas and resource paths. All assets are addressed by an
+  opaque GUID. The catalog follows the classic warehouse hierarchy
+  (Database > Schema > Table > Column) with BI assets, lineage edges, and
+  governance objects (tags, terms, collections, teams, documents) layered on top.
+entities:
+- name: Database
+  path: /v1/databases/{guid}/
+- name: Schema
+  path: /v1/schemas/{guid}/
+- name: Table
+  path: /v1/tables/{guid}/
+- name: Column
+  path: /v1/columns/{guid}/
+- name: Dashboard
+  path: /v1/bi/dashboards/{guid}/
+- name: DashboardElement
+  path: /v1/bi/dashboards/{dashboard__guid}/elements/
+- name: Tag
+  path: /v1/tags/{guid}/
+- name: Term
+  path: /v1/terms/{guid}/
+- name: Collection
+  path: /v1/collections/{guid}/
+- name: Team
+  path: /v1/teams/{guid}/
+- name: Document
+  path: /v1/documents/{guid}/
+- name: Metric
+  path: /v1/metrics/{guid}/
+- name: LineageEdge
+  path: /v1/lineage/{guid}/
+- name: User
+  path: /scim/v2/Users/{guid}
+relationships:
+- from: Database
+  to: Schema
+  type: has_many
+  via: parent database guid
+- from: Schema
+  to: Table
+  type: has_many
+  via: parent schema guid
+- from: Table
+  to: Column
+  type: has_many
+  via: parent table guid
+- from: Dashboard
+  to: DashboardElement
+  type: has_many
+  via: dashboard__guid
+- from: Table
+  to: Team
+  type: belongs_to
+  via: business_owner / technical_owner reference fields
+- from: Column
+  to: Column
+  type: has_many
+  via: ColumnLineage (upstream/downstream lineage edges)
+- from: Table
+  to: Tag
+  type: has_many
+  via: tags/items membership
+- from: Table
+  to: Term
+  type: has_many
+  via: glossary term assignment
+- from: Collection
+  to: Table
+  type: has_many
+  via: CollectionItem membership
+render: null

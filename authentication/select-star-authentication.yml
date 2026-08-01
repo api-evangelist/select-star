@@ -1,0 +1,30 @@
+generated: '2026-07-21'
+method: searched
+source: openapi/select-star-openapi.yml
+docs: https://docs.selectstar.com/select-star-api/authentication
+notes: >-
+  REST requests use the header "Authorization: Token <token>" — the keyword must
+  be Token, not Bearer. Tokens are created under Account Settings > Client API
+  Token > Manage API Tokens and have no expiration (delete/recreate to rotate).
+  A JWT bearer scheme also exists (used by the hosted MCP server as
+  "Authorization: Bearer <token>").
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+schemes:
+- name: JWTAuthentication
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  sources:
+  - openapi/select-star-openapi.yml
+- name: tokenAuth
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: Token-based authentication with required prefix "Token"
+  sources:
+  - openapi/select-star-openapi.yml

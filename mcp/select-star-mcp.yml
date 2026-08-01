@@ -1,0 +1,37 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.selectstar.com/features/mcp-server
+name: Select Star MCP Server
+description: >-
+  Official hosted (remote) Model Context Protocol server for the Select Star
+  metadata platform. Lets MCP clients (Claude Desktop, Cursor, Claude Code)
+  search the data catalog, retrieve asset details, inspect table schemas,
+  traverse column-level lineage, pull warehouse queries, and work with semantic
+  models — grounded in your Select Star metadata.
+status: live
+transport: remote
+endpoint: https://mcp.production.selectstar.com/mcp
+authentication:
+  scheme: bearer
+  header: Authorization
+  format: Bearer <select_star_api_token>
+  notes: Uses the same Client API Token generated in Select Star Account Settings.
+clients:
+- Claude Desktop
+- Cursor
+- Claude Code
+tools:
+- name: search_metadata
+  description: Search across all data catalog metadata with advanced filtering capabilities.
+- name: get_asset_details
+  description: Retrieve comprehensive information about a specific data asset.
+- name: get_table_info
+  description: Fetch table schema and usage data.
+- name: traverse_lineage
+  description: Explore data lineage relationships and dependencies.
+- name: get_asset_queries
+  description: Retrieve data warehouse queries connected to tables or columns.
+- name: search_semantic_models
+  description: Locate semantic models in the catalog.
+- name: get_semantic_model_details
+  description: Access complete semantic model information including YAML.

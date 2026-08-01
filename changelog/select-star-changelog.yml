@@ -1,0 +1,21 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.selectstar.com/changelog
+description: >-
+  Select Star publishes a dated product changelog organized into What's New,
+  What's Improved, and What's Fixed. It covers the product broadly (platform +
+  API surface) rather than a numbered API version log.
+scheme: dated-release-notes
+url: https://docs.selectstar.com/changelog
+categories:
+- What's New
+- What's Improved
+- What's Fixed
+entries:
+- date: '2025-11-04'
+  highlights: Ask AI accuracy improvements; AI Agents for Governance.
+  breaking: false
+notes: >-
+  The API itself is versioned in the URL path (/v1/) and described by an
+  OpenAPI 1.0.0 document; a separate numbered API version changelog is not
+  published. Entry list is a recent-window snapshot captured 2026-07-21.

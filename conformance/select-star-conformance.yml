@@ -1,0 +1,37 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/select-star-openapi.yml
+description: >-
+  Cross-cutting standards conformance for the Select Star Metadata API, derived
+  from the published OpenAPI 3.0.3 description plus the developer documentation.
+standards:
+- id: openapi-3.0
+  conforms: true
+  evidence: Published OpenAPI 3.0.3 description served at https://api.production.selectstar.com/schema/ (146 operations).
+- id: scim-2.0
+  conforms: true
+  evidence: Full SCIM v2 provisioning surface (/scim/v2/Users, /scim/v2/Me, ResourceTypes, ServiceProviderConfig) present in the spec.
+- id: oauth2
+  conforms: false
+  evidence: No oauth2 security scheme declared; API uses static Token (apiKey) and JWT bearer authentication.
+- id: oidc
+  conforms: false
+  evidence: No openIdConnect security scheme declared in the OpenAPI.
+- id: rfc9457
+  conforms: false
+  evidence: 'Errors are plain Django REST Framework JSON envelopes ({"detail": ...}); no application/problem+json media type is declared.'
+- id: pagination
+  conforms: true
+  evidence: Page-number pagination via page and page_size query params on 42 list operations.
+- id: idempotency
+  conforms: false
+  evidence: No idempotency-key header documented; mutations use PATCH/PUT/POST without a published idempotency contract.
+- id: json-api
+  conforms: false
+  evidence: Standard JSON payloads; does not implement the JSON:API media type.
+- id: fhir
+  conforms: false
+  evidence: Not a healthcare API.
+- id: odata
+  conforms: false
+  evidence: Custom query-parameter filtering; not OData.

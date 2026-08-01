@@ -1,0 +1,33 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/select-star-openapi.yml + https://docs.selectstar.com/select-star-api/troubleshooting
+format: drf-detail
+description: >-
+  Error catalog for the Select Star Metadata API. Errors are returned as plain
+  Django REST Framework JSON envelopes of the shape {"detail": "<message>"};
+  the API does not implement RFC 9457 application/problem+json. Status codes and
+  the throttling envelope are documented in the API overview and troubleshooting
+  pages.
+envelope:
+  field: detail
+  media_type: application/json
+  example: '{"detail": "Request was throttled. Expected available in 56 seconds."}'
+problems:
+- status: 400
+  title: Bad Request
+  remediation: Validate request body/query parameters against the schema; check required fields and value formats.
+- status: 401
+  title: Unauthorized
+  remediation: 'Provide a valid "Authorization: Token <token>" header. Use the keyword Token, not Bearer, for the REST API. Regenerate the token in Account Settings if it was deleted.'
+- status: 403
+  title: Forbidden
+  remediation: The authenticated principal lacks the role (admin / data_manager / user) required for the operation.
+- status: 404
+  title: Not Found
+  remediation: Verify the resource GUID and ensure the path ends with a trailing slash (required to avoid redirect issues).
+- status: 429
+  title: Too Many Requests
+  remediation: >-
+    Throttled. Burst limit is 1000 requests / 60s rolling window; sustained
+    limit is 10,000 requests / 24h rolling window. Back off using the seconds
+    reported in the detail message.

@@ -1,0 +1,190 @@
+# Select Star
+
+## Select Star
+
+- [What is Select Star?](https://docs.selectstar.com/readme.md): Discover and understand your data effortlessly with Select Star—an intelligent data discovery platform that simplifies data exploration and documentation.
+- [Getting Started](https://docs.selectstar.com/getting-started.md): This section provides resources to start using Select Star quickly and effectively, including tutorials, guides, and tips. Get up and running with ease!
+- [1. Data Source Setup](https://docs.selectstar.com/getting-started/data-source-setup.md): In this guide, we will walk you through how to connect your data to Select Star through our integrations and star utilizing your metadata through lineage generation.
+- [2. Mark Service Accounts](https://docs.selectstar.com/getting-started/mark-service-accounts.md): Discover how to mark and manage ETL users as service accounts with this comprehensive guide from Select Star. Learn the importance of service accounts and how to properly categorize them for optimal d
+- [3. Hide Unwanted Datasets](https://docs.selectstar.com/getting-started/clean-up.md): In Select Star, you can hide datasets created in personal spaces, that are used for testing purposes or that aren't relevant to the entire company. Learn how to here.
+- [4. Invite Owners](https://docs.selectstar.com/getting-started/invite-owners.md): If you're looking to improve your Select Star organization, inviting users is a great way to collaborate with others and get more done. Here's how to invite users to your Select Star organization.
+- [5. Add Documentation](https://docs.selectstar.com/getting-started/add-documentation-gs.md): Learn how to add searchable documentation to Select Star and help people within your organization understand your data better, fostering collaboration and better decision-making.
+- [Next Steps](https://docs.selectstar.com/getting-started/next-steps.md): Once you have completed our easy, 5 step set up process, you are ready to start utilizing the platform to optimize your data management and analytics processes.
+- [Integrations](https://docs.selectstar.com/integrations.md): Explore this page to view a comprehensive list of all Select Star integrations and the current features they support. Stay up-to-date with new integrations and features as they become available.
+- [Snowflake](https://docs.selectstar.com/integrations/snowflake.md)
+- [Using Key Pair Authentication](https://docs.selectstar.com/integrations/snowflake/key-pair.md)
+- [Using Password Authentication](https://docs.selectstar.com/integrations/snowflake/password.md)
+- [Snowflake Tag Sync](https://docs.selectstar.com/integrations/snowflake/snowflake-tag-sync.md): Follow these steps to enable sync of Select Star tags to Snowflake.
+- [Snowflake Key Pair Rotation](https://docs.selectstar.com/integrations/snowflake/key-pair-rotation.md)
+- [Cortex Analyst (beta)](https://docs.selectstar.com/integrations/snowflake/cortex-analyst.md)
+- [Databricks](https://docs.selectstar.com/integrations/databricks.md)
+- [Databricks on AWS](https://docs.selectstar.com/integrations/databricks/databricks-aws.md): Learn how to connect to your Databricks data warehouse on AWS to Select Star and retrieve metadata from your datasets. This guide will provide you with the necessary steps to get started.
+- [Databricks on Azure](https://docs.selectstar.com/integrations/databricks/databricks-azure.md): Learn how to connect to your Databricks data warehouse on Azure to Select Star and retrieve metadata from your datasets. This guide will provide you with the necessary steps to get started.
+- [BigQuery](https://docs.selectstar.com/integrations/bigquery.md): Learn how to connect to your BigQuery data warehouse to Select Star and retrieve metadata from your datasets. This guide will provide you with the necessary steps to get started.
+- [BigQuery Description Sync (beta)](https://docs.selectstar.com/integrations/bigquery/bigquery-description-sync.md)
+- [AWS Redshift](https://docs.selectstar.com/integrations/redshift.md): Follow these steps to connect your AWS Redshift instance to Select Star.
+- [Manual setup](https://docs.selectstar.com/integrations/redshift/manual.md)
+- [Microsoft SQL Server / MS SQL (beta)](https://docs.selectstar.com/integrations/mssql.md): Follow these steps to connect your Microsoft SQL Server instance to Select Star.
+- [Query Logs](https://docs.selectstar.com/integrations/mssql/query-log.md)
+- [MySQL (beta)](https://docs.selectstar.com/integrations/mysql.md): Follow these steps to connect your MySQL instance to Select Star.
+- [Query Logs](https://docs.selectstar.com/integrations/mysql/query-log.md)
+- [Oracle (beta)](https://docs.selectstar.com/integrations/oracle.md): Follow these steps to connect your Oracle instance to Select Star.
+- [Query Logs](https://docs.selectstar.com/integrations/oracle/query-log.md)
+- [Salesforce (beta)](https://docs.selectstar.com/integrations/salesforce.md): Follow these steps to connect your Salesforce instance to Select Star.
+- [Salesforce Analytics (beta)](https://docs.selectstar.com/integrations/salesforce-analytics.md): Follow these steps to connect your Salesforce Lightning and/or CRMA instance to Select Star.
+- [DB2 (beta)](https://docs.selectstar.com/integrations/db2.md): Follow these steps to connect your DB2 instance to Select Star.
+- [PostgreSQL](https://docs.selectstar.com/integrations/postgres.md)
+- [AWS Aurora PostgreSQL](https://docs.selectstar.com/integrations/postgres/aws-aurora.md): Follow these steps to connect your AWS Aurora PostgreSQL to Select Star.
+- [AWS RDS PostgreSQL](https://docs.selectstar.com/integrations/postgres/aws-rds.md): Follow these steps to connect your AWS RDS PostgreSQL to Select Star.
+- [PostgreSQL on-prem](https://docs.selectstar.com/integrations/postgres/on-prem.md): Follow these steps to connect your on-prem PostgreSQLto Select Star.
+- [AWS Glue (beta)](https://docs.selectstar.com/integrations/aws-glue.md): Learn how to connect AWS Glue to Select Star with our step-by-step guide. Discover the benefits of integrating these two powerful platforms for better data management and analysis.
+- [dbt](https://docs.selectstar.com/integrations/dbt.md): Follow these steps to connect your dbt project to Select Star.
+- [dbt Cloud](https://docs.selectstar.com/integrations/dbt/dbt-cloud.md): Follow these steps to connect your dbt Cloud project to Select Star.
+- [dbt Core (open source)](https://docs.selectstar.com/integrations/dbt/dbt-core-open-source.md): Follow these steps to connect your dbt Core project to Select Star.
+- [dbt Tags](https://docs.selectstar.com/integrations/dbt/dbt-tags-new.md): Learn how to access and view your dbt tags in Select Star with ease. Our simple guide will show you how to access your tags via the Tags sidebar.
+- [dbt Tests](https://docs.selectstar.com/integrations/dbt/dbt-tests-beta.md): Find out the latest news that dbt tests are now going to be ingested into Select Star, and how this will benefit your data projects.
+- [dbt docs Sync](https://docs.selectstar.com/integrations/dbt/dbt-docs-sync.md)
+- [Github dbt docs Sync](https://docs.selectstar.com/integrations/dbt/dbt-docs-sync/github-dbt-docs-sync.md)
+- [Bitbucket dbt docs Sync](https://docs.selectstar.com/integrations/dbt/dbt-docs-sync/bitbucket-dbt-docs-sync.md)
+- [dbt Impact Report](https://docs.selectstar.com/integrations/dbt/dbt-impact-report.md): Prevent breaking changes before they break your dashboards and key models with Select Star's dbt Impact Report.
+- [dbt Project Dependencies](https://docs.selectstar.com/integrations/dbt/dbt-project-dependencies.md): When using dbt projects as dependencies it is recommended to add all of them into a single datasource, this would give you a more complete lineage view while decreasing code duplication.
+- [Apache Airflow (beta)](https://docs.selectstar.com/integrations/apache-airflow.md): Follow these steps to connect your Apache Airflow to Select Star (via OpenLineage).
+- [OpenLineage (beta)](https://docs.selectstar.com/integrations/openlineage.md): Follow these steps to start pushing your OpenLineage events to Select Star.
+- [Tableau](https://docs.selectstar.com/integrations/tableau-server.md): The Select Star integration allows users to view, search and understand their Tableau instance all in one convenient place. Discover the benefits and features of the Tableau Select Star integration in
+- [Tableau Cloud](https://docs.selectstar.com/integrations/tableau-server/tableau-online.md): Select Star, a leading data management platform, now integrates seamlessly with Tableau Online. Discover how this integration can help you optimize your data visualization and analysis capabilities.
+- [Tableau Server](https://docs.selectstar.com/integrations/tableau-server/tableau-server.md): Learn how Select Star integrates with Tableau Server to improve data access and visibility, and how this integration can help your organization make more informed decisions based on real-time data.
+- [Microsoft Power BI](https://docs.selectstar.com/integrations/powerbi.md): Follow these steps to connect your Microsoft Power BI instance to Select Star.
+- [Looker](https://docs.selectstar.com/integrations/looker.md): Follow these steps to connect your Looker instance to Select Star.
+- [Metabase](https://docs.selectstar.com/integrations/metabase.md): Follow these steps to connect your Metabase to Select Star.
+- [Fivetran (beta)](https://docs.selectstar.com/integrations/fivetran.md): Follow these steps to connect your Fivetran instance to Select Star.
+- [Mode](https://docs.selectstar.com/integrations/mode.md): The Select Star integration allows users to view, search and understand their Mode instance all in one convenient place. Discover the benefits and features of the Mode Select Star integration in this
+- [Sigma Computing](https://docs.selectstar.com/integrations/sigma-computing.md): The Select Star integration allows users to view, search and understand their Sigma instance all in one convenient place.
+- [Sisense / Periscope (beta)](https://docs.selectstar.com/integrations/periscope.md): Follow these steps to connect your Sisense/Periscope instance to Select Star.
+- [Looker Studio (beta)](https://docs.selectstar.com/integrations/data-studio.md): The Select Star integration allows users to view, search and understand their Looker instance all in one convenient place. Discover the benefits and features of the Looker Select Star integration in t
+- [ThoughtSpot](https://docs.selectstar.com/integrations/thoughtspot.md): Follow these steps to connect your ThoughtSpot instance to Select Star.
+- [QuickSight (beta)](https://docs.selectstar.com/integrations/quicksight.md): Learn how to connect QuickSight to Select Star with our step-by-step guide. Discover the benefits of integrating these two powerful platforms for better data management and analysis.
+- [Event Logs](https://docs.selectstar.com/integrations/quicksight/event-logs.md)
+- [Hex (beta)](https://docs.selectstar.com/integrations/hex.md)
+- [Omni (beta)](https://docs.selectstar.com/integrations/omni-beta.md)
+- [Slack](https://docs.selectstar.com/integrations/slack.md): Select Star now integrates with Slack, making it easier than ever to find and share links to data assets. Learn how this integration can improve your team's productivity and help you stay organized.
+- [Monte Carlo](https://docs.selectstar.com/integrations/monte-carlo.md): Get visibility into your data quality issues directly from Select Star.
+- [Private Network](https://docs.selectstar.com/integrations/private-network.md)
+- [Features](https://docs.selectstar.com/features.md): Select Star is a data exploration platform that provides powerful tools for analyzing and visualizing data. Learn more about its key features and how they can help you make the most of your data.
+- [Search](https://docs.selectstar.com/features/search.md): Utilize Select Star's powerful search feature to find various data objects, even if you don't have their exact names. Explore tables, columns, reports and more.
+- [Table Page](https://docs.selectstar.com/features/table-page.md): Learn about basic and operational information, and navigate through different table tabs for comprehensive insights.
+- [Database Page](https://docs.selectstar.com/features/database-page.md): In Select Star, the database page provides an overview of your database, including tables and schemas. Explore and manage your data insights in a single platform.
+- [Dashboard Page](https://docs.selectstar.com/features/dashboard-page.md): Explore dashboards, reports, and looks in Select Star with dedicated pages. Access basic and operational information, dashboard tabs, and engage in discussions.
+- [Data Lineage](https://docs.selectstar.com/features/lineage.md): Understand data lineage in Select Star to explore relationships and evaluate impact. Learn more about lineage in our docs.
+- [Entity Relationship Diagram (ERD)](https://docs.selectstar.com/features/erd-entity-relationship-diagram.md): Explore Select Star's auto-generated ERD to understand data models and table relationships. View ERDs on table pages or create custom ERDs.
+- [Queries & Joins](https://docs.selectstar.com/features/queries-and-joins.md): Explore the Queries & Joins tab on tables to understand data context and learn about your team's data.
+- [Tags](https://docs.selectstar.com/features/tags.md): Use Select Star tags to organize your data by category, status, depricated, sensitive and more. Find the data that matters quickly.
+- [Teams](https://docs.selectstar.com/features/teams.md): "All Teams" page lists organization's teams. Team pages show details, members, favorites, assets, and discussions. Search and mention teams.
+- [Discussion](https://docs.selectstar.com/features/discussion.md): Learn how to utilize Select Star's Discussion tab for efficient dataset management, knowledge sharing, and cross-team collaboration.
+- [Downstream Notifications](https://docs.selectstar.com/features/downstream-notifications.md): Communicate key updates and upcoming changes to downstream users and key stakeholders easily with downstream notifications.
+- [Documentation](https://docs.selectstar.com/features/documents.md): Leverage Select Star's Documents feature for comprehensive data documentation. Use rich text editing, nesting, and mentions for effective knowledge organization.
+- [Pages](https://docs.selectstar.com/features/documents/documents.md): Leverage Select Star's Documents feature for comprehensive data documentation. Use rich text editing, nesting, and mentions for effective knowledge organization.
+- [Metrics](https://docs.selectstar.com/features/documents/metrics.md): Select Star offers a range of metrics that are based on data and are designed to answer specific business questions. Learn how these metrics can help you make informed decisions and drive success.
+- [Metrics Generation](https://docs.selectstar.com/features/documents/metrics/metrics-generation.md)
+- [Glossary](https://docs.selectstar.com/features/documents/glossary.md)
+- [Automated Documentation](https://docs.selectstar.com/features/auto-documentation.md): Simplify documentation with Select Star's automated features: suggested descriptions, AI-generated documentation, suggested tags, and public documentation loading.
+- [User Analytics](https://docs.selectstar.com/features/user-analytics.md): With the Select Star Analytics page, organization administrators can easily track user and page metrics to gain valuable insights into user behavior and interaction with the platform. Discover more ab
+- [Chrome Extension](https://docs.selectstar.com/features/chrome-extension.md): The Select Star Chrome Extension allows users to get their data context side-by-side their dashboards. It familiar web interface with the added benefit of one click search.
+- [Organization-wide install](https://docs.selectstar.com/features/chrome-extension/organization-wide-install.md): This guide explains how Google Workspace or Microsoft enterprise administrators can deploy the extension automatically to all users in their organization.
+- [Source Tables](https://docs.selectstar.com/features/source-tables.md): Learn about Select Star's source tables and source columns feature, providing column-level lineage to track data origins and flow.
+- [Cost Analysis](https://docs.selectstar.com/features/cost-analysis-private-preview.md)
+- [Schema Change Detection](https://docs.selectstar.com/features/schema-change-detection.md): Easily see schema changes to your tables and columns and understand how your data is evolving over time.
+- [Ask AI Chatbot](https://docs.selectstar.com/features/ask-ai-chatbot.md): Select Star's AI Chatbot will answer your data questions with natural language, combing through your metadata so you don't have to.
+- [MCP Server](https://docs.selectstar.com/features/mcp-server.md)
+- [Semantic Models](https://docs.selectstar.com/features/semantic-models.md)
+- [AI Settings](https://docs.selectstar.com/features/ai-features-and-settings.md): Learn how to configure AI-powered features in Select Star. Enable AI-generated descriptions to automate documentation, customize chatbot data access.
+- [AI Agents (Private Beta)](https://docs.selectstar.com/features/ai-tagging-agent.md)
+- [AI Admin Rating (Private Beta)](https://docs.selectstar.com/features/ai-admin-rating.md)
+- [Data Discovery](https://docs.selectstar.com/data-discovery.md): Simplify data exploration with Select Star's data discovery platform. Explore these articles for more information.
+- [Where's my data?](https://docs.selectstar.com/data-discovery/wheres-my-data.md): Effortlessly locate your data with Select Star's search and filters. Sort through datasets based on BI tools, customize views, and apply tags for efficient data exploration.
+- [Where's my dashboard?](https://docs.selectstar.com/data-discovery/wheres-my-dashboard.md): Find data in specific BI tools, apply category and status tags, and identify popular and well-documented dashboards using Select Star.
+- [How can I get the full context of this data?](https://docs.selectstar.com/data-discovery/how-can-i-use-this-data.md): Learn how to gain insights into dataset usage, related tables, popular queries, and top users. Explore tags, lineage, and field usage for a deeper understanding.
+- [My dashboard looks off](https://docs.selectstar.com/data-discovery/troubleshooting-broken-dashboards.md): Learn how to resolve dashboard issues and speed up your diagnostic process with Select Star. Investigate causes, check last run and edit dates.
+- [Change management](https://docs.selectstar.com/data-discovery/change-management.md): In these docs, learn how to streamline your change management process, discover dependencies, explore lineage, and discuss changes with data owners and creators
+- [I'm new to the team](https://docs.selectstar.com/data-discovery/im-new-to-the-team.md): If you're new to your team, Select Star can help you get acquainted with the right data through tags, dashboards, lineage, team profiles. Onboard with the Google for data.
+- [I have a data question](https://docs.selectstar.com/data-discovery/i-have-a-data-question.md): Learn how to find data answers in Select Star with search, discussion, pinned comments and how to stay up to speed with your teammates via Slack
+- [Data Management](https://docs.selectstar.com/data-management.md): Discover ways to better manage your data with Select Star's documenation, tag management, ownership rules and PII data rules.
+- [Add Documentation](https://docs.selectstar.com/data-management/add-documentation.md): Easily document and find descriptions of your data.
+- [CSV Metadata Upload](https://docs.selectstar.com/data-management/add-documentation/csv-metadata-upload.md): Streamline metadata management with ease with bulk table and column description CSV uploads. Learn how to upload in our docs.
+- [Collections](https://docs.selectstar.com/data-management/collections.md)
+- [Tags](https://docs.selectstar.com/data-management/tag-management.md): Use custom Tags to group data and indicate data quality.
+- [Data Ownership](https://docs.selectstar.com/data-management/data-ownership.md): Assign Owners to manage datasets and provide transparency.
+- [Sensitive / PII Data](https://docs.selectstar.com/data-management/sensitive-pii-data.md): Remove or mask sensitive data from Select Star while still making use of all its features.
+- [Automated PII Detection](https://docs.selectstar.com/data-management/automated-pii-detection-beta.md): Manage metadata PII rules to automatically classify your sensitive columns.
+- [Learning Data](https://docs.selectstar.com/learning-data.md): Learn more here about all our data integrations and how to get started with connecting your data.
+- [Getting Started: Looker](https://docs.selectstar.com/learning-data/getting-started-looker.md): The Select Star integration allows users to view, search and understand their Looker instance all in one convenient place. Discover the benefits and features of the Looker Select Star integration.
+- [Getting Started: Mode](https://docs.selectstar.com/learning-data/getting-started-mode.md): The Select Star integration allows users to view, search and understand their Mode instance all in one convenient place. Discover the benefits and features of the Mode Select Star integration.
+- [Getting Started: Tableau](https://docs.selectstar.com/learning-data/getting-started-tableau.md): The Select Star integration allows users to view, search and understand their Tableau instance all in one convenient place. Discover the benefits and features of the Tableau Select Star integration in
+- [Getting Started: Snowflake](https://docs.selectstar.com/learning-data/getting-started-snowflake.md): Learn how to connect to your Snowflake data warehouse to Select Star and retrieve metadata from your datasets. This guide will help you to get started.
+- [Getting Started: Databricks](https://docs.selectstar.com/learning-data/getting-started-databricks.md): Learn how to connect to your Databricks data warehouse to Select Star and retrieve metadata from your datasets. This guide will provide you with the necessary steps to get started.
+- [Getting Started: Data Warehouse](https://docs.selectstar.com/learning-data/getting-started-data-warehouse.md): Learn how to connect to your data warehouse to Select Star and retrieve metadata from your datasets. This guide will provide you with the necessary steps to get started.
+- [Getting Started: BigQuery](https://docs.selectstar.com/learning-data/getting-started-bigquery.md): Learn how to connect to your BigQuery data warehouse to Select Star and retrieve metadata from your datasets. This guide will provide you with the necessary steps to get started.
+- [Nested Fields](https://docs.selectstar.com/learning-data/getting-started-bigquery/bigquery-nested-fields.md): Where can you see BigQuery's nested fields?
+- [Getting Started: Sigma](https://docs.selectstar.com/learning-data/getting-started-sigma.md): The Select Star integration allows users to view, search and understand their Sigma instance all in one convenient place. Discover the benefits and features of the Sigma Select Star integration.
+- [Getting Started: ThoughtSpot](https://docs.selectstar.com/learning-data/getting-started-thoughtspot.md)
+- [Data Source Management](https://docs.selectstar.com/data-source-management.md): This data source management page provides information on how to connect and manage various data sources. Learn about the best practices and tools for efficient data source management.
+- [Manage Data Sources](https://docs.selectstar.com/data-source-management/manage-data-sources.md): Learn how to effortlessly manage data sources in Select Star: add, sync metadata, configure settings, hide/unhide datasets, and delete sources.
+- [Connect Data Source Users to Select Star](https://docs.selectstar.com/data-source-management/connect-data-source-users-to-select-star.md): Learn how to connect and align data source users with Select Star for a comprehensive view of user activities and data usage through popularity analytics.
+- [Custom Attributes](https://docs.selectstar.com/data-source-management/custom-attributes.md): Optimize asset management in Select Star with custom attributes. Learn how to create and update attributes in Settings, and leverage custom attributes via API
+- [Recent Queries](https://docs.selectstar.com/data-source-management/recent-queries.md): Identify long-running and expensive queries, access detailed information, and navigate to related tables for streamlined query performance analysis in Select Star.
+- [User Management](https://docs.selectstar.com/user-management.md): Learn how to efficiently manage user invitations, update roles and permissions, and enable SSO (Single Sign-On) for your organization with this comprehensive guide.
+- [Invite Users](https://docs.selectstar.com/user-management/invite-users.md): Invite more people from your organization to start discovering and managing data with the power of Select Star. Enhance data collaboration and empower your teams with this comprehensive guide.
+- [Roles & Permissions](https://docs.selectstar.com/user-management/user-roles.md): Understanding select star roles and permissions is crucial for managing user access and data security. Learn more about how to effectively assign and manage permissions for Select Star roles.
+- [SAML SSO](https://docs.selectstar.com/user-management/sso.md): Select Star leverages WorkOS to seamlessly integrate your single sign-on (SSO) provider with Select Star platform. Discover how this integration can simplify and streamline your authentication process
+- [Importing Roles and Teams (Okta)](https://docs.selectstar.com/user-management/importing-roles-and-teams-okta.md)
+- [Policy Based Access Control](https://docs.selectstar.com/user-management/policy-based-access-control.md): Select Star offers Policy-Based Access Control (PBAC), an access control model that determines user access based on predefined policies.
+- [Account and User Settings](https://docs.selectstar.com/user-management/account-and-user-settings.md): Users can update their own profile information and preferences
+- [Select Star API](https://docs.selectstar.com/select-star-api.md): The Select Star API is a powerful tool that allows for easy and efficient data retrieval and manipulation. This overview provides an in-depth look at its features and functionalities, making it easier
+- [Overview](https://docs.selectstar.com/select-star-api/overview.md): Learn how to integrate and use the Select Star API to retrieve data and perform various operations.
+- [API Token](https://docs.selectstar.com/select-star-api/authentication.md): This guide provides step-by-step instructions on how to generate a token for the Select Star API and access its features and data.
+- [Getting Started](https://docs.selectstar.com/select-star-api/quick-start.md): In this quick start guide, you will learn how to effectively read, describe, and fetch metadata for table objects. Gain a comprehensive understanding of metadata and enhance your data management skill
+- [Rich Text Descriptions via API](https://docs.selectstar.com/select-star-api/rich-text-descriptions-via-api.md): Learn how to update rich text descriptions via API using SlateJS and Markdown formats. This comprehensive guide will provide you with step-by-step instructions on how to implement this feature effecti
+- [Troubleshooting](https://docs.selectstar.com/select-star-api/troubleshooting.md): Troubleshooting access to Select Star API
+- [API Examples](https://docs.selectstar.com/select-star-api/api-examples.md): The Select Star API is a versatile tool that can be used in various scenarios. Here are some of the most common use cases where this API is beneficial.
+- [Security & Compliance](https://docs.selectstar.com/security-and-compliance.md): Your privacy and security is our top priority. Check out this document to find see how serious we are about it.
+- [IP and network restrictions](https://docs.selectstar.com/security-and-compliance/ip-filtering.md): Configure IP filtering to restrict access to Select Star from specific IP addresses or networks for enhanced security and compliance.
+- [FAQ](https://docs.selectstar.com/faq.md): Find answers to frequently asked questions here
+- [Icon Map](https://docs.selectstar.com/faq/icons-map.md): What does that icon mean? Find a full map of all Select Star icons here. Alternatively, hover your mouse over an icon to see its meaning within Select Star.
+- [Changelog](https://docs.selectstar.com/changelog.md)
+- [Nov 4, 2025 – Ask AI Accuracy, AI Agents for Governance, and more!](https://docs.selectstar.com/changelog/nov-4-2025-ask-ai-accuracy-ai-agents-for-governance-and-more.md)
+- [Oct 1, 2025 – AI Agents, Semantic Models, and more!](https://docs.selectstar.com/changelog/oct-1-2025-ai-agents-semantic-models-and-more.md)
+- [Sep 8, 2025 – Salesforce CRM Analytics, BigQuery Sync, MCP Updates, and more](https://docs.selectstar.com/changelog/sep-8-2024-salesforce-crm-analytics-bigquery-sync-mcp-updates-and-more.md)
+- [Aug 7, 2025 – Clearer ERD, AI-Ready Metadata MCP, Smarter Metrics, and more](https://docs.selectstar.com/changelog/aug-7-2025-clearer-erd-ai-ready-metadata-mcp-smarter-metrics-and-more.md)
+- [June 18, 2025 – Snowflake Semantic Models, LLM Search, Tableau Metric Extraction, and more](https://docs.selectstar.com/changelog/june-18-2025-auto-cortex-models-llm-search-tableau-metric-extraction-and-more.md)
+- [May 20, 2025 - Chrome Extension, Notifications, and More!](https://docs.selectstar.com/changelog/may-20-2025-chrome-extension-notifications-and-more.md)
+- [April 16, 2025 - Semantic Models, AI Metrics, and More!](https://docs.selectstar.com/changelog/april-16-2025-ai-metrics-semantic-models-and-more-1.md)
+- [March 12, 2025 - Fivetran Integration, Tableau Updates and More!](https://docs.selectstar.com/changelog/march-12-2025-fivetran-integration-tableau-updates-and-more.md)
+- [February 6, 2025 - Collections, Slack App Published, Salesforce Formula Lineage and more!](https://docs.selectstar.com/changelog/february-6-2025-collections-slack-app-published-salesforce-formula-lineage-and-more.md)
+- [December 10, 2024 - Hex Integration, Impact Score & Snowflake Key Pair Authentication!](https://docs.selectstar.com/changelog/december-10-2024-hex-integration-impact-score-and-snowflake-key-pair-authentication.md)
+- [November 13, 2024 - New Navigation, Airflow and More!](https://docs.selectstar.com/changelog/november-13-2024-new-navigation-airflow-and-more.md)
+- [September 30, 2024 - Upstream Data Quality Issue Tracking & 5 New Integrations!](https://docs.selectstar.com/changelog/september-30-2024-upstream-data-quality-issue-tracking-and-5-new-integrations.md)
+- [August 30, 2024 - Monte Carlo, dbt Cross-Project Lineage](https://docs.selectstar.com/changelog/august-30-2024-monte-carlo-dbt-cross-project-lineage.md)
+- [July 31, 2024 - Glossary Import, Lineage Updates & more!](https://docs.selectstar.com/changelog/july-31-2024-glossary-import-lineage-updates-and-more.md)
+- [July 9, 2024 - Lineage Explorer 2.0, Slack AI and Notifications](https://docs.selectstar.com/changelog/july-9-2024-lineage-explorer-2.0-slack-ai-and-notifications.md)
+- [February 29, 2024 - AI Chat, Schema Change Notifications](https://docs.selectstar.com/changelog/february-29-2024-ai-chat-schema-change-notifications.md)
+- [February 23, 2024 - Manual Lineage Creation](https://docs.selectstar.com/changelog/february-23-2024-manual-lineage-creation.md)
+- [November 23, 2023 - Bulk AI Documentation](https://docs.selectstar.com/changelog/november-23-2023-bulk-ai-documentation.md)
+- [October 19, 2023 - Downstream Notifications](https://docs.selectstar.com/changelog/october-19-2023-downstream-notifications.md)
+- [October 16, 2023 - New Homepage](https://docs.selectstar.com/changelog/october-16-2023-new-homepage.md)
+- [October 13, 2023 - dbt Impact Report](https://docs.selectstar.com/changelog/october-13-2023-dbt-impact-report.md)
+- [Historical Changelogs](https://docs.selectstar.com/changelog/historical-changelogs.md)
+
+
+---
+
+# Agent Instructions
+This documentation is published with GitBook. GitBook is the documentation platform designed so that both humans and AI agents can read, navigate, and reason over technical content effectively. Learn more at gitbook.com.
+
+## Querying This Documentation
+If you need additional information, you can query the documentation dynamically by asking a question.
+Perform an HTTP GET request on a page URL with the `ask` query parameter:
+```
+GET https://docs.selectstar.com/readme.md?ask=<question>
+```
+The question should be specific, self-contained, and written in natural language.
+The response will contain a direct answer to the question and relevant excerpts and sources from the documentation.
+Use this mechanism when the answer is not explicitly present in the current page, you need clarification or additional context, or you want to retrieve related documentation sections.

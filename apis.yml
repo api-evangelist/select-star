@@ -1,9 +1,30 @@
 aid: select-star
 name: Select Star
-description: Select Star is a company surfaced as a portfolio company of lightspeed-venture-partners and
-  added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment
-  pipeline.
+description: >-
+  Select Star is a metadata context platform that provides an automated data
+  catalog, column-level data lineage, and semantic model generation across a
+  company's data infrastructure. It indexes and documents metadata from
+  warehouses and BI tools (Snowflake, Databricks, BigQuery, Looker, Tableau,
+  Mode, Sigma, ThoughtSpot, dbt and more) to create a single source of truth for
+  both humans and AI. Select Star exposes a REST Metadata API and a hosted MCP
+  server so teams can search assets, traverse lineage, manage tags and
+  documentation, and make enterprise metadata AI-ready. Surfaced as a portfolio
+  company of Lightspeed Venture Partners and enriched into the API Evangelist
+  network.
 url: https://raw.githubusercontent.com/api-evangelist/select-star/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://www.selectstar.com/
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
@@ -12,12 +33,552 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
-apis: []
+- Data Catalog
+- Data Lineage
+- Metadata
+- Data Governance
+- Semantic Layer
+- MCP
+- AI-Ready Data
+- Analytics
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 17
+  pass: local-v1
+apis:
+- aid: select-star:select-star-bi-api
+  name: Select Star bi API
+  description: The bi API from Select Star — 23 operation(s) for bi.
+  humanURL: https://docs.selectstar.com/select-star-api/overview
+  baseURL: https://api.production.selectstar.com
+  tags:
+  - bi
+  properties:
+  - type: OpenAPI
+    url: openapi/select-star-bi-api-openapi.yml
+  - type: Authentication
+    url: authentication/select-star-authentication.yml
+  - type: Documentation
+    url: https://docs.selectstar.com/select-star-api/overview
+  - type: APIReference
+    url: https://api.production.selectstar.com/docs/
+  - type: GettingStarted
+    url: https://docs.selectstar.com/select-star-api/quick-start
+- aid: select-star:select-star-collections-api
+  name: Select Star collections API
+  description: The collections API from Select Star — 5 operation(s) for collections.
+  humanURL: https://docs.selectstar.com/select-star-api/overview
+  baseURL: https://api.production.selectstar.com
+  tags:
+  - collections
+  properties:
+  - type: OpenAPI
+    url: openapi/select-star-collections-api-openapi.yml
+  - type: Authentication
+    url: authentication/select-star-authentication.yml
+  - type: Documentation
+    url: https://docs.selectstar.com/select-star-api/overview
+  - type: APIReference
+    url: https://api.production.selectstar.com/docs/
+  - type: GettingStarted
+    url: https://docs.selectstar.com/select-star-api/quick-start
+- aid: select-star:select-star-columns-api
+  name: Select Star columns API
+  description: The columns API from Select Star — 3 operation(s) for columns.
+  humanURL: https://docs.selectstar.com/select-star-api/overview
+  baseURL: https://api.production.selectstar.com
+  tags:
+  - columns
+  properties:
+  - type: OpenAPI
+    url: openapi/select-star-columns-api-openapi.yml
+  - type: Authentication
+    url: authentication/select-star-authentication.yml
+  - type: Documentation
+    url: https://docs.selectstar.com/select-star-api/overview
+  - type: APIReference
+    url: https://api.production.selectstar.com/docs/
+  - type: GettingStarted
+    url: https://docs.selectstar.com/select-star-api/quick-start
+- aid: select-star:select-star-comments-api
+  name: Select Star comments API
+  description: The comments API from Select Star — 1 operation(s) for comments.
+  humanURL: https://docs.selectstar.com/select-star-api/overview
+  baseURL: https://api.production.selectstar.com
+  tags:
+  - comments
+  properties:
+  - type: OpenAPI
+    url: openapi/select-star-comments-api-openapi.yml
+  - type: Authentication
+    url: authentication/select-star-authentication.yml
+  - type: Documentation
+    url: https://docs.selectstar.com/select-star-api/overview
+  - type: APIReference
+    url: https://api.production.selectstar.com/docs/
+  - type: GettingStarted
+    url: https://docs.selectstar.com/select-star-api/quick-start
+- aid: select-star:select-star-custom-attribute-values-api
+  name: Select Star custom-attribute-values API
+  description: >-
+    The custom-attribute-values API from Select Star — 2 operation(s) for custom-attribute-values.
+  humanURL: https://docs.selectstar.com/select-star-api/overview
+  baseURL: https://api.production.selectstar.com
+  tags:
+  - custom-attribute-values
+  properties:
+  - type: OpenAPI
+    url: openapi/select-star-custom-attribute-values-api-openapi.yml
+  - type: Authentication
+    url: authentication/select-star-authentication.yml
+  - type: Documentation
+    url: https://docs.selectstar.com/select-star-api/overview
+  - type: APIReference
+    url: https://api.production.selectstar.com/docs/
+  - type: GettingStarted
+    url: https://docs.selectstar.com/select-star-api/quick-start
+- aid: select-star:select-star-custom-attributes-api
+  name: Select Star custom-attributes API
+  description: The custom-attributes API from Select Star — 2 operation(s) for custom-attributes.
+  humanURL: https://docs.selectstar.com/select-star-api/overview
+  baseURL: https://api.production.selectstar.com
+  tags:
+  - custom-attributes
+  properties:
+  - type: OpenAPI
+    url: openapi/select-star-custom-attributes-api-openapi.yml
+  - type: Authentication
+    url: authentication/select-star-authentication.yml
+  - type: Documentation
+    url: https://docs.selectstar.com/select-star-api/overview
+  - type: APIReference
+    url: https://api.production.selectstar.com/docs/
+  - type: GettingStarted
+    url: https://docs.selectstar.com/select-star-api/quick-start
+- aid: select-star:select-star-custom-attributes-with-value-api
+  name: Select Star custom-attributes-with-value API
+  description: >-
+    The custom-attributes-with-value API from Select Star — 1 operation(s) for custom-attributes-with-value.
+  humanURL: https://docs.selectstar.com/select-star-api/overview
+  baseURL: https://api.production.selectstar.com
+  tags:
+  - custom-attributes-with-value
+  properties:
+  - type: OpenAPI
+    url: openapi/select-star-custom-attributes-with-value-api-openapi.yml
+  - type: Authentication
+    url: authentication/select-star-authentication.yml
+  - type: Documentation
+    url: https://docs.selectstar.com/select-star-api/overview
+  - type: APIReference
+    url: https://api.production.selectstar.com/docs/
+  - type: GettingStarted
+    url: https://docs.selectstar.com/select-star-api/quick-start
+- aid: select-star:select-star-data-metrics-api
+  name: Select Star data-metrics API
+  description: The data-metrics API from Select Star — 2 operation(s) for data-metrics.
+  humanURL: https://docs.selectstar.com/select-star-api/overview
+  baseURL: https://api.production.selectstar.com
+  tags:
+  - data-metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/select-star-data-metrics-api-openapi.yml
+  - type: Authentication
+    url: authentication/select-star-authentication.yml
+  - type: Documentation
+    url: https://docs.selectstar.com/select-star-api/overview
+  - type: APIReference
+    url: https://api.production.selectstar.com/docs/
+  - type: GettingStarted
+    url: https://docs.selectstar.com/select-star-api/quick-start
+- aid: select-star:select-star-data-sources-api
+  name: Select Star data-sources API
+  description: The data-sources API from Select Star — 2 operation(s) for data-sources.
+  humanURL: https://docs.selectstar.com/select-star-api/overview
+  baseURL: https://api.production.selectstar.com
+  tags:
+  - data-sources
+  properties:
+  - type: OpenAPI
+    url: openapi/select-star-data-sources-api-openapi.yml
+  - type: Authentication
+    url: authentication/select-star-authentication.yml
+  - type: Documentation
+    url: https://docs.selectstar.com/select-star-api/overview
+  - type: APIReference
+    url: https://api.production.selectstar.com/docs/
+  - type: GettingStarted
+    url: https://docs.selectstar.com/select-star-api/quick-start
+- aid: select-star:select-star-databases-api
+  name: Select Star databases API
+  description: The databases API from Select Star — 3 operation(s) for databases.
+  humanURL: https://docs.selectstar.com/select-star-api/overview
+  baseURL: https://api.production.selectstar.com
+  tags:
+  - databases
+  properties:
+  - type: OpenAPI
+    url: openapi/select-star-databases-api-openapi.yml
+  - type: Authentication
+    url: authentication/select-star-authentication.yml
+  - type: Documentation
+    url: https://docs.selectstar.com/select-star-api/overview
+  - type: APIReference
+    url: https://api.production.selectstar.com/docs/
+  - type: GettingStarted
+    url: https://docs.selectstar.com/select-star-api/quick-start
+- aid: select-star:select-star-dbt-api
+  name: Select Star dbt API
+  description: The dbt API from Select Star — 4 operation(s) for dbt.
+  humanURL: https://docs.selectstar.com/select-star-api/overview
+  baseURL: https://api.production.selectstar.com
+  tags:
+  - dbt
+  properties:
+  - type: OpenAPI
+    url: openapi/select-star-dbt-api-openapi.yml
+  - type: Authentication
+    url: authentication/select-star-authentication.yml
+  - type: Documentation
+    url: https://docs.selectstar.com/select-star-api/overview
+  - type: APIReference
+    url: https://api.production.selectstar.com/docs/
+  - type: GettingStarted
+    url: https://docs.selectstar.com/select-star-api/quick-start
+- aid: select-star:select-star-documents-api
+  name: Select Star documents API
+  description: The documents API from Select Star — 3 operation(s) for documents.
+  humanURL: https://docs.selectstar.com/select-star-api/overview
+  baseURL: https://api.production.selectstar.com
+  tags:
+  - documents
+  properties:
+  - type: OpenAPI
+    url: openapi/select-star-documents-api-openapi.yml
+  - type: Authentication
+    url: authentication/select-star-authentication.yml
+  - type: Documentation
+    url: https://docs.selectstar.com/select-star-api/overview
+  - type: APIReference
+    url: https://api.production.selectstar.com/docs/
+  - type: GettingStarted
+    url: https://docs.selectstar.com/select-star-api/quick-start
+- aid: select-star:select-star-ingestion-api
+  name: Select Star ingestion API
+  description: The ingestion API from Select Star — 2 operation(s) for ingestion.
+  humanURL: https://docs.selectstar.com/select-star-api/overview
+  baseURL: https://api.production.selectstar.com
+  tags:
+  - ingestion
+  properties:
+  - type: OpenAPI
+    url: openapi/select-star-ingestion-api-openapi.yml
+  - type: Authentication
+    url: authentication/select-star-authentication.yml
+  - type: Documentation
+    url: https://docs.selectstar.com/select-star-api/overview
+  - type: APIReference
+    url: https://api.production.selectstar.com/docs/
+  - type: GettingStarted
+    url: https://docs.selectstar.com/select-star-api/quick-start
+- aid: select-star:select-star-jobs-api
+  name: Select Star jobs API
+  description: The jobs API from Select Star — 3 operation(s) for jobs.
+  humanURL: https://docs.selectstar.com/select-star-api/overview
+  baseURL: https://api.production.selectstar.com
+  tags:
+  - jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/select-star-jobs-api-openapi.yml
+  - type: Authentication
+    url: authentication/select-star-authentication.yml
+  - type: Documentation
+    url: https://docs.selectstar.com/select-star-api/overview
+  - type: APIReference
+    url: https://api.production.selectstar.com/docs/
+  - type: GettingStarted
+    url: https://docs.selectstar.com/select-star-api/quick-start
+- aid: select-star:select-star-joins-api
+  name: Select Star joins API
+  description: The joins API from Select Star — 1 operation(s) for joins.
+  humanURL: https://docs.selectstar.com/select-star-api/overview
+  baseURL: https://api.production.selectstar.com
+  tags:
+  - joins
+  properties:
+  - type: OpenAPI
+    url: openapi/select-star-joins-api-openapi.yml
+  - type: Authentication
+    url: authentication/select-star-authentication.yml
+  - type: Documentation
+    url: https://docs.selectstar.com/select-star-api/overview
+  - type: APIReference
+    url: https://api.production.selectstar.com/docs/
+  - type: GettingStarted
+    url: https://docs.selectstar.com/select-star-api/quick-start
+- aid: select-star:select-star-lineage-api
+  name: Select Star lineage API
+  description: The lineage API from Select Star — 4 operation(s) for lineage.
+  humanURL: https://docs.selectstar.com/select-star-api/overview
+  baseURL: https://api.production.selectstar.com
+  tags:
+  - lineage
+  properties:
+  - type: OpenAPI
+    url: openapi/select-star-lineage-api-openapi.yml
+  - type: Authentication
+    url: authentication/select-star-authentication.yml
+  - type: Documentation
+    url: https://docs.selectstar.com/select-star-api/overview
+  - type: APIReference
+    url: https://api.production.selectstar.com/docs/
+  - type: GettingStarted
+    url: https://docs.selectstar.com/select-star-api/quick-start
+- aid: select-star:select-star-metadata-api
+  name: Select Star metadata API
+  description: The metadata API from Select Star — 5 operation(s) for metadata.
+  humanURL: https://docs.selectstar.com/select-star-api/overview
+  baseURL: https://api.production.selectstar.com
+  tags:
+  - metadata
+  properties:
+  - type: OpenAPI
+    url: openapi/select-star-metadata-api-openapi.yml
+  - type: Authentication
+    url: authentication/select-star-authentication.yml
+  - type: Documentation
+    url: https://docs.selectstar.com/select-star-api/overview
+  - type: APIReference
+    url: https://api.production.selectstar.com/docs/
+  - type: GettingStarted
+    url: https://docs.selectstar.com/select-star-api/quick-start
+- aid: select-star:select-star-metrics-api
+  name: Select Star metrics API
+  description: The metrics API from Select Star — 3 operation(s) for metrics.
+  humanURL: https://docs.selectstar.com/select-star-api/overview
+  baseURL: https://api.production.selectstar.com
+  tags:
+  - metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/select-star-metrics-api-openapi.yml
+  - type: Authentication
+    url: authentication/select-star-authentication.yml
+  - type: Documentation
+    url: https://docs.selectstar.com/select-star-api/overview
+  - type: APIReference
+    url: https://api.production.selectstar.com/docs/
+  - type: GettingStarted
+    url: https://docs.selectstar.com/select-star-api/quick-start
+- aid: select-star:select-star-pii-api
+  name: Select Star pii API
+  description: The pii API from Select Star — 1 operation(s) for pii.
+  humanURL: https://docs.selectstar.com/select-star-api/overview
+  baseURL: https://api.production.selectstar.com
+  tags:
+  - pii
+  properties:
+  - type: OpenAPI
+    url: openapi/select-star-pii-api-openapi.yml
+  - type: Authentication
+    url: authentication/select-star-authentication.yml
+  - type: Documentation
+    url: https://docs.selectstar.com/select-star-api/overview
+  - type: APIReference
+    url: https://api.production.selectstar.com/docs/
+  - type: GettingStarted
+    url: https://docs.selectstar.com/select-star-api/quick-start
+- aid: select-star:select-star-schemas-api
+  name: Select Star schemas API
+  description: The schemas API from Select Star — 3 operation(s) for schemas.
+  humanURL: https://docs.selectstar.com/select-star-api/overview
+  baseURL: https://api.production.selectstar.com
+  tags:
+  - schemas
+  properties:
+  - type: OpenAPI
+    url: openapi/select-star-schemas-api-openapi.yml
+  - type: Authentication
+    url: authentication/select-star-authentication.yml
+  - type: Documentation
+    url: https://docs.selectstar.com/select-star-api/overview
+  - type: APIReference
+    url: https://api.production.selectstar.com/docs/
+  - type: GettingStarted
+    url: https://docs.selectstar.com/select-star-api/quick-start
+- aid: select-star:select-star-scim-api
+  name: Select Star scim API
+  description: The scim API from Select Star — 5 operation(s) for scim.
+  humanURL: https://docs.selectstar.com/select-star-api/overview
+  baseURL: https://api.production.selectstar.com
+  tags:
+  - scim
+  properties:
+  - type: OpenAPI
+    url: openapi/select-star-scim-api-openapi.yml
+  - type: Authentication
+    url: authentication/select-star-authentication.yml
+  - type: Documentation
+    url: https://docs.selectstar.com/select-star-api/overview
+  - type: APIReference
+    url: https://api.production.selectstar.com/docs/
+  - type: GettingStarted
+    url: https://docs.selectstar.com/select-star-api/quick-start
+- aid: select-star:select-star-search-api
+  name: Select Star search API
+  description: The search API from Select Star — 1 operation(s) for search.
+  humanURL: https://docs.selectstar.com/select-star-api/overview
+  baseURL: https://api.production.selectstar.com
+  tags:
+  - search
+  properties:
+  - type: OpenAPI
+    url: openapi/select-star-search-api-openapi.yml
+  - type: Authentication
+    url: authentication/select-star-authentication.yml
+  - type: Documentation
+    url: https://docs.selectstar.com/select-star-api/overview
+  - type: APIReference
+    url: https://api.production.selectstar.com/docs/
+  - type: GettingStarted
+    url: https://docs.selectstar.com/select-star-api/quick-start
+- aid: select-star:select-star-tables-api
+  name: Select Star tables API
+  description: The tables API from Select Star — 10 operation(s) for tables.
+  humanURL: https://docs.selectstar.com/select-star-api/overview
+  baseURL: https://api.production.selectstar.com
+  tags:
+  - tables
+  properties:
+  - type: OpenAPI
+    url: openapi/select-star-tables-api-openapi.yml
+  - type: Authentication
+    url: authentication/select-star-authentication.yml
+  - type: Documentation
+    url: https://docs.selectstar.com/select-star-api/overview
+  - type: APIReference
+    url: https://api.production.selectstar.com/docs/
+  - type: GettingStarted
+    url: https://docs.selectstar.com/select-star-api/quick-start
+- aid: select-star:select-star-tags-api
+  name: Select Star tags API
+  description: The tags API from Select Star — 5 operation(s) for tags.
+  humanURL: https://docs.selectstar.com/select-star-api/overview
+  baseURL: https://api.production.selectstar.com
+  tags:
+  - tags
+  properties:
+  - type: OpenAPI
+    url: openapi/select-star-tags-api-openapi.yml
+  - type: Authentication
+    url: authentication/select-star-authentication.yml
+  - type: Documentation
+    url: https://docs.selectstar.com/select-star-api/overview
+  - type: APIReference
+    url: https://api.production.selectstar.com/docs/
+  - type: GettingStarted
+    url: https://docs.selectstar.com/select-star-api/quick-start
+- aid: select-star:select-star-teams-api
+  name: Select Star teams API
+  description: The teams API from Select Star — 3 operation(s) for teams.
+  humanURL: https://docs.selectstar.com/select-star-api/overview
+  baseURL: https://api.production.selectstar.com
+  tags:
+  - teams
+  properties:
+  - type: OpenAPI
+    url: openapi/select-star-teams-api-openapi.yml
+  - type: Authentication
+    url: authentication/select-star-authentication.yml
+  - type: Documentation
+    url: https://docs.selectstar.com/select-star-api/overview
+  - type: APIReference
+    url: https://api.production.selectstar.com/docs/
+  - type: GettingStarted
+    url: https://docs.selectstar.com/select-star-api/quick-start
+- aid: select-star:select-star-terms-api
+  name: Select Star terms API
+  description: The terms API from Select Star — 5 operation(s) for terms.
+  humanURL: https://docs.selectstar.com/select-star-api/overview
+  baseURL: https://api.production.selectstar.com
+  tags:
+  - terms
+  properties:
+  - type: OpenAPI
+    url: openapi/select-star-terms-api-openapi.yml
+  - type: Authentication
+    url: authentication/select-star-authentication.yml
+  - type: Documentation
+    url: https://docs.selectstar.com/select-star-api/overview
+  - type: APIReference
+    url: https://api.production.selectstar.com/docs/
+  - type: GettingStarted
+    url: https://docs.selectstar.com/select-star-api/quick-start
+common:
+- type: DomainSecurity
+  url: security/select-star-domain-security.yml
+- type: DeveloperPortal
+  url: https://docs.selectstar.com/
+- type: Documentation
+  url: https://docs.selectstar.com/
+- type: APIReference
+  url: https://api.production.selectstar.com/docs/
+- type: GettingStarted
+  url: https://docs.selectstar.com/getting-started
+- type: Authentication
+  url: https://docs.selectstar.com/select-star-api/authentication
+- type: MCPServer
+  url: mcp/select-star-mcp.yml
+- type: StatusPage
+  url: https://selectstar.statuspage.io/
+- type: ChangeLog
+  url: https://docs.selectstar.com/changelog
+- type: Blog
+  url: https://www.selectstar.com/resources
+- type: Pricing
+  url: https://www.selectstar.com/pricing
+- type: SignUp
+  url: https://app.selectstar.com/login
+- type: Support
+  url: https://docs.selectstar.com/
+- type: TermsOfService
+  url: https://www.selectstar.com/terms-of-service
+- type: PrivacyPolicy
+  url: https://www.selectstar.com/privacy-policy
+- type: SecurityCompliance
+  url: https://www.selectstar.com/security-compliance
+- type: LLMsTxt
+  url: llms/select-star-llms.txt
+- type: Conformance
+  url: conformance/select-star-conformance.yml
+- type: ErrorCatalog
+  url: errors/select-star-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/select-star-lifecycle.yml
+- type: Conventions
+  url: conventions/select-star-conventions.yml
+- type: ChangeLog
+  url: changelog/select-star-changelog.yml
+- type: DataModel
+  url: data-model/select-star-data-model.yml
+- type: Overlay
+  url: overlays/select-star-openapi-overlay.yaml
+- type: WellKnown
+  url: well-known/select-star-well-known.yml
+- type: TrustCenter
+  url: security/select-star-trust-center.yml
+- type: Compliance
+  url: security/select-star-trust-center.yml
+- type: AgentSkill
+  url: skills/_index.yml

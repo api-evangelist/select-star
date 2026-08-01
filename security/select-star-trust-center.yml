@@ -1,0 +1,26 @@
+generated: '2026-07-21'
+method: searched
+source: https://www.selectstar.com/security-compliance
+description: >-
+  Select Star's published security and compliance posture. Formal reports are
+  shared under MNDA on request rather than via a self-service trust portal.
+trust_center_url: https://www.selectstar.com/security-compliance
+certifications:
+- name: SOC 2 Type II
+  scope: Security, Confidentiality, and Availability trust service criteria
+  status: current
+  evidence: >-
+    Annual SOC 2 Type II audit completed with no exceptions since May 2021.
+    Report available upon request under MNDA.
+practices:
+- Third-party penetration testing (report available under MNDA)
+- Encryption in transit and at rest
+- Audit logging and endpoint monitoring
+- Least-privilege access controls
+documents_on_request:
+- SOC 2 Type II audit report
+- Third-party penetration test report
+- Technical and organizational security summaries
+notes: >-
+  PCI, HIPAA, FedRAMP and GDPR are referenced only in the context of the
+  underlying AWS platform, not as Select Star's own certifications.

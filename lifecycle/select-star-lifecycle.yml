@@ -1,0 +1,24 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.selectstar.com/select-star-api/overview
+description: >-
+  Versioning, status, and change communication posture for the Select Star
+  Metadata API, from the developer documentation and public status page.
+versioning:
+  scheme: url-path
+  current: v1
+  spec_version: 1.0.0
+  base_url: https://api.production.selectstar.com/v1/
+  notes: API version is carried in the URL path (/v1/). SCIM endpoints are served under /scim/v2/.
+status_page:
+  url: https://selectstar.statuspage.io/
+  provider: Atlassian Statuspage
+changelog:
+  url: https://docs.selectstar.com/changelog
+  cadence: dated release notes (What's New / Improved / Fixed)
+deprecation:
+  policy_documented: false
+  notes: No public API deprecation policy or Sunset/Deprecation header contract was found in the documentation.
+rate_limits:
+  burst: 1000 requests per 60 second rolling window
+  sustained: 10000 requests per 24 hour rolling window

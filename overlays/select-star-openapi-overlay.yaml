@@ -1,0 +1,31 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enrichment overlay for Select Star Metadata API
+  version: 1.0.0
+extends: ../openapi/select-star-openapi.yml
+x-generated: '2026-07-21'
+x-method: generated
+x-source: API Evangelist enrichment pipeline (docs.selectstar.com)
+actions:
+- target: $.info
+  description: Record the production server, which the source description omits.
+  update:
+    x-apis-io-base-url: https://api.production.selectstar.com
+    x-apis-io-docs: https://docs.selectstar.com/select-star-api/overview
+- target: $
+  description: Add the servers array the published description is missing.
+  update:
+    servers:
+    - url: https://api.production.selectstar.com
+      description: Select Star production API (paths carry the /v1/ or /scim/v2/ version prefix).
+- target: $.info
+  description: Note the documented rate-limit contract for consumers.
+  update:
+    x-rate-limit-burst: 1000 requests per 60 second rolling window
+    x-rate-limit-sustained: 10000 requests per 24 hour rolling window
+- target: $.info
+  description: Clarify the REST token authorization keyword.
+  update:
+    x-auth-note: >-
+      REST requests use the header "Authorization: Token <token>" — the keyword
+      must be Token, not Bearer. A JWT bearer scheme also exists.

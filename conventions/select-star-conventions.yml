@@ -1,0 +1,58 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.selectstar.com/select-star-api/overview + openapi/select-star-openapi.yml
+description: >-
+  Cross-cutting request/response conventions for the Select Star Metadata API,
+  derived from the OpenAPI description and confirmed against the developer docs.
+authentication:
+  style: static-token
+  header: Authorization
+  value: 'Token <token>'
+  note: The REST API requires the keyword "Token" (not "Bearer"). A JWT bearer scheme also exists. Tokens have no expiration and are managed in Account Settings.
+base_url: https://api.production.selectstar.com/v1/
+trailing_slash:
+  required: true
+  note: All endpoint paths must end with a trailing slash to avoid unexpected redirect behavior.
+pagination:
+  style: page-number
+  params:
+    page: 1-based page index
+    page_size: items per page
+  applies_to: 42 list operations
+ordering:
+  param: order
+  note: Sort list results; supported on 41 operations.
+filtering:
+  style: query-parameter
+  common_params:
+  - search_name
+  - search_description
+  - search_tag_name
+  - search_all
+  - datasources
+  - collections
+  - owners
+  - status_tags
+  - types
+  - updated_on
+identifiers:
+  scheme: guid
+  note: Resources are addressed by an opaque GUID in the path (e.g. /v1/tables/{guid}/).
+versioning:
+  style: url-path
+  current: v1
+error_envelope:
+  shape: '{"detail": "<message>"}'
+  format: drf-detail
+  rfc9457: false
+rate_limit_signaling:
+  burst: 1000 / 60s rolling
+  sustained: 10000 / 24h rolling
+  throttle_response: 'HTTP 429 with {"detail": "Request was throttled. Expected available in N seconds."}'
+idempotency:
+  supported: false
+  note: No idempotency-key header is documented.
+cross_reference:
+  errors: errors/select-star-problem-types.yml
+  lifecycle: lifecycle/select-star-lifecycle.yml
+  authentication: authentication/select-star-authentication.yml
