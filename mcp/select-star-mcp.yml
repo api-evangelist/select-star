@@ -8,7 +8,8 @@ description: >-
   search the data catalog, retrieve asset details, inspect table schemas,
   traverse column-level lineage, pull warehouse queries, and work with semantic
   models — grounded in your Select Star metadata.
-status: live
+status: published
+status_raw: live
 transport: remote
 endpoint: https://mcp.production.selectstar.com/mcp
 authentication:
