@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Select Star Metadata bi pii API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "pii",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "pii_matching_export_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/pii/matching/:guid/export/",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "**Required Role:** Data Manager or Admin"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

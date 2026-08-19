@@ -1,0 +1,196 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Select Star Metadata bi data-metrics API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "data-metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "data_metrics_activities_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/data-metrics/activities/",
+            "params": [
+              {
+                "name": "data_source",
+                "value": "",
+                "type": "query",
+                "description": "Search for activities given a data source name"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "The end date of the date filter. The end date has to be set to equal or later than start date. The maximum date range limit user can set is equal to 90 days. Format: YYYY-MM-DD"
+              },
+              {
+                "name": "message",
+                "value": "",
+                "type": "query",
+                "description": "Search for activities given a description"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Specify the ordering for the results. A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "search_all",
+                "value": "",
+                "type": "query",
+                "description": "Search for activities given a user, activity type or target name"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "The start date of the date filter. The start date has to be set to before or equal than end date. The maximum date range limit user can set is equal to 90 days. Format: YYYY-MM-DD"
+              },
+              {
+                "name": "target",
+                "value": "",
+                "type": "query",
+                "description": "Search for activities given a target name"
+              },
+              {
+                "name": "target_full_name",
+                "value": "",
+                "type": "query",
+                "description": "Search for schema changes given a target full name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Search for activities given an activity type"
+              },
+              {
+                "name": "types",
+                "value": "",
+                "type": "query",
+                "description": "Specify the type of activity to filter for the results."
+              },
+              {
+                "name": "user",
+                "value": "",
+                "type": "query",
+                "description": "Search by 'user' using first name, last name, or email"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "*Beta version - Subject to Changes*\n\nEndpoint for the individual Activity list\n\n**Required Role:** Admin"
+        },
+        {
+          "info": {
+            "name": "schema_changes_get",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/data-metrics/activities/schema_changes/",
+            "params": [
+              {
+                "name": "data_source",
+                "value": "",
+                "type": "query",
+                "description": "Search for activities given a data source name"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "The end date of the date filter. The end date has to be set to equal or later than start date. The maximum date range limit user can set is equal to 90 days. Format: YYYY-MM-DD"
+              },
+              {
+                "name": "message",
+                "value": "",
+                "type": "query",
+                "description": "Search for activities given a description"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Specify the ordering for the results. A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order."
+              },
+              {
+                "name": "search_all",
+                "value": "",
+                "type": "query",
+                "description": "Search for activities given a user, activity type or target name"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "The start date of the date filter. The start date has to be set to before or equal than end date. The maximum date range limit user can set is equal to 90 days. Format: YYYY-MM-DD"
+              },
+              {
+                "name": "target",
+                "value": "",
+                "type": "query",
+                "description": "Search for activities given a target name"
+              },
+              {
+                "name": "target_full_name",
+                "value": "",
+                "type": "query",
+                "description": "Search for schema changes given a target full name"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Search for activities given an activity type"
+              },
+              {
+                "name": "types",
+                "value": "",
+                "type": "query",
+                "description": "Specify the type of activity to filter for the results."
+              },
+              {
+                "name": "user",
+                "value": "",
+                "type": "query",
+                "description": "Search by 'user' using first name, last name, or email"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "*Beta version - Subject to Changes*\n\nList endpoint for Schema Changes\n\n**Required Role:** Admin"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

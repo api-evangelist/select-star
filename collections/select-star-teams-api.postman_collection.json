@@ -1,0 +1,847 @@
+{
+  "item": [
+    {
+      "id": "3c007511-b985-4d24-bbf7-61160a118239",
+      "name": "teams",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b26d9178-9a66-4447-81e0-7e9c4a96df10",
+          "name": "teams list",
+          "request": {
+            "name": "teams list",
+            "description": {
+              "content": "List all teams within the organization along with sample users (access: all users)\n\n**Required Role:** Viewer or higher",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "teams",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "A page number within the paginated result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "da5dcb03-fce2-4744-b5e4-0663d7d31297",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 123,\n  \"results\": [\n    {\n      \"data_types\": {\n        \"data_source_type\": \"string\",\n        \"data_type\": \"string\",\n        \"external_database_type\": \"string\",\n        \"object_type\": \"string\"\n      },\n      \"members_count\": 6280,\n      \"name\": \"string\",\n      \"sample_users\": [\n        {\n          \"avatar\": \"https://dK.clopNSFXwhpOs5i\",\n          \"email\": \"dVNMxC@TmGenEiTFAWpRfXrAGyNjgNTNYA.zh\",\n          \"first_name\": \"string\",\n          \"guid\": \"string\",\n          \"is_active\": true,\n          \"last_name\": \"string\",\n          \"team\": {\n            \"guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"avatar\": \"https://NNefoFyxYqzBzELxCMbBbsjKwxk.ziIcAoqfMakxcbMAtVaAgoK,jr20CGYRrjaKej-hhT\",\n          \"email\": \"vTNdkw338@fwkivLCgWWRcZwJA.ewid\",\n          \"first_name\": \"string\",\n          \"guid\": \"string\",\n          \"is_active\": false,\n          \"last_name\": \"string\",\n          \"team\": {\n            \"guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"guid\": \"string\",\n      \"description\": \"string\",\n      \"richtext_description\": \"string\"\n    },\n    {\n      \"data_types\": {\n        \"data_source_type\": \"string\",\n        \"data_type\": \"string\",\n        \"external_database_type\": \"string\",\n        \"object_type\": \"string\"\n      },\n      \"members_count\": 4295,\n      \"name\": \"string\",\n      \"sample_users\": [\n        {\n          \"avatar\": \"http://LvofMcwva.fbEylatT857KdxObaL3YJGG0z-UYMbmnGH.foZU1-\",\n          \"email\": \"EBSNa8h@qH.ok\",\n          \"first_name\": \"string\",\n          \"guid\": \"string\",\n          \"is_active\": true,\n          \"last_name\": \"string\",\n          \"team\": {\n            \"guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"avatar\": \"http://epPvtDewzFOOLQ.snL7olWmZfWdwxpsSQhGySIN9CSwjbG+RzeI4bOJ4+Jt+3wFATeYTuDCReDCYDEUn\",\n          \"email\": \"YR7yG@ByLxaSW.ot\",\n          \"first_name\": \"string\",\n          \"guid\": \"string\",\n          \"is_active\": true,\n          \"last_name\": \"string\",\n          \"team\": {\n            \"guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"guid\": \"string\",\n      \"description\": \"string\",\n      \"richtext_description\": \"string\"\n    }\n  ],\n  \"next\": \"http://api.example.org/accounts/?page=4\",\n  \"previous\": \"http://api.example.org/accounts/?page=2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d1b7f2c2-d328-4574-849d-54363d3f2708",
+          "name": "teams create",
+          "request": {
+            "name": "teams create",
+            "description": {
+              "content": "Create a team within the organization (access: admin only)\n\n**Required Role:** Admin",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "teams",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "description",
+                  "value": "<string>",
+                  "description": "Active description"
+                },
+                {
+                  "disabled": false,
+                  "key": "richtext_description",
+                  "value": "<string>",
+                  "description": "Richtext formatted description. Can be in Slatejs or Draftjs format."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d78eb806-47f5-46f8-9f7d-a4ce52e8204f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Active description",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Richtext formatted description. Can be in Slatejs or Draftjs format.",
+                        "type": "text/plain"
+                      },
+                      "key": "richtext_description",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"guid\": \"string\",\n  \"members_count\": 6525,\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"richtext_description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e9b25230-d219-4ce9-bedf-80045288e4be",
+          "name": "teams retrieve",
+          "request": {
+            "name": "teams retrieve",
+            "description": {
+              "content": "Get a team given a guid (access: all users)\n\n**Required Role:** Viewer or higher",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "teams",
+                ":guid",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9222b675-b160-46b0-8977-e9a886a6393f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams",
+                    ":guid",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data_types\": {\n    \"data_source_type\": \"string\",\n    \"data_type\": \"string\",\n    \"external_database_type\": \"string\",\n    \"object_type\": \"string\"\n  },\n  \"guid\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"richtext_description\": \"string\",\n  \"users\": [\n    {\n      \"avatar\": \"https://CSedWvfFcnqQrHxnvmc.kstigAi-92QU-qdDdAjAfro,CGTtdSyNNf8Pw8YMIB0WzRMw.gTKXIa3ryjK\",\n      \"created_on\": \"1963-06-22T02:13:35.120Z\",\n      \"email\": \"\",\n      \"first_name\": \"string\",\n      \"guid\": \"string\",\n      \"is_active\": true,\n      \"is_agreed_to_terms\": false,\n      \"is_invitation_pending\": {},\n      \"is_verified\": true,\n      \"last_activity\": \"1991-11-29T09:10:10.675Z\",\n      \"last_login\": \"1958-07-17T07:16:53.817Z\",\n      \"last_name\": \"string\",\n      \"team\": {\n        \"guid\": \"string\",\n        \"name\": \"string\"\n      },\n      \"settings\": {\n        \"enable_email_notifications\": false,\n        \"enable_slack_notifications\": false,\n        \"enable_notifications_for_schema_changes\": false,\n        \"enable_notifications_for_metadata_changes\": false,\n        \"enable_discussions_notifications\": false,\n        \"enable_favorites_notifications_for_schema_changes\": false,\n        \"enable_favorites_notifications_for_metadata_changes\": true,\n        \"enable_favorites_notifications_for_discussions\": true,\n        \"default_database_table_column_order\": \"popularity\",\n        \"default_table_dashboard_tab\": \"columns_charts\"\n      }\n    },\n    {\n      \"avatar\": \"https://qJkpBndFbOLZbICYaKufOGHykhLJG.kpqTyoN1\",\n      \"created_on\": \"2010-09-28T15:51:55.288Z\",\n      \"email\": \"\",\n      \"first_name\": \"string\",\n      \"guid\": \"string\",\n      \"is_active\": false,\n      \"is_agreed_to_terms\": false,\n      \"is_invitation_pending\": {},\n      \"is_verified\": false,\n      \"last_activity\": \"1984-06-01T04:29:06.075Z\",\n      \"last_login\": \"1952-04-06T17:07:27.124Z\",\n      \"last_name\": \"string\",\n      \"team\": {\n        \"guid\": \"string\",\n        \"name\": \"string\"\n      },\n      \"settings\": {\n        \"enable_email_notifications\": false,\n        \"enable_slack_notifications\": false,\n        \"enable_notifications_for_schema_changes\": false,\n        \"enable_notifications_for_metadata_changes\": true,\n        \"enable_discussions_notifications\": false,\n        \"enable_favorites_notifications_for_schema_changes\": true,\n        \"enable_favorites_notifications_for_metadata_changes\": true,\n        \"enable_favorites_notifications_for_discussions\": true,\n        \"default_database_table_column_order\": \"column_ordinal_position\",\n        \"default_table_dashboard_tab\": \"columns_charts\"\n      }\n    }\n  ],\n  \"organization\": {\n    \"created_on\": \"1990-10-28T15:43:41.963Z\",\n    \"name\": \"string\",\n    \"settings\": {\n      \"allow_email_password_authentication\": false,\n      \"auto_document_empty_pages\": false,\n      \"automated_pii\": false,\n      \"enable_ai_features\": true,\n      \"enable_cost_analysis\": true,\n      \"enable_max_level_in_lineage_tags\": false,\n      \"popularity_timeframe\": 556,\n      \"separate_schemata\": false,\n      \"show_previews\": true,\n      \"show_schemata_page\": false,\n      \"show_sidebar_search\": true,\n      \"use_ai_automations\": true,\n      \"use_ai_customization_settings\": true,\n      \"use_ai_customization_settings_data_access\": false,\n      \"use_ai_descriptions\": false,\n      \"use_ai_evaluations\": true,\n      \"use_avatar_initials\": \"english\",\n      \"use_client_api\": false,\n      \"use_cortex_analyst\": false,\n      \"use_custom_attributes_search\": true,\n      \"use_data_quality_tab\": true,\n      \"use_data_quality_upstream_issues\": false,\n      \"use_db_agent\": true,\n      \"use_discussions\": true,\n      \"use_downstream_notifications\": false,\n      \"use_fivetran\": true,\n      \"use_group_label\": false,\n      \"use_impact_score\": false,\n      \"use_incidents_ingestion_for_monte_carlo\": false,\n      \"use_llm_chatbot\": true,\n      \"use_metric_generation\": true,\n      \"use_natural_language_search\": false,\n      \"use_new_layout\": false,\n      \"use_new_mentions\": false,\n      \"use_omni\": false,\n      \"use_openlineage\": false,\n      \"use_rbac\": false,\n      \"use_rbac_in_lineage\": false,\n      \"use_relevant_lineage\": false,\n      \"use_salesforce_crma\": true,\n      \"use_schema_change_detection\": false,\n      \"use_schema_change_notification\": true,\n      \"use_semantic_model\": false,\n      \"use_serial_tables_detection\": false,\n      \"use_show_more_button\": true,\n      \"use_similar_tables_in_suggested_tags\": false,\n      \"use_slack_chatbot\": false,\n      \"use_suggested_tags\": false,\n      \"use_suggestion_propagation\": true,\n      \"use_user_lists\": true,\n      \"use_viewer_client_api_tokens\": false\n    },\n    \"guid\": \"string\",\n    \"trial_ends_at\": \"1969-04-28\",\n    \"subscription_ends_at\": \"1971-05-31T17:03:16.320Z\",\n    \"is_onboarding_complete\": true\n  },\n  \"settings\": {\n    \"enable_notifications_for_schema_changes\": true,\n    \"enable_notifications_for_metadata_changes\": true,\n    \"slack_channels_for_notifications\": [\n      \"string\",\n      \"string\"\n    ],\n    \"emails_for_notifications\": [\n      \"@\",\n      \"@\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ccdb583-f29b-4ace-9183-5aad33c8b456",
+          "name": "teams partial update",
+          "request": {
+            "name": "teams partial update",
+            "description": {
+              "content": "Update the team within the organization (access: admin only)\n\n**Required Role:** Admin",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "teams",
+                ":guid",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "description",
+                  "value": "<string>",
+                  "description": "Active description"
+                },
+                {
+                  "disabled": false,
+                  "key": "richtext_description",
+                  "value": "<string>",
+                  "description": "Richtext formatted description. Can be in Slatejs or Draftjs format."
+                },
+                {
+                  "disabled": false,
+                  "key": "users",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "users",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "enable_notifications_for_schema_changes",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "enable_notifications_for_metadata_changes",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "slack_channels_for_notifications",
+                  "value": "[\"<string>\",\"<string>\"]"
+                },
+                {
+                  "disabled": false,
+                  "key": "emails_for_notifications",
+                  "value": "[\"<email>\",\"<email>\"]"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e301f31b-eed3-4d5f-812e-dc3984f7f55d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams",
+                    ":guid",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Active description",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Richtext formatted description. Can be in Slatejs or Draftjs format.",
+                        "type": "text/plain"
+                      },
+                      "key": "richtext_description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "users",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "users",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "enable_notifications_for_schema_changes",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "enable_notifications_for_metadata_changes",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "slack_channels_for_notifications",
+                      "value": "[\"<string>\",\"<string>\"]"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "emails_for_notifications",
+                      "value": "[\"<email>\",\"<email>\"]"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"guid\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"richtext_description\": \"string\",\n  \"settings\": {\n    \"enable_notifications_for_schema_changes\": false,\n    \"enable_notifications_for_metadata_changes\": true,\n    \"slack_channels_for_notifications\": [\n      \"string\",\n      \"string\"\n    ],\n    \"emails_for_notifications\": [\n      \"@\",\n      \"@\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "64a7d870-ce90-49d8-8902-2125e1f9bc63",
+          "name": "teams destroy",
+          "request": {
+            "name": "teams destroy",
+            "description": {
+              "content": "Remove a team from the organization (access: admin only)\n\n**Required Role:** Admin",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "teams",
+                ":guid",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "031b9333-8e20-4c93-87d8-1ef69cd24f85",
+              "name": "No response body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams",
+                    ":guid",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "390ee62c-5705-44eb-a994-6991de24d16e",
+          "name": "teams transfer users partial update",
+          "request": {
+            "name": "teams transfer users partial update",
+            "description": {
+              "content": "Manage Organization Teams\n\n**Required Role:** Admin",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "teams",
+                ":guid",
+                "transfer-users",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "new_team",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3067fb60-ad20-4f68-96c8-62ebc5876808",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams",
+                    ":guid",
+                    "transfer-users",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "key": "new_team",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"guid\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b45e18aa-45f5-46f7-8127-d791950d5fe0",
+    "name": "Select Star Metadata bi teams API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for interacting with the Select Star system\n\nContact Support:\n Email: support@selectstar.com",
+      "type": "text/plain"
+    }
+  }
+}

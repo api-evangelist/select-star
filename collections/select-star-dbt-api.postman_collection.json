@@ -1,0 +1,1766 @@
+{
+  "item": [
+    {
+      "id": "937a0325-2e77-4cc0-9f76-2b079a5eab41",
+      "name": "dbt",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "84b4ad91-6903-4a17-a0d4-7e0d54b38bb3",
+          "name": "dbt project list",
+          "request": {
+            "name": "dbt project list",
+            "description": {
+              "content": "**Required Role:** Admin (or RBAC policy)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "dbt",
+                "project",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "data_source",
+                  "value": "<string>",
+                  "description": "A comma separated list of data source guids to filter for items within those data sources."
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "<string>",
+                  "description": "Specify the ordering for the results. \n\n A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order. \n\nNote: Order is case-sensitive."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "A page number within the paginated result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "search_name",
+                  "value": "<string>",
+                  "description": "Search for an asset using its name"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c7bc3941-ec88-4bd4-98a5-5550f05b2b46",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "dbt",
+                    "project",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "data_source",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "search_name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 123,\n  \"results\": [\n    {\n      \"data_types\": {\n        \"data_source_type\": \"string\",\n        \"data_type\": \"string\",\n        \"external_database_type\": \"string\",\n        \"object_type\": \"string\"\n      },\n      \"dialect\": \"sigma\",\n      \"guid\": \"string\",\n      \"updated_on\": \"1982-05-07T15:18:34.673Z\",\n      \"name\": \"string\",\n      \"data_source\": {\n        \"data_types\": {\n          \"data_source_type\": \"string\",\n          \"data_type\": \"string\",\n          \"external_database_type\": \"string\",\n          \"object_type\": \"string\"\n        },\n        \"guid\": \"string\",\n        \"is_credentials_setup_incomplete\": false,\n        \"is_ingesting\": false,\n        \"is_syncing_paused\": false,\n        \"last_fully_ingested_on\": \"1962-10-16T13:12:20.835Z\",\n        \"name\": \"string\",\n        \"type\": \"looker\",\n        \"last_ingested_on\": \"1950-03-26T10:00:06.366Z\",\n        \"connection_status\": \"UN\",\n        \"connection_error_message\": \"string\",\n        \"external_uuid\": \"string\",\n        \"iam_principal\": \"string\"\n      },\n      \"target_data_source\": {\n        \"data_types\": {\n          \"data_source_type\": \"string\",\n          \"data_type\": \"string\",\n          \"external_database_type\": \"string\",\n          \"object_type\": \"string\"\n        },\n        \"guid\": \"string\",\n        \"is_credentials_setup_incomplete\": false,\n        \"is_ingesting\": false,\n        \"is_syncing_paused\": true,\n        \"last_fully_ingested_on\": \"2002-10-01T16:45:52.725Z\",\n        \"name\": \"string\",\n        \"type\": \"sigma\",\n        \"last_ingested_on\": \"1948-03-12T04:28:02.236Z\",\n        \"connection_status\": \"ER\",\n        \"connection_error_message\": \"string\",\n        \"external_uuid\": \"string\",\n        \"iam_principal\": \"string\"\n      },\n      \"dbt_type\": \"empty\"\n    },\n    {\n      \"data_types\": {\n        \"data_source_type\": \"string\",\n        \"data_type\": \"string\",\n        \"external_database_type\": \"string\",\n        \"object_type\": \"string\"\n      },\n      \"dialect\": \"power_bi\",\n      \"guid\": \"string\",\n      \"updated_on\": \"1995-08-06T13:36:56.470Z\",\n      \"name\": \"string\",\n      \"data_source\": {\n        \"data_types\": {\n          \"data_source_type\": \"string\",\n          \"data_type\": \"string\",\n          \"external_database_type\": \"string\",\n          \"object_type\": \"string\"\n        },\n        \"guid\": \"string\",\n        \"is_credentials_setup_incomplete\": false,\n        \"is_ingesting\": true,\n        \"is_syncing_paused\": false,\n        \"last_fully_ingested_on\": \"2008-05-21T13:08:41.580Z\",\n        \"name\": \"string\",\n        \"type\": \"openlineage\",\n        \"last_ingested_on\": \"1963-12-22T08:58:01.794Z\",\n        \"connection_status\": \"ER\",\n        \"connection_error_message\": \"string\",\n        \"external_uuid\": \"string\",\n        \"iam_principal\": \"string\"\n      },\n      \"target_data_source\": {\n        \"data_types\": {\n          \"data_source_type\": \"string\",\n          \"data_type\": \"string\",\n          \"external_database_type\": \"string\",\n          \"object_type\": \"string\"\n        },\n        \"guid\": \"string\",\n        \"is_credentials_setup_incomplete\": false,\n        \"is_ingesting\": false,\n        \"is_syncing_paused\": false,\n        \"last_fully_ingested_on\": \"2020-05-02T12:34:43.925Z\",\n        \"name\": \"string\",\n        \"type\": \"periscope\",\n        \"last_ingested_on\": \"1970-02-04T12:30:51.555Z\",\n        \"connection_status\": \"WA\",\n        \"connection_error_message\": \"string\",\n        \"external_uuid\": \"string\",\n        \"iam_principal\": \"string\"\n      },\n      \"dbt_type\": \"empty\"\n    }\n  ],\n  \"next\": \"http://api.example.org/accounts/?page=4\",\n  \"previous\": \"http://api.example.org/accounts/?page=2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "db204da9-fa52-4cc1-9aa6-39535a7f2123",
+          "name": "dbt project create",
+          "request": {
+            "name": "dbt project create",
+            "description": {
+              "content": "**Required Role:** Admin (or RBAC policy)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "dbt",
+                "project",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "dialect",
+                  "value": "<string>",
+                  "description": "(Required) the dialect of this dbt project\n\n* `airflow` - Airflow\n* `aws_s3` - AWS S3\n* `bigquery` - BigQuery\n* `data_studio` - Looker Studio\n* `databricks` - Databricks\n* `db_agent` - DB Agent\n* `db2` - DB2\n* `dbt` - dbt\n* `fivetran` - Fivetran\n* `glue` - Glue\n* `hex` - Hex\n* `looker` - Looker\n* `metabase` - Metabase\n* `mode` - Mode\n* `monte_carlo` - Monte Carlo\n* `mssql` - MS SQL\n* `mysql` - MySQL\n* `omni` - Omni BI\n* `openlineage` - Open Lineage\n* `oracle` - Oracle\n* `periscope` - Periscope\n* `postgres` - PostgreSQL\n* `power_bi` - Power BI\n* `quicksight` - QuickSight\n* `redshift` - Redshift\n* `salesforce` - Salesforce\n* `salesforce_crma` - Salesforce Analytics\n* `sigma` - Sigma\n* `snowflake` - Snowflake\n* `tableau` - Tableau\n* `thoughtspot` - ThoughtSpot\n* `trial` - Trial\n* `trial_redshift` - Trial Redshift"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "The name of the dbt project"
+                },
+                {
+                  "disabled": false,
+                  "key": "guid",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "last_ingested_on",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "connection_status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "connection_error_message",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "external_uuid",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "iam_principal",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "guid",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "last_ingested_on",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "connection_status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "connection_error_message",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "external_uuid",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "iam_principal",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "dbt_type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "key_0",
+                  "value": "{}"
+                },
+                {
+                  "disabled": false,
+                  "key": "key_0",
+                  "value": "{}"
+                },
+                {
+                  "disabled": false,
+                  "key": "key_0",
+                  "value": "{}"
+                },
+                {
+                  "disabled": false,
+                  "key": "key_1",
+                  "value": "{}"
+                },
+                {
+                  "disabled": false,
+                  "key": "key_2",
+                  "value": "{}"
+                },
+                {
+                  "disabled": false,
+                  "key": "cloud_token",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "cloud_job_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "cloud_base_url",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "cf53aba5-a102-4c6a-9c75-2888d19defe7",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "dbt",
+                    "project",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) the dialect of this dbt project\n\n* `airflow` - Airflow\n* `aws_s3` - AWS S3\n* `bigquery` - BigQuery\n* `data_studio` - Looker Studio\n* `databricks` - Databricks\n* `db_agent` - DB Agent\n* `db2` - DB2\n* `dbt` - dbt\n* `fivetran` - Fivetran\n* `glue` - Glue\n* `hex` - Hex\n* `looker` - Looker\n* `metabase` - Metabase\n* `mode` - Mode\n* `monte_carlo` - Monte Carlo\n* `mssql` - MS SQL\n* `mysql` - MySQL\n* `omni` - Omni BI\n* `openlineage` - Open Lineage\n* `oracle` - Oracle\n* `periscope` - Periscope\n* `postgres` - PostgreSQL\n* `power_bi` - Power BI\n* `quicksight` - QuickSight\n* `redshift` - Redshift\n* `salesforce` - Salesforce\n* `salesforce_crma` - Salesforce Analytics\n* `sigma` - Sigma\n* `snowflake` - Snowflake\n* `tableau` - Tableau\n* `thoughtspot` - ThoughtSpot\n* `trial` - Trial\n* `trial_redshift` - Trial Redshift",
+                        "type": "text/plain"
+                      },
+                      "key": "dialect",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The name of the dbt project",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "guid",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "last_ingested_on",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "connection_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "connection_error_message",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "external_uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "iam_principal",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "guid",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "last_ingested_on",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "connection_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "connection_error_message",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "external_uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "iam_principal",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "dbt_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "key_0",
+                      "value": "{}"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "key_0",
+                      "value": "{}"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "key_1",
+                      "value": "{}"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "key_0",
+                      "value": "{}"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "key_1",
+                      "value": "{}"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "cloud_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "cloud_job_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "cloud_base_url",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data_types\": {\n    \"data_source_type\": \"string\",\n    \"data_type\": \"string\",\n    \"external_database_type\": \"string\",\n    \"object_type\": \"string\"\n  },\n  \"dialect\": \"<string>\",\n  \"guid\": \"string\",\n  \"updated_on\": \"1976-05-17T04:26:45.004Z\",\n  \"name\": \"string\",\n  \"data_source\": {\n    \"data_types\": {\n      \"data_source_type\": \"string\",\n      \"data_type\": \"string\",\n      \"external_database_type\": \"string\",\n      \"object_type\": \"string\"\n    },\n    \"guid\": \"string\",\n    \"is_credentials_setup_incomplete\": false,\n    \"is_ingesting\": true,\n    \"is_syncing_paused\": true,\n    \"last_fully_ingested_on\": \"1966-02-06T22:03:53.322Z\",\n    \"name\": \"string\",\n    \"type\": \"quicksight\",\n    \"last_ingested_on\": \"1964-03-07T16:01:26.743Z\",\n    \"connection_status\": \"<string>\",\n    \"connection_error_message\": \"string\",\n    \"external_uuid\": \"string\",\n    \"iam_principal\": \"string\"\n  },\n  \"target_data_source\": {\n    \"data_types\": {\n      \"data_source_type\": \"string\",\n      \"data_type\": \"string\",\n      \"external_database_type\": \"string\",\n      \"object_type\": \"string\"\n    },\n    \"guid\": \"string\",\n    \"is_credentials_setup_incomplete\": true,\n    \"is_ingesting\": true,\n    \"is_syncing_paused\": false,\n    \"last_fully_ingested_on\": \"1951-12-20T21:42:31.261Z\",\n    \"name\": \"string\",\n    \"type\": \"fivetran\",\n    \"last_ingested_on\": \"2023-09-27T08:59:35.832Z\",\n    \"connection_status\": \"<string>\",\n    \"connection_error_message\": \"string\",\n    \"external_uuid\": \"string\",\n    \"iam_principal\": \"string\"\n  },\n  \"dbt_type\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c16a551a-6ac2-4ad4-9261-d277f0008df5",
+          "name": "dbt project retrieve",
+          "request": {
+            "name": "dbt project retrieve",
+            "description": {
+              "content": "**Required Role:** Admin (or RBAC policy)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "dbt",
+                "project",
+                ":guid",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b29ecb36-c5f0-4143-8d61-7d53ebd523d9",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "dbt",
+                    "project",
+                    ":guid",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data_types\": {\n    \"data_source_type\": \"string\",\n    \"data_type\": \"string\",\n    \"external_database_type\": \"string\",\n    \"object_type\": \"string\"\n  },\n  \"dialect\": \"<string>\",\n  \"guid\": \"string\",\n  \"updated_on\": \"1976-05-17T04:26:45.004Z\",\n  \"name\": \"string\",\n  \"data_source\": {\n    \"data_types\": {\n      \"data_source_type\": \"string\",\n      \"data_type\": \"string\",\n      \"external_database_type\": \"string\",\n      \"object_type\": \"string\"\n    },\n    \"guid\": \"string\",\n    \"is_credentials_setup_incomplete\": false,\n    \"is_ingesting\": true,\n    \"is_syncing_paused\": true,\n    \"last_fully_ingested_on\": \"1966-02-06T22:03:53.322Z\",\n    \"name\": \"string\",\n    \"type\": \"quicksight\",\n    \"last_ingested_on\": \"1964-03-07T16:01:26.743Z\",\n    \"connection_status\": \"<string>\",\n    \"connection_error_message\": \"string\",\n    \"external_uuid\": \"string\",\n    \"iam_principal\": \"string\"\n  },\n  \"target_data_source\": {\n    \"data_types\": {\n      \"data_source_type\": \"string\",\n      \"data_type\": \"string\",\n      \"external_database_type\": \"string\",\n      \"object_type\": \"string\"\n    },\n    \"guid\": \"string\",\n    \"is_credentials_setup_incomplete\": true,\n    \"is_ingesting\": true,\n    \"is_syncing_paused\": false,\n    \"last_fully_ingested_on\": \"1951-12-20T21:42:31.261Z\",\n    \"name\": \"string\",\n    \"type\": \"fivetran\",\n    \"last_ingested_on\": \"2023-09-27T08:59:35.832Z\",\n    \"connection_status\": \"<string>\",\n    \"connection_error_message\": \"string\",\n    \"external_uuid\": \"string\",\n    \"iam_principal\": \"string\"\n  },\n  \"dbt_type\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e925e2a6-96d4-49d7-a8e9-4d697eabecc4",
+          "name": "dbt project update",
+          "request": {
+            "name": "dbt project update",
+            "description": {
+              "content": "**Required Role:** Admin (or RBAC policy)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "dbt",
+                "project",
+                ":guid",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "dialect",
+                  "value": "<string>",
+                  "description": "(Required) the dialect of this dbt project\n\n* `airflow` - Airflow\n* `aws_s3` - AWS S3\n* `bigquery` - BigQuery\n* `data_studio` - Looker Studio\n* `databricks` - Databricks\n* `db_agent` - DB Agent\n* `db2` - DB2\n* `dbt` - dbt\n* `fivetran` - Fivetran\n* `glue` - Glue\n* `hex` - Hex\n* `looker` - Looker\n* `metabase` - Metabase\n* `mode` - Mode\n* `monte_carlo` - Monte Carlo\n* `mssql` - MS SQL\n* `mysql` - MySQL\n* `omni` - Omni BI\n* `openlineage` - Open Lineage\n* `oracle` - Oracle\n* `periscope` - Periscope\n* `postgres` - PostgreSQL\n* `power_bi` - Power BI\n* `quicksight` - QuickSight\n* `redshift` - Redshift\n* `salesforce` - Salesforce\n* `salesforce_crma` - Salesforce Analytics\n* `sigma` - Sigma\n* `snowflake` - Snowflake\n* `tableau` - Tableau\n* `thoughtspot` - ThoughtSpot\n* `trial` - Trial\n* `trial_redshift` - Trial Redshift"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "The name of the dbt project"
+                },
+                {
+                  "disabled": false,
+                  "key": "guid",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "last_ingested_on",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "connection_status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "connection_error_message",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "external_uuid",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "iam_principal",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "guid",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "last_ingested_on",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "connection_status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "connection_error_message",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "external_uuid",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "iam_principal",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "dbt_type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "key_0",
+                  "value": "{}"
+                },
+                {
+                  "disabled": false,
+                  "key": "key_0",
+                  "value": "{}"
+                },
+                {
+                  "disabled": false,
+                  "key": "key_0",
+                  "value": "{}"
+                },
+                {
+                  "disabled": false,
+                  "key": "key_1",
+                  "value": "{}"
+                },
+                {
+                  "disabled": false,
+                  "key": "key_2",
+                  "value": "{}"
+                },
+                {
+                  "disabled": false,
+                  "key": "cloud_token",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "cloud_job_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "cloud_base_url",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9f762782-84eb-41c9-af9a-af547e8929d5",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "dbt",
+                    "project",
+                    ":guid",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) the dialect of this dbt project\n\n* `airflow` - Airflow\n* `aws_s3` - AWS S3\n* `bigquery` - BigQuery\n* `data_studio` - Looker Studio\n* `databricks` - Databricks\n* `db_agent` - DB Agent\n* `db2` - DB2\n* `dbt` - dbt\n* `fivetran` - Fivetran\n* `glue` - Glue\n* `hex` - Hex\n* `looker` - Looker\n* `metabase` - Metabase\n* `mode` - Mode\n* `monte_carlo` - Monte Carlo\n* `mssql` - MS SQL\n* `mysql` - MySQL\n* `omni` - Omni BI\n* `openlineage` - Open Lineage\n* `oracle` - Oracle\n* `periscope` - Periscope\n* `postgres` - PostgreSQL\n* `power_bi` - Power BI\n* `quicksight` - QuickSight\n* `redshift` - Redshift\n* `salesforce` - Salesforce\n* `salesforce_crma` - Salesforce Analytics\n* `sigma` - Sigma\n* `snowflake` - Snowflake\n* `tableau` - Tableau\n* `thoughtspot` - ThoughtSpot\n* `trial` - Trial\n* `trial_redshift` - Trial Redshift",
+                        "type": "text/plain"
+                      },
+                      "key": "dialect",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The name of the dbt project",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "guid",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "last_ingested_on",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "connection_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "connection_error_message",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "external_uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "iam_principal",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "guid",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "last_ingested_on",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "connection_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "connection_error_message",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "external_uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "iam_principal",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "dbt_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "key_0",
+                      "value": "{}"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "key_0",
+                      "value": "{}"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "key_1",
+                      "value": "{}"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "key_0",
+                      "value": "{}"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "key_1",
+                      "value": "{}"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "cloud_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "cloud_job_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "cloud_base_url",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data_types\": {\n    \"data_source_type\": \"string\",\n    \"data_type\": \"string\",\n    \"external_database_type\": \"string\",\n    \"object_type\": \"string\"\n  },\n  \"dialect\": \"<string>\",\n  \"guid\": \"string\",\n  \"updated_on\": \"1976-05-17T04:26:45.004Z\",\n  \"name\": \"string\",\n  \"data_source\": {\n    \"data_types\": {\n      \"data_source_type\": \"string\",\n      \"data_type\": \"string\",\n      \"external_database_type\": \"string\",\n      \"object_type\": \"string\"\n    },\n    \"guid\": \"string\",\n    \"is_credentials_setup_incomplete\": false,\n    \"is_ingesting\": true,\n    \"is_syncing_paused\": true,\n    \"last_fully_ingested_on\": \"1966-02-06T22:03:53.322Z\",\n    \"name\": \"string\",\n    \"type\": \"quicksight\",\n    \"last_ingested_on\": \"1964-03-07T16:01:26.743Z\",\n    \"connection_status\": \"<string>\",\n    \"connection_error_message\": \"string\",\n    \"external_uuid\": \"string\",\n    \"iam_principal\": \"string\"\n  },\n  \"target_data_source\": {\n    \"data_types\": {\n      \"data_source_type\": \"string\",\n      \"data_type\": \"string\",\n      \"external_database_type\": \"string\",\n      \"object_type\": \"string\"\n    },\n    \"guid\": \"string\",\n    \"is_credentials_setup_incomplete\": true,\n    \"is_ingesting\": true,\n    \"is_syncing_paused\": false,\n    \"last_fully_ingested_on\": \"1951-12-20T21:42:31.261Z\",\n    \"name\": \"string\",\n    \"type\": \"fivetran\",\n    \"last_ingested_on\": \"2023-09-27T08:59:35.832Z\",\n    \"connection_status\": \"<string>\",\n    \"connection_error_message\": \"string\",\n    \"external_uuid\": \"string\",\n    \"iam_principal\": \"string\"\n  },\n  \"dbt_type\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0027f4dc-9aff-42ef-9795-8da41e0f6853",
+          "name": "dbt project partial update",
+          "request": {
+            "name": "dbt project partial update",
+            "description": {
+              "content": "**Required Role:** Admin (or RBAC policy)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "dbt",
+                "project",
+                ":guid",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "The name of the dbt project"
+                },
+                {
+                  "disabled": false,
+                  "key": "guid",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "last_ingested_on",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "connection_status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "connection_error_message",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "external_uuid",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "iam_principal",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "dialect",
+                  "value": "<string>",
+                  "description": "the dialect of this dbt project\n\n* `airflow` - Airflow\n* `aws_s3` - AWS S3\n* `bigquery` - BigQuery\n* `data_studio` - Looker Studio\n* `databricks` - Databricks\n* `db_agent` - DB Agent\n* `db2` - DB2\n* `dbt` - dbt\n* `fivetran` - Fivetran\n* `glue` - Glue\n* `hex` - Hex\n* `looker` - Looker\n* `metabase` - Metabase\n* `mode` - Mode\n* `monte_carlo` - Monte Carlo\n* `mssql` - MS SQL\n* `mysql` - MySQL\n* `omni` - Omni BI\n* `openlineage` - Open Lineage\n* `oracle` - Oracle\n* `periscope` - Periscope\n* `postgres` - PostgreSQL\n* `power_bi` - Power BI\n* `quicksight` - QuickSight\n* `redshift` - Redshift\n* `salesforce` - Salesforce\n* `salesforce_crma` - Salesforce Analytics\n* `sigma` - Sigma\n* `snowflake` - Snowflake\n* `tableau` - Tableau\n* `thoughtspot` - ThoughtSpot\n* `trial` - Trial\n* `trial_redshift` - Trial Redshift"
+                },
+                {
+                  "disabled": false,
+                  "key": "guid",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "last_ingested_on",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "connection_status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "connection_error_message",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "external_uuid",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "iam_principal",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "dbt_type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "key_0",
+                  "value": "{}"
+                },
+                {
+                  "disabled": false,
+                  "key": "key_1",
+                  "value": "{}"
+                },
+                {
+                  "disabled": false,
+                  "key": "key_2",
+                  "value": "{}"
+                },
+                {
+                  "disabled": false,
+                  "key": "key_0",
+                  "value": "{}"
+                },
+                {
+                  "disabled": false,
+                  "key": "key_1",
+                  "value": "{}"
+                },
+                {
+                  "disabled": false,
+                  "key": "key_0",
+                  "value": "{}"
+                },
+                {
+                  "disabled": false,
+                  "key": "key_1",
+                  "value": "{}"
+                },
+                {
+                  "disabled": false,
+                  "key": "cloud_token",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "cloud_job_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "cloud_base_url",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b076614e-d9b7-4f0e-bb33-1dfd94a2611b",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "dbt",
+                    "project",
+                    ":guid",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The name of the dbt project",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "guid",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "last_ingested_on",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "connection_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "connection_error_message",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "external_uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "iam_principal",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "the dialect of this dbt project\n\n* `airflow` - Airflow\n* `aws_s3` - AWS S3\n* `bigquery` - BigQuery\n* `data_studio` - Looker Studio\n* `databricks` - Databricks\n* `db_agent` - DB Agent\n* `db2` - DB2\n* `dbt` - dbt\n* `fivetran` - Fivetran\n* `glue` - Glue\n* `hex` - Hex\n* `looker` - Looker\n* `metabase` - Metabase\n* `mode` - Mode\n* `monte_carlo` - Monte Carlo\n* `mssql` - MS SQL\n* `mysql` - MySQL\n* `omni` - Omni BI\n* `openlineage` - Open Lineage\n* `oracle` - Oracle\n* `periscope` - Periscope\n* `postgres` - PostgreSQL\n* `power_bi` - Power BI\n* `quicksight` - QuickSight\n* `redshift` - Redshift\n* `salesforce` - Salesforce\n* `salesforce_crma` - Salesforce Analytics\n* `sigma` - Sigma\n* `snowflake` - Snowflake\n* `tableau` - Tableau\n* `thoughtspot` - ThoughtSpot\n* `trial` - Trial\n* `trial_redshift` - Trial Redshift",
+                        "type": "text/plain"
+                      },
+                      "key": "dialect",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "guid",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "last_ingested_on",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "connection_status",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "connection_error_message",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "external_uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "iam_principal",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "dbt_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "key_0",
+                      "value": "{}"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "key_0",
+                      "value": "{}"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "key_0",
+                      "value": "{}"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "key_1",
+                      "value": "{}"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "key_2",
+                      "value": "{}"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "cloud_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "cloud_job_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "cloud_base_url",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data_types\": {\n    \"data_source_type\": \"string\",\n    \"data_type\": \"string\",\n    \"external_database_type\": \"string\",\n    \"object_type\": \"string\"\n  },\n  \"dialect\": \"<string>\",\n  \"guid\": \"string\",\n  \"updated_on\": \"1976-05-17T04:26:45.004Z\",\n  \"name\": \"string\",\n  \"data_source\": {\n    \"data_types\": {\n      \"data_source_type\": \"string\",\n      \"data_type\": \"string\",\n      \"external_database_type\": \"string\",\n      \"object_type\": \"string\"\n    },\n    \"guid\": \"string\",\n    \"is_credentials_setup_incomplete\": false,\n    \"is_ingesting\": true,\n    \"is_syncing_paused\": true,\n    \"last_fully_ingested_on\": \"1966-02-06T22:03:53.322Z\",\n    \"name\": \"string\",\n    \"type\": \"quicksight\",\n    \"last_ingested_on\": \"1964-03-07T16:01:26.743Z\",\n    \"connection_status\": \"<string>\",\n    \"connection_error_message\": \"string\",\n    \"external_uuid\": \"string\",\n    \"iam_principal\": \"string\"\n  },\n  \"target_data_source\": {\n    \"data_types\": {\n      \"data_source_type\": \"string\",\n      \"data_type\": \"string\",\n      \"external_database_type\": \"string\",\n      \"object_type\": \"string\"\n    },\n    \"guid\": \"string\",\n    \"is_credentials_setup_incomplete\": true,\n    \"is_ingesting\": true,\n    \"is_syncing_paused\": false,\n    \"last_fully_ingested_on\": \"1951-12-20T21:42:31.261Z\",\n    \"name\": \"string\",\n    \"type\": \"fivetran\",\n    \"last_ingested_on\": \"2023-09-27T08:59:35.832Z\",\n    \"connection_status\": \"<string>\",\n    \"connection_error_message\": \"string\",\n    \"external_uuid\": \"string\",\n    \"iam_principal\": \"string\"\n  },\n  \"dbt_type\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "747dda3e-e676-4921-b530-c92c59461851",
+          "name": "dbt project destroy",
+          "request": {
+            "name": "dbt project destroy",
+            "description": {
+              "content": "**Required Role:** Admin (or RBAC policy)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "dbt",
+                "project",
+                ":guid",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "data_source",
+                  "value": "<string>",
+                  "description": "A comma separated list of data source guids to filter for items within those data sources."
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "<string>",
+                  "description": "Specify the ordering for the results. \n\n A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order. \n\nNote: Order is case-sensitive."
+                },
+                {
+                  "disabled": false,
+                  "key": "search_name",
+                  "value": "<string>",
+                  "description": "Search for an asset using its name"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b293d47d-0b45-4b61-83b8-23b6dcc42425",
+              "name": "No response body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "dbt",
+                    "project",
+                    ":guid",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "data_source",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search_name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4822b535-c5ae-4a4b-81fb-ea631c621e3c",
+          "name": "dbt warehouse link list",
+          "request": {
+            "name": "dbt warehouse link list",
+            "description": {
+              "content": "**Required Role:** Authenticated User with Active Organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "dbt",
+                "warehouse-link",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "<string>",
+                  "description": "Specify the ordering for the results. \n\n A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order. \n\nNote: Order is case-sensitive."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "A page number within the paginated result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "search_data_source",
+                  "value": "<string>",
+                  "description": "A search term."
+                },
+                {
+                  "disabled": false,
+                  "key": "search_name",
+                  "value": "<string>",
+                  "description": "A search term."
+                },
+                {
+                  "disabled": false,
+                  "key": "search_type",
+                  "value": "<string>",
+                  "description": "A search term."
+                },
+                {
+                  "disabled": false,
+                  "key": "types",
+                  "value": "<string>",
+                  "description": "A comma separated list of table types to filter for dbt dwh links."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6a7ef611-a540-4380-a78b-ec9cd5ee51f6",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "dbt",
+                    "warehouse-link",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "search_data_source",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "types",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 123,\n  \"results\": [\n    {\n      \"breadcrumbs\": [\n        {\n          \"target_data_source_guid\": \"string\",\n          \"target_data_type\": \"string\",\n          \"target_guid\": \"string\",\n          \"target_name\": \"string\",\n          \"target_object_type\": \"string\",\n          \"guid\": \"string\",\n          \"target_data_source_type\": \"mssql\",\n          \"ordinal\": 1899926180\n        },\n        {\n          \"target_data_source_guid\": \"string\",\n          \"target_data_type\": \"string\",\n          \"target_guid\": \"string\",\n          \"target_name\": \"string\",\n          \"target_object_type\": \"string\",\n          \"guid\": \"string\",\n          \"target_data_source_type\": \"oracle\",\n          \"ordinal\": 1823835320\n        }\n      ],\n      \"data_source\": \"string\",\n      \"dbt_model\": {\n        \"data_types\": {\n          \"data_source_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"data_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"external_database_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"object_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"name\": \"string\",\n        \"updated_on\": \"2007-08-05T07:25:16.848Z\",\n        \"guid\": \"string\",\n        \"table_type\": \"incremental\"\n      },\n      \"target_data_source\": \"string\",\n      \"warehouse_table\": {\n        \"data_types\": {\n          \"data_source_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"data_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"external_database_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"object_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"name\": \"string\",\n        \"updated_on\": \"1984-09-16T12:38:28.364Z\",\n        \"guid\": \"string\",\n        \"table_type\": \"incremental\"\n      }\n    },\n    {\n      \"breadcrumbs\": [\n        {\n          \"target_data_source_guid\": \"string\",\n          \"target_data_type\": \"string\",\n          \"target_guid\": \"string\",\n          \"target_name\": \"string\",\n          \"target_object_type\": \"string\",\n          \"guid\": \"string\",\n          \"target_data_source_type\": \"mssql\",\n          \"ordinal\": 139747208\n        },\n        {\n          \"target_data_source_guid\": \"string\",\n          \"target_data_type\": \"string\",\n          \"target_guid\": \"string\",\n          \"target_name\": \"string\",\n          \"target_object_type\": \"string\",\n          \"guid\": \"string\",\n          \"target_data_source_type\": \"oracle\",\n          \"ordinal\": 1110525477\n        }\n      ],\n      \"data_source\": \"string\",\n      \"dbt_model\": {\n        \"data_types\": {\n          \"data_source_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"data_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"external_database_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"object_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"name\": \"string\",\n        \"updated_on\": \"1981-05-12T23:45:15.140Z\",\n        \"guid\": \"string\",\n        \"table_type\": \"source\"\n      },\n      \"target_data_source\": \"string\",\n      \"warehouse_table\": {\n        \"data_types\": {\n          \"data_source_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"data_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"external_database_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"object_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"name\": \"string\",\n        \"updated_on\": \"1979-02-12T07:14:16.270Z\",\n        \"guid\": \"string\",\n        \"table_type\": \"dynamic_table\"\n      }\n    }\n  ],\n  \"next\": \"http://api.example.org/accounts/?page=4\",\n  \"previous\": \"http://api.example.org/accounts/?page=2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7dfb50f9-a507-4cf5-80c6-06df914574f4",
+          "name": "dbt warehouse link retrieve",
+          "request": {
+            "name": "dbt warehouse link retrieve",
+            "description": {
+              "content": "**Required Role:** Authenticated User with Active Organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "dbt",
+                "warehouse-link",
+                ":guid",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3610a792-ebc1-4882-b4da-d03451b6bdf6",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "dbt",
+                    "warehouse-link",
+                    ":guid",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"breadcrumbs\": [\n    {\n      \"target_data_source_guid\": \"string\",\n      \"target_data_type\": \"string\",\n      \"target_guid\": \"string\",\n      \"target_name\": \"string\",\n      \"target_object_type\": \"string\",\n      \"guid\": \"string\",\n      \"target_data_source_type\": \"sigma\",\n      \"ordinal\": 418514852\n    },\n    {\n      \"target_data_source_guid\": \"string\",\n      \"target_data_type\": \"string\",\n      \"target_guid\": \"string\",\n      \"target_name\": \"string\",\n      \"target_object_type\": \"string\",\n      \"guid\": \"string\",\n      \"target_data_source_type\": \"trial\",\n      \"ordinal\": 840079901\n    }\n  ],\n  \"data_source\": \"string\",\n  \"dbt_model\": {\n    \"data_types\": {\n      \"data_source_type\": \"string\",\n      \"data_type\": \"string\",\n      \"external_database_type\": \"string\",\n      \"object_type\": \"string\"\n    },\n    \"name\": \"string\",\n    \"updated_on\": \"2018-10-07T12:01:10.814Z\",\n    \"guid\": \"string\",\n    \"table_type\": \"external_table\"\n  },\n  \"target_data_source\": \"string\",\n  \"warehouse_table\": {\n    \"data_types\": {\n      \"data_source_type\": \"string\",\n      \"data_type\": \"string\",\n      \"external_database_type\": \"string\",\n      \"object_type\": \"string\"\n    },\n    \"name\": \"string\",\n    \"updated_on\": \"1958-05-05T11:41:02.904Z\",\n    \"guid\": \"string\",\n    \"table_type\": \"incremental\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "15c85ea3-76d4-4618-b60b-313dae36c0f1",
+    "name": "Select Star Metadata bi dbt API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for interacting with the Select Star system\n\nContact Support:\n Email: support@selectstar.com",
+      "type": "text/plain"
+    }
+  }
+}

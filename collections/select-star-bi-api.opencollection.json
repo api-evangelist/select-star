@@ -1,0 +1,1651 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Select Star Metadata bi API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "bi",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "bi_dashboards_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/bi/dashboards/",
+            "params": [
+              {
+                "name": "bifolders",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of BI folder guids to filter for dashboards within those folders."
+              },
+              {
+                "name": "collections",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of collection guids, for to filter the collection items from"
+              },
+              {
+                "name": "data_type",
+                "value": "",
+                "type": "query",
+                "description": "A value to filter by dashboard type."
+              },
+              {
+                "name": "datasources",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of data source guids to filter for items within those data sources."
+              },
+              {
+                "name": "dsuser_created_by",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of Data Source Users guids to filter for element creator. Allowed Values include DSUser GUIDs + 'known_users' + 'unknown_users'"
+              },
+              {
+                "name": "dsuser_owned_by",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of Data Source Users guids to filter for element owner (permission). Allowed Values include DSUser GUIDs + 'known_users' + 'unknown_users'"
+              },
+              {
+                "name": "is_hidden",
+                "value": "",
+                "type": "query",
+                "description": "A boolean to show hidden objects when true and hide hidden objects when false. Defaults to False."
+              },
+              {
+                "name": "new",
+                "value": "",
+                "type": "query",
+                "description": "A boolean which filters for newest tables in the organization."
+              },
+              {
+                "name": "no_business_owner",
+                "value": "",
+                "type": "query",
+                "description": "A flag that filters out any table that has a business owner."
+              },
+              {
+                "name": "no_description",
+                "value": "",
+                "type": "query",
+                "description": "A flag that filters out any tables with descriptions"
+              },
+              {
+                "name": "no_popularity",
+                "value": "",
+                "type": "query",
+                "description": "A flag that filters out any table that has a popularity rating."
+              },
+              {
+                "name": "no_source_tables",
+                "value": "",
+                "type": "query",
+                "description": "A flag that shows only assets with no source tables. Only for BI Tools"
+              },
+              {
+                "name": "no_tags",
+                "value": "",
+                "type": "query",
+                "description": "A flag that filters out any tagged tables"
+              },
+              {
+                "name": "no_technical_owner",
+                "value": "",
+                "type": "query",
+                "description": "A flag that filters out any table that has a technical owner."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Specify the ordering for the results. \n\n A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order. \n\nNote: Order is case-sensitive."
+              },
+              {
+                "name": "owners",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of user or team guids to filter for objects within these users as owners (technical or business)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "popularity",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of popularity ranges (inclusive) can include integers from 1-100 ex) 1-10,90-100 would be the bottom 10 percent and the top 10 percent, respectively. Ranges can overlap."
+              },
+              {
+                "name": "search_bifolder",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "search_business_owner",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using business owner name"
+              },
+              {
+                "name": "search_collections",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using a collection name"
+              },
+              {
+                "name": "search_description",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using its description"
+              },
+              {
+                "name": "search_dsuser_created_by",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using the name of the creator's user"
+              },
+              {
+                "name": "search_dsuser_owned_by",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using the name of the owner's user"
+              },
+              {
+                "name": "search_name",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using its name"
+              },
+              {
+                "name": "search_sql",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using its raw SQL"
+              },
+              {
+                "name": "search_tag_name",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using a tag name"
+              },
+              {
+                "name": "search_technical_owner",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using technical owner name"
+              },
+              {
+                "name": "status_tags",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of tag guids"
+              },
+              {
+                "name": "teams",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of team guids to filter for tables owned by users of those teams."
+              },
+              {
+                "name": "user",
+                "value": "",
+                "type": "query",
+                "description": "A user guid to filter for dashboards created by that user's Data Source users."
+              },
+              {
+                "name": "was_last_run_not_successful",
+                "value": "",
+                "type": "query",
+                "description": "A boolean to filter for dashboards which were not successfully run"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List of all dashboards available in authenticated user's organization\n\n**Required Role:** Viewer or higher"
+        },
+        {
+          "info": {
+            "name": "bi_dashboards_elements_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/bi/dashboards/:dashboard__guid/elements/",
+            "params": [
+              {
+                "name": "dashboard__guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Specify the ordering for the results. \n\n A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order. \n\nNote: Order is case-sensitive."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "search_description",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using its description"
+              },
+              {
+                "name": "search_name",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using its name"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List all Dashboard Elements within a specified Dashboard available\nin authenticated user's Organization\n\n**Required Role:** Viewer or higher"
+        },
+        {
+          "info": {
+            "name": "bi_dashboards_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/bi/dashboards/:guid/",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve a single dashboard\n\n**Required Role:** Viewer or higher"
+        },
+        {
+          "info": {
+            "name": "bi_dashboards_frequent_dsusers_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/bi/dashboards/:guid/frequent-dsusers/",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get the most frequent BI users and associated Select Star users (if any) that query a specified Dashboard\n\n**Required Role:** Authenticated User with Active Organization"
+        },
+        {
+          "info": {
+            "name": "bi_dashboards_frequent_dsusers_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/bi/dashboards/frequent-dsusers/",
+            "params": [
+              {
+                "name": "datasources",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of data source guids to filter for items within those data sources."
+              },
+              {
+                "name": "only_registered_users",
+                "value": "",
+                "type": "query",
+                "description": "A flag to hide DSUsers with no association with registered application users"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Specify the ordering for the results. \n\n A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order. \n\nNote: Order is case-sensitive."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "require_email",
+                "value": "",
+                "type": "query",
+                "description": "A flag to hide DSUsers with no associated registered user nor email"
+              },
+              {
+                "name": "search_name",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of data source types to filter for dsusers within that type"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get the most frequent BI users and associated Select Star users (if any) that query a list of Dashboards\n\n**Required Role:** Authenticated User with Active Organization"
+        },
+        {
+          "info": {
+            "name": "bi_dashboards_owners_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/bi/dashboards/owners/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Manage BI Dashboards\n\n**Required Role:** Data Manager or higher"
+        },
+        {
+          "info": {
+            "name": "bi_data_sources_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/bi/data-sources/",
+            "params": [
+              {
+                "name": "bifolders",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of BI folder guids to filter for dashboards within those folders."
+              },
+              {
+                "name": "collections",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of collection guids, for to filter the collection items from"
+              },
+              {
+                "name": "datasources",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of data source guids to filter for items within those data sources."
+              },
+              {
+                "name": "dsuser_created_by",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of Data Source Users guids to filter for element creator. Allowed Values include DSUser GUIDs + 'known_users' + 'unknown_users'"
+              },
+              {
+                "name": "is_hidden",
+                "value": "",
+                "type": "query",
+                "description": "A boolean to show hidden objects when true and hide hidden objects when false. Defaults to False."
+              },
+              {
+                "name": "new",
+                "value": "",
+                "type": "query",
+                "description": "A boolean which filters for newest tables in the organization."
+              },
+              {
+                "name": "no_description",
+                "value": "",
+                "type": "query",
+                "description": "A flag that filters out any tables with descriptions"
+              },
+              {
+                "name": "no_downstream_lineage",
+                "value": "",
+                "type": "query",
+                "description": "A flag that shows only tables with no downstream lineage"
+              },
+              {
+                "name": "no_popularity",
+                "value": "",
+                "type": "query",
+                "description": "A flag that filters out any table that has a popularity rating."
+              },
+              {
+                "name": "no_source_tables",
+                "value": "",
+                "type": "query",
+                "description": "A flag that shows only assets with no source tables. Only for BI Tools"
+              },
+              {
+                "name": "no_tags",
+                "value": "",
+                "type": "query",
+                "description": "A flag that filters out any tagged tables"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Specify the ordering for the results. \n\n A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order. \n\nNote: Order is case-sensitive."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "popularity",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of popularity ranges (inclusive) can include integers from 1-100 ex) 1-10,90-100 would be the bottom 10 percent and the top 10 percent, respectively. Ranges can overlap."
+              },
+              {
+                "name": "search_collections",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using a collection name"
+              },
+              {
+                "name": "search_description",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using its description"
+              },
+              {
+                "name": "search_dsuser_created_by",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using the name of the creator's user"
+              },
+              {
+                "name": "search_name",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using its name"
+              },
+              {
+                "name": "search_tag_name",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using a tag name"
+              },
+              {
+                "name": "status_tags",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of tag guids"
+              },
+              {
+                "name": "types",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of tableau data source types"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List all Published Data Sources within in authenticated user's Organization\n\n**Required Role:** Viewer or higher"
+        },
+        {
+          "info": {
+            "name": "bi_data_sources_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/bi/data-sources/:guid/",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Manage BI Data Sources, a bridge between Databases and Tableau objects\n\n**Required Role:** Viewer or higher"
+        },
+        {
+          "info": {
+            "name": "bi_data_sources_fields_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/bi/data-sources/:guid/fields/",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "no_tags",
+                "value": "",
+                "type": "query",
+                "description": "A flag that filters out any tagged tables"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Specify the ordering for the results. \n\n A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order. \n\nNote: Order is case-sensitive."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "role_types",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of TableauFieldRoleTypes i.e Measure or Dimension to filter within these TableauFields "
+              },
+              {
+                "name": "search_database",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "search_description",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using its description"
+              },
+              {
+                "name": "search_name",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using its name"
+              },
+              {
+                "name": "search_table",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "search_tag_name",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using a tag name"
+              },
+              {
+                "name": "status_tags",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of tag guids"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List all Tableau Fields within a specified Data Source available\nin authenticated user's Organization\n\n**Required Role:** Viewer or higher"
+        },
+        {
+          "info": {
+            "name": "bi_explores_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/bi/explores/",
+            "params": [
+              {
+                "name": "collections",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of collection guids, for to filter the collection items from"
+              },
+              {
+                "name": "datasources",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of data source guids to filter for items within those data sources."
+              },
+              {
+                "name": "groups",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of Group guids to filter for Explores within those Groups"
+              },
+              {
+                "name": "is_hidden",
+                "value": "",
+                "type": "query",
+                "description": "A boolean to show hidden objects when true and hide hidden objects when false. Defaults to False."
+              },
+              {
+                "name": "models",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of LookML Model guids to filter for Explores within those LookMLModels"
+              },
+              {
+                "name": "new",
+                "value": "",
+                "type": "query",
+                "description": "A boolean which filters for newest tables in the organization."
+              },
+              {
+                "name": "no_business_owner",
+                "value": "",
+                "type": "query",
+                "description": "A flag that filters out any table that has a business owner."
+              },
+              {
+                "name": "no_description",
+                "value": "",
+                "type": "query",
+                "description": "A flag that filters out any tables with descriptions"
+              },
+              {
+                "name": "no_popularity",
+                "value": "",
+                "type": "query",
+                "description": "A flag that filters out any table that has a popularity rating."
+              },
+              {
+                "name": "no_source_tables",
+                "value": "",
+                "type": "query",
+                "description": "A flag that shows only assets with no source tables. Only for BI Tools"
+              },
+              {
+                "name": "no_tags",
+                "value": "",
+                "type": "query",
+                "description": "A flag that filters out any tagged tables"
+              },
+              {
+                "name": "no_technical_owner",
+                "value": "",
+                "type": "query",
+                "description": "A flag that filters out any table that has a technical owner."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Specify the ordering for the results. \n\n A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order. \n\nNote: Order is case-sensitive."
+              },
+              {
+                "name": "owners",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of user or team guids to filter for objects within these users as owners (technical or business)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "popularity",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of popularity ranges (inclusive) can include integers from 1-100 ex) 1-10,90-100 would be the bottom 10 percent and the top 10 percent, respectively. Ranges can overlap."
+              },
+              {
+                "name": "search_all",
+                "value": "",
+                "type": "query",
+                "description": "Search an explore with multiple types of params in one go"
+              },
+              {
+                "name": "search_business_owner",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using business owner name"
+              },
+              {
+                "name": "search_collections",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using a collection name"
+              },
+              {
+                "name": "search_description",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using its description"
+              },
+              {
+                "name": "search_group_label",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "search_model",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "search_name",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "search_tag_name",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using a tag name"
+              },
+              {
+                "name": "search_technical_owner",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using technical owner name"
+              },
+              {
+                "name": "status_tags",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of tag guids"
+              },
+              {
+                "name": "teams",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of team guids to filter for tables owned by users of those teams."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List of all Explores available in authenticated user's organization\n\n**Required Role:** Viewer or higher"
+        },
+        {
+          "info": {
+            "name": "bi_explores_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/bi/explores/:guid/",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve a single Explore\n\n**Required Role:** Viewer or higher"
+        },
+        {
+          "info": {
+            "name": "bi_explores_frequent_dsusers_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/bi/explores/:guid/frequent-dsusers/",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get the most frequent BI users and associated Select Star users (if any) that query specified BI Looker Explore\n\n**Required Role:** Authenticated User with Active Organization"
+        },
+        {
+          "info": {
+            "name": "bi_explores_frequent_users_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/bi/explores/:guid/frequent-users/",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get the most frequent users that query specified Looker Explore\n\n**Required Role:** Authenticated User with Active Organization"
+        },
+        {
+          "info": {
+            "name": "bi_explores_related_dashboards_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/bi/explores/:guid/related-dashboards/",
+            "params": [
+              {
+                "name": "distance",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "include_hidden",
+                "value": "",
+                "type": "query",
+                "description": "A flag allowing to include hidden dashboards in the response."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Specify the ordering for the results. \n\n A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order. \n\nNote: Order is case-sensitive."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "relevant_lineage",
+                "value": "",
+                "type": "query",
+                "description": "When `relevant_lineage` is `true`, we only use edges between columns to traverse the graph. Requires relevant lineage to be enabled in the organization; the flag is ignored otherwise."
+              },
+              {
+                "name": "search_all",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "search_dsuser_created_by",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "search_name",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "updated_on",
+                "value": "",
+                "type": "query",
+                "description": "Filter objects by updated_on. May specify __gt, __gte, __lt or __lte.\n\n API call to: \n\n ENDPOINT/updated_on__gt=2021-08-04T15:12:40&updated_on__lt=2021-08-23 \n\n will result with objects updated_on after  August 4th 2021 at 15:12:40, but before August 23rd 2021. \n\n. If you want to include lower or upper bound of the range use __gte or __lte respectively."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Dashboards related to a specified (Looker) Explore\nA Dashboard is considered related to Explore if they share the same fields\nand the total number of views of the dashboard is in the TOP 5.\n\n**Required Role:** Viewer or higher"
+        },
+        {
+          "info": {
+            "name": "bi_explores_frequent_dsusers_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/bi/explores/frequent-dsusers/",
+            "params": [
+              {
+                "name": "datasources",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of data source guids to filter for items within those data sources."
+              },
+              {
+                "name": "only_registered_users",
+                "value": "",
+                "type": "query",
+                "description": "A flag to hide DSUsers with no association with registered application users"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Specify the ordering for the results. \n\n A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order. \n\nNote: Order is case-sensitive."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "require_email",
+                "value": "",
+                "type": "query",
+                "description": "A flag to hide DSUsers with no associated registered user nor email"
+              },
+              {
+                "name": "search_name",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of data source types to filter for dsusers within that type"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get the most frequent BI users and associated Select Star users (if any) that query a list of BI Looker Explore\n\n**Required Role:** Authenticated User with Active Organization"
+        },
+        {
+          "info": {
+            "name": "bi_lookml_views_related_dashboards_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/bi/lookml/views/:guid/related-dashboards/",
+            "params": [
+              {
+                "name": "distance",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "include_hidden",
+                "value": "",
+                "type": "query",
+                "description": "A flag allowing to include hidden dashboards in the response."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Specify the ordering for the results. \n\n A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order. \n\nNote: Order is case-sensitive."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "relevant_lineage",
+                "value": "",
+                "type": "query",
+                "description": "When `relevant_lineage` is `true`, we only use edges between columns to traverse the graph. Requires relevant lineage to be enabled in the organization; the flag is ignored otherwise."
+              },
+              {
+                "name": "search_all",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "search_dsuser_created_by",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "search_name",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "updated_on",
+                "value": "",
+                "type": "query",
+                "description": "Filter objects by updated_on. May specify __gt, __gte, __lt or __lte.\n\n API call to: \n\n ENDPOINT/updated_on__gt=2021-08-04T15:12:40&updated_on__lt=2021-08-23 \n\n will result with objects updated_on after  August 4th 2021 at 15:12:40, but before August 23rd 2021. \n\n. If you want to include lower or upper bound of the range use __gte or __lte respectively."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "**Required Role:** Viewer or higher"
+        },
+        {
+          "info": {
+            "name": "bi_queries_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/bi/queries/",
+            "params": [
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "A flag to hide deactivated objects."
+              },
+              {
+                "name": "dashboards",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of dashboard/report guids to filter for queries executed on that dashboard/report."
+              },
+              {
+                "name": "no_tags",
+                "value": "",
+                "type": "query",
+                "description": "A flag that filters out any tagged tables"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Specify the ordering for the results. \n\n A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order. \n\nNote: Order is case-sensitive."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "search_description",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using its description"
+              },
+              {
+                "name": "search_name",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using its name"
+              },
+              {
+                "name": "search_sql",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using its raw SQL"
+              },
+              {
+                "name": "status_tags",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of tag guids"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List of all Report Queries available in authenticated user's organization\n\n**Required Role:** Authenticated User with Active Organization"
+        },
+        {
+          "info": {
+            "name": "bi_queries_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/bi/queries/:guid/",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a single Report Query by guid\n\n**Required Role:** Authenticated User with Active Organization"
+        },
+        {
+          "info": {
+            "name": "bi_tableau_datasource_related_dashboards_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/bi/tableau/datasource/:guid/related-dashboards/",
+            "params": [
+              {
+                "name": "distance",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "include_hidden",
+                "value": "",
+                "type": "query",
+                "description": "A flag allowing to include hidden dashboards in the response."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Specify the ordering for the results. \n\n A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order. \n\nNote: Order is case-sensitive."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "relevant_lineage",
+                "value": "",
+                "type": "query",
+                "description": "When `relevant_lineage` is `true`, we only use edges between columns to traverse the graph. Requires relevant lineage to be enabled in the organization; the flag is ignored otherwise."
+              },
+              {
+                "name": "search_all",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "search_dsuser_created_by",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "search_name",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "updated_on",
+                "value": "",
+                "type": "query",
+                "description": "Filter objects by updated_on. May specify __gt, __gte, __lt or __lte.\n\n API call to: \n\n ENDPOINT/updated_on__gt=2021-08-04T15:12:40&updated_on__lt=2021-08-23 \n\n will result with objects updated_on after  August 4th 2021 at 15:12:40, but before August 23rd 2021. \n\n. If you want to include lower or upper bound of the range use __gte or __lte respectively."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "**Required Role:** Viewer or higher"
+        },
+        {
+          "info": {
+            "name": "bi_tableau_fields_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/bi/tableau/fields/",
+            "params": [
+              {
+                "name": "no_tags",
+                "value": "",
+                "type": "query",
+                "description": "A flag that filters out any tagged tables"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Specify the ordering for the results. \n\n A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order. \n\nNote: Order is case-sensitive."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "role_types",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of TableauFieldRoleTypes i.e Measure or Dimension to filter within these TableauFields "
+              },
+              {
+                "name": "search_database",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "search_description",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using its description"
+              },
+              {
+                "name": "search_name",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using its name"
+              },
+              {
+                "name": "search_table",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "search_tag_name",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using a tag name"
+              },
+              {
+                "name": "status_tags",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of tag guids"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List all Tableau Fields available within\nin an authenticated user's Organization\n\n**Required Role:** Viewer or higher"
+        },
+        {
+          "info": {
+            "name": "bi_views_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/bi/views/",
+            "params": [
+              {
+                "name": "all",
+                "value": "",
+                "type": "query",
+                "description": "Show all views even the ones hidden by the Tableau UI"
+              },
+              {
+                "name": "bifolders",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of BI folder guids to filter for dashboards within those folders."
+              },
+              {
+                "name": "datasources",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of data source guids to filter for items within those data sources."
+              },
+              {
+                "name": "dsuser_created_by",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of Data Source Users guids to filter for element creator. Allowed Values include DSUser GUIDs + 'known_users' + 'unknown_users'"
+              },
+              {
+                "name": "is_hidden",
+                "value": "",
+                "type": "query",
+                "description": "A boolean to show hidden objects when true and hide hidden objects when false. Defaults to False."
+              },
+              {
+                "name": "no_source_tables",
+                "value": "",
+                "type": "query",
+                "description": "A flag that shows only assets with no source tables. Only for BI Tools"
+              },
+              {
+                "name": "no_tags",
+                "value": "",
+                "type": "query",
+                "description": "A flag that filters out any tagged tables"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Specify the ordering for the results. \n\n A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order. \n\nNote: Order is case-sensitive."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "search_dashboard_views_name",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "search_description",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using its description"
+              },
+              {
+                "name": "search_dsuser_created_by",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using the name of the creator's user"
+              },
+              {
+                "name": "search_name",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "search_tag_name",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using a tag name"
+              },
+              {
+                "name": "search_workbook",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "status_tags",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of tag guids"
+              },
+              {
+                "name": "types",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of view types to filter for."
+              },
+              {
+                "name": "workbooks",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of Workbook guids to filter for Tableau Views (Sheets,Dashboards) within those data sources."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List all Views within a specified Workbook available\nin authenticated user's Organization\n\n**Required Role:** Viewer or higher"
+        },
+        {
+          "info": {
+            "name": "bi_views_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/bi/views/:guid/",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Manage Tableau Workbook Views (Sheet, Dashboard)\n\n**Required Role:** Viewer or higher"
+        },
+        {
+          "info": {
+            "name": "bi_views_fields_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/bi/views/:guid/fields/",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "no_tags",
+                "value": "",
+                "type": "query",
+                "description": "A flag that filters out any tagged tables"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Specify the ordering for the results. \n\n A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order. \n\nNote: Order is case-sensitive."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "search_database",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "search_description",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using its description"
+              },
+              {
+                "name": "search_name",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using its name"
+              },
+              {
+                "name": "search_table",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "search_tag_name",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using a tag name"
+              },
+              {
+                "name": "status_tags",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of tag guids"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List all Fields within a specified View (Sheet, Dashboard) available\nin authenticated user's Organization\n\n**Required Role:** Viewer or higher"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

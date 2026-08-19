@@ -1,0 +1,124 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Select Star Metadata bi schemas API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "schemas",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "schemas_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/schemas/",
+            "params": [
+              {
+                "name": "collections",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of collection guids, for to filter the collection items from"
+              },
+              {
+                "name": "databases",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of database guids to filter for items within those databases."
+              },
+              {
+                "name": "datasources",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of data source guids to filter for items within those data sources."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "search_collections",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using a collection name"
+              },
+              {
+                "name": "search_name",
+                "value": "",
+                "type": "query",
+                "description": "Search for schemas given a schema name (goes upto data source name)"
+              },
+              {
+                "name": "updated_on",
+                "value": "",
+                "type": "query",
+                "description": "Filter objects by updated_on. May specify __gt, __gte, __lt or __lte.\n\n API call to: \n\n ENDPOINT/updated_on__gt=2021-08-04T15:12:40&updated_on__lt=2021-08-23 \n\n will result with objects updated_on after  August 4th 2021 at 15:12:40, but before August 23rd 2021. \n\n. If you want to include lower or upper bound of the range use __gte or __lte respectively."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists all Schemas within an organization\n\n**Required Role:** Viewer or higher"
+        },
+        {
+          "info": {
+            "name": "schemas_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/schemas/:guid/",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve a single Schema object\n\n**Required Role:** Viewer or higher"
+        },
+        {
+          "info": {
+            "name": "schemas_owners_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/schemas/owners/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update schema owners\n\n**Required Role:** Data Manager or higher"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

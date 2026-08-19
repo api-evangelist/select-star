@@ -1,0 +1,236 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Select Star Metadata bi scim API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "scim",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "scim_v2_Me_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/scim/v2/Me",
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Manage Users with a SCIM compliant API.\n\n**Required Role:** Admin"
+        },
+        {
+          "info": {
+            "name": "scim_v2_Me_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/scim/v2/Me",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Manage Users with a SCIM compliant API.\n\n**Required Role:** Admin"
+        },
+        {
+          "info": {
+            "name": "scim_v2_ResourceTypes_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/scim/v2/ResourceTypes",
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "**Required Role:** Authenticated User with Active Organization"
+        },
+        {
+          "info": {
+            "name": "scim_v2_ServiceProviderConfig_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/scim/v2/ServiceProviderConfig",
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "**Required Role:** Authenticated User with Active Organization"
+        },
+        {
+          "info": {
+            "name": "scim_v2_Users_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/scim/v2/Users",
+            "params": [
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Non-negative integer. Specifies the desired maximum number of query results per page, e.g., 10. A negative value SHALL be interpreted as \"0\". A value of \"0\" indicates that no resource results are to be returned except for \"totalResults\"."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Deprecated. Use startIndex instead."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Deprecated. Use count instead."
+              },
+              {
+                "name": "startIndex",
+                "value": "",
+                "type": "query",
+                "description": "The 1-based index of the first query result."
+              },
+              {
+                "name": "userName",
+                "value": "",
+                "type": "query",
+                "description": "A string that is matched against the \"userName\" or \"email\" attributes of a User."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Manage Users with a SCIM compliant API.\n\n**Required Role:** Admin"
+        },
+        {
+          "info": {
+            "name": "scim_v2_Users_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/scim/v2/Users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Manage Users with a SCIM compliant API.\n\n**Required Role:** Admin"
+        },
+        {
+          "info": {
+            "name": "scim_v2_Users_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/scim/v2/Users/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Manage Users with a SCIM compliant API.\n\n**Required Role:** Admin"
+        },
+        {
+          "info": {
+            "name": "scim_v2_Users_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/scim/v2/Users/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Manage Users with a SCIM compliant API.\n\n**Required Role:** Admin"
+        },
+        {
+          "info": {
+            "name": "scim_v2_Users_destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/scim/v2/Users/:guid",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Manage Users with a SCIM compliant API.\n\n**Required Role:** Admin"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

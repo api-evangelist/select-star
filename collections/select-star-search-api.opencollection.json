@@ -1,0 +1,141 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Select Star Metadata bi search API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "search_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/search/",
+            "params": [
+              {
+                "name": "collections",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of collection GUIDs. The search results will only contain items from any of the given collections."
+              },
+              {
+                "name": "custom_attributes_search",
+                "value": "",
+                "type": "query",
+                "description": "When set to true, if the search term refers to a custom attribute name or value, then the results will contain all items that have that custom attribute. For example, if the search term contains `business` then it gets all items with a custom attribute named `business` or with a custom attribute with a value containing the word `business`."
+              },
+              {
+                "name": "data_source_types",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of data source types. The search results will only contain items from any of the given data source types."
+              },
+              {
+                "name": "dbt_tags",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of dbt tag GUIDs. The search results will only contain items tagged by any of the given tags."
+              },
+              {
+                "name": "guids",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of GUIDs to search for. When provided, other search parameters cannot be specified."
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of object types to filter on. If specified, the search results will only contain objects whose types are specified. For example, if the filter is `include=tables,databases` then the search results will only contain tables and databases."
+              },
+              {
+                "name": "no_exact_on_fuzzy",
+                "value": "",
+                "type": "query",
+                "description": "When set to true, exact matching will be turned off when no_fuzzy=false, and all search results will match the search terms fuzzily. No effect if no_fuzzy=true."
+              },
+              {
+                "name": "no_external_tags",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "no_fuzzy",
+                "value": "",
+                "type": "query",
+                "description": "When set to true, fuzzy search won't be used. All search results will match the search terms exactly"
+              },
+              {
+                "name": "no_popularity",
+                "value": "",
+                "type": "query",
+                "description": "When set to true, popularity won't be returned"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Specify the ordering for the results. \n\n A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order. \n\nNote: Order is case-sensitive."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "popularity",
+                "value": "",
+                "type": "query",
+                "description": "An inclusive range of values that popularity must fall between. The syntax of this query must match the following regex: `\\d{3}-\\d{3}`"
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "The terms to search on"
+              },
+              {
+                "name": "search_fields",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status_tags",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of status tag GUIDs. The search results will only contain items tagged by any of the given tags."
+              },
+              {
+                "name": "tags_search",
+                "value": "",
+                "type": "query",
+                "description": "When set to true, if the search term refers to a tag name, then the results will contain all items that are tagged with that tag. For example, if the search term contains `pii` and `tags_search` is enabled, then the results will contain all items that tagged as `pii`"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Search\n\n**Required Role:** Authenticated User with Active Organization"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

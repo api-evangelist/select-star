@@ -1,0 +1,1530 @@
+{
+  "item": [
+    {
+      "id": "e5bc94e3-eebe-4819-8695-17488715d104",
+      "name": "lineage",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "17b86cb0-8765-4718-ade5-9c340320add3",
+          "name": "lineage retrieve",
+          "request": {
+            "name": "lineage retrieve",
+            "description": {
+              "content": "Calculates lineage for given metadata object.\n\n**Required Role:** Authenticated User with Active Organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "lineage",
+                ":guid",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "dbt_links",
+                  "value": "false",
+                  "description": "Include dbt links in the lineage response"
+                },
+                {
+                  "disabled": false,
+                  "key": "direction",
+                  "value": "all",
+                  "description": "Can be used to specify which direction of lineage to load only. If this field is skipped, source & downstream lineage will be calculated."
+                },
+                {
+                  "disabled": false,
+                  "key": "enable_description",
+                  "value": "false",
+                  "description": "Include description in the lineage response"
+                },
+                {
+                  "disabled": false,
+                  "key": "enable_tags",
+                  "value": "false",
+                  "description": "Include tags in the lineage response. This will alter the response slightly to include non-null list of tag guids along with a tags legend."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter_nodes",
+                  "value": "<string>",
+                  "description": "A list of nodes that need to be filtered out of the response type"
+                },
+                {
+                  "disabled": false,
+                  "key": "group_by_data_source",
+                  "value": "false",
+                  "description": "Group lineage by data source"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_borderline_edges",
+                  "value": "false",
+                  "description": "Include borderline edges. Borderline edges - edges of which one node is part of this traversal, but the other one isn't"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_edge_jobs",
+                  "value": "false",
+                  "description": "Include the jobs (DAG/Spark) inside the edge objects responsible for the creation of those edges"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_impact_score",
+                  "value": "false",
+                  "description": "Include impact score in the lineage response"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_table_borderline_edges",
+                  "value": "false",
+                  "description": "Include borderline edges linked to tables. Borderline edges - edges of which one node is part of this traversal, but the other one isn't"
+                },
+                {
+                  "disabled": false,
+                  "key": "looker_db_lineage",
+                  "value": "true",
+                  "description": "Include Looker <-> DB lineage"
+                },
+                {
+                  "disabled": false,
+                  "key": "looker_view_lineage",
+                  "value": "true",
+                  "description": "Include looker fields in the lineage calculation"
+                },
+                {
+                  "disabled": false,
+                  "key": "max_depth",
+                  "value": "1",
+                  "description": "Can be used to specify max depth of lineage to load. `max` is a special value that is used as alias for 20. (1 by default)"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "all",
+                  "description": "Can be used to limit lineage calculation to table or column only. This should reduce payload size as well as computation time but is not fully supported in all Lineage objects (e.g. Looker Lineage doesn't support it fully)."
+                },
+                {
+                  "disabled": false,
+                  "key": "mode_lineage",
+                  "value": "true",
+                  "description": "Include Mode lineage"
+                },
+                {
+                  "disabled": false,
+                  "key": "relevant_columns",
+                  "value": "<string>",
+                  "description": "Comma-separated list of root node children GUIDs specifying relevant columns for lineage traversal. When provided, lineage of other root node columns will be ignored. Requires `relevant_lineage` to be enabled."
+                },
+                {
+                  "disabled": false,
+                  "key": "relevant_lineage",
+                  "value": "false",
+                  "description": "when `relevant_lineage` is enabled, we only use edges between columns to traverse the graph. Relevant table nodes and edges are still returned in the response, but they are not used for traversal."
+                },
+                {
+                  "disabled": false,
+                  "key": "tableau_table_lineage",
+                  "value": "true",
+                  "description": "Include Tableau lineage"
+                },
+                {
+                  "disabled": false,
+                  "key": "usage_type",
+                  "value": "<string>",
+                  "description": "Include the usage type for each edge related to every node in the response. Use `-` to exclude"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "bf1e59c6-2340-427b-9e3f-840a4e12f505",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lineage",
+                    ":guid",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dbt_links",
+                      "value": "false"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "all"
+                    },
+                    {
+                      "key": "enable_description",
+                      "value": "false"
+                    },
+                    {
+                      "key": "enable_tags",
+                      "value": "false"
+                    },
+                    {
+                      "key": "filter_nodes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "group_by_data_source",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_borderline_edges",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_edge_jobs",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_impact_score",
+                      "value": "false"
+                    },
+                    {
+                      "key": "include_table_borderline_edges",
+                      "value": "false"
+                    },
+                    {
+                      "key": "looker_db_lineage",
+                      "value": "true"
+                    },
+                    {
+                      "key": "looker_view_lineage",
+                      "value": "true"
+                    },
+                    {
+                      "key": "max_depth",
+                      "value": "1"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "all"
+                    },
+                    {
+                      "key": "mode_lineage",
+                      "value": "true"
+                    },
+                    {
+                      "key": "relevant_columns",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "relevant_lineage",
+                      "value": "false"
+                    },
+                    {
+                      "key": "tableau_table_lineage",
+                      "value": "true"
+                    },
+                    {
+                      "key": "usage_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"column_lineage\": [\n    {\n      \"data_source_type\": \"string\",\n      \"data_type\": \"string\",\n      \"data_types\": {\n        \"data_source_type\": \"string\",\n        \"data_type\": \"string\",\n        \"external_database_type\": \"string\",\n        \"object_type\": \"string\"\n      },\n      \"full_name\": \"string\",\n      \"guid\": \"string\",\n      \"key\": \"string\",\n      \"name\": \"string\",\n      \"object_type\": \"string\",\n      \"ordinal\": 3882,\n      \"source_edges\": {\n        \"key_0\": {}\n      },\n      \"table_guid\": \"string\",\n      \"target_edges\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"component_identifier\": 1,\n      \"description\": \"string\",\n      \"popularity\": {\n        \"popularity\": 8879,\n        \"query_count\": 4646,\n        \"service_query_count\": 8169,\n        \"timeframe\": 90,\n        \"user_count\": 361\n      },\n      \"impact_score\": 7380,\n      \"impacted_object_count\": 6272,\n      \"is_hidden\": false,\n      \"is_nested\": false,\n      \"rank\": 0,\n      \"source_column_guids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"target_column_guids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"source_table_guids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"linked_objs\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"data_source_type\": \"string\",\n      \"data_type\": \"string\",\n      \"data_types\": {\n        \"data_source_type\": \"string\",\n        \"data_type\": \"string\",\n        \"external_database_type\": \"string\",\n        \"object_type\": \"string\"\n      },\n      \"full_name\": \"string\",\n      \"guid\": \"string\",\n      \"key\": \"string\",\n      \"name\": \"string\",\n      \"object_type\": \"string\",\n      \"ordinal\": 9322,\n      \"source_edges\": {\n        \"key_0\": {}\n      },\n      \"table_guid\": \"string\",\n      \"target_edges\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"component_identifier\": 1,\n      \"description\": \"string\",\n      \"popularity\": {\n        \"popularity\": 8862,\n        \"query_count\": 6717,\n        \"service_query_count\": 1429,\n        \"timeframe\": 90,\n        \"user_count\": 3572\n      },\n      \"impact_score\": 7656,\n      \"impacted_object_count\": 5043,\n      \"is_hidden\": false,\n      \"is_nested\": true,\n      \"rank\": 0,\n      \"source_column_guids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"target_column_guids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"source_table_guids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"linked_objs\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"table_lineage\": [\n    {\n      \"columns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"data_source_type\": \"string\",\n      \"data_type\": \"string\",\n      \"data_types\": {\n        \"data_source_type\": \"string\",\n        \"data_type\": \"string\",\n        \"external_database_type\": \"string\",\n        \"object_type\": \"string\"\n      },\n      \"full_name\": \"string\",\n      \"guid\": \"string\",\n      \"key\": \"string\",\n      \"name\": \"string\",\n      \"object_type\": \"string\",\n      \"source_edges\": {\n        \"key_0\": {}\n      },\n      \"source_table_guids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"target_edges\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"target_table_guids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"component_identifier\": 1,\n      \"description\": \"string\",\n      \"rank\": 0,\n      \"popularity\": {\n        \"popularity\": 4350,\n        \"query_count\": 3189,\n        \"service_query_count\": 6832,\n        \"timeframe\": 90,\n        \"user_count\": 9759\n      },\n      \"impact_score\": 6169,\n      \"impacted_object_count\": 9907,\n      \"tag_guids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"linked_objs\": [\n        \"string\",\n        \"string\"\n      ],\n      \"query\": \"string\",\n      \"is_implicit\": false,\n      \"is_hidden\": false\n    },\n    {\n      \"columns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"data_source_type\": \"string\",\n      \"data_type\": \"string\",\n      \"data_types\": {\n        \"data_source_type\": \"string\",\n        \"data_type\": \"string\",\n        \"external_database_type\": \"string\",\n        \"object_type\": \"string\"\n      },\n      \"full_name\": \"string\",\n      \"guid\": \"string\",\n      \"key\": \"string\",\n      \"name\": \"string\",\n      \"object_type\": \"string\",\n      \"source_edges\": {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {}\n      },\n      \"source_table_guids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"target_edges\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"target_table_guids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"component_identifier\": 1,\n      \"description\": \"string\",\n      \"rank\": 0,\n      \"popularity\": {\n        \"popularity\": 3608,\n        \"query_count\": 5942,\n        \"service_query_count\": 6420,\n        \"timeframe\": 90,\n        \"user_count\": 8651\n      },\n      \"impact_score\": 674,\n      \"impacted_object_count\": 2989,\n      \"tag_guids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"linked_objs\": [\n        \"string\",\n        \"string\"\n      ],\n      \"query\": \"string\",\n      \"is_implicit\": true,\n      \"is_hidden\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fc056b67-3736-4071-bf8e-ec971b2ba835",
+          "name": "lineage manual edges list",
+          "request": {
+            "name": "lineage manual edges list",
+            "description": {
+              "content": "Get all manual lineage edges\n\n**Required Role:** Admin (or RBAC policy)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "lineage",
+                "manual",
+                "edges",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "A page number within the paginated result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a4dceb35-f60f-4111-8586-203ef93721b4",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lineage",
+                    "manual",
+                    "edges",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 123,\n  \"results\": [\n    {\n      \"source_node\": {\n        \"node\": \"string\",\n        \"node_type\": \"string\"\n      },\n      \"target_node\": {\n        \"node\": \"string\",\n        \"node_type\": \"string\"\n      },\n      \"usage\": \"aggregated\"\n    },\n    {\n      \"source_node\": {\n        \"node\": \"string\",\n        \"node_type\": \"string\"\n      },\n      \"target_node\": {\n        \"node\": \"string\",\n        \"node_type\": \"string\"\n      },\n      \"usage\": \"aggregated\"\n    }\n  ],\n  \"next\": \"http://api.example.org/accounts/?page=4\",\n  \"previous\": \"http://api.example.org/accounts/?page=2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7678ad8a-f323-44c2-bbb9-31cdc481a0e0",
+          "name": "lineage manual edges create",
+          "request": {
+            "name": "lineage manual edges create",
+            "description": {
+              "content": "Create a new Manual Lineage Edge.\nIt is needed to specify at least the `guid` for source and target nodes (`source_node` and `target_node`).\nThe `guid` corresponds to the actual `column` or `table` that is the source or target of the edge.\nAlso `usage` can be specified. If no `usage` is given, or it is given with `null` value, the edge will be created with `null` usage.\n\n\n**Required Role:** Admin (or RBAC policy)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "lineage",
+                "manual",
+                "edges",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "source_node",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "target_node",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "usage",
+                  "value": "<string>",
+                  "description": "Only for column level lineage. For Table level lineage, this value will always be set to null\n\n* `asis` - UsageType.asis\n* `transformed` - UsageType.transformed\n* `aggregated` - UsageType.aggregated\n* `filter` - UsageType.filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "create_automatic_related_lineage_edges",
+                  "value": "true",
+                  "description": "Boolean to specify whether to create column level edges for matching name if table level source and target guids are given"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1b5e473d-53e8-4d26-b504-ea2ac88deaff",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lineage",
+                    "manual",
+                    "edges",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "source_node",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "target_node",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Only for column level lineage. For Table level lineage, this value will always be set to null\n\n* `asis` - UsageType.asis\n* `transformed` - UsageType.transformed\n* `aggregated` - UsageType.aggregated\n* `filter` - UsageType.filter",
+                        "type": "text/plain"
+                      },
+                      "key": "usage",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Boolean to specify whether to create column level edges for matching name if table level source and target guids are given",
+                        "type": "text/plain"
+                      },
+                      "key": "create_automatic_related_lineage_edges",
+                      "value": "true"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"source_node\": {\n    \"node\": \"string\",\n    \"node_type\": \"string\"\n  },\n  \"target_node\": {\n    \"node\": \"string\",\n    \"node_type\": \"string\"\n  },\n  \"usage\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "35969c87-186c-4792-bd53-18a3b9339a61",
+          "name": "lineage manual edges retrieve",
+          "request": {
+            "name": "lineage manual edges retrieve",
+            "description": {
+              "content": "Get a single manual lineage edge given source and target guid and optional usage\n\n**Required Role:** Admin (or RBAC policy)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "lineage",
+                "manual",
+                "edges",
+                ":source_guid",
+                ":target_guid",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "source_guid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "target_guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "81edc1fb-b1ad-45b9-ad19-87a2d0dad5b7",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lineage",
+                    "manual",
+                    "edges",
+                    ":source_guid",
+                    ":target_guid",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source_guid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "target_guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"source_node\": {\n    \"node\": \"string\",\n    \"node_type\": \"string\"\n  },\n  \"target_node\": {\n    \"node\": \"string\",\n    \"node_type\": \"string\"\n  },\n  \"usage\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "19f680bb-b0e5-4876-b77b-8801ca0c0e4d",
+          "name": "lineage manual edges partial update",
+          "request": {
+            "name": "lineage manual edges partial update",
+            "description": {
+              "content": "Update an existing Manual Lineage Edge.\nUse the path parameters to specify uniquely the edge to update.\nUse the request body to specify the parameters you want to update.\nIn any update case, a new edge with the given parameters will be created, and the old one will be deleted.\n\n\n**Required Role:** Admin (or RBAC policy)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "lineage",
+                "manual",
+                "edges",
+                ":source_guid",
+                ":target_guid",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "source_guid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "target_guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "usage",
+                  "value": "<string>",
+                  "description": "Only for column level lineage. For Table level lineage, this value will always be set to null\n\n* `asis` - UsageType.asis\n* `transformed` - UsageType.transformed\n* `aggregated` - UsageType.aggregated\n* `filter` - UsageType.filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "source_node",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "target_node",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "create_automatic_related_lineage_edges",
+                  "value": "true",
+                  "description": "Boolean to specify whether to create column level edges for matching name if table level source and target guids are given"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "15b29cb2-8493-4ef3-b291-e3647fa789c7",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lineage",
+                    "manual",
+                    "edges",
+                    ":source_guid",
+                    ":target_guid",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source_guid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "target_guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Only for column level lineage. For Table level lineage, this value will always be set to null\n\n* `asis` - UsageType.asis\n* `transformed` - UsageType.transformed\n* `aggregated` - UsageType.aggregated\n* `filter` - UsageType.filter",
+                        "type": "text/plain"
+                      },
+                      "key": "usage",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "source_node",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "target_node",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Boolean to specify whether to create column level edges for matching name if table level source and target guids are given",
+                        "type": "text/plain"
+                      },
+                      "key": "create_automatic_related_lineage_edges",
+                      "value": "true"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"source_node\": {\n    \"node\": \"string\",\n    \"node_type\": \"string\"\n  },\n  \"target_node\": {\n    \"node\": \"string\",\n    \"node_type\": \"string\"\n  },\n  \"usage\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f5f2f53d-f430-42b9-8380-d629c644fcc5",
+          "name": "lineage manual edges destroy",
+          "request": {
+            "name": "lineage manual edges destroy",
+            "description": {
+              "content": "Delete a single manual lineage edge.\n\n**Required Role:** Admin (or RBAC policy)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "lineage",
+                "manual",
+                "edges",
+                ":source_guid",
+                ":target_guid",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "source_guid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "target_guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "663abd0e-1ba1-4e86-bbf3-87cca4c5ee3f",
+              "name": "No response body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lineage",
+                    "manual",
+                    "edges",
+                    ":source_guid",
+                    ":target_guid",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source_guid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "target_guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "88cf31ea-1b1f-41fc-9ff4-3d53289097e7",
+          "name": "lineage manual edges retrieve 2",
+          "request": {
+            "name": "lineage manual edges retrieve 2",
+            "description": {
+              "content": "Get a single manual lineage edge given source and target guid and optional usage\n\n**Required Role:** Admin (or RBAC policy)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "lineage",
+                "manual",
+                "edges",
+                ":source_guid",
+                ":target_guid",
+                ":usage",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "source_guid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "target_guid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "usage",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ac643e28-c377-4448-9aa7-428ee6c54b1b",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lineage",
+                    "manual",
+                    "edges",
+                    ":source_guid",
+                    ":target_guid",
+                    ":usage",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source_guid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "target_guid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "usage",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"source_node\": {\n    \"node\": \"string\",\n    \"node_type\": \"string\"\n  },\n  \"target_node\": {\n    \"node\": \"string\",\n    \"node_type\": \"string\"\n  },\n  \"usage\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9d4811af-55db-41a9-abf8-fda1b8930b40",
+          "name": "lineage manual edges partial update 2",
+          "request": {
+            "name": "lineage manual edges partial update 2",
+            "description": {
+              "content": "Update an existing Manual Lineage Edge.\nUse the path parameters to specify uniquely the edge to update.\nUse the request body to specify the parameters you want to update.\nIn any update case, a new edge with the given parameters will be created, and the old one will be deleted.\n\n\n**Required Role:** Admin (or RBAC policy)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "lineage",
+                "manual",
+                "edges",
+                ":source_guid",
+                ":target_guid",
+                ":usage",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "source_guid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "target_guid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "usage",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "usage",
+                  "value": "<string>",
+                  "description": "Only for column level lineage. For Table level lineage, this value will always be set to null\n\n* `asis` - UsageType.asis\n* `transformed` - UsageType.transformed\n* `aggregated` - UsageType.aggregated\n* `filter` - UsageType.filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "source_node",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "target_node",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "create_automatic_related_lineage_edges",
+                  "value": "true",
+                  "description": "Boolean to specify whether to create column level edges for matching name if table level source and target guids are given"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c5b0684e-9d0e-42f9-a8f6-d9fe421cdfaf",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lineage",
+                    "manual",
+                    "edges",
+                    ":source_guid",
+                    ":target_guid",
+                    ":usage",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source_guid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "target_guid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "usage",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Only for column level lineage. For Table level lineage, this value will always be set to null\n\n* `asis` - UsageType.asis\n* `transformed` - UsageType.transformed\n* `aggregated` - UsageType.aggregated\n* `filter` - UsageType.filter",
+                        "type": "text/plain"
+                      },
+                      "key": "usage",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "source_node",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "target_node",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Boolean to specify whether to create column level edges for matching name if table level source and target guids are given",
+                        "type": "text/plain"
+                      },
+                      "key": "create_automatic_related_lineage_edges",
+                      "value": "true"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"source_node\": {\n    \"node\": \"string\",\n    \"node_type\": \"string\"\n  },\n  \"target_node\": {\n    \"node\": \"string\",\n    \"node_type\": \"string\"\n  },\n  \"usage\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d0f196c0-4514-4efe-9dc3-39bdabfb2175",
+          "name": "lineage manual edges destroy 2",
+          "request": {
+            "name": "lineage manual edges destroy 2",
+            "description": {
+              "content": "Delete a single manual lineage edge.\n\n**Required Role:** Admin (or RBAC policy)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "lineage",
+                "manual",
+                "edges",
+                ":source_guid",
+                ":target_guid",
+                ":usage",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "source_guid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "target_guid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "usage",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2cc08c37-3a10-403f-ae8f-8802fa4dcdee",
+              "name": "No response body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lineage",
+                    "manual",
+                    "edges",
+                    ":source_guid",
+                    ":target_guid",
+                    ":usage",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source_guid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "target_guid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "usage",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6f284b2a-83f3-4a36-a960-1ecc5117aeac",
+    "name": "Select Star Metadata bi lineage API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for interacting with the Select Star system\n\nContact Support:\n Email: support@selectstar.com",
+      "type": "text/plain"
+    }
+  }
+}

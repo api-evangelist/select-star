@@ -1,0 +1,787 @@
+{
+  "item": [
+    {
+      "id": "9ca8d814-9da8-4d53-bc90-c7d06e95e122",
+      "name": "custom-attribute-values",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "93f52173-fb51-4bd2-bf6d-a4a1165ba652",
+          "name": "custom attribute values list",
+          "request": {
+            "name": "custom attribute values list",
+            "description": {
+              "content": "This endpoint retrieves a list of all values for a specific custom attribute.\n      If a list of object GUIDs is provided (via the 'items' parameter),\n      it will return all values for that custom attribute across the provided objects.\n\n**Required Role:** Viewer or higher",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "custom-attribute-values",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "asset_type",
+                  "value": "<string>",
+                  "description": "A comma separated value for asset type in form: data_source_type,object_type,data_type"
+                },
+                {
+                  "disabled": false,
+                  "key": "custom_attributes",
+                  "value": "<string>",
+                  "description": "A comma separated list of custom attribute guids to get their custom attribute values."
+                },
+                {
+                  "disabled": false,
+                  "key": "datasources",
+                  "value": "<string>",
+                  "description": "Filter custom attributes values by a data source guid"
+                },
+                {
+                  "disabled": false,
+                  "key": "items",
+                  "value": "<string>",
+                  "description": "Filter custom attributes values by a item guids, that values are assigned for"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "A page number within the paginated result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d8ef10eb-22e6-4912-806f-eb8abfafe48d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "custom-attribute-values",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "asset_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "custom_attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "datasources",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "items",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 123,\n  \"results\": [\n    {\n      \"custom_attribute\": {\n        \"guid\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"text\"\n      },\n      \"data_source\": \"string\",\n      \"item\": \"string\",\n      \"organization\": \"string\",\n      \"guid\": \"string\",\n      \"value\": \"string\",\n      \"richtext_value\": \"string\"\n    },\n    {\n      \"custom_attribute\": {\n        \"guid\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"text\"\n      },\n      \"data_source\": \"string\",\n      \"item\": \"string\",\n      \"organization\": \"string\",\n      \"guid\": \"string\",\n      \"value\": \"string\",\n      \"richtext_value\": \"string\"\n    }\n  ],\n  \"next\": \"http://api.example.org/accounts/?page=4\",\n  \"previous\": \"http://api.example.org/accounts/?page=2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2a23fc5d-3c2c-4edc-9ad5-07134347aa2d",
+          "name": "custom attribute values create",
+          "request": {
+            "name": "custom attribute values create",
+            "description": {
+              "content": "Use this endpoint when you need to assign a value to a specific custom attribute tied to a specific object.\n        This endpoint is used to update a custom attribute's value as it applies to a specific object.\n        It's meant for individual updates, modifying only one custom attribute value at a time.\n        Default behavior dictates, that values are plaintext.\n        However, you can create a rich text value by using richtext_value field.\n        In that case the richtext_value should follow SlateJS specification.\n\n**Required Role:** Data Manager or higher",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "custom-attribute-values",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "custom_attribute",
+                  "value": "<string>",
+                  "description": "(Required) GUID of a Custom Attribute"
+                },
+                {
+                  "disabled": false,
+                  "key": "item",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "guid",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "<string>",
+                  "description": "The value of the attribute"
+                },
+                {
+                  "disabled": false,
+                  "key": "richtext_value",
+                  "value": "<string>",
+                  "description": "The richtext formatted value of the attribute"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8bffe143-b79c-47fa-a4e7-2038f3b28721",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "custom-attribute-values",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) GUID of a Custom Attribute",
+                        "type": "text/plain"
+                      },
+                      "key": "custom_attribute",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "item",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "guid",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The value of the attribute",
+                        "type": "text/plain"
+                      },
+                      "key": "value",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The richtext formatted value of the attribute",
+                        "type": "text/plain"
+                      },
+                      "key": "richtext_value",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data_source\": \"string\",\n  \"item\": \"string\",\n  \"organization\": \"string\",\n  \"guid\": \"string\",\n  \"value\": \"string\",\n  \"richtext_value\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3e712bef-290f-4f50-a5cf-7b522e413b6d",
+          "name": "custom attribute values retrieve",
+          "request": {
+            "name": "custom attribute values retrieve",
+            "description": {
+              "content": "This endpoint is for reading the value of a custom attribute itself.\n          The GUID in the URL corresponds to the value of the custom attribute, which is linked to its textual\n          content and the object it is attached to.\n\n**Required Role:** Viewer or higher",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "custom-attribute-values",
+                ":guid",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0764c07e-5182-471f-9489-d2bd51161af2",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "custom-attribute-values",
+                    ":guid",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"custom_attribute\": {\n    \"guid\": \"string\",\n    \"name\": \"string\",\n    \"type\": \"text\"\n  },\n  \"data_source\": \"string\",\n  \"item\": \"string\",\n  \"organization\": \"string\",\n  \"guid\": \"string\",\n  \"value\": \"string\",\n  \"richtext_value\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "23e14141-de8b-4879-a232-413ce224443b",
+          "name": "custom attribute values partial update",
+          "request": {
+            "name": "custom attribute values partial update",
+            "description": {
+              "content": "This endpoint is designed for modifying an existing\n                value and/or rich text value of a custom attribute on a particular object.\n\n**Required Role:** Data Manager or higher",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "custom-attribute-values",
+                ":guid",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "guid",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "custom_attribute",
+                  "value": "<string>",
+                  "description": "GUID of a Custom Attribute"
+                },
+                {
+                  "disabled": false,
+                  "key": "item",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "<string>",
+                  "description": "The value of the attribute"
+                },
+                {
+                  "disabled": false,
+                  "key": "richtext_value",
+                  "value": "<string>",
+                  "description": "The richtext formatted value of the attribute"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "22d837f0-d392-402b-8deb-4574a1730eb6",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "custom-attribute-values",
+                    ":guid",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "key": "guid",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "GUID of a Custom Attribute",
+                        "type": "text/plain"
+                      },
+                      "key": "custom_attribute",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "item",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The value of the attribute",
+                        "type": "text/plain"
+                      },
+                      "key": "value",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The richtext formatted value of the attribute",
+                        "type": "text/plain"
+                      },
+                      "key": "richtext_value",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data_source\": \"string\",\n  \"item\": \"string\",\n  \"organization\": \"string\",\n  \"guid\": \"string\",\n  \"value\": \"string\",\n  \"richtext_value\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "929fd359-a560-4192-b9d2-72c187cfeab0",
+          "name": "custom attribute values destroy",
+          "request": {
+            "name": "custom attribute values destroy",
+            "description": {
+              "content": "This endpoint will delete a custom attribute value from an object\n\n**Required Role:** Data Manager or higher",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "custom-attribute-values",
+                ":guid",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "asset_type",
+                  "value": "<string>",
+                  "description": "A comma separated value for asset type in form: data_source_type,object_type,data_type"
+                },
+                {
+                  "disabled": false,
+                  "key": "custom_attributes",
+                  "value": "<string>",
+                  "description": "A comma separated list of custom attribute guids to get their custom attribute values."
+                },
+                {
+                  "disabled": false,
+                  "key": "datasources",
+                  "value": "<string>",
+                  "description": "Filter custom attributes values by a data source guid"
+                },
+                {
+                  "disabled": false,
+                  "key": "items",
+                  "value": "<string>",
+                  "description": "Filter custom attributes values by a item guids, that values are assigned for"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "23c38696-3777-40b5-a1da-198f085d5202",
+              "name": "No response body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "custom-attribute-values",
+                    ":guid",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "asset_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "custom_attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "datasources",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "items",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6bfefe77-af03-44e1-a7ee-b14780b69136",
+    "name": "Select Star Metadata bi custom-attribute-values API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for interacting with the Select Star system\n\nContact Support:\n Email: support@selectstar.com",
+      "type": "text/plain"
+    }
+  }
+}

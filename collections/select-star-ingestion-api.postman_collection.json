@@ -1,0 +1,352 @@
+{
+  "item": [
+    {
+      "id": "15bb9325-5515-4c63-9887-3e184dcbfb2c",
+      "name": "ingestion",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "123f8e42-6e10-4079-8d3f-8e879e25ba23",
+          "name": "Kick off dbt ingestion",
+          "request": {
+            "name": "Kick off dbt ingestion",
+            "description": {
+              "content": "\n        Kick off dbt ingestion using the provided `manifest.json` and `catalog.json`\n\n        If the dbt data's ingestion settings\n        * is Sync Docs, then the `catalog.json` is optional\n        * is New Data Source, then the `catalog.json` is required\n\n        You may send `manifest.json` as `manifest_file`.\n        You may send `catalog.json` as `catalog_file`.\n        You may send `run_results.json` as `run_results_file`.\n\n        Example:\n\n            curl --location --request POST 'https://api.production.selectstar.com/v1/ingestion/dbt/' \\\n                --header 'Authorization: Token ...' \\\n                --form 'data_source=\"...\"' \\\n                --form 'manifest_file=@\"/path/to/manifest.json\"' \\\n                --form 'catalog_file=@\"/path/to/catalog.json\"' \\\n                --form 'run_results_file=@\"/path/to/run_results.json\"'\n\n        \n\n**Required Role:** Data Manager or Admin",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "ingestion",
+                "dbt",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "data_source",
+                  "value": "<string>",
+                  "description": "(Required) the guid of the data source you want to update"
+                },
+                {
+                  "disabled": false,
+                  "key": "dbt_project",
+                  "value": "<string>",
+                  "description": "the guid of the dbt project you want to update. (REQUIRED if you have multiple dbt projects in the same data source)"
+                },
+                {
+                  "disabled": false,
+                  "key": "manifest",
+                  "value": "<string>",
+                  "description": "the contents of the catalog.json file, use `catalog_file` instead"
+                },
+                {
+                  "disabled": false,
+                  "key": "catalog",
+                  "value": "<string>",
+                  "description": "the contents of the manifest.json file, use `manifest_file` instead"
+                },
+                {
+                  "disabled": false,
+                  "key": "manifest_file",
+                  "value": "<binary>",
+                  "description": "the manifest.json file encoded in `utf8` (mutually exclusive with manifest)"
+                },
+                {
+                  "disabled": false,
+                  "key": "catalog_file",
+                  "value": "<binary>",
+                  "description": "the catalog.json file encoded in `utf8` (mutually exclusive with catalog)"
+                },
+                {
+                  "disabled": false,
+                  "key": "run_results_file",
+                  "value": "<binary>",
+                  "description": "the run_results.json file encoded in `utf8`"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7b21ef5f-ff32-4ba0-8a7b-59b77fc26dcf",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ingestion",
+                    "dbt",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) the guid of the data source you want to update",
+                        "type": "text/plain"
+                      },
+                      "key": "data_source",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "the guid of the dbt project you want to update. (REQUIRED if you have multiple dbt projects in the same data source)",
+                        "type": "text/plain"
+                      },
+                      "key": "dbt_project",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "the contents of the catalog.json file, use `catalog_file` instead",
+                        "type": "text/plain"
+                      },
+                      "key": "manifest",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "the contents of the manifest.json file, use `manifest_file` instead",
+                        "type": "text/plain"
+                      },
+                      "key": "catalog",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "the manifest.json file encoded in `utf8` (mutually exclusive with manifest)",
+                        "type": "text/plain"
+                      },
+                      "key": "manifest_file",
+                      "value": "<binary>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "the catalog.json file encoded in `utf8` (mutually exclusive with catalog)",
+                        "type": "text/plain"
+                      },
+                      "key": "catalog_file",
+                      "value": "<binary>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "the run_results.json file encoded in `utf8`",
+                        "type": "text/plain"
+                      },
+                      "key": "run_results_file",
+                      "value": "<binary>"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data_source\": \"string\",\n  \"dbt_project\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7e90bb49-0a4d-4afd-83a5-f9a23d370175",
+          "name": "Start dbt ingestion",
+          "request": {
+            "name": "Start dbt ingestion",
+            "description": {
+              "content": "Start dbt ingestion for the given data source\n\n**Required Role:** Admin (or RBAC policy)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "ingestion",
+                "dbt",
+                ":guid",
+                "ingest",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ac97d8d5-ba0b-49ec-999c-264be484367f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "ingestion",
+                    "dbt",
+                    ":guid",
+                    "ingest",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cloudformation_url\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"data_types\": {\n    \"data_source_type\": \"string\",\n    \"data_type\": \"string\",\n    \"external_database_type\": \"string\",\n    \"object_type\": \"string\"\n  },\n  \"guid\": \"string\",\n  \"is_credentials_setup_incomplete\": true,\n  \"is_ingesting\": false,\n  \"is_mode_discovery_db_added\": false,\n  \"is_syncing_paused\": false,\n  \"last_fully_ingested_on\": \"1999-07-04T10:06:57.361Z\",\n  \"name\": \"string\",\n  \"type\": \"sigma\",\n  \"keypair\": {\n    \"public_key\": \"string\"\n  },\n  \"last_ingested_on\": \"2017-04-22T03:59:28.957Z\",\n  \"connection_status\": \"ER\",\n  \"connection_error_message\": \"string\",\n  \"external_uuid\": \"string\",\n  \"iam_principal\": \"string\",\n  \"processed_through\": {\n    \"start_time\": [\n      {\n        \"date\": \"1963-02-22T11:09:40.903Z\",\n        \"key\": \"string\"\n      },\n      {\n        \"date\": \"2014-02-02T11:47:17.002Z\",\n        \"key\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e5bbe4f9-0a03-48a2-beb5-a170d5d17b54",
+    "name": "Select Star Metadata bi ingestion API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for interacting with the Select Star system\n\nContact Support:\n Email: support@selectstar.com",
+      "type": "text/plain"
+    }
+  }
+}

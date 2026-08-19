@@ -1,0 +1,405 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Select Star Metadata bi collections API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "collections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "collections_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/collections/",
+            "params": [
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Specify the ordering for the results. \n\n A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order. \n\nNote: Order is case-sensitive."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "parent",
+                "value": "",
+                "type": "query",
+                "description": "Collection parent GUID to filter by. Use `parent=null` to retrieve top-level collections."
+              },
+              {
+                "name": "search_all",
+                "value": "",
+                "type": "query",
+                "description": "Search a collections with multiple types of params in one go"
+              },
+              {
+                "name": "search_business_owner",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using business owner name"
+              },
+              {
+                "name": "search_description",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using its description"
+              },
+              {
+                "name": "search_name",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using its name"
+              },
+              {
+                "name": "search_tag_name",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using a tag name"
+              },
+              {
+                "name": "search_technical_owner",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using technical owner name"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "**Required Role:** Viewer or higher"
+        },
+        {
+          "info": {
+            "name": "collections_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/collections/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "**Required Role:** Admin"
+        },
+        {
+          "info": {
+            "name": "collections_bulk_delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/collections/",
+            "params": [
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Specify the ordering for the results. \n\n A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order. \n\nNote: Order is case-sensitive."
+              },
+              {
+                "name": "parent",
+                "value": "",
+                "type": "query",
+                "description": "Collection parent GUID to filter by. Use `parent=null` to retrieve top-level collections."
+              },
+              {
+                "name": "search_all",
+                "value": "",
+                "type": "query",
+                "description": "Search a collections with multiple types of params in one go"
+              },
+              {
+                "name": "search_business_owner",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using business owner name"
+              },
+              {
+                "name": "search_description",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using its description"
+              },
+              {
+                "name": "search_name",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using its name"
+              },
+              {
+                "name": "search_tag_name",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using a tag name"
+              },
+              {
+                "name": "search_technical_owner",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using technical owner name"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "**Required Role:** Admin"
+        },
+        {
+          "info": {
+            "name": "collections_items_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/collections/:collection__guid/items/",
+            "params": [
+              {
+                "name": "collection__guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "data_source_type",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of data source types to filter for assets within those data source types."
+              },
+              {
+                "name": "datasources",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of data source guids to filter for assets within those data sources."
+              },
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of object types to filter for assets of those types."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Specify the ordering for the results. \n\n A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order. \n\nNote: Order is case-sensitive."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "search_all",
+                "value": "",
+                "type": "query",
+                "description": "Search a collection item with multiple types of params in one go"
+              },
+              {
+                "name": "sources",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of sources to filter items. Valid values include data source type display labels (e.g. 'Postgres', 'PostgreSQL', 'snowflake'), 'External' for links, and 'Select Star' for internal items."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "**Required Role:** Viewer or higher"
+        },
+        {
+          "info": {
+            "name": "collections_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/collections/:guid/",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "**Required Role:** Viewer or higher"
+        },
+        {
+          "info": {
+            "name": "collections_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/collections/:guid/",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "**Required Role:** Admin"
+        },
+        {
+          "info": {
+            "name": "collections_destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/collections/:guid/",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Specify the ordering for the results. \n\n A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order. \n\nNote: Order is case-sensitive."
+              },
+              {
+                "name": "parent",
+                "value": "",
+                "type": "query",
+                "description": "Collection parent GUID to filter by. Use `parent=null` to retrieve top-level collections."
+              },
+              {
+                "name": "search_all",
+                "value": "",
+                "type": "query",
+                "description": "Search a collections with multiple types of params in one go"
+              },
+              {
+                "name": "search_business_owner",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using business owner name"
+              },
+              {
+                "name": "search_description",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using its description"
+              },
+              {
+                "name": "search_name",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using its name"
+              },
+              {
+                "name": "search_tag_name",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using a tag name"
+              },
+              {
+                "name": "search_technical_owner",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using technical owner name"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "**Required Role:** Admin"
+        },
+        {
+          "info": {
+            "name": "collections_items_bulk_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/collections/items/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "**Required Role:** Data Manager or higher"
+        },
+        {
+          "info": {
+            "name": "collections_owners_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/collections/owners/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "**Required Role:** Admin"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

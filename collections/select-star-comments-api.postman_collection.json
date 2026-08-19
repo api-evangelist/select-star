@@ -1,0 +1,193 @@
+{
+  "item": [
+    {
+      "id": "71ab9e49-acbd-49db-9b3c-8c23ffdc73bd",
+      "name": "comments",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c87bc1fe-6c7b-4393-b37f-ccd009a4b22d",
+          "name": "comments list",
+          "request": {
+            "name": "comments list",
+            "description": {
+              "content": "**Required Role:** Data Manager or Admin (or RBAC policy)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "comments",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "commented_on",
+                  "value": "<string>",
+                  "description": "Filter objects by commented_on. May specify __gt, __gte, __lt or __lte.\n\n API call to: \n\n ENDPOINT/commented_on__gt=2021-08-04T15:12:40&commented_on__lt=2021-08-23 \n\n will result with objects commented_on after  August 4th 2021 at 15:12:40, but before August 23rd 2021. \n\n. If you want to include lower or upper bound of the range use __gte or __lte respectively."
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "<string>",
+                  "description": "Specify the ordering for the results. \n\n A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order. \n\nNote: Order is case-sensitive."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "A page number within the paginated result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "search_comment",
+                  "value": "<string>",
+                  "description": "Filter comments by the message."
+                },
+                {
+                  "disabled": false,
+                  "key": "search_commented_by",
+                  "value": "<string>",
+                  "description": "Filter comments by the author."
+                },
+                {
+                  "disabled": false,
+                  "key": "search_target",
+                  "value": "<string>",
+                  "description": "Filter comments by the commented object name."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a2de8ef1-a35a-4647-9d42-32e1f5578318",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "comments",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "commented_on",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "search_comment",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search_commented_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search_target",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 123,\n  \"results\": [\n    {\n      \"commented_by\": {\n        \"avatar\": \"http://QjHXw.wbbW.PKz0X\",\n        \"email\": \"TZjCp3@oapcVZwOhxIRdm.js\",\n        \"first_name\": \"string\",\n        \"guid\": \"string\",\n        \"is_active\": true,\n        \"last_name\": \"string\",\n        \"team\": {\n          \"guid\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"commented_on\": \"2015-07-08T19:50:50.898Z\",\n      \"data_types\": {\n        \"data_source_type\": \"string\",\n        \"data_type\": \"string\",\n        \"external_database_type\": \"string\",\n        \"object_type\": \"string\"\n      },\n      \"guid\": \"string\",\n      \"replies\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Comment detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Comment detected>\"\n        }\n      ],\n      \"richtext_message\": \"string\",\n      \"target\": {\n        \"breadcrumbs\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"collections\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"data_source_type\": \"string\",\n        \"data_types\": {\n          \"readOnly\": true,\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"downstream_objects_counts\": {\n          \"readOnly\": true,\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"group\": {\n          \"data_types\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"guid\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"is_hidden\": false,\n        \"label\": \"string\",\n        \"lookml_model\": {\n          \"data_source\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"label\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"guid\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"project_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"name\": \"string\",\n        \"popularity\": {\n          \"readOnly\": true,\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"search_name\": \"string\",\n        \"tagged_items\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"upstream_objects_counts\": {\n          \"readOnly\": true,\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"user_description_author\": {\n          \"readOnly\": true,\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"guid\": \"string\",\n        \"group_label\": \"string\",\n        \"description\": \"string\",\n        \"description_source\": {\n          \"nullable\": true,\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"user_description\": \"string\",\n        \"ai_description\": \"string\",\n        \"ingested_description\": \"string\",\n        \"richtext_description\": \"string\",\n        \"project_name\": \"string\",\n        \"business_owner\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"technical_owner\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"url\": \"https://PWinOxgJ.nrmKrET3rlxkGrqrl+dwrwgOPGT+w1PnINnP6Juh\"\n      },\n      \"message\": \"string\",\n      \"in_reply_to\": {\n        \"value\": \"<Circular reference to #/components/schemas/Comment detected>\"\n      },\n      \"pinned_at\": \"1953-01-23T19:56:50.301Z\",\n      \"pinned\": false,\n      \"comment_recipients\": [\n        {\n          \"recipient\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"recipient\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    },\n    {\n      \"commented_by\": {\n        \"avatar\": \"https://xYZKKMPiPRHvflGZWvxshjGiuLiRSn.ghzAJOqZS-QYazBbCYkwsijkDAFG-wxGwWmxB85L+h\",\n        \"email\": \"TRYTz8Xgw9iv@xvoXjxJIqNTfxgLlfnpVcoZYqvzjL.wqoi\",\n        \"first_name\": \"string\",\n        \"guid\": \"string\",\n        \"is_active\": true,\n        \"last_name\": \"string\",\n        \"team\": {\n          \"guid\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"commented_on\": \"1975-05-11T06:37:04.772Z\",\n      \"data_types\": {\n        \"data_source_type\": \"string\",\n        \"data_type\": \"string\",\n        \"external_database_type\": \"string\",\n        \"object_type\": \"string\"\n      },\n      \"guid\": \"string\",\n      \"replies\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Comment detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Comment detected>\"\n        }\n      ],\n      \"richtext_message\": \"string\",\n      \"target\": {\n        \"breadcrumbs\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"collections\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"data_source_type\": \"string\",\n        \"data_types\": {\n          \"readOnly\": true,\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"downstream_objects_counts\": {\n          \"readOnly\": true,\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"group\": {\n          \"data_types\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"guid\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"is_hidden\": true,\n        \"label\": \"string\",\n        \"lookml_model\": {\n          \"data_source\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"label\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"guid\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"project_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"name\": \"string\",\n        \"popularity\": {\n          \"readOnly\": true,\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"search_name\": \"string\",\n        \"tagged_items\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"upstream_objects_counts\": {\n          \"readOnly\": true,\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"user_description_author\": {\n          \"readOnly\": true,\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"guid\": \"string\",\n        \"group_label\": \"string\",\n        \"description\": \"string\",\n        \"description_source\": {\n          \"nullable\": true,\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"user_description\": \"string\",\n        \"ai_description\": \"string\",\n        \"ingested_description\": \"string\",\n        \"richtext_description\": \"string\",\n        \"project_name\": \"string\",\n        \"business_owner\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"technical_owner\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"url\": \"https://OZFRnLaoxtYukXdhYJd.kvxmFhJHok6tcHhFnMBliFTY\"\n      },\n      \"message\": \"string\",\n      \"in_reply_to\": {\n        \"value\": \"<Circular reference to #/components/schemas/Comment detected>\"\n      },\n      \"pinned_at\": \"2012-03-24T21:54:32.550Z\",\n      \"pinned\": false,\n      \"comment_recipients\": [\n        {\n          \"recipient\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"recipient\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    }\n  ],\n  \"next\": \"http://api.example.org/accounts/?page=4\",\n  \"previous\": \"http://api.example.org/accounts/?page=2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "aabbc4ec-a609-4bef-ab55-585e08f405ef",
+    "name": "Select Star Metadata bi comments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for interacting with the Select Star system\n\nContact Support:\n Email: support@selectstar.com",
+      "type": "text/plain"
+    }
+  }
+}

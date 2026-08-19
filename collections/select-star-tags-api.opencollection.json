@@ -1,0 +1,363 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Select Star Metadata bi tags API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "tags",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "tags_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/tags/",
+            "params": [
+              {
+                "name": "datasources",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of data source guids to filter for items within those data sources. Works for dbt tags"
+              },
+              {
+                "name": "items",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of item guids to filter for their tags."
+              },
+              {
+                "name": "only_visible",
+                "value": "",
+                "type": "query",
+                "description": "An optional boolean filter to show visible items. If only_visible is set to `false`, then all tags (including hidden tags) are returned, otherwise only visible tags are returned."
+              },
+              {
+                "name": "owners",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of user guids to filter for tag owners"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "parents",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of tag parent guids to filter for"
+              },
+              {
+                "name": "top_level",
+                "value": "",
+                "type": "query",
+                "description": "Filter tags to only return top level tags (tags without a parent). For example, 'top_level=true'. If top_level is set to `false`, then all tags are returned. Defaults to `false`."
+              },
+              {
+                "name": "types",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of tag types to filter. Supported types: ['status']"
+              },
+              {
+                "name": "updated_on",
+                "value": "",
+                "type": "query",
+                "description": "Filter objects by updated_on. May specify __gt, __gte, __lt or __lte.\n\n API call to: \n\n ENDPOINT/updated_on__gt=2021-08-04T15:12:40&updated_on__lt=2021-08-23 \n\n will result with objects updated_on after  August 4th 2021 at 15:12:40, but before August 23rd 2021. \n\n. If you want to include lower or upper bound of the range use __gte or __lte respectively."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List of the tags available in authenticated user's organization\n\n**Required Role:** Viewer or higher"
+        },
+        {
+          "info": {
+            "name": "tags_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/tags/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a tag within authenticated user's organization\n\n**Required Role:** Admin"
+        },
+        {
+          "info": {
+            "name": "tags_bulk_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/tags/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update tags in bulk\n\n**Required Role:** Admin"
+        },
+        {
+          "info": {
+            "name": "tags_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/tags/:guid/",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve a single tag\n\n**Required Role:** Viewer or higher"
+        },
+        {
+          "info": {
+            "name": "tags_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/tags/:guid/",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update a single tag\n\n**Required Role:** Admin"
+        },
+        {
+          "info": {
+            "name": "tags_destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/tags/:guid/",
+            "params": [
+              {
+                "name": "datasources",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of data source guids to filter for items within those data sources. Works for dbt tags"
+              },
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "items",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of item guids to filter for their tags."
+              },
+              {
+                "name": "only_visible",
+                "value": "",
+                "type": "query",
+                "description": "An optional boolean filter to show visible items. If only_visible is set to `false`, then all tags (including hidden tags) are returned, otherwise only visible tags are returned."
+              },
+              {
+                "name": "owners",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of user guids to filter for tag owners"
+              },
+              {
+                "name": "parents",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of tag parent guids to filter for"
+              },
+              {
+                "name": "top_level",
+                "value": "",
+                "type": "query",
+                "description": "Filter tags to only return top level tags (tags without a parent). For example, 'top_level=true'. If top_level is set to `false`, then all tags are returned. Defaults to `false`."
+              },
+              {
+                "name": "types",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of tag types to filter. Supported types: ['status']"
+              },
+              {
+                "name": "updated_on",
+                "value": "",
+                "type": "query",
+                "description": "Filter objects by updated_on. May specify __gt, __gte, __lt or __lte.\n\n API call to: \n\n ENDPOINT/updated_on__gt=2021-08-04T15:12:40&updated_on__lt=2021-08-23 \n\n will result with objects updated_on after  August 4th 2021 at 15:12:40, but before August 23rd 2021. \n\n. If you want to include lower or upper bound of the range use __gte or __lte respectively."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Archive a single tag\n\n**Required Role:** Admin"
+        },
+        {
+          "info": {
+            "name": "tags_hierarchy_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/tags/hierarchy/",
+            "params": [
+              {
+                "name": "only_visible",
+                "value": "",
+                "type": "query",
+                "description": "An optional boolean filter to show visible items. If only_visible is set to `false`, then all tags (including hidden tags) are returned, otherwise only visible tags are returned."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "This viewset has been created for the main sidebar in the frontend.\nThis will respond back in a similar way to DataSources Hierarchy\nto ensure uniformity in the frontend.\n\n**Required Role:** Authenticated User with Active Organization"
+        },
+        {
+          "info": {
+            "name": "tags_items_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/tags/items/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update multiple tagged items.\n\n**Required Role:** Data Manager or higher"
+        },
+        {
+          "info": {
+            "name": "tags_items_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/tags/items/:guid/",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query",
+                "description": "Filter out any tagged item kind. Allowed values 'user' and 'suggestion'"
+              },
+              {
+                "name": "object_type",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of asset types to filter for tagged_items"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Specify the ordering for the results. \n\n A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order. \n\nNote: Order is case-sensitive."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "search_description",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "search_name",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "search_tag_name",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using a tag name"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List of the taggedItems available\n\n**Required Role:** Viewer or higher"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

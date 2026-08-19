@@ -1,0 +1,83 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Select Star Metadata bi joins API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "joins",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "joins_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/joins/",
+            "params": [
+              {
+                "name": "columns",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of column guids to filter for joins that this table was a source or target column of the join."
+              },
+              {
+                "name": "datasources",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of data source guids to filter for items within those data sources."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Specify the ordering for the results. \n\n A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order. \n\nNote: Order is case-sensitive."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "popularity",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of popularity ranges (inclusive) can include integers from 1-100 ex) 1-10,90-100 would be the bottom 10 percent and the top 10 percent, respectively. Ranges can overlap."
+              },
+              {
+                "name": "source_tables",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of table guids to filter for joins that this table was a source table of the join."
+              },
+              {
+                "name": "tables",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of table guids to filter for joins that this table was a source or target table of the join."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List of the joins available in authenticated user's organization\n\n**Required Role:** Authenticated User with Active Organization"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

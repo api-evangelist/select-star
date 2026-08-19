@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Select Star Metadata bi ingestion API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ingestion",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Kick off dbt ingestion",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/ingestion/dbt/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "\n        Kick off dbt ingestion using the provided `manifest.json` and `catalog.json`\n\n        If the dbt data's ingestion settings\n        * is Sync Docs, then the `catalog.json` is optional\n        * is New Data Source, then the `catalog.json` is required\n\n        You may send `manifest.json` as `manifest_file`.\n        You may send `catalog.json` as `catalog_file`.\n        You may send `run_results.json` as `run_results_file`.\n\n        Example:\n\n            curl --location --request POST 'htt"
+        },
+        {
+          "info": {
+            "name": "Start dbt ingestion",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/ingestion/dbt/:guid/ingest/",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Start dbt ingestion for the given data source\n\n**Required Role:** Admin (or RBAC policy)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

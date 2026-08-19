@@ -1,0 +1,892 @@
+{
+  "item": [
+    {
+      "id": "545c4e49-700f-4fd3-9e61-88478d6d0cba",
+      "name": "custom-attributes",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "32b694ee-fa2d-408d-bafb-e4cf58e9f92f",
+          "name": "custom attributes list",
+          "request": {
+            "name": "custom attributes list",
+            "description": {
+              "content": "This endpoint provides a list of all the custom attribute definitions within an organization.\n\n**Required Role:** Viewer or higher",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "custom-attributes",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "asset_type",
+                  "value": "<string>",
+                  "description": "A comma separated value for asset type in form: data_source_type,object_type,data_type"
+                },
+                {
+                  "disabled": false,
+                  "key": "data_source_types",
+                  "value": "<string>",
+                  "description": "A list of comma separated types to filter these custom attributes for."
+                },
+                {
+                  "disabled": false,
+                  "key": "data_types",
+                  "value": "<string>",
+                  "description": "A list of comma separated types to filter these custom attributes for."
+                },
+                {
+                  "disabled": false,
+                  "key": "object_types",
+                  "value": "<string>",
+                  "description": "A list of comma separated types to filter these custom attributes for."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "A page number within the paginated result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3cbf2f2b-a9c4-444c-b7a2-cbda5c8e872a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "custom-attributes",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "asset_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "data_source_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "data_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "object_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 123,\n  \"results\": [\n    {\n      \"created_by\": {\n        \"avatar\": \"https://ligpVETnDZvEiMEixMycqjqRAtpbXv.mme7AidPtzH,.HwInPxpzCTHAi3r.\",\n        \"email\": \"asMTGXng@JNnrKCxxzgUEbJzebsXQED.xa\",\n        \"first_name\": \"string\",\n        \"guid\": \"string\",\n        \"is_active\": false,\n        \"last_name\": \"string\",\n        \"team\": {\n          \"guid\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"guid\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"text\",\n      \"data_source_types\": [\n        \"power_bi\",\n        \"salesforce_crma\"\n      ],\n      \"object_types\": [\n        \"bifolder\",\n        \"lookmlfield\"\n      ],\n      \"data_types\": [\n        \"column\",\n        \"sql_view\"\n      ]\n    },\n    {\n      \"created_by\": {\n        \"avatar\": \"https://eMOVBIhq.pvbn1VNP.gg.W0PNxN1YQWys.Wkzr\",\n        \"email\": \"tqdTj21DoG4QpW2@BC.bdwa\",\n        \"first_name\": \"string\",\n        \"guid\": \"string\",\n        \"is_active\": false,\n        \"last_name\": \"string\",\n        \"team\": {\n          \"guid\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"guid\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"text\",\n      \"data_source_types\": [\n        \"postgres\",\n        \"thoughtspot\"\n      ],\n      \"object_types\": [\n        \"bidashboardelement\",\n        \"database\"\n      ],\n      \"data_types\": [\n        \"report\",\n        \"element\"\n      ]\n    }\n  ],\n  \"next\": \"http://api.example.org/accounts/?page=4\",\n  \"previous\": \"http://api.example.org/accounts/?page=2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "143ed5c4-21cb-4fae-abf7-9e4b32a138a2",
+          "name": "custom attributes create",
+          "request": {
+            "name": "custom attributes create",
+            "description": {
+              "content": "This endpoint allows you to create a definition for a custom attribute.\n        It enables you to define a custom attribute, specify which data source types/objects it should\n        apply to (such as Redshift tables), and fill in the business definition.\n        This creates a comprehensive definition and identifies its applications.\n\n**Required Role:** Data Manager or higher",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "custom-attributes",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) Custom attribute display name"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) Custom Attribute type, either category or status\n\n* `text` - text"
+                },
+                {
+                  "disabled": false,
+                  "key": "data_source_types",
+                  "value": "<string>",
+                  "description": "List of data source types CA applies to. Positions correspond with object_types and data_types fields"
+                },
+                {
+                  "disabled": false,
+                  "key": "data_source_types",
+                  "value": "<string>",
+                  "description": "List of data source types CA applies to. Positions correspond with object_types and data_types fields"
+                },
+                {
+                  "disabled": false,
+                  "key": "object_types",
+                  "value": "<string>",
+                  "description": "List of object types CA applies to. Positions correspond with data_source_types and data_types fields"
+                },
+                {
+                  "disabled": false,
+                  "key": "object_types",
+                  "value": "<string>",
+                  "description": "List of object types CA applies to. Positions correspond with data_source_types and data_types fields"
+                },
+                {
+                  "disabled": false,
+                  "key": "data_types",
+                  "value": "<string>",
+                  "description": "List of data types CA applies to. Positions correspond with data_source_types and object_types fields"
+                },
+                {
+                  "disabled": false,
+                  "key": "data_types",
+                  "value": "<string>",
+                  "description": "List of data types CA applies to. Positions correspond with data_source_types and object_types fields"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2eac597a-6cb7-41b8-bf68-91a8daf1339e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "custom-attributes",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Custom attribute display name",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Custom Attribute type, either category or status\n\n* `text` - text",
+                        "type": "text/plain"
+                      },
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "List of data source types CA applies to. Positions correspond with object_types and data_types fields",
+                        "type": "text/plain"
+                      },
+                      "key": "data_source_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "List of data source types CA applies to. Positions correspond with object_types and data_types fields",
+                        "type": "text/plain"
+                      },
+                      "key": "data_source_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "List of object types CA applies to. Positions correspond with data_source_types and data_types fields",
+                        "type": "text/plain"
+                      },
+                      "key": "object_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "List of object types CA applies to. Positions correspond with data_source_types and data_types fields",
+                        "type": "text/plain"
+                      },
+                      "key": "object_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "List of data types CA applies to. Positions correspond with data_source_types and object_types fields",
+                        "type": "text/plain"
+                      },
+                      "key": "data_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "List of data types CA applies to. Positions correspond with data_source_types and object_types fields",
+                        "type": "text/plain"
+                      },
+                      "key": "data_types",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created_by\": {\n    \"avatar\": \"https://nIdDSNFxovaPzlpmeeXUvXwQqrXceK.nlztaHX-kFphc10hX-Zu\",\n    \"email\": \"9jY1K6ZmMF@sTUzQZHXgDRlAbJteyEVj.shq\",\n    \"first_name\": \"string\",\n    \"guid\": \"string\",\n    \"is_active\": true,\n    \"last_name\": \"string\",\n    \"team\": {\n      \"guid\": \"string\",\n      \"name\": \"string\"\n    }\n  },\n  \"guid\": \"string\",\n  \"name\": \"string\",\n  \"type\": \"<string>\",\n  \"data_source_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"object_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"data_types\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "13dfd8c7-27b9-4ad6-82ac-a1953c9fb327",
+          "name": "custom attributes retrieve",
+          "request": {
+            "name": "custom attributes retrieve",
+            "description": {
+              "content": "If you have a GUID, this endpoint will return the information for a single custom attribute.\n\n**Required Role:** Viewer or higher",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "custom-attributes",
+                ":guid",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4e8031fa-fc6d-4b2e-a89d-4dab9601c321",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "custom-attributes",
+                    ":guid",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created_by\": {\n    \"avatar\": \"https://nIdDSNFxovaPzlpmeeXUvXwQqrXceK.nlztaHX-kFphc10hX-Zu\",\n    \"email\": \"9jY1K6ZmMF@sTUzQZHXgDRlAbJteyEVj.shq\",\n    \"first_name\": \"string\",\n    \"guid\": \"string\",\n    \"is_active\": true,\n    \"last_name\": \"string\",\n    \"team\": {\n      \"guid\": \"string\",\n      \"name\": \"string\"\n    }\n  },\n  \"guid\": \"string\",\n  \"name\": \"string\",\n  \"type\": \"<string>\",\n  \"data_source_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"object_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"data_types\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b5c15d40-290b-4bb5-9e82-d9a4b9f758a9",
+          "name": "custom attributes partial update",
+          "request": {
+            "name": "custom attributes partial update",
+            "description": {
+              "content": "If you possess a GUID for a custom attribute, this endpoint allows you to modify its details,\n                such as its name and the objects it's assigned to.\n\n**Required Role:** Data Manager or higher",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "custom-attributes",
+                ":guid",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Custom Attribute type, either category or status\n\n* `text` - text"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Custom attribute display name"
+                },
+                {
+                  "disabled": false,
+                  "key": "data_source_types",
+                  "value": "<string>",
+                  "description": "List of data source types CA applies to. Positions correspond with object_types and data_types fields"
+                },
+                {
+                  "disabled": false,
+                  "key": "data_source_types",
+                  "value": "<string>",
+                  "description": "List of data source types CA applies to. Positions correspond with object_types and data_types fields"
+                },
+                {
+                  "disabled": false,
+                  "key": "object_types",
+                  "value": "<string>",
+                  "description": "List of object types CA applies to. Positions correspond with data_source_types and data_types fields"
+                },
+                {
+                  "disabled": false,
+                  "key": "object_types",
+                  "value": "<string>",
+                  "description": "List of object types CA applies to. Positions correspond with data_source_types and data_types fields"
+                },
+                {
+                  "disabled": false,
+                  "key": "data_types",
+                  "value": "<string>",
+                  "description": "List of data types CA applies to. Positions correspond with data_source_types and object_types fields"
+                },
+                {
+                  "disabled": false,
+                  "key": "data_types",
+                  "value": "<string>",
+                  "description": "List of data types CA applies to. Positions correspond with data_source_types and object_types fields"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b3b99ed9-57c9-4194-afe0-674e5e09a130",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "custom-attributes",
+                    ":guid",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Custom Attribute type, either category or status\n\n* `text` - text",
+                        "type": "text/plain"
+                      },
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Custom attribute display name",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "List of data source types CA applies to. Positions correspond with object_types and data_types fields",
+                        "type": "text/plain"
+                      },
+                      "key": "data_source_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "List of data source types CA applies to. Positions correspond with object_types and data_types fields",
+                        "type": "text/plain"
+                      },
+                      "key": "data_source_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "List of object types CA applies to. Positions correspond with data_source_types and data_types fields",
+                        "type": "text/plain"
+                      },
+                      "key": "object_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "List of object types CA applies to. Positions correspond with data_source_types and data_types fields",
+                        "type": "text/plain"
+                      },
+                      "key": "object_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "List of data types CA applies to. Positions correspond with data_source_types and object_types fields",
+                        "type": "text/plain"
+                      },
+                      "key": "data_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "List of data types CA applies to. Positions correspond with data_source_types and object_types fields",
+                        "type": "text/plain"
+                      },
+                      "key": "data_types",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created_by\": {\n    \"avatar\": \"https://nIdDSNFxovaPzlpmeeXUvXwQqrXceK.nlztaHX-kFphc10hX-Zu\",\n    \"email\": \"9jY1K6ZmMF@sTUzQZHXgDRlAbJteyEVj.shq\",\n    \"first_name\": \"string\",\n    \"guid\": \"string\",\n    \"is_active\": true,\n    \"last_name\": \"string\",\n    \"team\": {\n      \"guid\": \"string\",\n      \"name\": \"string\"\n    }\n  },\n  \"guid\": \"string\",\n  \"name\": \"string\",\n  \"type\": \"<string>\",\n  \"data_source_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"object_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"data_types\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c04c273d-9284-4bc3-bc7c-5ef828cdbb9a",
+          "name": "custom attributes destroy",
+          "request": {
+            "name": "custom attributes destroy",
+            "description": {
+              "content": "This endpoint will delete a custom attribute\n\n**Required Role:** Data Manager or higher",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "custom-attributes",
+                ":guid",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "asset_type",
+                  "value": "<string>",
+                  "description": "A comma separated value for asset type in form: data_source_type,object_type,data_type"
+                },
+                {
+                  "disabled": false,
+                  "key": "data_source_types",
+                  "value": "<string>",
+                  "description": "A list of comma separated types to filter these custom attributes for."
+                },
+                {
+                  "disabled": false,
+                  "key": "data_types",
+                  "value": "<string>",
+                  "description": "A list of comma separated types to filter these custom attributes for."
+                },
+                {
+                  "disabled": false,
+                  "key": "object_types",
+                  "value": "<string>",
+                  "description": "A list of comma separated types to filter these custom attributes for."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "55c1e2c0-00d7-4527-ad41-0fde1eae754b",
+              "name": "No response body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "custom-attributes",
+                    ":guid",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "asset_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "data_source_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "data_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "object_types",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5cedfb4a-a7c2-4df7-bc95-0073d6279c4c",
+    "name": "Select Star Metadata bi custom-attributes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for interacting with the Select Star system\n\nContact Support:\n Email: support@selectstar.com",
+      "type": "text/plain"
+    }
+  }
+}

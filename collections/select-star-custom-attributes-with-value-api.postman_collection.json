@@ -1,0 +1,201 @@
+{
+  "item": [
+    {
+      "id": "3bd63d5e-8265-41c2-84df-0e6a9cd81927",
+      "name": "custom-attributes-with-value",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0a7136ad-ad2f-4faa-a6cb-50276715cb40",
+          "name": "custom attributes with value list",
+          "request": {
+            "name": "custom attributes with value list",
+            "description": {
+              "content": "The GUID in the path is for the object that the custom attribute is assigned to (like a table, column, etc).\nThis endpoint returns all the custom attributes tied to this object, along with their corresponding values.\n\n**Required Role:** Viewer or higher",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "custom-attributes-with-value",
+                ":item_guid",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "asset_type",
+                  "value": "<string>",
+                  "description": "A comma separated value for asset type in form: data_source_type,object_type,data_type"
+                },
+                {
+                  "disabled": false,
+                  "key": "data_source_types",
+                  "value": "<string>",
+                  "description": "A list of comma separated types to filter these custom attributes for."
+                },
+                {
+                  "disabled": false,
+                  "key": "data_types",
+                  "value": "<string>",
+                  "description": "A list of comma separated types to filter these custom attributes for."
+                },
+                {
+                  "disabled": false,
+                  "key": "object_types",
+                  "value": "<string>",
+                  "description": "A list of comma separated types to filter these custom attributes for."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "A page number within the paginated result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "item_guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c4287a50-2c78-43e6-beaa-92aefbd14ac3",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "custom-attributes-with-value",
+                    ":item_guid",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "asset_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "data_source_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "data_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "object_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "item_guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 123,\n  \"results\": [\n    {\n      \"created_by\": {\n        \"avatar\": \"https://HQpDksTUTXOEYAbGSmqDwOVBRphaSb.ehonHMh7yAI9,7Wb9vIqXO5EtjxEpqqDMOw,gGAR9gDFP.uqCoxZh-OJU\",\n        \"email\": \"cCPN7le@RFFDcqasbDcgfOdcBPYnGhcFVZkTDDu.gsp\",\n        \"first_name\": \"string\",\n        \"guid\": \"string\",\n        \"is_active\": true,\n        \"last_name\": \"string\",\n        \"team\": {\n          \"guid\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"data_source_types\": [\n        \"sigma\",\n        \"postgres\"\n      ],\n      \"data_types\": [\n        \"tile\",\n        \"one_to_one_logical\"\n      ],\n      \"guid\": \"string\",\n      \"name\": \"string\",\n      \"object_types\": [\n        \"lookmlview\",\n        \"column\"\n      ],\n      \"type\": \"text\",\n      \"value\": {\n        \"custom_attribute\": {\n          \"guid\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"data_source\": \"string\",\n        \"item\": \"string\",\n        \"organization\": \"string\",\n        \"guid\": \"string\",\n        \"value\": \"string\",\n        \"richtext_value\": \"string\"\n      }\n    },\n    {\n      \"created_by\": {\n        \"avatar\": \"http://zlvvlDGiebemtcOWlSZ.qemF-V0S8ptEXLS.vt6oFNcIU3UZ6bodAHcOJfZ2JCoFAciLqSP91VS\",\n        \"email\": \"jv8nyI@OzhxfrxjIROzGNqBaUMBiwcAUZnqhqsan.gtu\",\n        \"first_name\": \"string\",\n        \"guid\": \"string\",\n        \"is_active\": false,\n        \"last_name\": \"string\",\n        \"team\": {\n          \"guid\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"data_source_types\": [\n        \"redshift\",\n        \"snowflake\"\n      ],\n      \"data_types\": [\n        \"question\",\n        \"question\"\n      ],\n      \"guid\": \"string\",\n      \"name\": \"string\",\n      \"object_types\": [\n        \"tableaufield\",\n        \"schema\"\n      ],\n      \"type\": \"text\",\n      \"value\": {\n        \"custom_attribute\": {\n          \"guid\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"data_source\": \"string\",\n        \"item\": \"string\",\n        \"organization\": \"string\",\n        \"guid\": \"string\",\n        \"value\": \"string\",\n        \"richtext_value\": \"string\"\n      }\n    }\n  ],\n  \"next\": \"http://api.example.org/accounts/?page=4\",\n  \"previous\": \"http://api.example.org/accounts/?page=2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8d3ba920-c462-4802-8f5d-f3735891a57e",
+    "name": "Select Star Metadata bi custom-attributes-with-value API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for interacting with the Select Star system\n\nContact Support:\n Email: support@selectstar.com",
+      "type": "text/plain"
+    }
+  }
+}

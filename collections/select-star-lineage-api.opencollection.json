@@ -1,0 +1,387 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Select Star Metadata bi lineage API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "lineage",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "lineage_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/lineage/:guid/",
+            "params": [
+              {
+                "name": "dbt_links",
+                "value": "",
+                "type": "query",
+                "description": "Include dbt links in the lineage response"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "Can be used to specify which direction of lineage to load only. If this field is skipped, source & downstream lineage will be calculated."
+              },
+              {
+                "name": "enable_description",
+                "value": "",
+                "type": "query",
+                "description": "Include description in the lineage response"
+              },
+              {
+                "name": "enable_tags",
+                "value": "",
+                "type": "query",
+                "description": "Include tags in the lineage response. This will alter the response slightly to include non-null list of tag guids along with a tags legend."
+              },
+              {
+                "name": "filter_nodes",
+                "value": "",
+                "type": "query",
+                "description": "A list of nodes that need to be filtered out of the response type"
+              },
+              {
+                "name": "group_by_data_source",
+                "value": "",
+                "type": "query",
+                "description": "Group lineage by data source"
+              },
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "include_borderline_edges",
+                "value": "",
+                "type": "query",
+                "description": "Include borderline edges. Borderline edges - edges of which one node is part of this traversal, but the other one isn't"
+              },
+              {
+                "name": "include_edge_jobs",
+                "value": "",
+                "type": "query",
+                "description": "Include the jobs (DAG/Spark) inside the edge objects responsible for the creation of those edges"
+              },
+              {
+                "name": "include_impact_score",
+                "value": "",
+                "type": "query",
+                "description": "Include impact score in the lineage response"
+              },
+              {
+                "name": "include_table_borderline_edges",
+                "value": "",
+                "type": "query",
+                "description": "Include borderline edges linked to tables. Borderline edges - edges of which one node is part of this traversal, but the other one isn't"
+              },
+              {
+                "name": "looker_db_lineage",
+                "value": "",
+                "type": "query",
+                "description": "Include Looker <-> DB lineage"
+              },
+              {
+                "name": "looker_view_lineage",
+                "value": "",
+                "type": "query",
+                "description": "Include looker fields in the lineage calculation"
+              },
+              {
+                "name": "max_depth",
+                "value": "",
+                "type": "query",
+                "description": "Can be used to specify max depth of lineage to load. `max` is a special value that is used as alias for 20. (1 by default)"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Can be used to limit lineage calculation to table or column only. This should reduce payload size as well as computation time but is not fully supported in all Lineage objects (e.g. Looker Lineage doesn't support it fully)."
+              },
+              {
+                "name": "mode_lineage",
+                "value": "",
+                "type": "query",
+                "description": "Include Mode lineage"
+              },
+              {
+                "name": "relevant_columns",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of root node children GUIDs specifying relevant columns for lineage traversal. When provided, lineage of other root node columns will be ignored. Requires `relevant_lineage` to be enabled."
+              },
+              {
+                "name": "relevant_lineage",
+                "value": "",
+                "type": "query",
+                "description": "when `relevant_lineage` is enabled, we only use edges between columns to traverse the graph. Relevant table nodes and edges are still returned in the response, but they are not used for traversal."
+              },
+              {
+                "name": "tableau_table_lineage",
+                "value": "",
+                "type": "query",
+                "description": "Include Tableau lineage"
+              },
+              {
+                "name": "usage_type",
+                "value": "",
+                "type": "query",
+                "description": "Include the usage type for each edge related to every node in the response. Use `-` to exclude"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Calculates lineage for given metadata object.\n\n**Required Role:** Authenticated User with Active Organization"
+        },
+        {
+          "info": {
+            "name": "lineage_manual_edges_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/lineage/manual/edges/",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all manual lineage edges\n\n**Required Role:** Admin (or RBAC policy)"
+        },
+        {
+          "info": {
+            "name": "lineage_manual_edges_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/lineage/manual/edges/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new Manual Lineage Edge.\nIt is needed to specify at least the `guid` for source and target nodes (`source_node` and `target_node`).\nThe `guid` corresponds to the actual `column` or `table` that is the source or target of the edge.\nAlso `usage` can be specified. If no `usage` is given, or it is given with `null` value, the edge will be created with `null` usage.\n\n\n**Required Role:** Admin (or RBAC policy)"
+        },
+        {
+          "info": {
+            "name": "lineage_manual_edges_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/lineage/manual/edges/:source_guid/:target_guid/",
+            "params": [
+              {
+                "name": "source_guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "target_guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a single manual lineage edge given source and target guid and optional usage\n\n**Required Role:** Admin (or RBAC policy)"
+        },
+        {
+          "info": {
+            "name": "lineage_manual_edges_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/lineage/manual/edges/:source_guid/:target_guid/",
+            "params": [
+              {
+                "name": "source_guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "target_guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing Manual Lineage Edge.\nUse the path parameters to specify uniquely the edge to update.\nUse the request body to specify the parameters you want to update.\nIn any update case, a new edge with the given parameters will be created, and the old one will be deleted.\n\n\n**Required Role:** Admin (or RBAC policy)"
+        },
+        {
+          "info": {
+            "name": "lineage_manual_edges_destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/lineage/manual/edges/:source_guid/:target_guid/",
+            "params": [
+              {
+                "name": "source_guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "target_guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a single manual lineage edge.\n\n**Required Role:** Admin (or RBAC policy)"
+        },
+        {
+          "info": {
+            "name": "lineage_manual_edges_retrieve_2",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/lineage/manual/edges/:source_guid/:target_guid/:usage/",
+            "params": [
+              {
+                "name": "source_guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "target_guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "usage",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a single manual lineage edge given source and target guid and optional usage\n\n**Required Role:** Admin (or RBAC policy)"
+        },
+        {
+          "info": {
+            "name": "lineage_manual_edges_partial_update_2",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/lineage/manual/edges/:source_guid/:target_guid/:usage/",
+            "params": [
+              {
+                "name": "source_guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "target_guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "usage",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing Manual Lineage Edge.\nUse the path parameters to specify uniquely the edge to update.\nUse the request body to specify the parameters you want to update.\nIn any update case, a new edge with the given parameters will be created, and the old one will be deleted.\n\n\n**Required Role:** Admin (or RBAC policy)"
+        },
+        {
+          "info": {
+            "name": "lineage_manual_edges_destroy_2",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/lineage/manual/edges/:source_guid/:target_guid/:usage/",
+            "params": [
+              {
+                "name": "source_guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "target_guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "usage",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a single manual lineage edge.\n\n**Required Role:** Admin (or RBAC policy)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,279 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Select Star Metadata bi dbt API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "dbt",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "dbt_project_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/dbt/project/",
+            "params": [
+              {
+                "name": "data_source",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of data source guids to filter for items within those data sources."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Specify the ordering for the results. \n\n A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order. \n\nNote: Order is case-sensitive."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "search_name",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using its name"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "**Required Role:** Admin (or RBAC policy)"
+        },
+        {
+          "info": {
+            "name": "dbt_project_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/dbt/project/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "**Required Role:** Admin (or RBAC policy)"
+        },
+        {
+          "info": {
+            "name": "dbt_project_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/dbt/project/:guid/",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "**Required Role:** Admin (or RBAC policy)"
+        },
+        {
+          "info": {
+            "name": "dbt_project_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/dbt/project/:guid/",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "**Required Role:** Admin (or RBAC policy)"
+        },
+        {
+          "info": {
+            "name": "dbt_project_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/dbt/project/:guid/",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "**Required Role:** Admin (or RBAC policy)"
+        },
+        {
+          "info": {
+            "name": "dbt_project_destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/dbt/project/:guid/",
+            "params": [
+              {
+                "name": "data_source",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of data source guids to filter for items within those data sources."
+              },
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Specify the ordering for the results. \n\n A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order. \n\nNote: Order is case-sensitive."
+              },
+              {
+                "name": "search_name",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using its name"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "**Required Role:** Admin (or RBAC policy)"
+        },
+        {
+          "info": {
+            "name": "dbt_warehouse_link_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/dbt/warehouse-link/",
+            "params": [
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Specify the ordering for the results. \n\n A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order. \n\nNote: Order is case-sensitive."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "search_data_source",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "search_name",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "search_type",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "types",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of table types to filter for dbt dwh links."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "**Required Role:** Authenticated User with Active Organization"
+        },
+        {
+          "info": {
+            "name": "dbt_warehouse_link_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/dbt/warehouse-link/:guid/",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "**Required Role:** Authenticated User with Active Organization"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,77 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Select Star Metadata bi comments API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "comments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "comments_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/comments/",
+            "params": [
+              {
+                "name": "commented_on",
+                "value": "",
+                "type": "query",
+                "description": "Filter objects by commented_on. May specify __gt, __gte, __lt or __lte.\n\n API call to: \n\n ENDPOINT/commented_on__gt=2021-08-04T15:12:40&commented_on__lt=2021-08-23 \n\n will result with objects commented_on after  August 4th 2021 at 15:12:40, but before August 23rd 2021. \n\n. If you want to include lower or upper bound of the range use __gte or __lte respectively."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Specify the ordering for the results. \n\n A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order. \n\nNote: Order is case-sensitive."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "search_comment",
+                "value": "",
+                "type": "query",
+                "description": "Filter comments by the message."
+              },
+              {
+                "name": "search_commented_by",
+                "value": "",
+                "type": "query",
+                "description": "Filter comments by the author."
+              },
+              {
+                "name": "search_target",
+                "value": "",
+                "type": "query",
+                "description": "Filter comments by the commented object name."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "**Required Role:** Data Manager or Admin (or RBAC policy)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

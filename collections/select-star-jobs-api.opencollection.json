@@ -1,0 +1,217 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Select Star Metadata bi jobs API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "jobs_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/jobs/",
+            "params": [
+              {
+                "name": "collections",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of collection guids, for to filter the collection items from"
+              },
+              {
+                "name": "datasource_types",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of data source types to filter for those types of data sources that these jobs  belong to. Supported types: ['airflow', 'fivetran', 'openlineage']"
+              },
+              {
+                "name": "datasources",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of data source guids to filter for items within those data sources."
+              },
+              {
+                "name": "ddl_only",
+                "value": "",
+                "type": "query",
+                "description": "A boolean to fetch the jobs where target table event type has the ddl statement. Defaults to False."
+              },
+              {
+                "name": "folders",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the folder guid"
+              },
+              {
+                "name": "is_hidden",
+                "value": "",
+                "type": "query",
+                "description": "A boolean to show hidden objects when true and hide hidden objects when false. Defaults to False."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Specify the ordering for the results. \n\n A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order. \n\nNote: Order is case-sensitive."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "search_collections",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using a collection name"
+              },
+              {
+                "name": "search_description",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using its description"
+              },
+              {
+                "name": "search_name",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using its name"
+              },
+              {
+                "name": "target_tables",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of table guids to filter for the jobs affecting the tables"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List of the jobs available in authenticated user's organization\n\n**Required Role:** Viewer or higher"
+        },
+        {
+          "info": {
+            "name": "jobs_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/jobs/:guid/",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve a single job\n\n**Required Role:** Viewer or higher"
+        },
+        {
+          "info": {
+            "name": "jobs_related_dashboards_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/jobs/:guid/related-dashboards/",
+            "params": [
+              {
+                "name": "distance",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "include_hidden",
+                "value": "",
+                "type": "query",
+                "description": "A flag allowing to include hidden dashboards in the response."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Specify the ordering for the results. \n\n A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order. \n\nNote: Order is case-sensitive."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "relevant_lineage",
+                "value": "",
+                "type": "query",
+                "description": "When `relevant_lineage` is `true`, we only use edges between columns to traverse the graph. Requires relevant lineage to be enabled in the organization; the flag is ignored otherwise."
+              },
+              {
+                "name": "search_all",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "search_dsuser_created_by",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "search_name",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "updated_on",
+                "value": "",
+                "type": "query",
+                "description": "Filter objects by updated_on. May specify __gt, __gte, __lt or __lte.\n\n API call to: \n\n ENDPOINT/updated_on__gt=2021-08-04T15:12:40&updated_on__lt=2021-08-23 \n\n will result with objects updated_on after  August 4th 2021 at 15:12:40, but before August 23rd 2021. \n\n. If you want to include lower or upper bound of the range use __gte or __lte respectively."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Gets a list of related dashboards given a job_guid\n\n**Required Role:** Viewer or higher"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

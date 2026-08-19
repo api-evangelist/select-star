@@ -1,0 +1,1376 @@
+{
+  "item": [
+    {
+      "id": "ec4b0fca-5f9a-460c-9c13-756c6c7a70bb",
+      "name": "metrics",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "65faa917-1e67-48ca-b4bd-9eb6396884d7",
+          "name": "metrics list",
+          "request": {
+            "name": "metrics list",
+            "description": {
+              "content": "List of all metrics available in authenticated user's organization\n\n**Required Role:** Viewer or higher",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "metrics",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "collections",
+                  "value": "<string>",
+                  "description": "A comma separated list of collection guids, for to filter the collection items from"
+                },
+                {
+                  "disabled": false,
+                  "key": "dimensions",
+                  "value": "<string>",
+                  "description": "A comma separated list of dimension guids to filter for metrics with those dimensions"
+                },
+                {
+                  "disabled": false,
+                  "key": "no_tags",
+                  "value": "<string>",
+                  "description": "A flag that filters out any tagged tables"
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "<string>",
+                  "description": "Specify the ordering for the results. \n\n A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order. \n\nNote: Order is case-sensitive."
+                },
+                {
+                  "disabled": false,
+                  "key": "owners",
+                  "value": "<string>",
+                  "description": "A comma separated list of user or team guids to filter for objects within these users as owners (technical or business)."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "A page number within the paginated result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "search_collections",
+                  "value": "<string>",
+                  "description": "Search for an asset using a collection name"
+                },
+                {
+                  "disabled": false,
+                  "key": "search_description",
+                  "value": "<string>",
+                  "description": "A search term."
+                },
+                {
+                  "disabled": false,
+                  "key": "search_name",
+                  "value": "<string>",
+                  "description": "Search for an asset using its name"
+                },
+                {
+                  "disabled": false,
+                  "key": "search_sql",
+                  "value": "<string>",
+                  "description": "A search term."
+                },
+                {
+                  "disabled": false,
+                  "key": "search_synonyms",
+                  "value": "<string>",
+                  "description": "A search term."
+                },
+                {
+                  "disabled": false,
+                  "key": "search_tag_name",
+                  "value": "<string>",
+                  "description": "Search for an asset using a tag name"
+                },
+                {
+                  "disabled": false,
+                  "key": "semantic_models",
+                  "value": "<string>",
+                  "description": "Filter by one or more semantic model GUIDs. Provide a comma-separated list of GUIDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "status_tags",
+                  "value": "<string>",
+                  "description": "A comma separated list of tag guids"
+                },
+                {
+                  "disabled": false,
+                  "key": "teams",
+                  "value": "<string>",
+                  "description": "A comma separated list of team guids to filter for tables owned by users of those teams."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "39c4fd19-12c5-48ff-b6b2-58f351fa64fb",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "metrics",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collections",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dimensions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "no_tags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "owners",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "search_collections",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search_description",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search_sql",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search_synonyms",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search_tag_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "semantic_models",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status_tags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "teams",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 123,\n  \"results\": [\n    {\n      \"breadcrumbs\": [\n        {\n          \"target_data_source_guid\": \"string\",\n          \"target_data_type\": \"string\",\n          \"target_guid\": \"string\",\n          \"target_name\": \"string\",\n          \"target_object_type\": \"string\",\n          \"guid\": \"string\",\n          \"target_data_source_type\": \"dbt\",\n          \"ordinal\": 15955263\n        },\n        {\n          \"target_data_source_guid\": \"string\",\n          \"target_data_type\": \"string\",\n          \"target_guid\": \"string\",\n          \"target_name\": \"string\",\n          \"target_object_type\": \"string\",\n          \"guid\": \"string\",\n          \"target_data_source_type\": \"quicksight\",\n          \"ordinal\": 2056729445\n        }\n      ],\n      \"collections\": [\n        {\n          \"breadcrumbs\": [\n            {\n              \"target_data_source_guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_data_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_object_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_data_source_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ordinal\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"target_data_source_guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_data_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_object_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_data_source_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ordinal\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"color_scheme\": \"string\",\n          \"data_types\": {\n            \"data_source_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"data_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"external_database_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"object_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"emoji\": \"string\",\n          \"guid\": \"string\",\n          \"icon\": \"string\",\n          \"linked_from\": [\n            \"string\",\n            \"string\"\n          ],\n          \"name\": \"string\"\n        },\n        {\n          \"breadcrumbs\": [\n            {\n              \"target_data_source_guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_data_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_object_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_data_source_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ordinal\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"target_data_source_guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_data_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_object_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_data_source_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ordinal\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"color_scheme\": \"string\",\n          \"data_types\": {\n            \"data_source_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"data_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"external_database_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"object_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"emoji\": \"string\",\n          \"guid\": \"string\",\n          \"icon\": \"string\",\n          \"linked_from\": [\n            \"string\",\n            \"string\"\n          ],\n          \"name\": \"string\"\n        }\n      ],\n      \"created_by\": {\n        \"avatar\": \"https://tfIqC.vmi51I5grZ7.fV\",\n        \"created_on\": \"2022-11-04T12:31:40.326Z\",\n        \"email\": \"\",\n        \"first_name\": \"string\",\n        \"guid\": \"string\",\n        \"is_active\": false,\n        \"is_agreed_to_terms\": true,\n        \"is_invitation_pending\": {},\n        \"is_verified\": false,\n        \"last_activity\": \"1982-10-11T13:38:45.849Z\",\n        \"last_login\": \"2011-11-07T12:06:27.915Z\",\n        \"last_name\": \"string\",\n        \"team\": {\n          \"guid\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"settings\": {\n          \"enable_email_notifications\": false,\n          \"enable_slack_notifications\": true,\n          \"enable_notifications_for_schema_changes\": false,\n          \"enable_notifications_for_metadata_changes\": true,\n          \"enable_discussions_notifications\": false,\n          \"enable_favorites_notifications_for_schema_changes\": true,\n          \"enable_favorites_notifications_for_metadata_changes\": false,\n          \"enable_favorites_notifications_for_discussions\": true,\n          \"default_database_table_column_order\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"default_table_dashboard_tab\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"data_type\": \"string\",\n      \"data_types\": {\n        \"data_source_type\": \"string\",\n        \"data_type\": \"string\",\n        \"external_database_type\": \"string\",\n        \"object_type\": \"string\"\n      },\n      \"full_path\": \"string\",\n      \"guid\": \"string\",\n      \"parent_hierarchy\": \"string\",\n      \"represented_as_fields\": [\n        {\n          \"item\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"parent\": {\n            \"breadcrumbs\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"object_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"full_name\": \"string\",\n          \"full_sql\": \"string\",\n          \"additional_condition\": \"string\"\n        },\n        {\n          \"item\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"parent\": {\n            \"breadcrumbs\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"object_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"full_name\": \"string\",\n          \"full_sql\": \"string\",\n          \"additional_condition\": \"string\"\n        }\n      ],\n      \"tagged_items\": [\n        {\n          \"guid\": \"string\",\n          \"kind\": \"string\",\n          \"suggested_source_kind\": \"string\",\n          \"suggestion_source_object\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"tag\": {\n            \"breadcrumbs\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"color\": \"string\",\n            \"icon\": \"string\",\n            \"name\": \"string\",\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"visible\": true,\n            \"guid\": \"string\",\n            \"links_to\": \"string\"\n          },\n          \"suggestion_source\": {\n            \"item\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"guid\": \"string\",\n          \"kind\": \"string\",\n          \"suggested_source_kind\": \"string\",\n          \"suggestion_source_object\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"tag\": {\n            \"breadcrumbs\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"color\": \"string\",\n            \"icon\": \"string\",\n            \"name\": \"string\",\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"visible\": true,\n            \"guid\": \"string\",\n            \"links_to\": \"string\"\n          },\n          \"suggestion_source\": {\n            \"item\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"updated_on\": \"2000-07-14T07:17:56.134Z\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"richtext_description\": \"string\",\n      \"dimensions\": [\n        {\n          \"field\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"field\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"business_owner\": {\n        \"data_source\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"guid\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"last_ingested_on\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"name\": \"string\",\n        \"guid\": \"string\",\n        \"display_name\": \"string\"\n      },\n      \"technical_owner\": {\n        \"data_source\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"guid\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"last_ingested_on\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"name\": \"string\",\n        \"guid\": \"string\",\n        \"display_name\": \"string\"\n      },\n      \"represented_as\": \"string\",\n      \"richtext_represented_as\": \"string\",\n      \"sql\": \"string\",\n      \"synonyms\": [\n        \"string\",\n        \"string\"\n      ],\n      \"ordinal\": 1409351132\n    },\n    {\n      \"breadcrumbs\": [\n        {\n          \"target_data_source_guid\": \"string\",\n          \"target_data_type\": \"string\",\n          \"target_guid\": \"string\",\n          \"target_name\": \"string\",\n          \"target_object_type\": \"string\",\n          \"guid\": \"string\",\n          \"target_data_source_type\": \"bigquery\",\n          \"ordinal\": 1175618824\n        },\n        {\n          \"target_data_source_guid\": \"string\",\n          \"target_data_type\": \"string\",\n          \"target_guid\": \"string\",\n          \"target_name\": \"string\",\n          \"target_object_type\": \"string\",\n          \"guid\": \"string\",\n          \"target_data_source_type\": \"quicksight\",\n          \"ordinal\": 102372678\n        }\n      ],\n      \"collections\": [\n        {\n          \"breadcrumbs\": [\n            {\n              \"target_data_source_guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_data_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_object_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_data_source_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ordinal\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"target_data_source_guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_data_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_object_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_data_source_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ordinal\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"color_scheme\": \"string\",\n          \"data_types\": {\n            \"data_source_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"data_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"external_database_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"object_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"emoji\": \"string\",\n          \"guid\": \"string\",\n          \"icon\": \"string\",\n          \"linked_from\": [\n            \"string\",\n            \"string\"\n          ],\n          \"name\": \"string\"\n        },\n        {\n          \"breadcrumbs\": [\n            {\n              \"target_data_source_guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_data_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_object_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_data_source_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ordinal\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"target_data_source_guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_data_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_object_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"guid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target_data_source_type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ordinal\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"color_scheme\": \"string\",\n          \"data_types\": {\n            \"data_source_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"data_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"external_database_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"object_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"emoji\": \"string\",\n          \"guid\": \"string\",\n          \"icon\": \"string\",\n          \"linked_from\": [\n            \"string\",\n            \"string\"\n          ],\n          \"name\": \"string\"\n        }\n      ],\n      \"created_by\": {\n        \"avatar\": \"https://nIhSskWVWXRmuzrRHWw.bwb+nK5.geA9icHdDaMmRxHPO++ujh1saRyTEAqlRPSOPgsp5tZFDd8mHlFQ0R7xguIIAKkA5LfinA7I7S,4w.RV4\",\n        \"created_on\": \"2018-06-01T17:59:11.410Z\",\n        \"email\": \"\",\n        \"first_name\": \"string\",\n        \"guid\": \"string\",\n        \"is_active\": false,\n        \"is_agreed_to_terms\": true,\n        \"is_invitation_pending\": {},\n        \"is_verified\": false,\n        \"last_activity\": \"1964-06-30T20:38:32.195Z\",\n        \"last_login\": \"2024-04-25T04:31:49.507Z\",\n        \"last_name\": \"string\",\n        \"team\": {\n          \"guid\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"settings\": {\n          \"enable_email_notifications\": true,\n          \"enable_slack_notifications\": true,\n          \"enable_notifications_for_schema_changes\": true,\n          \"enable_notifications_for_metadata_changes\": false,\n          \"enable_discussions_notifications\": false,\n          \"enable_favorites_notifications_for_schema_changes\": true,\n          \"enable_favorites_notifications_for_metadata_changes\": true,\n          \"enable_favorites_notifications_for_discussions\": true,\n          \"default_database_table_column_order\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"default_table_dashboard_tab\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"data_type\": \"string\",\n      \"data_types\": {\n        \"data_source_type\": \"string\",\n        \"data_type\": \"string\",\n        \"external_database_type\": \"string\",\n        \"object_type\": \"string\"\n      },\n      \"full_path\": \"string\",\n      \"guid\": \"string\",\n      \"parent_hierarchy\": \"string\",\n      \"represented_as_fields\": [\n        {\n          \"item\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"parent\": {\n            \"breadcrumbs\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"object_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"full_name\": \"string\",\n          \"full_sql\": \"string\",\n          \"additional_condition\": \"string\"\n        },\n        {\n          \"item\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"parent\": {\n            \"breadcrumbs\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"object_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"full_name\": \"string\",\n          \"full_sql\": \"string\",\n          \"additional_condition\": \"string\"\n        }\n      ],\n      \"tagged_items\": [\n        {\n          \"guid\": \"string\",\n          \"kind\": \"string\",\n          \"suggested_source_kind\": \"string\",\n          \"suggestion_source_object\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"tag\": {\n            \"breadcrumbs\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"color\": \"string\",\n            \"icon\": \"string\",\n            \"name\": \"string\",\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"visible\": true,\n            \"guid\": \"string\",\n            \"links_to\": \"string\"\n          },\n          \"suggestion_source\": {\n            \"item\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"guid\": \"string\",\n          \"kind\": \"string\",\n          \"suggested_source_kind\": \"string\",\n          \"suggestion_source_object\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"tag\": {\n            \"breadcrumbs\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"color\": \"string\",\n            \"icon\": \"string\",\n            \"name\": \"string\",\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"visible\": true,\n            \"guid\": \"string\",\n            \"links_to\": \"string\"\n          },\n          \"suggestion_source\": {\n            \"item\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"updated_on\": \"2000-12-01T17:20:05.007Z\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"richtext_description\": \"string\",\n      \"dimensions\": [\n        {\n          \"field\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"field\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"business_owner\": {\n        \"data_source\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"guid\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"last_ingested_on\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"name\": \"string\",\n        \"guid\": \"string\",\n        \"display_name\": \"string\"\n      },\n      \"technical_owner\": {\n        \"data_source\": {\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"guid\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"last_ingested_on\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"name\": \"string\",\n        \"guid\": \"string\",\n        \"display_name\": \"string\"\n      },\n      \"represented_as\": \"string\",\n      \"richtext_represented_as\": \"string\",\n      \"sql\": \"string\",\n      \"synonyms\": [\n        \"string\",\n        \"string\"\n      ],\n      \"ordinal\": 1999225481\n    }\n  ],\n  \"next\": \"http://api.example.org/accounts/?page=4\",\n  \"previous\": \"http://api.example.org/accounts/?page=2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "30d2d25e-b251-466c-8e79-5199e34f05db",
+          "name": "metrics create",
+          "request": {
+            "name": "metrics create",
+            "description": {
+              "content": "Create a metric within authenticated user's organization\n\n**Required Role:** Data Manager or higher",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "metrics",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "guid",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "description",
+                  "value": "<string>",
+                  "description": "Active description"
+                },
+                {
+                  "disabled": false,
+                  "key": "richtext_description",
+                  "value": "<string>",
+                  "description": "Richtext formatted description. Can be in Slatejs or Draftjs format."
+                },
+                {
+                  "disabled": false,
+                  "key": "dimensions",
+                  "value": "{\"field\":\"<string>\"}"
+                },
+                {
+                  "disabled": false,
+                  "key": "dimensions",
+                  "value": "{\"field\":\"<string>\"}"
+                },
+                {
+                  "disabled": false,
+                  "key": "business_owner",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "technical_owner",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "represented_as",
+                  "value": "<string>",
+                  "description": "The plaintext Metric represented as formula"
+                },
+                {
+                  "disabled": false,
+                  "key": "richtext_represented_as",
+                  "value": "<string>",
+                  "description": "The richtext enabled Metric represented as formula"
+                },
+                {
+                  "disabled": false,
+                  "key": "sql",
+                  "value": "<string>",
+                  "description": "The SQL that represents the calculation of this metric"
+                },
+                {
+                  "disabled": false,
+                  "key": "synonyms",
+                  "value": "<string>",
+                  "description": "Array of synonyms/alternative names for this metric"
+                },
+                {
+                  "disabled": false,
+                  "key": "synonyms",
+                  "value": "<string>",
+                  "description": "Array of synonyms/alternative names for this metric"
+                },
+                {
+                  "disabled": false,
+                  "key": "ordinal",
+                  "value": "<integer>",
+                  "description": "Ordinal number for determining sorting order of that document"
+                },
+                {
+                  "disabled": false,
+                  "key": "dimension_fields",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "dimension_fields",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "key_0",
+                  "value": "{\"key_0\":{},\"key_1\":{},\"key_2\":{}}"
+                },
+                {
+                  "disabled": false,
+                  "key": "key_1",
+                  "value": "{\"key_0\":{},\"key_1\":{},\"key_2\":{}}"
+                },
+                {
+                  "disabled": false,
+                  "key": "key_2",
+                  "value": "{\"key_0\":{},\"key_1\":{},\"key_2\":{},\"key_3\":{},\"key_4\":{}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "457e11be-6083-49f6-b384-3576d32b4f93",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "metrics",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "key": "guid",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Active description",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Richtext formatted description. Can be in Slatejs or Draftjs format.",
+                        "type": "text/plain"
+                      },
+                      "key": "richtext_description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "dimensions",
+                      "value": "{\"field\":\"<string>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "dimensions",
+                      "value": "{\"field\":\"<string>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "business_owner",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "technical_owner",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The plaintext Metric represented as formula",
+                        "type": "text/plain"
+                      },
+                      "key": "represented_as",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The richtext enabled Metric represented as formula",
+                        "type": "text/plain"
+                      },
+                      "key": "richtext_represented_as",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The SQL that represents the calculation of this metric",
+                        "type": "text/plain"
+                      },
+                      "key": "sql",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Array of synonyms/alternative names for this metric",
+                        "type": "text/plain"
+                      },
+                      "key": "synonyms",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Array of synonyms/alternative names for this metric",
+                        "type": "text/plain"
+                      },
+                      "key": "synonyms",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Ordinal number for determining sorting order of that document",
+                        "type": "text/plain"
+                      },
+                      "key": "ordinal",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "dimension_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "dimension_fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "key_0",
+                      "value": "{\"key_0\":{},\"key_1\":{}}"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "key_1",
+                      "value": "{\"key_0\":{},\"key_1\":{}}"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "key_2",
+                      "value": "{\"key_0\":{},\"key_1\":{}}"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "key_3",
+                      "value": "{\"key_0\":{},\"key_1\":{}}"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "key_4",
+                      "value": "{\"key_0\":{},\"key_1\":{}}"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"breadcrumbs\": [\n    {\n      \"target_data_source_guid\": \"string\",\n      \"target_data_type\": \"string\",\n      \"target_guid\": \"string\",\n      \"target_name\": \"string\",\n      \"target_object_type\": \"string\",\n      \"guid\": \"string\",\n      \"target_data_source_type\": \"metabase\",\n      \"ordinal\": 1575737279\n    },\n    {\n      \"target_data_source_guid\": \"string\",\n      \"target_data_type\": \"string\",\n      \"target_guid\": \"string\",\n      \"target_name\": \"string\",\n      \"target_object_type\": \"string\",\n      \"guid\": \"string\",\n      \"target_data_source_type\": \"monte_carlo\",\n      \"ordinal\": 80254776\n    }\n  ],\n  \"collections\": [\n    {\n      \"breadcrumbs\": [\n        {\n          \"target_data_source_guid\": \"string\",\n          \"target_data_type\": \"string\",\n          \"target_guid\": \"string\",\n          \"target_name\": \"string\",\n          \"target_object_type\": \"string\",\n          \"guid\": \"string\",\n          \"target_data_source_type\": \"dbt\",\n          \"ordinal\": 1291325349\n        },\n        {\n          \"target_data_source_guid\": \"string\",\n          \"target_data_type\": \"string\",\n          \"target_guid\": \"string\",\n          \"target_name\": \"string\",\n          \"target_object_type\": \"string\",\n          \"guid\": \"string\",\n          \"target_data_source_type\": \"snowflake\",\n          \"ordinal\": 1019897849\n        }\n      ],\n      \"color_scheme\": \"string\",\n      \"data_types\": {\n        \"data_source_type\": \"string\",\n        \"data_type\": \"string\",\n        \"external_database_type\": \"string\",\n        \"object_type\": \"string\"\n      },\n      \"emoji\": \"string\",\n      \"guid\": \"string\",\n      \"icon\": \"string\",\n      \"linked_from\": [\n        \"string\",\n        \"string\"\n      ],\n      \"name\": \"string\"\n    },\n    {\n      \"breadcrumbs\": [\n        {\n          \"target_data_source_guid\": \"string\",\n          \"target_data_type\": \"string\",\n          \"target_guid\": \"string\",\n          \"target_name\": \"string\",\n          \"target_object_type\": \"string\",\n          \"guid\": \"string\",\n          \"target_data_source_type\": \"hex\",\n          \"ordinal\": 357210572\n        },\n        {\n          \"target_data_source_guid\": \"string\",\n          \"target_data_type\": \"string\",\n          \"target_guid\": \"string\",\n          \"target_name\": \"string\",\n          \"target_object_type\": \"string\",\n          \"guid\": \"string\",\n          \"target_data_source_type\": \"redshift\",\n          \"ordinal\": 1422568421\n        }\n      ],\n      \"color_scheme\": \"string\",\n      \"data_types\": {\n        \"data_source_type\": \"string\",\n        \"data_type\": \"string\",\n        \"external_database_type\": \"string\",\n        \"object_type\": \"string\"\n      },\n      \"emoji\": \"string\",\n      \"guid\": \"string\",\n      \"icon\": \"string\",\n      \"linked_from\": [\n        \"string\",\n        \"string\"\n      ],\n      \"name\": \"string\"\n    }\n  ],\n  \"created_by\": {\n    \"avatar\": \"http://LcRvutvWdPtTKtL.ajxbkLeMecf9scGrGZtiZpbGCaOxCIXKl0V,gI+RjizxTy6RWsXTZM+t95\",\n    \"created_on\": \"1993-08-23T13:15:11.842Z\",\n    \"email\": \"\",\n    \"first_name\": \"string\",\n    \"guid\": \"string\",\n    \"is_active\": true,\n    \"is_agreed_to_terms\": true,\n    \"is_invitation_pending\": {},\n    \"is_verified\": true,\n    \"last_activity\": \"1969-05-10T21:21:08.330Z\",\n    \"last_login\": \"1964-03-04T18:57:47.231Z\",\n    \"last_name\": \"string\",\n    \"team\": {\n      \"guid\": \"string\",\n      \"name\": \"string\"\n    },\n    \"settings\": {\n      \"enable_email_notifications\": false,\n      \"enable_slack_notifications\": false,\n      \"enable_notifications_for_schema_changes\": true,\n      \"enable_notifications_for_metadata_changes\": true,\n      \"enable_discussions_notifications\": true,\n      \"enable_favorites_notifications_for_schema_changes\": false,\n      \"enable_favorites_notifications_for_metadata_changes\": true,\n      \"enable_favorites_notifications_for_discussions\": true,\n      \"default_database_table_column_order\": \"column_ordinal_position\",\n      \"default_table_dashboard_tab\": \"columns_charts\"\n    }\n  },\n  \"data_type\": \"string\",\n  \"data_types\": {\n    \"data_source_type\": \"string\",\n    \"data_type\": \"string\",\n    \"external_database_type\": \"string\",\n    \"object_type\": \"string\"\n  },\n  \"full_path\": \"string\",\n  \"parent_hierarchy\": \"string\",\n  \"represented_as_fields\": [\n    {\n      \"item\": {\n        \"breadcrumbs\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"guid\": \"string\",\n        \"name\": \"string\",\n        \"object_type\": \"string\"\n      },\n      \"parent\": {\n        \"breadcrumbs\": [\n          {\n            \"target_data_source_guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_data_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_object_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_data_source_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ordinal\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"target_data_source_guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_data_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_object_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_data_source_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ordinal\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"guid\": \"string\",\n        \"name\": \"string\",\n        \"object_type\": \"string\"\n      },\n      \"full_name\": \"string\",\n      \"full_sql\": \"string\",\n      \"additional_condition\": \"string\"\n    },\n    {\n      \"item\": {\n        \"breadcrumbs\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"guid\": \"string\",\n        \"name\": \"string\",\n        \"object_type\": \"string\"\n      },\n      \"parent\": {\n        \"breadcrumbs\": [\n          {\n            \"target_data_source_guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_data_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_object_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_data_source_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ordinal\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"target_data_source_guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_data_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_object_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_data_source_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ordinal\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"guid\": \"string\",\n        \"name\": \"string\",\n        \"object_type\": \"string\"\n      },\n      \"full_name\": \"string\",\n      \"full_sql\": \"string\",\n      \"additional_condition\": \"string\"\n    }\n  ],\n  \"tagged_items\": [\n    {\n      \"guid\": \"string\",\n      \"kind\": \"string\",\n      \"suggested_source_kind\": \"string\",\n      \"suggestion_source_object\": {\n        \"created_by\": {\n          \"readOnly\": true,\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"item_count\": 4744,\n        \"name\": \"string\",\n        \"regex\": \"string\",\n        \"type\": {\n          \"description\": \"The type of PII this represents\\n\\n* `address` - address\\n* `banking` - banking\\n* `birthdate` - birthdate\\n* `document` - document\\n* `email` - email\\n* `face_photo` - face_photo\\n* `gender` - gender\\n* `marital_status` - marital_status\\n* `nationality` - nationality\\n* `online_account` - online_account\\n* `online_address` - online_address\\n* `password` - password\\n* `person` - person\\n* `phone` - phone\\n* `salary` - salary\\n* `ssn` - ssn\\n* `username` - username\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"guid\": \"string\",\n        \"active\": false\n      },\n      \"tag\": {\n        \"breadcrumbs\": [\n          {\n            \"target_data_source_guid\": \"string\",\n            \"target_data_type\": \"string\",\n            \"target_guid\": \"string\",\n            \"target_name\": \"string\",\n            \"target_object_type\": \"string\",\n            \"guid\": \"string\",\n            \"target_data_source_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ordinal\": 1457705486\n          },\n          {\n            \"target_data_source_guid\": \"string\",\n            \"target_data_type\": \"string\",\n            \"target_guid\": \"string\",\n            \"target_name\": \"string\",\n            \"target_object_type\": \"string\",\n            \"guid\": \"string\",\n            \"target_data_source_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ordinal\": 696168955\n          }\n        ],\n        \"color\": \"string\",\n        \"icon\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"dbt\",\n        \"visible\": false,\n        \"guid\": \"string\",\n        \"links_to\": \"string\"\n      },\n      \"suggestion_source\": {\n        \"item\": {\n          \"breadcrumbs\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"guid\": \"string\",\n          \"name\": \"string\",\n          \"object_type\": \"string\"\n        }\n      }\n    },\n    {\n      \"guid\": \"string\",\n      \"kind\": \"string\",\n      \"suggested_source_kind\": \"string\",\n      \"suggestion_source_object\": {\n        \"created_by\": {\n          \"readOnly\": true,\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"item_count\": 6052,\n        \"name\": \"string\",\n        \"regex\": \"string\",\n        \"type\": {\n          \"description\": \"The type of PII this represents\\n\\n* `address` - address\\n* `banking` - banking\\n* `birthdate` - birthdate\\n* `document` - document\\n* `email` - email\\n* `face_photo` - face_photo\\n* `gender` - gender\\n* `marital_status` - marital_status\\n* `nationality` - nationality\\n* `online_account` - online_account\\n* `online_address` - online_address\\n* `password` - password\\n* `person` - person\\n* `phone` - phone\\n* `salary` - salary\\n* `ssn` - ssn\\n* `username` - username\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"guid\": \"string\",\n        \"active\": true\n      },\n      \"tag\": {\n        \"breadcrumbs\": [\n          {\n            \"target_data_source_guid\": \"string\",\n            \"target_data_type\": \"string\",\n            \"target_guid\": \"string\",\n            \"target_name\": \"string\",\n            \"target_object_type\": \"string\",\n            \"guid\": \"string\",\n            \"target_data_source_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ordinal\": 657047019\n          },\n          {\n            \"target_data_source_guid\": \"string\",\n            \"target_data_type\": \"string\",\n            \"target_guid\": \"string\",\n            \"target_name\": \"string\",\n            \"target_object_type\": \"string\",\n            \"guid\": \"string\",\n            \"target_data_source_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ordinal\": 1707002060\n          }\n        ],\n        \"color\": \"string\",\n        \"icon\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"dbt\",\n        \"visible\": true,\n        \"guid\": \"string\",\n        \"links_to\": \"string\"\n      },\n      \"suggestion_source\": {\n        \"item\": {\n          \"breadcrumbs\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"guid\": \"string\",\n          \"name\": \"string\",\n          \"object_type\": \"string\"\n        }\n      }\n    }\n  ],\n  \"updated_on\": \"2005-02-22T06:05:40.439Z\",\n  \"guid\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"richtext_description\": \"string\",\n  \"dimensions\": [\n    {\n      \"field\": {\n        \"breadcrumbs\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"data_types\": {\n          \"readOnly\": true,\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"field\": {\n          \"ai_description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"data_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"data_types\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description_source\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"external_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"field_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"ingested_description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"is_mention\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"is_metric\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"is_used_as_filter\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"is_used_as_pivot\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"label\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"popularity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"sql\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"suggested_description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"suggested_description_source\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"suggested_description_source_object\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"tagged_items\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"user_description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"user_description_author\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"view\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"view_label\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"guid\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"richtext_description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"project_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"is_dimension\": {},\n        \"is_mention\": {},\n        \"is_metric\": {},\n        \"parent_guid\": \"string\",\n        \"popularity\": {\n          \"popularity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"query_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"service_query_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timeframe\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"user_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"search_name\": \"string\",\n        \"tagged_items\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"guid\": \"string\",\n        \"joined_view_label\": \"string\",\n        \"url\": \"https://hBIWpnqiklapNIdqNI.rxxF4eY1BzZb37\"\n      }\n    },\n    {\n      \"field\": {\n        \"breadcrumbs\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"data_types\": {\n          \"readOnly\": true,\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"field\": {\n          \"ai_description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"data_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"data_types\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description_source\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"external_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"field_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"ingested_description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"is_mention\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"is_metric\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"is_used_as_filter\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"is_used_as_pivot\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"label\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"popularity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"sql\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"suggested_description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"suggested_description_source\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"suggested_description_source_object\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"tagged_items\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"user_description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"user_description_author\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"view\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"view_label\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"guid\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"richtext_description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"project_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"is_dimension\": {},\n        \"is_mention\": {},\n        \"is_metric\": {},\n        \"parent_guid\": \"string\",\n        \"popularity\": {\n          \"popularity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"query_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"service_query_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timeframe\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"user_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"search_name\": \"string\",\n        \"tagged_items\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"guid\": \"string\",\n        \"joined_view_label\": \"string\",\n        \"url\": \"http://EjhFuais.vdqlxjffB1AbmQjSFGgFLYr21gxO4030eX83\"\n      }\n    }\n  ],\n  \"business_owner\": {\n    \"data_source\": {\n      \"name\": \"string\",\n      \"type\": \"airflow\",\n      \"guid\": \"string\",\n      \"last_ingested_on\": \"1975-09-19T14:52:13.682Z\"\n    },\n    \"name\": \"string\",\n    \"guid\": \"string\",\n    \"display_name\": \"string\"\n  },\n  \"technical_owner\": {\n    \"data_source\": {\n      \"name\": \"string\",\n      \"type\": \"quicksight\",\n      \"guid\": \"string\",\n      \"last_ingested_on\": \"2012-01-11T03:49:21.299Z\"\n    },\n    \"name\": \"string\",\n    \"guid\": \"string\",\n    \"display_name\": \"string\"\n  },\n  \"represented_as\": \"string\",\n  \"richtext_represented_as\": \"string\",\n  \"sql\": \"string\",\n  \"synonyms\": [\n    \"string\",\n    \"string\"\n  ],\n  \"ordinal\": 1669673484\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dbbbca9e-4d7e-4fba-a9af-37899bcf8af3",
+          "name": "metrics retrieve",
+          "request": {
+            "name": "metrics retrieve",
+            "description": {
+              "content": "Retrieve a single metric\n\n**Required Role:** Viewer or higher",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "metrics",
+                ":guid",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "bc5f9dc8-7470-428a-bd52-cb8299b03eb0",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "metrics",
+                    ":guid",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"breadcrumbs\": [\n    {\n      \"target_data_source_guid\": \"string\",\n      \"target_data_type\": \"string\",\n      \"target_guid\": \"string\",\n      \"target_name\": \"string\",\n      \"target_object_type\": \"string\",\n      \"guid\": \"string\",\n      \"target_data_source_type\": \"periscope\",\n      \"ordinal\": 1742373987\n    },\n    {\n      \"target_data_source_guid\": \"string\",\n      \"target_data_type\": \"string\",\n      \"target_guid\": \"string\",\n      \"target_name\": \"string\",\n      \"target_object_type\": \"string\",\n      \"guid\": \"string\",\n      \"target_data_source_type\": \"sigma\",\n      \"ordinal\": 427154220\n    }\n  ],\n  \"collections\": [\n    {\n      \"breadcrumbs\": [\n        {\n          \"target_data_source_guid\": \"string\",\n          \"target_data_type\": \"string\",\n          \"target_guid\": \"string\",\n          \"target_name\": \"string\",\n          \"target_object_type\": \"string\",\n          \"guid\": \"string\",\n          \"target_data_source_type\": \"metabase\",\n          \"ordinal\": 803028134\n        },\n        {\n          \"target_data_source_guid\": \"string\",\n          \"target_data_type\": \"string\",\n          \"target_guid\": \"string\",\n          \"target_name\": \"string\",\n          \"target_object_type\": \"string\",\n          \"guid\": \"string\",\n          \"target_data_source_type\": \"quicksight\",\n          \"ordinal\": 2097186256\n        }\n      ],\n      \"color_scheme\": \"string\",\n      \"data_types\": {\n        \"data_source_type\": \"string\",\n        \"data_type\": \"string\",\n        \"external_database_type\": \"string\",\n        \"object_type\": \"string\"\n      },\n      \"emoji\": \"string\",\n      \"guid\": \"string\",\n      \"icon\": \"string\",\n      \"linked_from\": [\n        \"string\",\n        \"string\"\n      ],\n      \"name\": \"string\"\n    },\n    {\n      \"breadcrumbs\": [\n        {\n          \"target_data_source_guid\": \"string\",\n          \"target_data_type\": \"string\",\n          \"target_guid\": \"string\",\n          \"target_name\": \"string\",\n          \"target_object_type\": \"string\",\n          \"guid\": \"string\",\n          \"target_data_source_type\": \"dbt\",\n          \"ordinal\": 772293283\n        },\n        {\n          \"target_data_source_guid\": \"string\",\n          \"target_data_type\": \"string\",\n          \"target_guid\": \"string\",\n          \"target_name\": \"string\",\n          \"target_object_type\": \"string\",\n          \"guid\": \"string\",\n          \"target_data_source_type\": \"bigquery\",\n          \"ordinal\": 911822500\n        }\n      ],\n      \"color_scheme\": \"string\",\n      \"data_types\": {\n        \"data_source_type\": \"string\",\n        \"data_type\": \"string\",\n        \"external_database_type\": \"string\",\n        \"object_type\": \"string\"\n      },\n      \"emoji\": \"string\",\n      \"guid\": \"string\",\n      \"icon\": \"string\",\n      \"linked_from\": [\n        \"string\",\n        \"string\"\n      ],\n      \"name\": \"string\"\n    }\n  ],\n  \"created_by\": {\n    \"avatar\": \"https://iebxIZzpXNNKJmVzosTnqaUerfor.clyHcXCZzhSvvb0fW8in+0Jr.BhmgLjbOwo9vI4+\",\n    \"created_on\": \"1962-09-15T20:55:53.334Z\",\n    \"email\": \"\",\n    \"first_name\": \"string\",\n    \"guid\": \"string\",\n    \"is_active\": false,\n    \"is_agreed_to_terms\": false,\n    \"is_invitation_pending\": {},\n    \"is_verified\": true,\n    \"last_activity\": \"1964-01-04T15:46:51.681Z\",\n    \"last_login\": \"1965-03-13T22:24:00.015Z\",\n    \"last_name\": \"string\",\n    \"team\": {\n      \"guid\": \"string\",\n      \"name\": \"string\"\n    },\n    \"settings\": {\n      \"enable_email_notifications\": false,\n      \"enable_slack_notifications\": false,\n      \"enable_notifications_for_schema_changes\": false,\n      \"enable_notifications_for_metadata_changes\": false,\n      \"enable_discussions_notifications\": true,\n      \"enable_favorites_notifications_for_schema_changes\": true,\n      \"enable_favorites_notifications_for_metadata_changes\": true,\n      \"enable_favorites_notifications_for_discussions\": false,\n      \"default_database_table_column_order\": \"column_ordinal_position\",\n      \"default_table_dashboard_tab\": \"columns_charts\"\n    }\n  },\n  \"data_type\": \"string\",\n  \"data_types\": {\n    \"data_source_type\": \"string\",\n    \"data_type\": \"string\",\n    \"external_database_type\": \"string\",\n    \"object_type\": \"string\"\n  },\n  \"full_path\": \"string\",\n  \"guid\": \"string\",\n  \"parent_hierarchy\": \"string\",\n  \"represented_as_fields\": [\n    {\n      \"item\": {\n        \"breadcrumbs\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"guid\": \"string\",\n        \"name\": \"string\",\n        \"object_type\": \"string\"\n      },\n      \"parent\": {\n        \"breadcrumbs\": [\n          {\n            \"target_data_source_guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_data_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_object_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_data_source_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ordinal\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"target_data_source_guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_data_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_object_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_data_source_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ordinal\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"guid\": \"string\",\n        \"name\": \"string\",\n        \"object_type\": \"string\"\n      },\n      \"full_name\": \"string\",\n      \"full_sql\": \"string\",\n      \"additional_condition\": \"string\"\n    },\n    {\n      \"item\": {\n        \"breadcrumbs\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"guid\": \"string\",\n        \"name\": \"string\",\n        \"object_type\": \"string\"\n      },\n      \"parent\": {\n        \"breadcrumbs\": [\n          {\n            \"target_data_source_guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_data_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_object_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_data_source_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ordinal\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"target_data_source_guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_data_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_object_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_data_source_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ordinal\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"guid\": \"string\",\n        \"name\": \"string\",\n        \"object_type\": \"string\"\n      },\n      \"full_name\": \"string\",\n      \"full_sql\": \"string\",\n      \"additional_condition\": \"string\"\n    }\n  ],\n  \"tagged_items\": [\n    {\n      \"guid\": \"string\",\n      \"kind\": \"string\",\n      \"suggested_source_kind\": \"string\",\n      \"suggestion_source_object\": {\n        \"created_by\": {\n          \"readOnly\": true,\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"item_count\": 5509,\n        \"name\": \"string\",\n        \"regex\": \"string\",\n        \"type\": {\n          \"description\": \"The type of PII this represents\\n\\n* `address` - address\\n* `banking` - banking\\n* `birthdate` - birthdate\\n* `document` - document\\n* `email` - email\\n* `face_photo` - face_photo\\n* `gender` - gender\\n* `marital_status` - marital_status\\n* `nationality` - nationality\\n* `online_account` - online_account\\n* `online_address` - online_address\\n* `password` - password\\n* `person` - person\\n* `phone` - phone\\n* `salary` - salary\\n* `ssn` - ssn\\n* `username` - username\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"guid\": \"string\",\n        \"active\": true\n      },\n      \"tag\": {\n        \"breadcrumbs\": [\n          {\n            \"target_data_source_guid\": \"string\",\n            \"target_data_type\": \"string\",\n            \"target_guid\": \"string\",\n            \"target_name\": \"string\",\n            \"target_object_type\": \"string\",\n            \"guid\": \"string\",\n            \"target_data_source_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ordinal\": 247504443\n          },\n          {\n            \"target_data_source_guid\": \"string\",\n            \"target_data_type\": \"string\",\n            \"target_guid\": \"string\",\n            \"target_name\": \"string\",\n            \"target_object_type\": \"string\",\n            \"guid\": \"string\",\n            \"target_data_source_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ordinal\": 525631674\n          }\n        ],\n        \"color\": \"string\",\n        \"icon\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"dbt\",\n        \"visible\": true,\n        \"guid\": \"string\",\n        \"links_to\": \"string\"\n      },\n      \"suggestion_source\": {\n        \"item\": {\n          \"breadcrumbs\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"guid\": \"string\",\n          \"name\": \"string\",\n          \"object_type\": \"string\"\n        }\n      }\n    },\n    {\n      \"guid\": \"string\",\n      \"kind\": \"string\",\n      \"suggested_source_kind\": \"string\",\n      \"suggestion_source_object\": {\n        \"created_by\": {\n          \"readOnly\": true,\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"item_count\": 7865,\n        \"name\": \"string\",\n        \"regex\": \"string\",\n        \"type\": {\n          \"description\": \"The type of PII this represents\\n\\n* `address` - address\\n* `banking` - banking\\n* `birthdate` - birthdate\\n* `document` - document\\n* `email` - email\\n* `face_photo` - face_photo\\n* `gender` - gender\\n* `marital_status` - marital_status\\n* `nationality` - nationality\\n* `online_account` - online_account\\n* `online_address` - online_address\\n* `password` - password\\n* `person` - person\\n* `phone` - phone\\n* `salary` - salary\\n* `ssn` - ssn\\n* `username` - username\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"guid\": \"string\",\n        \"active\": true\n      },\n      \"tag\": {\n        \"breadcrumbs\": [\n          {\n            \"target_data_source_guid\": \"string\",\n            \"target_data_type\": \"string\",\n            \"target_guid\": \"string\",\n            \"target_name\": \"string\",\n            \"target_object_type\": \"string\",\n            \"guid\": \"string\",\n            \"target_data_source_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ordinal\": 1943430975\n          },\n          {\n            \"target_data_source_guid\": \"string\",\n            \"target_data_type\": \"string\",\n            \"target_guid\": \"string\",\n            \"target_name\": \"string\",\n            \"target_object_type\": \"string\",\n            \"guid\": \"string\",\n            \"target_data_source_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ordinal\": 2099235234\n          }\n        ],\n        \"color\": \"string\",\n        \"icon\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"dbt\",\n        \"visible\": true,\n        \"guid\": \"string\",\n        \"links_to\": \"string\"\n      },\n      \"suggestion_source\": {\n        \"item\": {\n          \"breadcrumbs\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"guid\": \"string\",\n          \"name\": \"string\",\n          \"object_type\": \"string\"\n        }\n      }\n    }\n  ],\n  \"updated_on\": \"1967-09-17T21:03:59.552Z\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"richtext_description\": \"string\",\n  \"dimensions\": [\n    {\n      \"field\": {\n        \"breadcrumbs\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"data_types\": {\n          \"readOnly\": true,\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"field\": {\n          \"ai_description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"data_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"data_types\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description_source\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"external_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"field_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"ingested_description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"is_mention\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"is_metric\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"is_used_as_filter\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"is_used_as_pivot\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"label\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"popularity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"sql\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"suggested_description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"suggested_description_source\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"suggested_description_source_object\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"tagged_items\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"user_description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"user_description_author\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"view\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"view_label\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"guid\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"richtext_description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"project_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"is_dimension\": {},\n        \"is_mention\": {},\n        \"is_metric\": {},\n        \"parent_guid\": \"string\",\n        \"popularity\": {\n          \"popularity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"query_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"service_query_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timeframe\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"user_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"search_name\": \"string\",\n        \"tagged_items\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"guid\": \"string\",\n        \"joined_view_label\": \"string\",\n        \"url\": \"http://vGnZASecbwRNwmNgJ.levW7whdwmPo6BTdxUdNocrVLcD19vDEkNLzI\"\n      }\n    },\n    {\n      \"field\": {\n        \"breadcrumbs\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"data_types\": {\n          \"readOnly\": true,\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"field\": {\n          \"ai_description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"data_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"data_types\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description_source\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"external_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"field_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"ingested_description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"is_mention\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"is_metric\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"is_used_as_filter\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"is_used_as_pivot\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"label\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"popularity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"sql\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"suggested_description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"suggested_description_source\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"suggested_description_source_object\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"tagged_items\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"user_description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"user_description_author\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"view\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"view_label\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"guid\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"richtext_description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"project_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"is_dimension\": {},\n        \"is_mention\": {},\n        \"is_metric\": {},\n        \"parent_guid\": \"string\",\n        \"popularity\": {\n          \"popularity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"query_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"service_query_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timeframe\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"user_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"search_name\": \"string\",\n        \"tagged_items\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"guid\": \"string\",\n        \"joined_view_label\": \"string\",\n        \"url\": \"http://fyDRnQFtVxTMQGPdwNrsWIhXWj.tkursfrdcVToETk4ARKuVg,,hYN47ifRrQunKxEdbojqLwM+WG2ySs5IA.ly\"\n      }\n    }\n  ],\n  \"business_owner\": {\n    \"data_source\": {\n      \"name\": \"string\",\n      \"type\": \"postgres\",\n      \"guid\": \"string\",\n      \"last_ingested_on\": \"1950-09-02T22:26:13.870Z\"\n    },\n    \"name\": \"string\",\n    \"guid\": \"string\",\n    \"display_name\": \"string\"\n  },\n  \"technical_owner\": {\n    \"data_source\": {\n      \"name\": \"string\",\n      \"type\": \"tableau\",\n      \"guid\": \"string\",\n      \"last_ingested_on\": \"1975-05-18T18:26:48.289Z\"\n    },\n    \"name\": \"string\",\n    \"guid\": \"string\",\n    \"display_name\": \"string\"\n  },\n  \"represented_as\": \"string\",\n  \"richtext_represented_as\": \"string\",\n  \"sql\": \"string\",\n  \"synonyms\": [\n    \"string\",\n    \"string\"\n  ],\n  \"ordinal\": 880677995\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b1b1ede1-b6ba-4459-b2a5-6f5548e83b72",
+          "name": "metrics partial update",
+          "request": {
+            "name": "metrics partial update",
+            "description": {
+              "content": "Update a single metric\n\n**Required Role:** Data Manager or higher",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "metrics",
+                ":guid",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "description",
+                  "value": "<string>",
+                  "description": "Active description"
+                },
+                {
+                  "disabled": false,
+                  "key": "richtext_description",
+                  "value": "<string>",
+                  "description": "Richtext formatted description. Can be in Slatejs or Draftjs format."
+                },
+                {
+                  "disabled": false,
+                  "key": "dimensions",
+                  "value": "{\"field\":\"<string>\"}"
+                },
+                {
+                  "disabled": false,
+                  "key": "dimensions",
+                  "value": "{\"field\":\"<string>\"}"
+                },
+                {
+                  "disabled": false,
+                  "key": "business_owner",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "technical_owner",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "represented_as",
+                  "value": "<string>",
+                  "description": "The plaintext Metric represented as formula"
+                },
+                {
+                  "disabled": false,
+                  "key": "richtext_represented_as",
+                  "value": "<string>",
+                  "description": "The richtext enabled Metric represented as formula"
+                },
+                {
+                  "disabled": false,
+                  "key": "sql",
+                  "value": "<string>",
+                  "description": "The SQL that represents the calculation of this metric"
+                },
+                {
+                  "disabled": false,
+                  "key": "synonyms",
+                  "value": "<string>",
+                  "description": "Array of synonyms/alternative names for this metric"
+                },
+                {
+                  "disabled": false,
+                  "key": "synonyms",
+                  "value": "<string>",
+                  "description": "Array of synonyms/alternative names for this metric"
+                },
+                {
+                  "disabled": false,
+                  "key": "ordinal",
+                  "value": "<integer>",
+                  "description": "Ordinal number for determining sorting order of that document"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a04624aa-153d-459e-b2f6-e46b61e85904",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "metrics",
+                    ":guid",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Active description",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Richtext formatted description. Can be in Slatejs or Draftjs format.",
+                        "type": "text/plain"
+                      },
+                      "key": "richtext_description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "dimensions",
+                      "value": "{\"field\":\"<string>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "dimensions",
+                      "value": "{\"field\":\"<string>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "business_owner",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "technical_owner",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The plaintext Metric represented as formula",
+                        "type": "text/plain"
+                      },
+                      "key": "represented_as",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The richtext enabled Metric represented as formula",
+                        "type": "text/plain"
+                      },
+                      "key": "richtext_represented_as",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The SQL that represents the calculation of this metric",
+                        "type": "text/plain"
+                      },
+                      "key": "sql",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Array of synonyms/alternative names for this metric",
+                        "type": "text/plain"
+                      },
+                      "key": "synonyms",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Array of synonyms/alternative names for this metric",
+                        "type": "text/plain"
+                      },
+                      "key": "synonyms",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Ordinal number for determining sorting order of that document",
+                        "type": "text/plain"
+                      },
+                      "key": "ordinal",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"breadcrumbs\": [\n    {\n      \"target_data_source_guid\": \"string\",\n      \"target_data_type\": \"string\",\n      \"target_guid\": \"string\",\n      \"target_name\": \"string\",\n      \"target_object_type\": \"string\",\n      \"guid\": \"string\",\n      \"target_data_source_type\": \"periscope\",\n      \"ordinal\": 1742373987\n    },\n    {\n      \"target_data_source_guid\": \"string\",\n      \"target_data_type\": \"string\",\n      \"target_guid\": \"string\",\n      \"target_name\": \"string\",\n      \"target_object_type\": \"string\",\n      \"guid\": \"string\",\n      \"target_data_source_type\": \"sigma\",\n      \"ordinal\": 427154220\n    }\n  ],\n  \"collections\": [\n    {\n      \"breadcrumbs\": [\n        {\n          \"target_data_source_guid\": \"string\",\n          \"target_data_type\": \"string\",\n          \"target_guid\": \"string\",\n          \"target_name\": \"string\",\n          \"target_object_type\": \"string\",\n          \"guid\": \"string\",\n          \"target_data_source_type\": \"metabase\",\n          \"ordinal\": 803028134\n        },\n        {\n          \"target_data_source_guid\": \"string\",\n          \"target_data_type\": \"string\",\n          \"target_guid\": \"string\",\n          \"target_name\": \"string\",\n          \"target_object_type\": \"string\",\n          \"guid\": \"string\",\n          \"target_data_source_type\": \"quicksight\",\n          \"ordinal\": 2097186256\n        }\n      ],\n      \"color_scheme\": \"string\",\n      \"data_types\": {\n        \"data_source_type\": \"string\",\n        \"data_type\": \"string\",\n        \"external_database_type\": \"string\",\n        \"object_type\": \"string\"\n      },\n      \"emoji\": \"string\",\n      \"guid\": \"string\",\n      \"icon\": \"string\",\n      \"linked_from\": [\n        \"string\",\n        \"string\"\n      ],\n      \"name\": \"string\"\n    },\n    {\n      \"breadcrumbs\": [\n        {\n          \"target_data_source_guid\": \"string\",\n          \"target_data_type\": \"string\",\n          \"target_guid\": \"string\",\n          \"target_name\": \"string\",\n          \"target_object_type\": \"string\",\n          \"guid\": \"string\",\n          \"target_data_source_type\": \"dbt\",\n          \"ordinal\": 772293283\n        },\n        {\n          \"target_data_source_guid\": \"string\",\n          \"target_data_type\": \"string\",\n          \"target_guid\": \"string\",\n          \"target_name\": \"string\",\n          \"target_object_type\": \"string\",\n          \"guid\": \"string\",\n          \"target_data_source_type\": \"bigquery\",\n          \"ordinal\": 911822500\n        }\n      ],\n      \"color_scheme\": \"string\",\n      \"data_types\": {\n        \"data_source_type\": \"string\",\n        \"data_type\": \"string\",\n        \"external_database_type\": \"string\",\n        \"object_type\": \"string\"\n      },\n      \"emoji\": \"string\",\n      \"guid\": \"string\",\n      \"icon\": \"string\",\n      \"linked_from\": [\n        \"string\",\n        \"string\"\n      ],\n      \"name\": \"string\"\n    }\n  ],\n  \"created_by\": {\n    \"avatar\": \"https://iebxIZzpXNNKJmVzosTnqaUerfor.clyHcXCZzhSvvb0fW8in+0Jr.BhmgLjbOwo9vI4+\",\n    \"created_on\": \"1962-09-15T20:55:53.334Z\",\n    \"email\": \"\",\n    \"first_name\": \"string\",\n    \"guid\": \"string\",\n    \"is_active\": false,\n    \"is_agreed_to_terms\": false,\n    \"is_invitation_pending\": {},\n    \"is_verified\": true,\n    \"last_activity\": \"1964-01-04T15:46:51.681Z\",\n    \"last_login\": \"1965-03-13T22:24:00.015Z\",\n    \"last_name\": \"string\",\n    \"team\": {\n      \"guid\": \"string\",\n      \"name\": \"string\"\n    },\n    \"settings\": {\n      \"enable_email_notifications\": false,\n      \"enable_slack_notifications\": false,\n      \"enable_notifications_for_schema_changes\": false,\n      \"enable_notifications_for_metadata_changes\": false,\n      \"enable_discussions_notifications\": true,\n      \"enable_favorites_notifications_for_schema_changes\": true,\n      \"enable_favorites_notifications_for_metadata_changes\": true,\n      \"enable_favorites_notifications_for_discussions\": false,\n      \"default_database_table_column_order\": \"column_ordinal_position\",\n      \"default_table_dashboard_tab\": \"columns_charts\"\n    }\n  },\n  \"data_type\": \"string\",\n  \"data_types\": {\n    \"data_source_type\": \"string\",\n    \"data_type\": \"string\",\n    \"external_database_type\": \"string\",\n    \"object_type\": \"string\"\n  },\n  \"full_path\": \"string\",\n  \"guid\": \"string\",\n  \"parent_hierarchy\": \"string\",\n  \"represented_as_fields\": [\n    {\n      \"item\": {\n        \"breadcrumbs\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"guid\": \"string\",\n        \"name\": \"string\",\n        \"object_type\": \"string\"\n      },\n      \"parent\": {\n        \"breadcrumbs\": [\n          {\n            \"target_data_source_guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_data_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_object_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_data_source_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ordinal\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"target_data_source_guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_data_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_object_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_data_source_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ordinal\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"guid\": \"string\",\n        \"name\": \"string\",\n        \"object_type\": \"string\"\n      },\n      \"full_name\": \"string\",\n      \"full_sql\": \"string\",\n      \"additional_condition\": \"string\"\n    },\n    {\n      \"item\": {\n        \"breadcrumbs\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"guid\": \"string\",\n        \"name\": \"string\",\n        \"object_type\": \"string\"\n      },\n      \"parent\": {\n        \"breadcrumbs\": [\n          {\n            \"target_data_source_guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_data_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_object_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_data_source_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ordinal\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"target_data_source_guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_data_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_object_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target_data_source_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ordinal\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"guid\": \"string\",\n        \"name\": \"string\",\n        \"object_type\": \"string\"\n      },\n      \"full_name\": \"string\",\n      \"full_sql\": \"string\",\n      \"additional_condition\": \"string\"\n    }\n  ],\n  \"tagged_items\": [\n    {\n      \"guid\": \"string\",\n      \"kind\": \"string\",\n      \"suggested_source_kind\": \"string\",\n      \"suggestion_source_object\": {\n        \"created_by\": {\n          \"readOnly\": true,\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"item_count\": 5509,\n        \"name\": \"string\",\n        \"regex\": \"string\",\n        \"type\": {\n          \"description\": \"The type of PII this represents\\n\\n* `address` - address\\n* `banking` - banking\\n* `birthdate` - birthdate\\n* `document` - document\\n* `email` - email\\n* `face_photo` - face_photo\\n* `gender` - gender\\n* `marital_status` - marital_status\\n* `nationality` - nationality\\n* `online_account` - online_account\\n* `online_address` - online_address\\n* `password` - password\\n* `person` - person\\n* `phone` - phone\\n* `salary` - salary\\n* `ssn` - ssn\\n* `username` - username\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"guid\": \"string\",\n        \"active\": true\n      },\n      \"tag\": {\n        \"breadcrumbs\": [\n          {\n            \"target_data_source_guid\": \"string\",\n            \"target_data_type\": \"string\",\n            \"target_guid\": \"string\",\n            \"target_name\": \"string\",\n            \"target_object_type\": \"string\",\n            \"guid\": \"string\",\n            \"target_data_source_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ordinal\": 247504443\n          },\n          {\n            \"target_data_source_guid\": \"string\",\n            \"target_data_type\": \"string\",\n            \"target_guid\": \"string\",\n            \"target_name\": \"string\",\n            \"target_object_type\": \"string\",\n            \"guid\": \"string\",\n            \"target_data_source_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ordinal\": 525631674\n          }\n        ],\n        \"color\": \"string\",\n        \"icon\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"dbt\",\n        \"visible\": true,\n        \"guid\": \"string\",\n        \"links_to\": \"string\"\n      },\n      \"suggestion_source\": {\n        \"item\": {\n          \"breadcrumbs\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"guid\": \"string\",\n          \"name\": \"string\",\n          \"object_type\": \"string\"\n        }\n      }\n    },\n    {\n      \"guid\": \"string\",\n      \"kind\": \"string\",\n      \"suggested_source_kind\": \"string\",\n      \"suggestion_source_object\": {\n        \"created_by\": {\n          \"readOnly\": true,\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"item_count\": 7865,\n        \"name\": \"string\",\n        \"regex\": \"string\",\n        \"type\": {\n          \"description\": \"The type of PII this represents\\n\\n* `address` - address\\n* `banking` - banking\\n* `birthdate` - birthdate\\n* `document` - document\\n* `email` - email\\n* `face_photo` - face_photo\\n* `gender` - gender\\n* `marital_status` - marital_status\\n* `nationality` - nationality\\n* `online_account` - online_account\\n* `online_address` - online_address\\n* `password` - password\\n* `person` - person\\n* `phone` - phone\\n* `salary` - salary\\n* `ssn` - ssn\\n* `username` - username\",\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"guid\": \"string\",\n        \"active\": true\n      },\n      \"tag\": {\n        \"breadcrumbs\": [\n          {\n            \"target_data_source_guid\": \"string\",\n            \"target_data_type\": \"string\",\n            \"target_guid\": \"string\",\n            \"target_name\": \"string\",\n            \"target_object_type\": \"string\",\n            \"guid\": \"string\",\n            \"target_data_source_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ordinal\": 1943430975\n          },\n          {\n            \"target_data_source_guid\": \"string\",\n            \"target_data_type\": \"string\",\n            \"target_guid\": \"string\",\n            \"target_name\": \"string\",\n            \"target_object_type\": \"string\",\n            \"guid\": \"string\",\n            \"target_data_source_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"ordinal\": 2099235234\n          }\n        ],\n        \"color\": \"string\",\n        \"icon\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"dbt\",\n        \"visible\": true,\n        \"guid\": \"string\",\n        \"links_to\": \"string\"\n      },\n      \"suggestion_source\": {\n        \"item\": {\n          \"breadcrumbs\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"guid\": \"string\",\n          \"name\": \"string\",\n          \"object_type\": \"string\"\n        }\n      }\n    }\n  ],\n  \"updated_on\": \"1967-09-17T21:03:59.552Z\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"richtext_description\": \"string\",\n  \"dimensions\": [\n    {\n      \"field\": {\n        \"breadcrumbs\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"data_types\": {\n          \"readOnly\": true,\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"field\": {\n          \"ai_description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"data_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"data_types\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description_source\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"external_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"field_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"ingested_description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"is_mention\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"is_metric\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"is_used_as_filter\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"is_used_as_pivot\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"label\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"popularity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"sql\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"suggested_description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"suggested_description_source\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"suggested_description_source_object\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"tagged_items\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"user_description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"user_description_author\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"view\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"view_label\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"guid\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"richtext_description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"project_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"is_dimension\": {},\n        \"is_mention\": {},\n        \"is_metric\": {},\n        \"parent_guid\": \"string\",\n        \"popularity\": {\n          \"popularity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"query_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"service_query_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timeframe\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"user_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"search_name\": \"string\",\n        \"tagged_items\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"guid\": \"string\",\n        \"joined_view_label\": \"string\",\n        \"url\": \"http://vGnZASecbwRNwmNgJ.levW7whdwmPo6BTdxUdNocrVLcD19vDEkNLzI\"\n      }\n    },\n    {\n      \"field\": {\n        \"breadcrumbs\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"data_types\": {\n          \"readOnly\": true,\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"field\": {\n          \"ai_description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"data_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"data_types\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description_source\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"external_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"field_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"ingested_description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"is_mention\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"is_metric\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"is_used_as_filter\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"is_used_as_pivot\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"label\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"popularity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"sql\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"suggested_description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"suggested_description_source\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"suggested_description_source_object\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"tagged_items\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"user_description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"user_description_author\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"view\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"view_label\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"guid\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"richtext_description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"project_name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"is_dimension\": {},\n        \"is_mention\": {},\n        \"is_metric\": {},\n        \"parent_guid\": \"string\",\n        \"popularity\": {\n          \"popularity\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"query_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"service_query_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"timeframe\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"user_count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"search_name\": \"string\",\n        \"tagged_items\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"guid\": \"string\",\n        \"joined_view_label\": \"string\",\n        \"url\": \"http://fyDRnQFtVxTMQGPdwNrsWIhXWj.tkursfrdcVToETk4ARKuVg,,hYN47ifRrQunKxEdbojqLwM+WG2ySs5IA.ly\"\n      }\n    }\n  ],\n  \"business_owner\": {\n    \"data_source\": {\n      \"name\": \"string\",\n      \"type\": \"postgres\",\n      \"guid\": \"string\",\n      \"last_ingested_on\": \"1950-09-02T22:26:13.870Z\"\n    },\n    \"name\": \"string\",\n    \"guid\": \"string\",\n    \"display_name\": \"string\"\n  },\n  \"technical_owner\": {\n    \"data_source\": {\n      \"name\": \"string\",\n      \"type\": \"tableau\",\n      \"guid\": \"string\",\n      \"last_ingested_on\": \"1975-05-18T18:26:48.289Z\"\n    },\n    \"name\": \"string\",\n    \"guid\": \"string\",\n    \"display_name\": \"string\"\n  },\n  \"represented_as\": \"string\",\n  \"richtext_represented_as\": \"string\",\n  \"sql\": \"string\",\n  \"synonyms\": [\n    \"string\",\n    \"string\"\n  ],\n  \"ordinal\": 880677995\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4c3a070f-f4d8-479d-be0b-777e50df283c",
+          "name": "metrics destroy",
+          "request": {
+            "name": "metrics destroy",
+            "description": {
+              "content": "Archive a single metric\n\n**Required Role:** Data Manager or higher",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "metrics",
+                ":guid",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "collections",
+                  "value": "<string>",
+                  "description": "A comma separated list of collection guids, for to filter the collection items from"
+                },
+                {
+                  "disabled": false,
+                  "key": "dimensions",
+                  "value": "<string>",
+                  "description": "A comma separated list of dimension guids to filter for metrics with those dimensions"
+                },
+                {
+                  "disabled": false,
+                  "key": "no_tags",
+                  "value": "<string>",
+                  "description": "A flag that filters out any tagged tables"
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "<string>",
+                  "description": "Specify the ordering for the results. \n\n A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order. \n\nNote: Order is case-sensitive."
+                },
+                {
+                  "disabled": false,
+                  "key": "owners",
+                  "value": "<string>",
+                  "description": "A comma separated list of user or team guids to filter for objects within these users as owners (technical or business)."
+                },
+                {
+                  "disabled": false,
+                  "key": "search_collections",
+                  "value": "<string>",
+                  "description": "Search for an asset using a collection name"
+                },
+                {
+                  "disabled": false,
+                  "key": "search_description",
+                  "value": "<string>",
+                  "description": "A search term."
+                },
+                {
+                  "disabled": false,
+                  "key": "search_name",
+                  "value": "<string>",
+                  "description": "Search for an asset using its name"
+                },
+                {
+                  "disabled": false,
+                  "key": "search_sql",
+                  "value": "<string>",
+                  "description": "A search term."
+                },
+                {
+                  "disabled": false,
+                  "key": "search_synonyms",
+                  "value": "<string>",
+                  "description": "A search term."
+                },
+                {
+                  "disabled": false,
+                  "key": "search_tag_name",
+                  "value": "<string>",
+                  "description": "Search for an asset using a tag name"
+                },
+                {
+                  "disabled": false,
+                  "key": "semantic_models",
+                  "value": "<string>",
+                  "description": "Filter by one or more semantic model GUIDs. Provide a comma-separated list of GUIDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "status_tags",
+                  "value": "<string>",
+                  "description": "A comma separated list of tag guids"
+                },
+                {
+                  "disabled": false,
+                  "key": "teams",
+                  "value": "<string>",
+                  "description": "A comma separated list of team guids to filter for tables owned by users of those teams."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "guid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "934c933f-fd19-4422-b044-d27870d74883",
+              "name": "No response body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "metrics",
+                    ":guid",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "collections",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dimensions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "no_tags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "owners",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search_collections",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search_description",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search_sql",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search_synonyms",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search_tag_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "semantic_models",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status_tags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "teams",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "guid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d0a2af23-4bc3-4b86-ada3-4e029bdd80ca",
+          "name": "metrics dimensions partial update",
+          "request": {
+            "name": "metrics dimensions partial update",
+            "description": {
+              "content": "Update a single metric's dimensions\n\n**Required Role:** Data Manager or higher",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "metrics",
+                "dimensions",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "field",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ee5911a9-f900-45be-b197-e9a16e79b84c",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "metrics",
+                    "dimensions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "key": "field",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"field\": {\n    \"breadcrumbs\": [\n      {\n        \"target_data_source_guid\": \"string\",\n        \"target_data_type\": \"string\",\n        \"target_guid\": \"string\",\n        \"target_name\": \"string\",\n        \"target_object_type\": \"string\",\n        \"guid\": \"string\",\n        \"target_data_source_type\": {\n          \"nullable\": true,\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"ordinal\": 1415558622\n      },\n      {\n        \"target_data_source_guid\": \"string\",\n        \"target_data_type\": \"string\",\n        \"target_guid\": \"string\",\n        \"target_name\": \"string\",\n        \"target_object_type\": \"string\",\n        \"guid\": \"string\",\n        \"target_data_source_type\": {\n          \"nullable\": true,\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"ordinal\": 226994277\n      }\n    ],\n    \"data_types\": {\n      \"data_source_type\": \"string\",\n      \"data_type\": \"string\",\n      \"external_database_type\": \"string\",\n      \"object_type\": \"string\"\n    },\n    \"field\": {\n      \"ai_description\": \"string\",\n      \"data_type\": \"string\",\n      \"data_types\": {\n        \"data_source_type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"data_type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"external_database_type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"object_type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"description_source\": \"similarity\",\n      \"external_type\": \"string\",\n      \"field_type\": \"measure\",\n      \"ingested_description\": \"string\",\n      \"is_mention\": {},\n      \"is_metric\": {},\n      \"is_used_as_filter\": {},\n      \"is_used_as_pivot\": {},\n      \"label\": \"string\",\n      \"name\": \"string\",\n      \"popularity\": {\n        \"popularity\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"query_count\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"service_query_count\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"timeframe\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"user_count\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"view_count\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"sql\": \"string\",\n      \"suggested_description\": \"string\",\n      \"suggested_description_source\": \"unknown\",\n      \"suggested_description_source_object\": {\n        \"readOnly\": true,\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"tagged_items\": [\n        {\n          \"guid\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"kind\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"suggested_source_kind\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"suggestion_source_object\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"tag\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"suggestion_source\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"guid\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"kind\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"suggested_source_kind\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"suggestion_source_object\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"tag\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"suggestion_source\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"type\": \"string\",\n      \"user_description\": \"string\",\n      \"user_description_author\": {\n        \"avatar\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"email\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"first_name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"guid\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"is_active\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"last_name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"team\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"view\": {\n        \"ai_description\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"breadcrumbs\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"collections\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"data_source\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"data_types\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"description_source\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"downstream_objects_counts\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"explores\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"external_id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"guid\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"ingested_description\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"label\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"popularity\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"project_name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"search_name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"tagged_items\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"upstream_objects_counts\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"user_description\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"user_description_author\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"description\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"richtext_description\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"business_owner\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"technical_owner\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"view_label\": \"string\",\n      \"guid\": \"string\",\n      \"description\": \"string\",\n      \"richtext_description\": \"string\",\n      \"project_name\": \"string\"\n    },\n    \"is_dimension\": {},\n    \"is_mention\": {},\n    \"is_metric\": {},\n    \"parent_guid\": \"string\",\n    \"popularity\": {\n      \"popularity\": 9722,\n      \"query_count\": 409,\n      \"service_query_count\": 9256,\n      \"timeframe\": 90,\n      \"user_count\": 9188\n    },\n    \"search_name\": \"string\",\n    \"tagged_items\": [\n      {\n        \"guid\": \"string\",\n        \"kind\": \"string\",\n        \"suggested_source_kind\": \"string\",\n        \"suggestion_source_object\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"tag\": {\n          \"breadcrumbs\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"color\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"icon\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"visible\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"guid\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"links_to\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"suggestion_source\": {\n          \"item\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      {\n        \"guid\": \"string\",\n        \"kind\": \"string\",\n        \"suggested_source_kind\": \"string\",\n        \"suggestion_source_object\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"tag\": {\n          \"breadcrumbs\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"color\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"icon\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"visible\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"guid\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"links_to\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"suggestion_source\": {\n          \"item\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    ],\n    \"guid\": \"string\",\n    \"joined_view_label\": \"string\",\n    \"url\": \"https://gArFQIMkfqKncBgVOfYBMZRaWUW.ytiDyQDrcCBuj+h58M1.R8jGbuShNe-VUG+7x74b9mymthPBqunrTsaMPRJz9wq\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "15cb505e-1dc5-41f6-b712-4b46a27e0eb7",
+    "name": "Select Star Metadata bi metrics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for interacting with the Select Star system\n\nContact Support:\n Email: support@selectstar.com",
+      "type": "text/plain"
+    }
+  }
+}

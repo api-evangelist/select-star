@@ -1,0 +1,460 @@
+{
+  "item": [
+    {
+      "id": "7533737a-b88c-4910-9dcd-2d5f0264b021",
+      "name": "data-metrics",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b142c564-76d0-4919-8312-4e609cd81c8c",
+          "name": "data metrics activities list",
+          "request": {
+            "name": "data metrics activities list",
+            "description": {
+              "content": "*Beta version - Subject to Changes*\n\nEndpoint for the individual Activity list\n\n**Required Role:** Admin",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "data-metrics",
+                "activities",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "data_source",
+                  "value": "<string>",
+                  "description": "Search for activities given a data source name"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<string>",
+                  "description": "(Required) The end date of the date filter. The end date has to be set to equal or later than start date. The maximum date range limit user can set is equal to 90 days. Format: YYYY-MM-DD"
+                },
+                {
+                  "disabled": false,
+                  "key": "message",
+                  "value": "<string>",
+                  "description": "Search for activities given a description"
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "<string>",
+                  "description": "Specify the ordering for the results. A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "A page number within the paginated result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "<integer>",
+                  "description": "Number of results to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "search_all",
+                  "value": "<string>",
+                  "description": "Search for activities given a user, activity type or target name"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<string>",
+                  "description": "(Required) The start date of the date filter. The start date has to be set to before or equal than end date. The maximum date range limit user can set is equal to 90 days. Format: YYYY-MM-DD"
+                },
+                {
+                  "disabled": false,
+                  "key": "target",
+                  "value": "<string>",
+                  "description": "Search for activities given a target name"
+                },
+                {
+                  "disabled": false,
+                  "key": "target_full_name",
+                  "value": "<string>",
+                  "description": "Search for schema changes given a target full name"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Search for activities given an activity type"
+                },
+                {
+                  "disabled": false,
+                  "key": "types",
+                  "value": "<string>",
+                  "description": "Specify the type of activity to filter for the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "user",
+                  "value": "<string>",
+                  "description": "Search by 'user' using first name, last name, or email"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "520dfe4a-98aa-475f-a266-bd6062bc9a0a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "data-metrics",
+                    "activities",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "data_source",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "message",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "search_all",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "target",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "target_full_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 123,\n  \"results\": [\n    {\n      \"activity_type\": \"string\",\n      \"data\": \"string\",\n      \"data_types\": {\n        \"data_source_type\": \"string\",\n        \"data_type\": \"string\",\n        \"external_database_type\": \"string\",\n        \"object_type\": \"string\"\n      },\n      \"field\": \"string\",\n      \"message\": {\n        \"template\": \"string\",\n        \"values\": {\n          \"user\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"target\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"parent\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"performed_on\": \"1966-07-29T13:43:52.356Z\",\n      \"target\": \"string\",\n      \"target_data_type\": \"string\",\n      \"target_name\": \"string\",\n      \"target_object_type\": \"string\",\n      \"target_parent_guid\": \"string\",\n      \"user\": {\n        \"avatar\": \"string\",\n        \"email\": \"string\",\n        \"first_name\": \"string\",\n        \"guid\": \"string\",\n        \"last_name\": \"string\"\n      }\n    },\n    {\n      \"activity_type\": \"string\",\n      \"data\": \"string\",\n      \"data_types\": {\n        \"data_source_type\": \"string\",\n        \"data_type\": \"string\",\n        \"external_database_type\": \"string\",\n        \"object_type\": \"string\"\n      },\n      \"field\": \"string\",\n      \"message\": {\n        \"template\": \"string\",\n        \"values\": {\n          \"user\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"target\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"parent\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"performed_on\": \"1975-01-27T11:04:32.567Z\",\n      \"target\": \"string\",\n      \"target_data_type\": \"string\",\n      \"target_name\": \"string\",\n      \"target_object_type\": \"string\",\n      \"target_parent_guid\": \"string\",\n      \"user\": {\n        \"avatar\": \"string\",\n        \"email\": \"string\",\n        \"first_name\": \"string\",\n        \"guid\": \"string\",\n        \"last_name\": \"string\"\n      }\n    }\n  ],\n  \"next\": \"http://api.example.org/accounts/?page=4\",\n  \"previous\": \"http://api.example.org/accounts/?page=2\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "be6eee95-21a9-48ea-a532-d97c6246292c",
+          "name": "schema changes get",
+          "request": {
+            "name": "schema changes get",
+            "description": {
+              "content": "*Beta version - Subject to Changes*\n\nList endpoint for Schema Changes\n\n**Required Role:** Admin",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "data-metrics",
+                "activities",
+                "schema_changes",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "data_source",
+                  "value": "<string>",
+                  "description": "Search for activities given a data source name"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<string>",
+                  "description": "(Required) The end date of the date filter. The end date has to be set to equal or later than start date. The maximum date range limit user can set is equal to 90 days. Format: YYYY-MM-DD"
+                },
+                {
+                  "disabled": false,
+                  "key": "message",
+                  "value": "<string>",
+                  "description": "Search for activities given a description"
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "<string>",
+                  "description": "Specify the ordering for the results. A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order."
+                },
+                {
+                  "disabled": false,
+                  "key": "search_all",
+                  "value": "<string>",
+                  "description": "Search for activities given a user, activity type or target name"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<string>",
+                  "description": "(Required) The start date of the date filter. The start date has to be set to before or equal than end date. The maximum date range limit user can set is equal to 90 days. Format: YYYY-MM-DD"
+                },
+                {
+                  "disabled": false,
+                  "key": "target",
+                  "value": "<string>",
+                  "description": "Search for activities given a target name"
+                },
+                {
+                  "disabled": false,
+                  "key": "target_full_name",
+                  "value": "<string>",
+                  "description": "Search for schema changes given a target full name"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Search for activities given an activity type"
+                },
+                {
+                  "disabled": false,
+                  "key": "types",
+                  "value": "<string>",
+                  "description": "Specify the type of activity to filter for the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "user",
+                  "value": "<string>",
+                  "description": "Search by 'user' using first name, last name, or email"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f6843446-fe41-4c36-b880-7bcf6f9ad935",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "data-metrics",
+                    "activities",
+                    "schema_changes",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "data_source",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "message",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search_all",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "target",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "target_full_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"breadcrumbs\": [\n    {\n      \"target_data_source_guid\": \"string\",\n      \"target_data_type\": \"string\",\n      \"target_guid\": \"string\",\n      \"target_name\": \"string\",\n      \"target_object_type\": \"string\",\n      \"guid\": \"string\",\n      \"target_data_source_type\": \"omni\",\n      \"ordinal\": 1329867349\n    },\n    {\n      \"target_data_source_guid\": \"string\",\n      \"target_data_type\": \"string\",\n      \"target_guid\": \"string\",\n      \"target_name\": \"string\",\n      \"target_object_type\": \"string\",\n      \"guid\": \"string\",\n      \"target_data_source_type\": \"tableau\",\n      \"ordinal\": 594908161\n    }\n  ],\n  \"data\": \"string\",\n  \"data_types\": {\n    \"data_source_type\": \"string\",\n    \"data_type\": \"string\",\n    \"external_database_type\": \"string\",\n    \"object_type\": \"string\"\n  },\n  \"guid\": \"string\",\n  \"message\": {\n    \"template\": \"string\",\n    \"values\": {\n      \"user\": {\n        \"data\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"object_type\": \"string\"\n      },\n      \"target\": {\n        \"data\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"object_type\": \"string\"\n      },\n      \"parent\": {\n        \"data\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"object_type\": \"string\"\n      }\n    }\n  },\n  \"performed_on\": \"1950-01-21T22:42:29.074Z\",\n  \"target\": \"string\",\n  \"target_data_source\": {\n    \"name\": \"string\",\n    \"type\": \"salesforce_crma\",\n    \"guid\": \"string\"\n  },\n  \"target_name\": \"string\",\n  \"target_parent_guid\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2bcfd74b-d534-4d63-b779-06a9d3fb27ac",
+    "name": "Select Star Metadata bi data-metrics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for interacting with the Select Star system\n\nContact Support:\n Email: support@selectstar.com",
+      "type": "text/plain"
+    }
+  }
+}

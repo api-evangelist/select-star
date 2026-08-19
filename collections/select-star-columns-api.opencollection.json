@@ -1,0 +1,272 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Select Star Metadata bi columns API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "columns",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "columns_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/columns/",
+            "params": [
+              {
+                "name": "data_types",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of select star data_types to filter for columns that are of those dataTypes."
+              },
+              {
+                "name": "databases",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of database guids to filter for items within those databases."
+              },
+              {
+                "name": "datasources",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of data source guids to filter for items within those data sources."
+              },
+              {
+                "name": "dbt_tags",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of tag guids"
+              },
+              {
+                "name": "folders",
+                "value": "",
+                "type": "query",
+                "description": "A list of dbt project guids to filter these columns for. The returned values will be dbt models"
+              },
+              {
+                "name": "include_counts",
+                "value": "",
+                "type": "query",
+                "description": "Calculate and include total object counts in the response."
+              },
+              {
+                "name": "is_join_key",
+                "value": "",
+                "type": "query",
+                "description": "Filters by is_join_key field value."
+              },
+              {
+                "name": "new",
+                "value": "",
+                "type": "query",
+                "description": "A boolean which filters for newest tables in the organization."
+              },
+              {
+                "name": "no_description",
+                "value": "",
+                "type": "query",
+                "description": "A flag that filters out any tables with descriptions"
+              },
+              {
+                "name": "no_downstream_lineage",
+                "value": "",
+                "type": "query",
+                "description": "A flag that shows only tables with no downstream lineage"
+              },
+              {
+                "name": "no_popularity",
+                "value": "",
+                "type": "query",
+                "description": "A flag that filters out any table that has a popularity rating."
+              },
+              {
+                "name": "no_tags",
+                "value": "",
+                "type": "query",
+                "description": "A flag that filters out any tagged tables"
+              },
+              {
+                "name": "no_upstream_lineage",
+                "value": "",
+                "type": "query",
+                "description": "A flag that shows only tables with no upstream lineage"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Specify the ordering for the results. \n\n A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order. \n\nNote: Order is case-sensitive."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "popularity",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of popularity ranges (inclusive) can include integers from 1-100 ex) 1-10,90-100 would be the bottom 10 percent and the top 10 percent, respectively. Ranges can overlap."
+              },
+              {
+                "name": "schemas",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of schema guids to filter for columns within those schemas"
+              },
+              {
+                "name": "search_all",
+                "value": "",
+                "type": "query",
+                "description": "Search a column with multiple types of params in one go"
+              },
+              {
+                "name": "search_description",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using its description"
+              },
+              {
+                "name": "search_external_type",
+                "value": "",
+                "type": "query",
+                "description": "Search for columns given an external type"
+              },
+              {
+                "name": "search_extra_data_data_type",
+                "value": "",
+                "type": "query",
+                "description": "Search for columns given a data type"
+              },
+              {
+                "name": "search_extra_data_formula",
+                "value": "",
+                "type": "query",
+                "description": "Search for columns given a formula"
+              },
+              {
+                "name": "search_extra_data_label",
+                "value": "",
+                "type": "query",
+                "description": "Search for columns given a label"
+              },
+              {
+                "name": "search_name",
+                "value": "",
+                "type": "query",
+                "description": "Search for columns given a column name (goes upto data source name)"
+              },
+              {
+                "name": "search_tag_name",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using a tag name"
+              },
+              {
+                "name": "status_tags",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of tag guids"
+              },
+              {
+                "name": "tables",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of table guids to filter for columns within those tables"
+              },
+              {
+                "name": "updated_on",
+                "value": "",
+                "type": "query",
+                "description": "Filter objects by updated_on. May specify __gt, __gte, __lt or __lte.\n\n API call to: \n\n ENDPOINT/updated_on__gt=2021-08-04T15:12:40&updated_on__lt=2021-08-23 \n\n will result with objects updated_on after  August 4th 2021 at 15:12:40, but before August 23rd 2021. \n\n. If you want to include lower or upper bound of the range use __gte or __lte respectively."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "get a list of columns\n\n**Required Role:** Viewer or higher"
+        },
+        {
+          "info": {
+            "name": "columns_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/columns/:guid/",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "get a single column\n\n**Required Role:** Viewer or higher"
+        },
+        {
+          "info": {
+            "name": "columns_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/columns/:guid/",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update the is_primary key value in columns\n\n**Required Role:** Data Manager or higher"
+        },
+        {
+          "info": {
+            "name": "columns_export_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/columns/export/",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a CSV with data to export.\n\n**Required Role:** Viewer or higher"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

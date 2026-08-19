@@ -1,0 +1,184 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Select Star Metadata bi custom-attribute-values API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "custom-attribute-values",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "custom_attribute_values_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/custom-attribute-values/",
+            "params": [
+              {
+                "name": "asset_type",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated value for asset type in form: data_source_type,object_type,data_type"
+              },
+              {
+                "name": "custom_attributes",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of custom attribute guids to get their custom attribute values."
+              },
+              {
+                "name": "datasources",
+                "value": "",
+                "type": "query",
+                "description": "Filter custom attributes values by a data source guid"
+              },
+              {
+                "name": "items",
+                "value": "",
+                "type": "query",
+                "description": "Filter custom attributes values by a item guids, that values are assigned for"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "This endpoint retrieves a list of all values for a specific custom attribute.\n      If a list of object GUIDs is provided (via the 'items' parameter),\n      it will return all values for that custom attribute across the provided objects.\n\n**Required Role:** Viewer or higher"
+        },
+        {
+          "info": {
+            "name": "custom_attribute_values_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/custom-attribute-values/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Use this endpoint when you need to assign a value to a specific custom attribute tied to a specific object.\n        This endpoint is used to update a custom attribute's value as it applies to a specific object.\n        It's meant for individual updates, modifying only one custom attribute value at a time.\n        Default behavior dictates, that values are plaintext.\n        However, you can create a rich text value by using richtext_value field.\n        In that case the richtext_value should fol"
+        },
+        {
+          "info": {
+            "name": "custom_attribute_values_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/custom-attribute-values/:guid/",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "This endpoint is for reading the value of a custom attribute itself.\n          The GUID in the URL corresponds to the value of the custom attribute, which is linked to its textual\n          content and the object it is attached to.\n\n**Required Role:** Viewer or higher"
+        },
+        {
+          "info": {
+            "name": "custom_attribute_values_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/custom-attribute-values/:guid/",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "This endpoint is designed for modifying an existing\n                value and/or rich text value of a custom attribute on a particular object.\n\n**Required Role:** Data Manager or higher"
+        },
+        {
+          "info": {
+            "name": "custom_attribute_values_destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/custom-attribute-values/:guid/",
+            "params": [
+              {
+                "name": "asset_type",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated value for asset type in form: data_source_type,object_type,data_type"
+              },
+              {
+                "name": "custom_attributes",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of custom attribute guids to get their custom attribute values."
+              },
+              {
+                "name": "datasources",
+                "value": "",
+                "type": "query",
+                "description": "Filter custom attributes values by a data source guid"
+              },
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "items",
+                "value": "",
+                "type": "query",
+                "description": "Filter custom attributes values by a item guids, that values are assigned for"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "This endpoint will delete a custom attribute value from an object\n\n**Required Role:** Data Manager or higher"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

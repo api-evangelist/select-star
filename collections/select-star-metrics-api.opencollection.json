@@ -1,0 +1,323 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Select Star Metadata bi metrics API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "metrics_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/metrics/",
+            "params": [
+              {
+                "name": "collections",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of collection guids, for to filter the collection items from"
+              },
+              {
+                "name": "dimensions",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of dimension guids to filter for metrics with those dimensions"
+              },
+              {
+                "name": "no_tags",
+                "value": "",
+                "type": "query",
+                "description": "A flag that filters out any tagged tables"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Specify the ordering for the results. \n\n A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order. \n\nNote: Order is case-sensitive."
+              },
+              {
+                "name": "owners",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of user or team guids to filter for objects within these users as owners (technical or business)."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              },
+              {
+                "name": "search_collections",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using a collection name"
+              },
+              {
+                "name": "search_description",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "search_name",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using its name"
+              },
+              {
+                "name": "search_sql",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "search_synonyms",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "search_tag_name",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using a tag name"
+              },
+              {
+                "name": "semantic_models",
+                "value": "",
+                "type": "query",
+                "description": "Filter by one or more semantic model GUIDs. Provide a comma-separated list of GUIDs."
+              },
+              {
+                "name": "status_tags",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of tag guids"
+              },
+              {
+                "name": "teams",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of team guids to filter for tables owned by users of those teams."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List of all metrics available in authenticated user's organization\n\n**Required Role:** Viewer or higher"
+        },
+        {
+          "info": {
+            "name": "metrics_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/metrics/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a metric within authenticated user's organization\n\n**Required Role:** Data Manager or higher"
+        },
+        {
+          "info": {
+            "name": "metrics_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/metrics/:guid/",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve a single metric\n\n**Required Role:** Viewer or higher"
+        },
+        {
+          "info": {
+            "name": "metrics_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/metrics/:guid/",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update a single metric\n\n**Required Role:** Data Manager or higher"
+        },
+        {
+          "info": {
+            "name": "metrics_destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/metrics/:guid/",
+            "params": [
+              {
+                "name": "collections",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of collection guids, for to filter the collection items from"
+              },
+              {
+                "name": "dimensions",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of dimension guids to filter for metrics with those dimensions"
+              },
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "no_tags",
+                "value": "",
+                "type": "query",
+                "description": "A flag that filters out any tagged tables"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Specify the ordering for the results. \n\n A comma separated list for ordering by multiple fields and a preceding `-` indicates reverse order. \n\nNote: Order is case-sensitive."
+              },
+              {
+                "name": "owners",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of user or team guids to filter for objects within these users as owners (technical or business)."
+              },
+              {
+                "name": "search_collections",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using a collection name"
+              },
+              {
+                "name": "search_description",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "search_name",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using its name"
+              },
+              {
+                "name": "search_sql",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "search_synonyms",
+                "value": "",
+                "type": "query",
+                "description": "A search term."
+              },
+              {
+                "name": "search_tag_name",
+                "value": "",
+                "type": "query",
+                "description": "Search for an asset using a tag name"
+              },
+              {
+                "name": "semantic_models",
+                "value": "",
+                "type": "query",
+                "description": "Filter by one or more semantic model GUIDs. Provide a comma-separated list of GUIDs."
+              },
+              {
+                "name": "status_tags",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of tag guids"
+              },
+              {
+                "name": "teams",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated list of team guids to filter for tables owned by users of those teams."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Archive a single metric\n\n**Required Role:** Data Manager or higher"
+        },
+        {
+          "info": {
+            "name": "metrics_dimensions_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/metrics/dimensions/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update a single metric's dimensions\n\n**Required Role:** Data Manager or higher"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

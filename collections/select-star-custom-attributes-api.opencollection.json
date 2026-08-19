@@ -1,0 +1,184 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Select Star Metadata bi custom-attributes API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "custom-attributes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "custom_attributes_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/custom-attributes/",
+            "params": [
+              {
+                "name": "asset_type",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated value for asset type in form: data_source_type,object_type,data_type"
+              },
+              {
+                "name": "data_source_types",
+                "value": "",
+                "type": "query",
+                "description": "A list of comma separated types to filter these custom attributes for."
+              },
+              {
+                "name": "data_types",
+                "value": "",
+                "type": "query",
+                "description": "A list of comma separated types to filter these custom attributes for."
+              },
+              {
+                "name": "object_types",
+                "value": "",
+                "type": "query",
+                "description": "A list of comma separated types to filter these custom attributes for."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "A page number within the paginated result set."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return per page."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "This endpoint provides a list of all the custom attribute definitions within an organization.\n\n**Required Role:** Viewer or higher"
+        },
+        {
+          "info": {
+            "name": "custom_attributes_create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/custom-attributes/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "This endpoint allows you to create a definition for a custom attribute.\n        It enables you to define a custom attribute, specify which data source types/objects it should\n        apply to (such as Redshift tables), and fill in the business definition.\n        This creates a comprehensive definition and identifies its applications.\n\n**Required Role:** Data Manager or higher"
+        },
+        {
+          "info": {
+            "name": "custom_attributes_retrieve",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/custom-attributes/:guid/",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "If you have a GUID, this endpoint will return the information for a single custom attribute.\n\n**Required Role:** Viewer or higher"
+        },
+        {
+          "info": {
+            "name": "custom_attributes_partial_update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/custom-attributes/:guid/",
+            "params": [
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "If you possess a GUID for a custom attribute, this endpoint allows you to modify its details,\n                such as its name and the objects it's assigned to.\n\n**Required Role:** Data Manager or higher"
+        },
+        {
+          "info": {
+            "name": "custom_attributes_destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/custom-attributes/:guid/",
+            "params": [
+              {
+                "name": "asset_type",
+                "value": "",
+                "type": "query",
+                "description": "A comma separated value for asset type in form: data_source_type,object_type,data_type"
+              },
+              {
+                "name": "data_source_types",
+                "value": "",
+                "type": "query",
+                "description": "A list of comma separated types to filter these custom attributes for."
+              },
+              {
+                "name": "data_types",
+                "value": "",
+                "type": "query",
+                "description": "A list of comma separated types to filter these custom attributes for."
+              },
+              {
+                "name": "guid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "object_types",
+                "value": "",
+                "type": "query",
+                "description": "A list of comma separated types to filter these custom attributes for."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "This endpoint will delete a custom attribute\n\n**Required Role:** Data Manager or higher"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
