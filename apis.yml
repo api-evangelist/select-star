@@ -61,6 +61,8 @@ apis:
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
   tags:
+  - BI
+  tags_raw:
   - bi
   properties:
   - type: OpenAPI
@@ -79,6 +81,8 @@ apis:
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
   tags:
+  - Collection
+  tags_raw:
   - collections
   properties:
   - type: OpenAPI
@@ -97,6 +101,8 @@ apis:
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
   tags:
+  - Columns
+  tags_raw:
   - columns
   properties:
   - type: OpenAPI
@@ -115,6 +121,8 @@ apis:
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
   tags:
+  - Comments
+  tags_raw:
   - comments
   properties:
   - type: OpenAPI
@@ -152,6 +160,8 @@ apis:
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
   tags:
+  - Custom Attributes
+  tags_raw:
   - custom-attributes
   properties:
   - type: OpenAPI
@@ -207,6 +217,8 @@ apis:
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
   tags:
+  - Data Sources
+  tags_raw:
   - data-sources
   properties:
   - type: OpenAPI
@@ -225,6 +237,8 @@ apis:
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
   tags:
+  - Databases
+  tags_raw:
   - databases
   properties:
   - type: OpenAPI
@@ -261,6 +275,8 @@ apis:
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
   tags:
+  - Documents
+  tags_raw:
   - documents
   properties:
   - type: OpenAPI
@@ -279,6 +295,8 @@ apis:
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
   tags:
+  - Ingestion
+  tags_raw:
   - ingestion
   properties:
   - type: OpenAPI
@@ -297,6 +315,8 @@ apis:
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
   tags:
+  - Job
+  tags_raw:
   - jobs
   properties:
   - type: OpenAPI
@@ -333,6 +353,8 @@ apis:
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
   tags:
+  - Lineage
+  tags_raw:
   - lineage
   properties:
   - type: OpenAPI
@@ -351,6 +373,8 @@ apis:
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
   tags:
+  - Metadata
+  tags_raw:
   - metadata
   properties:
   - type: OpenAPI
@@ -369,6 +393,8 @@ apis:
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
   tags:
+  - Metrics
+  tags_raw:
   - metrics
   properties:
   - type: OpenAPI
@@ -387,6 +413,8 @@ apis:
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
   tags:
+  - PII
+  tags_raw:
   - pii
   properties:
   - type: OpenAPI
@@ -405,6 +433,8 @@ apis:
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
   tags:
+  - Schemas
+  tags_raw:
   - schemas
   properties:
   - type: OpenAPI
@@ -423,6 +453,8 @@ apis:
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
   tags:
+  - SCIM
+  tags_raw:
   - scim
   properties:
   - type: OpenAPI
@@ -441,6 +473,8 @@ apis:
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
   tags:
+  - Search
+  tags_raw:
   - search
   properties:
   - type: OpenAPI
@@ -459,6 +493,8 @@ apis:
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
   tags:
+  - Tables
+  tags_raw:
   - tables
   properties:
   - type: OpenAPI
@@ -477,6 +513,8 @@ apis:
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
   tags:
+  - Tags
+  tags_raw:
   - tags
   properties:
   - type: OpenAPI
@@ -495,6 +533,8 @@ apis:
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
   tags:
+  - Team
+  tags_raw:
   - teams
   properties:
   - type: OpenAPI
@@ -513,6 +553,8 @@ apis:
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
   tags:
+  - Terms
+  tags_raw:
   - terms
   properties:
   - type: OpenAPI
