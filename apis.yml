@@ -113,7 +113,7 @@ apis:
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
   tags:
-  - Columns
+  - columns
   tags_raw:
   - columns
   properties:
@@ -172,7 +172,7 @@ apis:
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
   tags:
-  - Custom Attributes
+  - custom-attributes
   tags_raw:
   - custom-attributes
   properties:
@@ -307,7 +307,7 @@ apis:
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
   tags:
-  - Ingestion
+  - ingestion
   tags_raw:
   - ingestion
   properties:
@@ -365,7 +365,7 @@ apis:
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
   tags:
-  - Lineage
+  - lineage
   tags_raw:
   - lineage
   properties:
@@ -565,7 +565,7 @@ apis:
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
   tags:
-  - Terms
+  - terms
   tags_raw:
   - terms
   properties:
