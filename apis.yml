@@ -581,6 +581,8 @@ apis:
   - type: GettingStarted
     url: https://docs.selectstar.com/select-star-api/quick-start
 common:
+- type: Website
+  url: https://www.selectstar.com/
 - type: DomainSecurity
   url: security/select-star-domain-security.yml
 - type: DeveloperPortal
