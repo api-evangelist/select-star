@@ -74,7 +74,7 @@ apis:
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
   tags:
-  - BI
+  - Business Intelligence
   tags_raw:
   - bi
   properties:
@@ -250,7 +250,7 @@ apis:
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
   tags:
-  - Databases
+  - Database
   tags_raw:
   - databases
   properties:
@@ -446,7 +446,7 @@ apis:
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
   tags:
-  - Schemas
+  - Schema
   tags_raw:
   - schemas
   properties:
