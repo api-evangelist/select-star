@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Select Star Metadata bi data-metrics API
+  title: Select Star Metadata Data Metrics API
   version: 1.0.0
   x-role-system:
     description: This API uses role-based access control
@@ -149,6 +149,8 @@ paths:
                 $ref: '#/components/schemas/PaginatedActivityAnalyticsList'
           description: ''
       x-role-requirements: Admin
+      summary: Data metrics activities list
+      x-summary-source: derived
   /v1/data-metrics/activities/schema_changes/:
     get:
       operationId: schema_changes_get
@@ -269,46 +271,127 @@ paths:
                 $ref: '#/components/schemas/ActivitySchemaChanges'
           description: ''
       x-role-requirements: Admin
+      summary: Schema changes get
+      x-summary-source: derived
 components:
   schemas:
-    UserActivityAnalytics:
+    ActivityMessage:
+      type: object
+      description: 'Activity Message Serializer is written to handle the
+
+        different types of messages that possible for activity
+
+        to display.
+
+        For this serializer to work, context must be passed in
+
+        with the key.
+
+        target_data_source.type.value'
+      properties:
+        template:
+          type: string
+        values:
+          $ref: '#/components/schemas/ActivityMessageValue'
+      required:
+      - template
+      - values
+    ActivityMessageData:
       type: object
       properties:
-        first_name:
-          type: string
+        object_type:
+          type:
+          - string
+          - 'null'
+        data:
+          type:
+          - object
+          - 'null'
+          oneOf:
+          - type: object
+            properties:
+              first_name:
+                type: string
+              last_name:
+                type: string
+              guid:
+                type: string
+              avatar:
+                type:
+                - string
+                - 'null'
+          - type: object
+            properties:
+              guid:
+                type: string
+              name:
+                type: string
+              data_types:
+                type: object
+              parent_guid:
+                type:
+                - string
+                - 'null'
+          - type: object
+            properties:
+              guid:
+                type: string
+              name:
+                type: string
+              data_types:
+                type: object
           readOnly: true
-        last_name:
-          type: string
-          readOnly: true
-        email:
-          type: string
-          readOnly: true
+      required:
+      - data
+      - object_type
+    ActivitySchemaChanges:
+      type: object
+      properties:
         guid:
           type: string
           readOnly: true
-        avatar:
+        target:
           type: string
           readOnly: true
+        target_name:
+          type: string
+        target_parent_guid:
+          type: string
+        target_data_source:
+          $ref: '#/components/schemas/BaseDataSource'
+        performed_on:
+          type: string
+          format: date-time
+          readOnly: true
+        breadcrumbs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Breadcrumb'
+        message:
+          allOf:
+          - $ref: '#/components/schemas/ActivityMessage'
+          readOnly: true
+        data:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          description: Extra data stored for the activity (e.g. pre- or post-update field value)
+        data_types:
+          allOf:
+          - $ref: '#/components/schemas/BaseType'
+          readOnly: true
       required:
-      - avatar
-      - email
-      - first_name
+      - breadcrumbs
+      - data
+      - data_types
       - guid
-      - last_name
-    BaseDataSource:
-      type: object
-      properties:
-        guid:
-          type: string
-          maxLength: 25
-        type:
-          $ref: '#/components/schemas/Type6b6Enum'
-        name:
-          type: string
-          maxLength: 100
-      required:
-      - name
-      - type
+      - message
+      - performed_on
+      - target
+      - target_data_source
+      - target_name
+      - target_parent_guid
     ActivityAnalytics:
       type: object
       properties:
@@ -341,18 +424,20 @@ components:
           - $ref: '#/components/schemas/BaseType'
           readOnly: true
         field:
-          type: string
+          type:
+          - string
+          - 'null'
           readOnly: true
-          nullable: true
           description: The field of the class the activity pertains to. Can be null in instances such as view
         message:
           allOf:
           - $ref: '#/components/schemas/ActivityMessage'
           readOnly: true
         data:
-          type: string
+          type:
+          - string
+          - 'null'
           readOnly: true
-          nullable: true
           description: Extra data stored for the activity (e.g. pre- or post-update field value)
       required:
       - activity_type
@@ -367,6 +452,81 @@ components:
       - target_object_type
       - target_parent_guid
       - user
+    PaginatedActivityAnalyticsList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ActivityAnalytics'
+    UserActivityAnalytics:
+      type: object
+      properties:
+        first_name:
+          type: string
+          readOnly: true
+        last_name:
+          type: string
+          readOnly: true
+        email:
+          type: string
+          readOnly: true
+        guid:
+          type: string
+          readOnly: true
+        avatar:
+          type: string
+          readOnly: true
+      required:
+      - avatar
+      - email
+      - first_name
+      - guid
+      - last_name
+    ActivityMessageValue:
+      type: object
+      properties:
+        user:
+          allOf:
+          - $ref: '#/components/schemas/ActivityMessageData'
+        target:
+          allOf:
+          - $ref: '#/components/schemas/ActivityMessageData'
+        parent:
+          allOf:
+          - $ref: '#/components/schemas/ActivityMessageData'
+    BaseDataSource:
+      type: object
+      properties:
+        guid:
+          type: string
+          maxLength: 25
+        type:
+          $ref: '#/components/schemas/Type6b6Enum'
+        name:
+          type: string
+          maxLength: 100
+      required:
+      - name
+      - type
     TargetDataSourceTypeEnum:
       enum:
       - airflow
@@ -468,191 +628,6 @@ components:
         * `trial` - Trial
 
         * `trial_redshift` - Trial Redshift'
-    ActivityMessageData:
-      type: object
-      properties:
-        object_type:
-          type: string
-          nullable: true
-        data:
-          type: object
-          oneOf:
-          - type: object
-            properties:
-              first_name:
-                type: string
-              last_name:
-                type: string
-              guid:
-                type: string
-              avatar:
-                type: string
-                nullable: true
-          - type: object
-            properties:
-              guid:
-                type: string
-              name:
-                type: string
-              data_types:
-                type: object
-              parent_guid:
-                type: string
-                nullable: true
-          - type: object
-            properties:
-              guid:
-                type: string
-              name:
-                type: string
-              data_types:
-                type: object
-          readOnly: true
-          nullable: true
-      required:
-      - data
-      - object_type
-    PaginatedActivityAnalyticsList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/ActivityAnalytics'
-    ActivitySchemaChanges:
-      type: object
-      properties:
-        guid:
-          type: string
-          readOnly: true
-        target:
-          type: string
-          readOnly: true
-        target_name:
-          type: string
-        target_parent_guid:
-          type: string
-        target_data_source:
-          $ref: '#/components/schemas/BaseDataSource'
-        performed_on:
-          type: string
-          format: date-time
-          readOnly: true
-        breadcrumbs:
-          type: array
-          items:
-            $ref: '#/components/schemas/Breadcrumb'
-        message:
-          allOf:
-          - $ref: '#/components/schemas/ActivityMessage'
-          readOnly: true
-        data:
-          type: string
-          readOnly: true
-          nullable: true
-          description: Extra data stored for the activity (e.g. pre- or post-update field value)
-        data_types:
-          allOf:
-          - $ref: '#/components/schemas/BaseType'
-          readOnly: true
-      required:
-      - breadcrumbs
-      - data
-      - data_types
-      - guid
-      - message
-      - performed_on
-      - target
-      - target_data_source
-      - target_name
-      - target_parent_guid
-    ActivityMessage:
-      type: object
-      description: 'Activity Message Serializer is written to handle the
-
-        different types of messages that possible for activity
-
-        to display.
-
-        For this serializer to work, context must be passed in
-
-        with the key.
-
-        target_data_source.type.value'
-      properties:
-        template:
-          type: string
-        values:
-          $ref: '#/components/schemas/ActivityMessageValue'
-      required:
-      - template
-      - values
-    ActivityMessageValue:
-      type: object
-      properties:
-        user:
-          allOf:
-          - $ref: '#/components/schemas/ActivityMessageData'
-          nullable: true
-        target:
-          allOf:
-          - $ref: '#/components/schemas/ActivityMessageData'
-          nullable: true
-        parent:
-          allOf:
-          - $ref: '#/components/schemas/ActivityMessageData'
-          nullable: true
-    Breadcrumb:
-      type: object
-      properties:
-        guid:
-          type: string
-          maxLength: 25
-        target_guid:
-          type: string
-          maxLength: 256
-        target_name:
-          type: string
-          readOnly: true
-        target_object_type:
-          type: string
-        target_data_type:
-          type: string
-        target_data_source_guid:
-          type: string
-          nullable: true
-          readOnly: true
-        target_data_source_type:
-          allOf:
-          - $ref: '#/components/schemas/TargetDataSourceTypeEnum'
-          nullable: true
-        ordinal:
-          type: integer
-          maximum: 2147483647
-          minimum: 0
-          description: Ordering of breadcrumb within the table
-      required:
-      - target_data_source_guid
-      - target_data_type
-      - target_guid
-      - target_name
-      - target_object_type
     Type6b6Enum:
       enum:
       - airflow
@@ -754,6 +729,41 @@ components:
         * `trial` - Trial
 
         * `trial_redshift` - Trial Redshift'
+    Breadcrumb:
+      type: object
+      properties:
+        guid:
+          type: string
+          maxLength: 25
+        target_guid:
+          type: string
+          maxLength: 256
+        target_name:
+          type: string
+          readOnly: true
+        target_object_type:
+          type: string
+        target_data_type:
+          type: string
+        target_data_source_guid:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        target_data_source_type:
+          allOf:
+          - $ref: '#/components/schemas/TargetDataSourceTypeEnum'
+        ordinal:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          description: Ordering of breadcrumb within the table
+      required:
+      - target_data_source_guid
+      - target_data_type
+      - target_guid
+      - target_name
+      - target_object_type
     BaseType:
       type: object
       description: 'Base Serializer to inject the following `type` information:
@@ -765,20 +775,24 @@ components:
         - Data Type: Additional type like tile, visual, card etc.'
       properties:
         object_type:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           readOnly: true
         data_source_type:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           readOnly: true
         data_type:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           readOnly: true
         external_database_type:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           readOnly: true
       required:
       - data_source_type

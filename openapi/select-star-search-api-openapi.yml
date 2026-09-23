@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Select Star Metadata bi search API
+  title: Select Star Metadata Search API
   version: 1.0.0
   x-role-system:
     description: This API uses role-based access control
@@ -15,7 +15,7 @@ info:
   license:
     name: All Rights Reserved
 tags:
-- name: search
+- name: Search
 paths:
   /v1/search/:
     get:
@@ -222,7 +222,7 @@ paths:
           default: false
         description: When set to true, if the search term refers to a tag name, then the results will contain all items that are tagged with that tag. For example, if the search term contains `pii` and `tags_search` is enabled, then the results will contain all items that tagged as `pii`
       tags:
-      - search
+      - Search
       security:
       - JWTAuthentication: []
       - tokenAuth: []
@@ -234,43 +234,74 @@ paths:
                 $ref: '#/components/schemas/PaginatedSearchResultList'
           description: ''
       x-role-requirements: Authenticated User with Active Organization
+      summary: Search list
+      x-summary-source: derived
 components:
   schemas:
-    SearchResultCollection:
+    BaseType:
+      type: object
+      description: 'Base Serializer to inject the following `type` information:
+
+        - Object Type: Model Name of the Object: Table, Dashboard, ReportQuery
+
+        - Data Source Type: snowflake, databricks etc.
+
+        - Data Type: Additional type like tile, visual, card etc.'
+      properties:
+        object_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        data_source_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        data_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        external_database_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+      required:
+      - data_source_type
+      - data_type
+      - external_database_type
+      - object_type
+    SearchResultTag:
       type: object
       properties:
         guid:
+          type: string
+        type:
           type: string
         name:
           type: string
         icon:
           type: string
-        emoji:
+        color:
           type: string
-        color_scheme:
-          type: string
+        visible:
+          type: boolean
         breadcrumbs:
           type: array
           items:
             $ref: '#/components/schemas/Breadcrumb'
           readOnly: true
+        links_to:
+          type: string
       required:
       - breadcrumbs
-      - color_scheme
-      - emoji
+      - color
       - guid
       - icon
       - name
-    SearchResultCustomAttribute:
-      type: object
-      properties:
-        name:
-          type: string
-        value:
-          type: string
-      required:
-      - name
-      - value
+      - type
     SearchResult:
       type: object
       properties:
@@ -338,8 +369,9 @@ components:
         is_active:
           type: boolean
         avatar:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           readOnly: true
         data_source_type:
           type: string
@@ -397,6 +429,63 @@ components:
       required:
       - guid
       - name
+    PaginatedSearchResultList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchResult'
+    TableTypeEnum:
+      enum:
+      - table
+      - view
+      - materialized_view
+      - external_table
+      - dynamic_table
+      - incremental
+      - ephemeral
+      - source
+      - seed
+      - model
+      type: string
+      description: '* `table` - table
+
+        * `view` - view
+
+        * `materialized_view` - materialized_view
+
+        * `external_table` - external_table
+
+        * `dynamic_table` - dynamic_table
+
+        * `incremental` - dbt_incremental
+
+        * `ephemeral` - dbt_ephemeral
+
+        * `source` - dbt_source
+
+        * `seed` - dbt_seed
+
+        * `model` - dbt_model_legacy'
     TargetDataSourceTypeEnum:
       enum:
       - airflow
@@ -498,58 +587,6 @@ components:
         * `trial` - Trial
 
         * `trial_redshift` - Trial Redshift'
-    SearchResultTag:
-      type: object
-      properties:
-        guid:
-          type: string
-        type:
-          type: string
-        name:
-          type: string
-        icon:
-          type: string
-        color:
-          type: string
-        visible:
-          type: boolean
-        breadcrumbs:
-          type: array
-          items:
-            $ref: '#/components/schemas/Breadcrumb'
-          readOnly: true
-        links_to:
-          type: string
-      required:
-      - breadcrumbs
-      - color
-      - guid
-      - icon
-      - name
-      - type
-    PaginatedSearchResultList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/SearchResult'
     SearchResultTaggedItems:
       type: object
       properties:
@@ -577,13 +614,13 @@ components:
         target_data_type:
           type: string
         target_data_source_guid:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           readOnly: true
         target_data_source_type:
           allOf:
           - $ref: '#/components/schemas/TargetDataSourceTypeEnum'
-          nullable: true
         ordinal:
           type: integer
           maximum: 2147483647
@@ -595,69 +632,41 @@ components:
       - target_guid
       - target_name
       - target_object_type
-    TableTypeEnum:
-      enum:
-      - table
-      - view
-      - materialized_view
-      - external_table
-      - dynamic_table
-      - incremental
-      - ephemeral
-      - source
-      - seed
-      - model
-      type: string
-      description: '* `table` - table
-
-        * `view` - view
-
-        * `materialized_view` - materialized_view
-
-        * `external_table` - external_table
-
-        * `dynamic_table` - dynamic_table
-
-        * `incremental` - dbt_incremental
-
-        * `ephemeral` - dbt_ephemeral
-
-        * `source` - dbt_source
-
-        * `seed` - dbt_seed
-
-        * `model` - dbt_model_legacy'
-    BaseType:
+    SearchResultCollection:
       type: object
-      description: 'Base Serializer to inject the following `type` information:
-
-        - Object Type: Model Name of the Object: Table, Dashboard, ReportQuery
-
-        - Data Source Type: snowflake, databricks etc.
-
-        - Data Type: Additional type like tile, visual, card etc.'
       properties:
-        object_type:
+        guid:
           type: string
-          nullable: true
-          readOnly: true
-        data_source_type:
+        name:
           type: string
-          nullable: true
-          readOnly: true
-        data_type:
+        icon:
           type: string
-          nullable: true
-          readOnly: true
-        external_database_type:
+        emoji:
           type: string
-          nullable: true
+        color_scheme:
+          type: string
+        breadcrumbs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Breadcrumb'
           readOnly: true
       required:
-      - data_source_type
-      - data_type
-      - external_database_type
-      - object_type
+      - breadcrumbs
+      - color_scheme
+      - emoji
+      - guid
+      - icon
+      - name
+    SearchResultCustomAttribute:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+      required:
+      - name
+      - value
   securitySchemes:
     JWTAuthentication:
       type: http

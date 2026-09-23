@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Select Star Metadata bi data-sources API
+  title: Select Star Metadata Data Sources API
   version: 1.0.0
   x-role-system:
     description: This API uses role-based access control
@@ -15,7 +15,7 @@ info:
   license:
     name: All Rights Reserved
 tags:
-- name: data-sources
+- name: Data Sources
 paths:
   /v1/data-sources/:
     get:
@@ -54,7 +54,7 @@ paths:
         schema:
           type: string
       tags:
-      - data-sources
+      - Data Sources
       security:
       - JWTAuthentication: []
       - tokenAuth: []
@@ -66,6 +66,8 @@ paths:
                 $ref: '#/components/schemas/PaginatedDataSourceList'
           description: ''
       x-role-requirements: Admin (or RBAC policy)
+      summary: Data sources list
+      x-summary-source: derived
   /v1/data-sources/{guid}/:
     get:
       operationId: data_sources_retrieve
@@ -81,7 +83,7 @@ paths:
           pattern: ^([a-zA-z]{2}_[a-zA-Z0-9]{22})|me|default|([a-zA-z]{2}_[a-zA-Z0-9]{22}).personal$
         required: true
       tags:
-      - data-sources
+      - Data Sources
       security:
       - JWTAuthentication: []
       - tokenAuth: []
@@ -93,132 +95,10 @@ paths:
                 $ref: '#/components/schemas/DataSource'
           description: ''
       x-role-requirements: Admin (or RBAC policy)
+      summary: Data sources retrieve
+      x-summary-source: derived
 components:
   schemas:
-    ConnectionStatusEnum:
-      enum:
-      - OK
-      - WA
-      - UN
-      - ER
-      type: string
-      description: '* `OK` - Correct
-
-        * `WA` - Warning
-
-        * `UN` - Unknown
-
-        * `ER` - Error'
-    DataSource:
-      type: object
-      properties:
-        guid:
-          type: string
-          readOnly: true
-        type:
-          $ref: '#/components/schemas/Type6b6Enum'
-        name:
-          type: string
-          maxLength: 100
-        keypair:
-          $ref: '#/components/schemas/KeyPair'
-        last_ingested_on:
-          type: string
-          format: date-time
-          nullable: true
-        last_fully_ingested_on:
-          type: string
-          format: date-time
-          readOnly: true
-        is_ingesting:
-          type: boolean
-          readOnly: true
-        is_syncing_paused:
-          type: boolean
-          readOnly: true
-        connection_status:
-          $ref: '#/components/schemas/ConnectionStatusEnum'
-        connection_error_message:
-          type: string
-          description: Exception message if health check failed
-        is_mode_discovery_db_added:
-          type: boolean
-          readOnly: true
-        external_uuid:
-          type: string
-          nullable: true
-          description: UUID used for running aws cloudformation.
-          maxLength: 64
-        iam_principal:
-          type: string
-          nullable: true
-          description: IAM Principal used for running aws cloudformation.
-          maxLength: 64
-        cloudformation_url:
-          type: object
-          additionalProperties:
-            type: string
-          nullable: true
-          readOnly: true
-        is_credentials_setup_incomplete:
-          type: boolean
-          readOnly: true
-        processed_through:
-          $ref: '#/components/schemas/ProcessedThrough'
-        data_types:
-          allOf:
-          - $ref: '#/components/schemas/BaseType'
-          readOnly: true
-      required:
-      - cloudformation_url
-      - data_types
-      - guid
-      - is_credentials_setup_incomplete
-      - is_ingesting
-      - is_mode_discovery_db_added
-      - is_syncing_paused
-      - last_fully_ingested_on
-      - name
-      - type
-    ProcessedThrough:
-      type: object
-      properties:
-        start_time:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProcessedThroughEntry'
-      required:
-      - start_time
-    KeyPair:
-      type: object
-      properties:
-        public_key:
-          type: string
-          nullable: true
-          maxLength: 1000
-    PaginatedDataSourceList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataSource'
     ProcessedThroughEntry:
       type: object
       properties:
@@ -232,6 +112,48 @@ components:
       required:
       - date
       - key
+    ProcessedThrough:
+      type: object
+      properties:
+        start_time:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcessedThroughEntry'
+      required:
+      - start_time
+    PaginatedDataSourceList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataSource'
+    KeyPair:
+      type: object
+      properties:
+        public_key:
+          type:
+          - string
+          - 'null'
+          maxLength: 1000
     Type6b6Enum:
       enum:
       - airflow
@@ -333,6 +255,20 @@ components:
         * `trial` - Trial
 
         * `trial_redshift` - Trial Redshift'
+    ConnectionStatusEnum:
+      enum:
+      - OK
+      - WA
+      - UN
+      - ER
+      type: string
+      description: '* `OK` - Correct
+
+        * `WA` - Warning
+
+        * `UN` - Unknown
+
+        * `ER` - Error'
     BaseType:
       type: object
       description: 'Base Serializer to inject the following `type` information:
@@ -344,26 +280,105 @@ components:
         - Data Type: Additional type like tile, visual, card etc.'
       properties:
         object_type:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           readOnly: true
         data_source_type:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           readOnly: true
         data_type:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           readOnly: true
         external_database_type:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           readOnly: true
       required:
       - data_source_type
       - data_type
       - external_database_type
       - object_type
+    DataSource:
+      type: object
+      properties:
+        guid:
+          type: string
+          readOnly: true
+        type:
+          $ref: '#/components/schemas/Type6b6Enum'
+        name:
+          type: string
+          maxLength: 100
+        keypair:
+          $ref: '#/components/schemas/KeyPair'
+        last_ingested_on:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        last_fully_ingested_on:
+          type: string
+          format: date-time
+          readOnly: true
+        is_ingesting:
+          type: boolean
+          readOnly: true
+        is_syncing_paused:
+          type: boolean
+          readOnly: true
+        connection_status:
+          $ref: '#/components/schemas/ConnectionStatusEnum'
+        connection_error_message:
+          type: string
+          description: Exception message if health check failed
+        is_mode_discovery_db_added:
+          type: boolean
+          readOnly: true
+        external_uuid:
+          type:
+          - string
+          - 'null'
+          description: UUID used for running aws cloudformation.
+          maxLength: 64
+        iam_principal:
+          type:
+          - string
+          - 'null'
+          description: IAM Principal used for running aws cloudformation.
+          maxLength: 64
+        cloudformation_url:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+          readOnly: true
+        is_credentials_setup_incomplete:
+          type: boolean
+          readOnly: true
+        processed_through:
+          $ref: '#/components/schemas/ProcessedThrough'
+        data_types:
+          allOf:
+          - $ref: '#/components/schemas/BaseType'
+          readOnly: true
+      required:
+      - cloudformation_url
+      - data_types
+      - guid
+      - is_credentials_setup_incomplete
+      - is_ingesting
+      - is_mode_discovery_db_added
+      - is_syncing_paused
+      - last_fully_ingested_on
+      - name
+      - type
   securitySchemes:
     JWTAuthentication:
       type: http
