@@ -238,70 +238,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    BaseType:
-      type: object
-      description: 'Base Serializer to inject the following `type` information:
-
-        - Object Type: Model Name of the Object: Table, Dashboard, ReportQuery
-
-        - Data Source Type: snowflake, databricks etc.
-
-        - Data Type: Additional type like tile, visual, card etc.'
-      properties:
-        object_type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        data_source_type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        data_type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        external_database_type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-      required:
-      - data_source_type
-      - data_type
-      - external_database_type
-      - object_type
-    SearchResultTag:
-      type: object
-      properties:
-        guid:
-          type: string
-        type:
-          type: string
-        name:
-          type: string
-        icon:
-          type: string
-        color:
-          type: string
-        visible:
-          type: boolean
-        breadcrumbs:
-          type: array
-          items:
-            $ref: '#/components/schemas/Breadcrumb'
-          readOnly: true
-        links_to:
-          type: string
-      required:
-      - breadcrumbs
-      - color
-      - guid
-      - icon
-      - name
-      - type
     SearchResult:
       type: object
       properties:
@@ -419,41 +355,16 @@ components:
       - score
       - search_name
       - tagged_items
-    SearchResultTeam:
+    SearchResultCustomAttribute:
       type: object
       properties:
-        guid:
-          type: string
         name:
           type: string
+        value:
+          type: string
       required:
-      - guid
       - name
-    PaginatedSearchResultList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/SearchResult'
+      - value
     TableTypeEnum:
       enum:
       - table
@@ -486,6 +397,105 @@ components:
         * `seed` - dbt_seed
 
         * `model` - dbt_model_legacy'
+    SearchResultTeam:
+      type: object
+      properties:
+        guid:
+          type: string
+        name:
+          type: string
+      required:
+      - guid
+      - name
+    BaseType:
+      type: object
+      description: 'Base Serializer to inject the following `type` information:
+
+        - Object Type: Model Name of the Object: Table, Dashboard, ReportQuery
+
+        - Data Source Type: snowflake, databricks etc.
+
+        - Data Type: Additional type like tile, visual, card etc.'
+      properties:
+        object_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        data_source_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        data_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        external_database_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+      required:
+      - data_source_type
+      - data_type
+      - external_database_type
+      - object_type
+    SearchResultTag:
+      type: object
+      properties:
+        guid:
+          type: string
+        type:
+          type: string
+        name:
+          type: string
+        icon:
+          type: string
+        color:
+          type: string
+        visible:
+          type: boolean
+        breadcrumbs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Breadcrumb'
+          readOnly: true
+        links_to:
+          type: string
+      required:
+      - breadcrumbs
+      - color
+      - guid
+      - icon
+      - name
+      - type
+    SearchResultCollection:
+      type: object
+      properties:
+        guid:
+          type: string
+        name:
+          type: string
+        icon:
+          type: string
+        emoji:
+          type: string
+        color_scheme:
+          type: string
+        breadcrumbs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Breadcrumb'
+          readOnly: true
+      required:
+      - breadcrumbs
+      - color_scheme
+      - emoji
+      - guid
+      - icon
+      - name
     TargetDataSourceTypeEnum:
       enum:
       - airflow
@@ -597,6 +607,31 @@ components:
       required:
       - kind
       - tag
+    PaginatedSearchResultList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchResult'
     Breadcrumb:
       type: object
       properties:
@@ -632,41 +667,6 @@ components:
       - target_guid
       - target_name
       - target_object_type
-    SearchResultCollection:
-      type: object
-      properties:
-        guid:
-          type: string
-        name:
-          type: string
-        icon:
-          type: string
-        emoji:
-          type: string
-        color_scheme:
-          type: string
-        breadcrumbs:
-          type: array
-          items:
-            $ref: '#/components/schemas/Breadcrumb'
-          readOnly: true
-      required:
-      - breadcrumbs
-      - color_scheme
-      - emoji
-      - guid
-      - icon
-      - name
-    SearchResultCustomAttribute:
-      type: object
-      properties:
-        name:
-          type: string
-        value:
-          type: string
-      required:
-      - name
-      - value
   securitySchemes:
     JWTAuthentication:
       type: http

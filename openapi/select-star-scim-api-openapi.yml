@@ -251,6 +251,39 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    SCIMUserCreateRequest:
+      type: object
+      properties:
+        userName:
+          type: string
+          minLength: 1
+          pattern: '@(?!gmail\.|hotmail\.|yahoo\.|live\.|qq\.|naver\.|protonmail\.|yopmail\.|pokemail\.|bvhrs\.|idrct\.|caraparcal\.|tryninja.io|mailinator.com|ontimeusemail\.|outlook\.|icloud\.|mail\.|instasmail\.|nevyxus\.|bvhrk\.|cazlq\.)'
+        password:
+          type: string
+          writeOnly: true
+          minLength: 1
+        name:
+          type: object
+          properties:
+            givenName:
+              type: string
+            familyName:
+              type: string
+          description: 'The components of the user''s real name. Returned as a complex type with the following sub-attributes: `familyName`, `givenName`.'
+        active:
+          type: boolean
+        role:
+          type: string
+          minLength: 1
+          description: The role of the user. One of 'user', 'admin' or 'data_manager'
+        team:
+          allOf:
+          - $ref: '#/components/schemas/TeamRequest'
+      required:
+      - active
+      - name
+      - password
+      - userName
     TeamRequest:
       type: object
       properties:
@@ -270,6 +303,34 @@ components:
           description: Richtext formatted description. Can be in Slatejs or Draftjs format.
       required:
       - name
+    SCIMUserUpdateRequest:
+      type: object
+      properties:
+        userName:
+          type: string
+          minLength: 1
+          pattern: '@(?!gmail\.|hotmail\.|yahoo\.|live\.|qq\.|naver\.|protonmail\.|yopmail\.|pokemail\.|bvhrs\.|idrct\.|caraparcal\.|tryninja.io|mailinator.com|ontimeusemail\.|outlook\.|icloud\.|mail\.|instasmail\.|nevyxus\.|bvhrk\.|cazlq\.)'
+        name:
+          type: object
+          properties:
+            givenName:
+              type: string
+            familyName:
+              type: string
+          description: 'The components of the user''s real name. Returned as a complex type with the following sub-attributes: `familyName`, `givenName`.'
+        active:
+          type: boolean
+        role:
+          type: string
+          minLength: 1
+          description: The role of the user. One of 'user', 'admin' or 'data_manager'
+        team:
+          allOf:
+          - $ref: '#/components/schemas/TeamRequest'
+      required:
+      - active
+      - name
+      - userName
     SCIMUser:
       type: object
       properties:
@@ -329,39 +390,6 @@ components:
       - name
       - schemas
       - userName
-    SCIMUserCreateRequest:
-      type: object
-      properties:
-        userName:
-          type: string
-          minLength: 1
-          pattern: '@(?!gmail\.|hotmail\.|yahoo\.|live\.|qq\.|naver\.|protonmail\.|yopmail\.|pokemail\.|bvhrs\.|idrct\.|caraparcal\.|tryninja.io|mailinator.com|ontimeusemail\.|outlook\.|icloud\.|mail\.|instasmail\.|nevyxus\.|bvhrk\.|cazlq\.)'
-        password:
-          type: string
-          writeOnly: true
-          minLength: 1
-        name:
-          type: object
-          properties:
-            givenName:
-              type: string
-            familyName:
-              type: string
-          description: 'The components of the user''s real name. Returned as a complex type with the following sub-attributes: `familyName`, `givenName`.'
-        active:
-          type: boolean
-        role:
-          type: string
-          minLength: 1
-          description: The role of the user. One of 'user', 'admin' or 'data_manager'
-        team:
-          allOf:
-          - $ref: '#/components/schemas/TeamRequest'
-      required:
-      - active
-      - name
-      - password
-      - userName
     Team:
       type: object
       properties:
@@ -418,34 +446,6 @@ components:
       - schemas
       - startIndex
       - totalResults
-    SCIMUserUpdateRequest:
-      type: object
-      properties:
-        userName:
-          type: string
-          minLength: 1
-          pattern: '@(?!gmail\.|hotmail\.|yahoo\.|live\.|qq\.|naver\.|protonmail\.|yopmail\.|pokemail\.|bvhrs\.|idrct\.|caraparcal\.|tryninja.io|mailinator.com|ontimeusemail\.|outlook\.|icloud\.|mail\.|instasmail\.|nevyxus\.|bvhrk\.|cazlq\.)'
-        name:
-          type: object
-          properties:
-            givenName:
-              type: string
-            familyName:
-              type: string
-          description: 'The components of the user''s real name. Returned as a complex type with the following sub-attributes: `familyName`, `givenName`.'
-        active:
-          type: boolean
-        role:
-          type: string
-          minLength: 1
-          description: The role of the user. One of 'user', 'admin' or 'data_manager'
-        team:
-          allOf:
-          - $ref: '#/components/schemas/TeamRequest'
-      required:
-      - active
-      - name
-      - userName
   securitySchemes:
     JWTAuthentication:
       type: http

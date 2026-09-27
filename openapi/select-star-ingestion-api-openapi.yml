@@ -110,40 +110,6 @@ paths:
       x-role-requirements: Admin (or RBAC policy)
 components:
   schemas:
-    ProcessedThroughEntry:
-      type: object
-      properties:
-        key:
-          type: string
-          readOnly: true
-        date:
-          type: string
-          format: date-time
-          readOnly: true
-      required:
-      - date
-      - key
-    ManifestJsonSerializerOutput:
-      type: object
-      properties:
-        data_source:
-          type: string
-          description: the guid of the data source you updated
-        dbt_project:
-          type: string
-          description: the guid of the dbt project you updated
-      required:
-      - data_source
-      - dbt_project
-    ProcessedThrough:
-      type: object
-      properties:
-        start_time:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProcessedThroughEntry'
-      required:
-      - start_time
     KeyPair:
       type: object
       properties:
@@ -267,41 +233,47 @@ components:
         * `UN` - Unknown
 
         * `ER` - Error'
-    BaseType:
+    ManifestJsonRequest:
       type: object
-      description: 'Base Serializer to inject the following `type` information:
-
-        - Object Type: Model Name of the Object: Table, Dashboard, ReportQuery
-
-        - Data Source Type: snowflake, databricks etc.
-
-        - Data Type: Additional type like tile, visual, card etc.'
       properties:
-        object_type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        data_source_type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        data_type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        external_database_type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
+        data_source:
+          type: string
+          minLength: 1
+          description: the guid of the data source you want to update
+        dbt_project:
+          type: string
+          minLength: 1
+          writeOnly: true
+          description: the guid of the dbt project you want to update. (REQUIRED if you have multiple dbt projects in the same data source)
+        manifest:
+          type: string
+          writeOnly: true
+          minLength: 1
+          description: the contents of the catalog.json file, use `catalog_file` instead
+          deprecated: true
+        catalog:
+          type: string
+          writeOnly: true
+          minLength: 1
+          description: the contents of the manifest.json file, use `manifest_file` instead
+          deprecated: true
+        manifest_file:
+          type: string
+          format: binary
+          writeOnly: true
+          description: the manifest.json file encoded in `utf8` (mutually exclusive with manifest)
+        catalog_file:
+          type: string
+          format: binary
+          writeOnly: true
+          description: the catalog.json file encoded in `utf8` (mutually exclusive with catalog)
+        run_results_file:
+          type: string
+          format: binary
+          writeOnly: true
+          description: the run_results.json file encoded in `utf8`
       required:
-      - data_source_type
-      - data_type
-      - external_database_type
-      - object_type
+      - data_source
     DataSource:
       type: object
       properties:
@@ -377,47 +349,75 @@ components:
       - last_fully_ingested_on
       - name
       - type
-    ManifestJsonRequest:
+    ProcessedThrough:
+      type: object
+      properties:
+        start_time:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcessedThroughEntry'
+      required:
+      - start_time
+    BaseType:
+      type: object
+      description: 'Base Serializer to inject the following `type` information:
+
+        - Object Type: Model Name of the Object: Table, Dashboard, ReportQuery
+
+        - Data Source Type: snowflake, databricks etc.
+
+        - Data Type: Additional type like tile, visual, card etc.'
+      properties:
+        object_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        data_source_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        data_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        external_database_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+      required:
+      - data_source_type
+      - data_type
+      - external_database_type
+      - object_type
+    ManifestJsonSerializerOutput:
       type: object
       properties:
         data_source:
           type: string
-          minLength: 1
-          description: the guid of the data source you want to update
+          description: the guid of the data source you updated
         dbt_project:
           type: string
-          minLength: 1
-          writeOnly: true
-          description: the guid of the dbt project you want to update. (REQUIRED if you have multiple dbt projects in the same data source)
-        manifest:
-          type: string
-          writeOnly: true
-          minLength: 1
-          description: the contents of the catalog.json file, use `catalog_file` instead
-          deprecated: true
-        catalog:
-          type: string
-          writeOnly: true
-          minLength: 1
-          description: the contents of the manifest.json file, use `manifest_file` instead
-          deprecated: true
-        manifest_file:
-          type: string
-          format: binary
-          writeOnly: true
-          description: the manifest.json file encoded in `utf8` (mutually exclusive with manifest)
-        catalog_file:
-          type: string
-          format: binary
-          writeOnly: true
-          description: the catalog.json file encoded in `utf8` (mutually exclusive with catalog)
-        run_results_file:
-          type: string
-          format: binary
-          writeOnly: true
-          description: the run_results.json file encoded in `utf8`
+          description: the guid of the dbt project you updated
       required:
       - data_source
+      - dbt_project
+    ProcessedThroughEntry:
+      type: object
+      properties:
+        key:
+          type: string
+          readOnly: true
+        date:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - date
+      - key
   securitySchemes:
     JWTAuthentication:
       type: http

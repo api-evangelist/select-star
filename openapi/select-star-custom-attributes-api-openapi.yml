@@ -235,11 +235,31 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    CustomAttributeType:
-      enum:
-      - text
-      type: string
-      description: '* `text` - text'
+    PaginatedCustomAttributeList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttribute'
     CustomAttributeRequest:
       type: object
       properties:
@@ -367,44 +387,326 @@ components:
       required:
       - name
       - type
-    UserLite:
+    TeamShortcut:
       type: object
       properties:
         guid:
           type: string
-          readOnly: true
-        first_name:
+        name:
           type: string
-          readOnly: true
-        last_name:
-          type: string
-          readOnly: true
-        team:
-          allOf:
-          - $ref: '#/components/schemas/TeamShortcut'
-          readOnly: true
-        email:
-          type: string
-          format: email
-          readOnly: true
-          title: Email address
-        avatar:
-          type:
-          - string
-          - 'null'
-          format: uri
-          readOnly: true
-        is_active:
-          type: boolean
-          readOnly: true
       required:
-      - avatar
-      - email
-      - first_name
       - guid
-      - is_active
-      - last_name
-      - team
+      - name
+    PatchedCustomAttributeRequest:
+      type: object
+      properties:
+        type:
+          allOf:
+          - $ref: '#/components/schemas/CustomAttributeType'
+          description: 'Custom Attribute type, either category or status
+
+
+            * `text` - text'
+        name:
+          type: string
+          minLength: 1
+          description: Custom attribute display name
+          maxLength: 30
+        data_source_types:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataSourceTypesEnum'
+          description: List of data source types CA applies to. Positions correspond with object_types and data_types fields
+        object_types:
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/CustomAttributeObjectType'
+            description: 'Object type of an asset
+
+
+              * `database` - database
+
+              * `schema` - schema
+
+              * `table` - table
+
+              * `column` - column
+
+              * `explore` - explore
+
+              * `lookmlmodel` - lookmlmodel
+
+              * `lookmlview` - lookmlview
+
+              * `lookmlfield` - lookmlfield
+
+              * `explorefield` - explorefield
+
+              * `tableaudatasource` - tableaudatasource
+
+              * `tableautable` - tableautable
+
+              * `tableauview` - tableauview
+
+              * `tableaufield` - tableaufield
+
+              * `bifolder` - bifolder
+
+              * `dashboard` - dashboard
+
+              * `dashboardelement` - dashboardelement
+
+              * `metabasetable` - metabasetable
+
+              * `powerbicolumn` - powerbicolumn
+
+              * `reportquery` - reportquery
+
+              * `thoughtspotcolumn` - thoughtspotcolumn
+
+              * `thoughtspottable` - thoughtspottable
+
+              * `bicolumn` - bicolumn
+
+              * `bidashboardelement` - bidashboardelement
+
+              * `bidataset` - bidataset
+
+              * `bitable` - bitable
+
+              * `notebook` - notebook
+
+              * `job` - job
+
+              * `` - empty'
+          description: List of object types CA applies to. Positions correspond with data_source_types and data_types fields
+        data_types:
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/DataTypesEnum'
+            description: 'Data type of an asset
+
+
+              * `column` - column
+
+              * `tile` - tile
+
+              * `page` - page
+
+              * `card` - card
+
+              * `element` - element
+
+              * `dashboard` - dashboard
+
+              * `report` - report
+
+              * `metric` - metric
+
+              * `visual` - visual
+
+              * `worksheet` - worksheet
+
+              * `one_to_one_logical` - one_to_one_logical
+
+              * `sql_view` - sql_view
+
+              * `question` - question
+
+              * `model` - model
+
+              * `table` - table
+
+              * `` - empty'
+          description: List of data types CA applies to. Positions correspond with data_source_types and object_types fields
+    DataSourceTypesEnum:
+      enum:
+      - airflow
+      - aws_s3
+      - bigquery
+      - data_studio
+      - databricks
+      - db_agent
+      - db2
+      - dbt
+      - fivetran
+      - glue
+      - hex
+      - looker
+      - metabase
+      - mode
+      - monte_carlo
+      - mssql
+      - mysql
+      - omni
+      - openlineage
+      - oracle
+      - periscope
+      - postgres
+      - power_bi
+      - quicksight
+      - redshift
+      - salesforce
+      - salesforce_crma
+      - sigma
+      - snowflake
+      - tableau
+      - thoughtspot
+      - trial
+      - trial_redshift
+      type: string
+      description: '* `airflow` - Airflow
+
+        * `aws_s3` - AWS S3
+
+        * `bigquery` - BigQuery
+
+        * `data_studio` - Looker Studio
+
+        * `databricks` - Databricks
+
+        * `db_agent` - DB Agent
+
+        * `db2` - DB2
+
+        * `dbt` - dbt
+
+        * `fivetran` - Fivetran
+
+        * `glue` - Glue
+
+        * `hex` - Hex
+
+        * `looker` - Looker
+
+        * `metabase` - Metabase
+
+        * `mode` - Mode
+
+        * `monte_carlo` - Monte Carlo
+
+        * `mssql` - MS SQL
+
+        * `mysql` - MySQL
+
+        * `omni` - Omni BI
+
+        * `openlineage` - Open Lineage
+
+        * `oracle` - Oracle
+
+        * `periscope` - Periscope
+
+        * `postgres` - PostgreSQL
+
+        * `power_bi` - Power BI
+
+        * `quicksight` - QuickSight
+
+        * `redshift` - Redshift
+
+        * `salesforce` - Salesforce
+
+        * `salesforce_crma` - Salesforce Analytics
+
+        * `sigma` - Sigma
+
+        * `snowflake` - Snowflake
+
+        * `tableau` - Tableau
+
+        * `thoughtspot` - ThoughtSpot
+
+        * `trial` - Trial
+
+        * `trial_redshift` - Trial Redshift'
+    CustomAttributeObjectType:
+      enum:
+      - database
+      - schema
+      - table
+      - column
+      - explore
+      - lookmlmodel
+      - lookmlview
+      - lookmlfield
+      - explorefield
+      - tableaudatasource
+      - tableautable
+      - tableauview
+      - tableaufield
+      - bifolder
+      - dashboard
+      - dashboardelement
+      - metabasetable
+      - powerbicolumn
+      - reportquery
+      - thoughtspotcolumn
+      - thoughtspottable
+      - bicolumn
+      - bidashboardelement
+      - bidataset
+      - bitable
+      - notebook
+      - job
+      type: string
+      description: '* `database` - database
+
+        * `schema` - schema
+
+        * `table` - table
+
+        * `column` - column
+
+        * `explore` - explore
+
+        * `lookmlmodel` - lookmlmodel
+
+        * `lookmlview` - lookmlview
+
+        * `lookmlfield` - lookmlfield
+
+        * `explorefield` - explorefield
+
+        * `tableaudatasource` - tableaudatasource
+
+        * `tableautable` - tableautable
+
+        * `tableauview` - tableauview
+
+        * `tableaufield` - tableaufield
+
+        * `bifolder` - bifolder
+
+        * `dashboard` - dashboard
+
+        * `dashboardelement` - dashboardelement
+
+        * `metabasetable` - metabasetable
+
+        * `powerbicolumn` - powerbicolumn
+
+        * `reportquery` - reportquery
+
+        * `thoughtspotcolumn` - thoughtspotcolumn
+
+        * `thoughtspottable` - thoughtspottable
+
+        * `bicolumn` - bicolumn
+
+        * `bidashboardelement` - bidashboardelement
+
+        * `bidataset` - bidataset
+
+        * `bitable` - bitable
+
+        * `notebook` - notebook
+
+        * `job` - job
+
+        * `` - empty'
     CustomAttribute:
       type: object
       properties:
@@ -540,240 +842,6 @@ components:
       - guid
       - name
       - type
-    CustomAttributeObjectType:
-      enum:
-      - database
-      - schema
-      - table
-      - column
-      - explore
-      - lookmlmodel
-      - lookmlview
-      - lookmlfield
-      - explorefield
-      - tableaudatasource
-      - tableautable
-      - tableauview
-      - tableaufield
-      - bifolder
-      - dashboard
-      - dashboardelement
-      - metabasetable
-      - powerbicolumn
-      - reportquery
-      - thoughtspotcolumn
-      - thoughtspottable
-      - bicolumn
-      - bidashboardelement
-      - bidataset
-      - bitable
-      - notebook
-      - job
-      type: string
-      description: '* `database` - database
-
-        * `schema` - schema
-
-        * `table` - table
-
-        * `column` - column
-
-        * `explore` - explore
-
-        * `lookmlmodel` - lookmlmodel
-
-        * `lookmlview` - lookmlview
-
-        * `lookmlfield` - lookmlfield
-
-        * `explorefield` - explorefield
-
-        * `tableaudatasource` - tableaudatasource
-
-        * `tableautable` - tableautable
-
-        * `tableauview` - tableauview
-
-        * `tableaufield` - tableaufield
-
-        * `bifolder` - bifolder
-
-        * `dashboard` - dashboard
-
-        * `dashboardelement` - dashboardelement
-
-        * `metabasetable` - metabasetable
-
-        * `powerbicolumn` - powerbicolumn
-
-        * `reportquery` - reportquery
-
-        * `thoughtspotcolumn` - thoughtspotcolumn
-
-        * `thoughtspottable` - thoughtspottable
-
-        * `bicolumn` - bicolumn
-
-        * `bidashboardelement` - bidashboardelement
-
-        * `bidataset` - bidataset
-
-        * `bitable` - bitable
-
-        * `notebook` - notebook
-
-        * `job` - job
-
-        * `` - empty'
-    PaginatedCustomAttributeList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomAttribute'
-    PatchedCustomAttributeRequest:
-      type: object
-      properties:
-        type:
-          allOf:
-          - $ref: '#/components/schemas/CustomAttributeType'
-          description: 'Custom Attribute type, either category or status
-
-
-            * `text` - text'
-        name:
-          type: string
-          minLength: 1
-          description: Custom attribute display name
-          maxLength: 30
-        data_source_types:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataSourceTypesEnum'
-          description: List of data source types CA applies to. Positions correspond with object_types and data_types fields
-        object_types:
-          type: array
-          items:
-            allOf:
-            - $ref: '#/components/schemas/CustomAttributeObjectType'
-            description: 'Object type of an asset
-
-
-              * `database` - database
-
-              * `schema` - schema
-
-              * `table` - table
-
-              * `column` - column
-
-              * `explore` - explore
-
-              * `lookmlmodel` - lookmlmodel
-
-              * `lookmlview` - lookmlview
-
-              * `lookmlfield` - lookmlfield
-
-              * `explorefield` - explorefield
-
-              * `tableaudatasource` - tableaudatasource
-
-              * `tableautable` - tableautable
-
-              * `tableauview` - tableauview
-
-              * `tableaufield` - tableaufield
-
-              * `bifolder` - bifolder
-
-              * `dashboard` - dashboard
-
-              * `dashboardelement` - dashboardelement
-
-              * `metabasetable` - metabasetable
-
-              * `powerbicolumn` - powerbicolumn
-
-              * `reportquery` - reportquery
-
-              * `thoughtspotcolumn` - thoughtspotcolumn
-
-              * `thoughtspottable` - thoughtspottable
-
-              * `bicolumn` - bicolumn
-
-              * `bidashboardelement` - bidashboardelement
-
-              * `bidataset` - bidataset
-
-              * `bitable` - bitable
-
-              * `notebook` - notebook
-
-              * `job` - job
-
-              * `` - empty'
-          description: List of object types CA applies to. Positions correspond with data_source_types and data_types fields
-        data_types:
-          type: array
-          items:
-            allOf:
-            - $ref: '#/components/schemas/DataTypesEnum'
-            description: 'Data type of an asset
-
-
-              * `column` - column
-
-              * `tile` - tile
-
-              * `page` - page
-
-              * `card` - card
-
-              * `element` - element
-
-              * `dashboard` - dashboard
-
-              * `report` - report
-
-              * `metric` - metric
-
-              * `visual` - visual
-
-              * `worksheet` - worksheet
-
-              * `one_to_one_logical` - one_to_one_logical
-
-              * `sql_view` - sql_view
-
-              * `question` - question
-
-              * `model` - model
-
-              * `table` - table
-
-              * `` - empty'
-          description: List of data types CA applies to. Positions correspond with data_source_types and object_types fields
     DataTypesEnum:
       enum:
       - column
@@ -823,117 +891,49 @@ components:
         * `table` - table
 
         * `` - empty'
-    TeamShortcut:
+    CustomAttributeType:
+      enum:
+      - text
+      type: string
+      description: '* `text` - text'
+    UserLite:
       type: object
       properties:
         guid:
           type: string
-        name:
+          readOnly: true
+        first_name:
           type: string
+          readOnly: true
+        last_name:
+          type: string
+          readOnly: true
+        team:
+          allOf:
+          - $ref: '#/components/schemas/TeamShortcut'
+          readOnly: true
+        email:
+          type: string
+          format: email
+          readOnly: true
+          title: Email address
+        avatar:
+          type:
+          - string
+          - 'null'
+          format: uri
+          readOnly: true
+        is_active:
+          type: boolean
+          readOnly: true
       required:
+      - avatar
+      - email
+      - first_name
       - guid
-      - name
-    DataSourceTypesEnum:
-      enum:
-      - airflow
-      - aws_s3
-      - bigquery
-      - data_studio
-      - databricks
-      - db_agent
-      - db2
-      - dbt
-      - fivetran
-      - glue
-      - hex
-      - looker
-      - metabase
-      - mode
-      - monte_carlo
-      - mssql
-      - mysql
-      - omni
-      - openlineage
-      - oracle
-      - periscope
-      - postgres
-      - power_bi
-      - quicksight
-      - redshift
-      - salesforce
-      - salesforce_crma
-      - sigma
-      - snowflake
-      - tableau
-      - thoughtspot
-      - trial
-      - trial_redshift
-      type: string
-      description: '* `airflow` - Airflow
-
-        * `aws_s3` - AWS S3
-
-        * `bigquery` - BigQuery
-
-        * `data_studio` - Looker Studio
-
-        * `databricks` - Databricks
-
-        * `db_agent` - DB Agent
-
-        * `db2` - DB2
-
-        * `dbt` - dbt
-
-        * `fivetran` - Fivetran
-
-        * `glue` - Glue
-
-        * `hex` - Hex
-
-        * `looker` - Looker
-
-        * `metabase` - Metabase
-
-        * `mode` - Mode
-
-        * `monte_carlo` - Monte Carlo
-
-        * `mssql` - MS SQL
-
-        * `mysql` - MySQL
-
-        * `omni` - Omni BI
-
-        * `openlineage` - Open Lineage
-
-        * `oracle` - Oracle
-
-        * `periscope` - Periscope
-
-        * `postgres` - PostgreSQL
-
-        * `power_bi` - Power BI
-
-        * `quicksight` - QuickSight
-
-        * `redshift` - Redshift
-
-        * `salesforce` - Salesforce
-
-        * `salesforce_crma` - Salesforce Analytics
-
-        * `sigma` - Sigma
-
-        * `snowflake` - Snowflake
-
-        * `tableau` - Tableau
-
-        * `thoughtspot` - ThoughtSpot
-
-        * `trial` - Trial
-
-        * `trial_redshift` - Trial Redshift'
+      - is_active
+      - last_name
+      - team
   securitySchemes:
     JWTAuthentication:
       type: http

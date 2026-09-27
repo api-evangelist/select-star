@@ -69,7 +69,7 @@ x-enrichment:
   pass: local-v1
 apis:
 - aid: select-star:select-star-bi-api
-  name: Select Star bi API
+  name: Select Star Bi API
   description: The bi API from Select Star — 23 operation(s) for bi.
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
@@ -89,7 +89,7 @@ apis:
   - type: GettingStarted
     url: https://docs.selectstar.com/select-star-api/quick-start
 - aid: select-star:select-star-collections-api
-  name: Select Star collections API
+  name: Select Star Collections API
   description: The collections API from Select Star — 5 operation(s) for collections.
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
@@ -109,7 +109,7 @@ apis:
   - type: GettingStarted
     url: https://docs.selectstar.com/select-star-api/quick-start
 - aid: select-star:select-star-columns-api
-  name: Select Star columns API
+  name: Select Star Columns API
   description: The columns API from Select Star — 3 operation(s) for columns.
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
@@ -129,7 +129,7 @@ apis:
   - type: GettingStarted
     url: https://docs.selectstar.com/select-star-api/quick-start
 - aid: select-star:select-star-comments-api
-  name: Select Star comments API
+  name: Select Star Comments API
   description: The comments API from Select Star — 1 operation(s) for comments.
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
@@ -149,7 +149,7 @@ apis:
   - type: GettingStarted
     url: https://docs.selectstar.com/select-star-api/quick-start
 - aid: select-star:select-star-custom-attribute-values-api
-  name: Select Star custom-attribute-values API
+  name: Select Star Custom Attribute Values API
   description: >-
     The custom-attribute-values API from Select Star — 2 operation(s) for custom-attribute-values.
   humanURL: https://docs.selectstar.com/select-star-api/overview
@@ -168,7 +168,7 @@ apis:
   - type: GettingStarted
     url: https://docs.selectstar.com/select-star-api/quick-start
 - aid: select-star:select-star-custom-attributes-api
-  name: Select Star custom-attributes API
+  name: Select Star Custom Attributes API
   description: The custom-attributes API from Select Star — 2 operation(s) for custom-attributes.
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
@@ -188,7 +188,7 @@ apis:
   - type: GettingStarted
     url: https://docs.selectstar.com/select-star-api/quick-start
 - aid: select-star:select-star-custom-attributes-with-value-api
-  name: Select Star custom-attributes-with-value API
+  name: Select Star Custom Attributes With Value API
   description: >-
     The custom-attributes-with-value API from Select Star — 1 operation(s) for custom-attributes-with-value.
   humanURL: https://docs.selectstar.com/select-star-api/overview
@@ -207,7 +207,7 @@ apis:
   - type: GettingStarted
     url: https://docs.selectstar.com/select-star-api/quick-start
 - aid: select-star:select-star-data-metrics-api
-  name: Select Star data-metrics API
+  name: Select Star Data Metrics API
   description: The data-metrics API from Select Star — 2 operation(s) for data-metrics.
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
@@ -225,7 +225,7 @@ apis:
   - type: GettingStarted
     url: https://docs.selectstar.com/select-star-api/quick-start
 - aid: select-star:select-star-data-sources-api
-  name: Select Star data-sources API
+  name: Select Star Data Sources API
   description: The data-sources API from Select Star — 2 operation(s) for data-sources.
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
@@ -245,7 +245,7 @@ apis:
   - type: GettingStarted
     url: https://docs.selectstar.com/select-star-api/quick-start
 - aid: select-star:select-star-databases-api
-  name: Select Star databases API
+  name: Select Star Databases API
   description: The databases API from Select Star — 3 operation(s) for databases.
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
@@ -265,7 +265,7 @@ apis:
   - type: GettingStarted
     url: https://docs.selectstar.com/select-star-api/quick-start
 - aid: select-star:select-star-dbt-api
-  name: Select Star dbt API
+  name: Select Star Dbt API
   description: The dbt API from Select Star — 4 operation(s) for dbt.
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
@@ -283,7 +283,7 @@ apis:
   - type: GettingStarted
     url: https://docs.selectstar.com/select-star-api/quick-start
 - aid: select-star:select-star-documents-api
-  name: Select Star documents API
+  name: Select Star Documents API
   description: The documents API from Select Star — 3 operation(s) for documents.
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
@@ -303,7 +303,7 @@ apis:
   - type: GettingStarted
     url: https://docs.selectstar.com/select-star-api/quick-start
 - aid: select-star:select-star-ingestion-api
-  name: Select Star ingestion API
+  name: Select Star Ingestion API
   description: The ingestion API from Select Star — 2 operation(s) for ingestion.
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
@@ -323,7 +323,7 @@ apis:
   - type: GettingStarted
     url: https://docs.selectstar.com/select-star-api/quick-start
 - aid: select-star:select-star-jobs-api
-  name: Select Star jobs API
+  name: Select Star Jobs API
   description: The jobs API from Select Star — 3 operation(s) for jobs.
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
@@ -343,7 +343,7 @@ apis:
   - type: GettingStarted
     url: https://docs.selectstar.com/select-star-api/quick-start
 - aid: select-star:select-star-joins-api
-  name: Select Star joins API
+  name: Select Star Joins API
   description: The joins API from Select Star — 1 operation(s) for joins.
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
@@ -361,7 +361,7 @@ apis:
   - type: GettingStarted
     url: https://docs.selectstar.com/select-star-api/quick-start
 - aid: select-star:select-star-lineage-api
-  name: Select Star lineage API
+  name: Select Star Lineage API
   description: The lineage API from Select Star — 4 operation(s) for lineage.
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
@@ -381,7 +381,7 @@ apis:
   - type: GettingStarted
     url: https://docs.selectstar.com/select-star-api/quick-start
 - aid: select-star:select-star-metadata-api
-  name: Select Star metadata API
+  name: Select Star Metadata API
   description: The metadata API from Select Star — 5 operation(s) for metadata.
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
@@ -401,7 +401,7 @@ apis:
   - type: GettingStarted
     url: https://docs.selectstar.com/select-star-api/quick-start
 - aid: select-star:select-star-metrics-api
-  name: Select Star metrics API
+  name: Select Star Metrics API
   description: The metrics API from Select Star — 3 operation(s) for metrics.
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
@@ -421,7 +421,7 @@ apis:
   - type: GettingStarted
     url: https://docs.selectstar.com/select-star-api/quick-start
 - aid: select-star:select-star-pii-api
-  name: Select Star pii API
+  name: Select Star Pii API
   description: The pii API from Select Star — 1 operation(s) for pii.
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
@@ -441,7 +441,7 @@ apis:
   - type: GettingStarted
     url: https://docs.selectstar.com/select-star-api/quick-start
 - aid: select-star:select-star-schemas-api
-  name: Select Star schemas API
+  name: Select Star Schemas API
   description: The schemas API from Select Star — 3 operation(s) for schemas.
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
@@ -461,7 +461,7 @@ apis:
   - type: GettingStarted
     url: https://docs.selectstar.com/select-star-api/quick-start
 - aid: select-star:select-star-scim-api
-  name: Select Star scim API
+  name: Select Star SCIM API
   description: The scim API from Select Star — 5 operation(s) for scim.
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
@@ -481,7 +481,7 @@ apis:
   - type: GettingStarted
     url: https://docs.selectstar.com/select-star-api/quick-start
 - aid: select-star:select-star-search-api
-  name: Select Star search API
+  name: Select Star Search API
   description: The search API from Select Star — 1 operation(s) for search.
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
@@ -501,7 +501,7 @@ apis:
   - type: GettingStarted
     url: https://docs.selectstar.com/select-star-api/quick-start
 - aid: select-star:select-star-tables-api
-  name: Select Star tables API
+  name: Select Star Tables API
   description: The tables API from Select Star — 10 operation(s) for tables.
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
@@ -521,7 +521,7 @@ apis:
   - type: GettingStarted
     url: https://docs.selectstar.com/select-star-api/quick-start
 - aid: select-star:select-star-tags-api
-  name: Select Star tags API
+  name: Select Star Tags API
   description: The tags API from Select Star — 5 operation(s) for tags.
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
@@ -541,7 +541,7 @@ apis:
   - type: GettingStarted
     url: https://docs.selectstar.com/select-star-api/quick-start
 - aid: select-star:select-star-teams-api
-  name: Select Star teams API
+  name: Select Star Teams API
   description: The teams API from Select Star — 3 operation(s) for teams.
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
@@ -561,7 +561,7 @@ apis:
   - type: GettingStarted
     url: https://docs.selectstar.com/select-star-api/quick-start
 - aid: select-star:select-star-terms-api
-  name: Select Star terms API
+  name: Select Star Terms API
   description: The terms API from Select Star — 5 operation(s) for terms.
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
