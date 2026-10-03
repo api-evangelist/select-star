@@ -344,6 +344,116 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    PatchedDbtProjectRequest:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          description: The name of the dbt project
+          maxLength: 255
+        data_source:
+          $ref: '#/components/schemas/DbtProjectDataSourceRequest'
+        dialect:
+          allOf:
+          - $ref: '#/components/schemas/DialectEnum'
+          description: 'the dialect of this dbt project
+
+
+            * `airflow` - Airflow
+
+            * `aws_s3` - AWS S3
+
+            * `bigquery` - BigQuery
+
+            * `data_studio` - Looker Studio
+
+            * `databricks` - Databricks
+
+            * `db_agent` - DB Agent
+
+            * `db2` - DB2
+
+            * `dbt` - dbt
+
+            * `fivetran` - Fivetran
+
+            * `glue` - Glue
+
+            * `hex` - Hex
+
+            * `looker` - Looker
+
+            * `metabase` - Metabase
+
+            * `mode` - Mode
+
+            * `monte_carlo` - Monte Carlo
+
+            * `mssql` - MS SQL
+
+            * `mysql` - MySQL
+
+            * `omni` - Omni BI
+
+            * `openlineage` - Open Lineage
+
+            * `oracle` - Oracle
+
+            * `periscope` - Periscope
+
+            * `postgres` - PostgreSQL
+
+            * `power_bi` - Power BI
+
+            * `quicksight` - QuickSight
+
+            * `redshift` - Redshift
+
+            * `salesforce` - Salesforce
+
+            * `salesforce_crma` - Salesforce Analytics
+
+            * `sigma` - Sigma
+
+            * `snowflake` - Snowflake
+
+            * `tableau` - Tableau
+
+            * `thoughtspot` - ThoughtSpot
+
+            * `trial` - Trial
+
+            * `trial_redshift` - Trial Redshift'
+        target_data_source:
+          $ref: '#/components/schemas/DbtProjectDataSourceRequest'
+        dbt_type:
+          $ref: '#/components/schemas/DbtTypeEnum'
+        core_manifest_json:
+          type: object
+          additionalProperties: {}
+          writeOnly: true
+        core_catalog_json:
+          type: object
+          additionalProperties: {}
+          writeOnly: true
+        core_run_results_json:
+          type: object
+          additionalProperties: {}
+          writeOnly: true
+        cloud_token:
+          type: string
+          writeOnly: true
+          minLength: 1
+        cloud_job_id:
+          type: string
+          writeOnly: true
+          minLength: 1
+        cloud_base_url:
+          type: string
+          writeOnly: true
+          minLength: 1
     DbtTypeEnum:
       enum:
       - both
@@ -403,6 +513,214 @@ components:
       - data_types
       - name
       - updated_on
+    DbtProjectDataSource:
+      type: object
+      properties:
+        guid:
+          type: string
+        type:
+          allOf:
+          - $ref: '#/components/schemas/Type6b6Enum'
+          readOnly: true
+        name:
+          type: string
+          readOnly: true
+        last_ingested_on:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        last_fully_ingested_on:
+          type: string
+          format: date-time
+          readOnly: true
+        is_ingesting:
+          type: boolean
+          readOnly: true
+        is_syncing_paused:
+          type: boolean
+          readOnly: true
+        connection_status:
+          $ref: '#/components/schemas/ConnectionStatusEnum'
+        connection_error_message:
+          type: string
+          description: Exception message if health check failed
+        external_uuid:
+          type:
+          - string
+          - 'null'
+          description: UUID used for running aws cloudformation.
+          maxLength: 64
+        iam_principal:
+          type:
+          - string
+          - 'null'
+          description: IAM Principal used for running aws cloudformation.
+          maxLength: 64
+        is_credentials_setup_incomplete:
+          type: boolean
+          readOnly: true
+        data_types:
+          allOf:
+          - $ref: '#/components/schemas/BaseType'
+          readOnly: true
+      required:
+      - data_types
+      - guid
+      - is_credentials_setup_incomplete
+      - is_ingesting
+      - is_syncing_paused
+      - last_fully_ingested_on
+      - name
+      - type
+    ConnectionStatusEnum:
+      enum:
+      - OK
+      - WA
+      - UN
+      - ER
+      type: string
+      description: '* `OK` - Correct
+
+        * `WA` - Warning
+
+        * `UN` - Unknown
+
+        * `ER` - Error'
+    TableTypeEnum:
+      enum:
+      - table
+      - view
+      - materialized_view
+      - external_table
+      - dynamic_table
+      - incremental
+      - ephemeral
+      - source
+      - seed
+      - model
+      type: string
+      description: '* `table` - table
+
+        * `view` - view
+
+        * `materialized_view` - materialized_view
+
+        * `external_table` - external_table
+
+        * `dynamic_table` - dynamic_table
+
+        * `incremental` - dbt_incremental
+
+        * `ephemeral` - dbt_ephemeral
+
+        * `source` - dbt_source
+
+        * `seed` - dbt_seed
+
+        * `model` - dbt_model_legacy'
+    DbtProject:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          description: The name of the dbt project
+          maxLength: 255
+        guid:
+          type: string
+          readOnly: true
+        data_source:
+          $ref: '#/components/schemas/DbtProjectDataSource'
+        dialect:
+          allOf:
+          - $ref: '#/components/schemas/DialectEnum'
+          description: 'the dialect of this dbt project
+
+
+            * `airflow` - Airflow
+
+            * `aws_s3` - AWS S3
+
+            * `bigquery` - BigQuery
+
+            * `data_studio` - Looker Studio
+
+            * `databricks` - Databricks
+
+            * `db_agent` - DB Agent
+
+            * `db2` - DB2
+
+            * `dbt` - dbt
+
+            * `fivetran` - Fivetran
+
+            * `glue` - Glue
+
+            * `hex` - Hex
+
+            * `looker` - Looker
+
+            * `metabase` - Metabase
+
+            * `mode` - Mode
+
+            * `monte_carlo` - Monte Carlo
+
+            * `mssql` - MS SQL
+
+            * `mysql` - MySQL
+
+            * `omni` - Omni BI
+
+            * `openlineage` - Open Lineage
+
+            * `oracle` - Oracle
+
+            * `periscope` - Periscope
+
+            * `postgres` - PostgreSQL
+
+            * `power_bi` - Power BI
+
+            * `quicksight` - QuickSight
+
+            * `redshift` - Redshift
+
+            * `salesforce` - Salesforce
+
+            * `salesforce_crma` - Salesforce Analytics
+
+            * `sigma` - Sigma
+
+            * `snowflake` - Snowflake
+
+            * `tableau` - Tableau
+
+            * `thoughtspot` - ThoughtSpot
+
+            * `trial` - Trial
+
+            * `trial_redshift` - Trial Redshift'
+        target_data_source:
+          $ref: '#/components/schemas/DbtProjectDataSource'
+        updated_on:
+          type: string
+          format: date-time
+          readOnly: true
+        dbt_type:
+          $ref: '#/components/schemas/DbtTypeEnum'
+        data_types:
+          allOf:
+          - $ref: '#/components/schemas/BaseType'
+          readOnly: true
+      required:
+      - data_types
+      - dialect
+      - guid
+      - updated_on
     DbtWarehouseLink:
       type: object
       properties:
@@ -431,6 +749,359 @@ components:
       - dbt_model
       - target_data_source
       - warehouse_table
+    Type6b6Enum:
+      enum:
+      - airflow
+      - aws_s3
+      - bigquery
+      - data_studio
+      - databricks
+      - db_agent
+      - db2
+      - dbt
+      - fivetran
+      - glue
+      - hex
+      - looker
+      - metabase
+      - mode
+      - monte_carlo
+      - mssql
+      - mysql
+      - omni
+      - openlineage
+      - oracle
+      - periscope
+      - postgres
+      - power_bi
+      - quicksight
+      - redshift
+      - salesforce
+      - salesforce_crma
+      - sigma
+      - snowflake
+      - tableau
+      - thoughtspot
+      - trial
+      - trial_redshift
+      type: string
+      description: '* `airflow` - Airflow
+
+        * `aws_s3` - AWS S3
+
+        * `bigquery` - BigQuery
+
+        * `data_studio` - Looker Studio
+
+        * `databricks` - Databricks
+
+        * `db_agent` - DB Agent
+
+        * `db2` - DB2
+
+        * `dbt` - dbt
+
+        * `fivetran` - Fivetran
+
+        * `glue` - Glue
+
+        * `hex` - Hex
+
+        * `looker` - Looker
+
+        * `metabase` - Metabase
+
+        * `mode` - Mode
+
+        * `monte_carlo` - Monte Carlo
+
+        * `mssql` - MS SQL
+
+        * `mysql` - MySQL
+
+        * `omni` - Omni BI
+
+        * `openlineage` - Open Lineage
+
+        * `oracle` - Oracle
+
+        * `periscope` - Periscope
+
+        * `postgres` - PostgreSQL
+
+        * `power_bi` - Power BI
+
+        * `quicksight` - QuickSight
+
+        * `redshift` - Redshift
+
+        * `salesforce` - Salesforce
+
+        * `salesforce_crma` - Salesforce Analytics
+
+        * `sigma` - Sigma
+
+        * `snowflake` - Snowflake
+
+        * `tableau` - Tableau
+
+        * `thoughtspot` - ThoughtSpot
+
+        * `trial` - Trial
+
+        * `trial_redshift` - Trial Redshift'
+    DbtProjectDataSourceRequest:
+      type: object
+      properties:
+        guid:
+          type: string
+          minLength: 1
+        last_ingested_on:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        connection_status:
+          $ref: '#/components/schemas/ConnectionStatusEnum'
+        connection_error_message:
+          type: string
+          minLength: 1
+          description: Exception message if health check failed
+        external_uuid:
+          type:
+          - string
+          - 'null'
+          description: UUID used for running aws cloudformation.
+          maxLength: 64
+        iam_principal:
+          type:
+          - string
+          - 'null'
+          description: IAM Principal used for running aws cloudformation.
+          maxLength: 64
+      required:
+      - guid
+    PaginatedDbtProjectList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DbtProject'
+    Breadcrumb:
+      type: object
+      properties:
+        guid:
+          type: string
+          maxLength: 25
+        target_guid:
+          type: string
+          maxLength: 256
+        target_name:
+          type: string
+          readOnly: true
+        target_object_type:
+          type: string
+        target_data_type:
+          type: string
+        target_data_source_guid:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        target_data_source_type:
+          allOf:
+          - $ref: '#/components/schemas/TargetDataSourceTypeEnum'
+        ordinal:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          description: Ordering of breadcrumb within the table
+      required:
+      - target_data_source_guid
+      - target_data_type
+      - target_guid
+      - target_name
+      - target_object_type
+    BaseType:
+      type: object
+      description: 'Base Serializer to inject the following `type` information:
+
+        - Object Type: Model Name of the Object: Table, Dashboard, ReportQuery
+
+        - Data Source Type: snowflake, databricks etc.
+
+        - Data Type: Additional type like tile, visual, card etc.'
+      properties:
+        object_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        data_source_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        data_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        external_database_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+      required:
+      - data_source_type
+      - data_type
+      - external_database_type
+      - object_type
+    PaginatedDbtWarehouseLinkList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DbtWarehouseLink'
+    TargetDataSourceTypeEnum:
+      enum:
+      - airflow
+      - aws_s3
+      - bigquery
+      - data_studio
+      - databricks
+      - db_agent
+      - db2
+      - dbt
+      - fivetran
+      - glue
+      - hex
+      - looker
+      - metabase
+      - mode
+      - monte_carlo
+      - mssql
+      - mysql
+      - omni
+      - openlineage
+      - oracle
+      - periscope
+      - postgres
+      - power_bi
+      - quicksight
+      - redshift
+      - salesforce
+      - salesforce_crma
+      - sigma
+      - snowflake
+      - tableau
+      - thoughtspot
+      - trial
+      - trial_redshift
+      type: string
+      description: '* `airflow` - Airflow
+
+        * `aws_s3` - AWS S3
+
+        * `bigquery` - BigQuery
+
+        * `data_studio` - Looker Studio
+
+        * `databricks` - Databricks
+
+        * `db_agent` - DB Agent
+
+        * `db2` - DB2
+
+        * `dbt` - dbt
+
+        * `fivetran` - Fivetran
+
+        * `glue` - Glue
+
+        * `hex` - Hex
+
+        * `looker` - Looker
+
+        * `metabase` - Metabase
+
+        * `mode` - Mode
+
+        * `monte_carlo` - Monte Carlo
+
+        * `mssql` - MS SQL
+
+        * `mysql` - MySQL
+
+        * `omni` - Omni BI
+
+        * `openlineage` - Open Lineage
+
+        * `oracle` - Oracle
+
+        * `periscope` - Periscope
+
+        * `postgres` - PostgreSQL
+
+        * `power_bi` - Power BI
+
+        * `quicksight` - QuickSight
+
+        * `redshift` - Redshift
+
+        * `salesforce` - Salesforce
+
+        * `salesforce_crma` - Salesforce Analytics
+
+        * `sigma` - Sigma
+
+        * `snowflake` - Snowflake
+
+        * `tableau` - Tableau
+
+        * `thoughtspot` - ThoughtSpot
+
+        * `trial` - Trial
+
+        * `trial_redshift` - Trial Redshift'
     DbtProjectRequest:
       type: object
       properties:
@@ -543,273 +1214,6 @@ components:
           minLength: 1
       required:
       - dialect
-    Type6b6Enum:
-      enum:
-      - airflow
-      - aws_s3
-      - bigquery
-      - data_studio
-      - databricks
-      - db_agent
-      - db2
-      - dbt
-      - fivetran
-      - glue
-      - hex
-      - looker
-      - metabase
-      - mode
-      - monte_carlo
-      - mssql
-      - mysql
-      - omni
-      - openlineage
-      - oracle
-      - periscope
-      - postgres
-      - power_bi
-      - quicksight
-      - redshift
-      - salesforce
-      - salesforce_crma
-      - sigma
-      - snowflake
-      - tableau
-      - thoughtspot
-      - trial
-      - trial_redshift
-      type: string
-      description: '* `airflow` - Airflow
-
-        * `aws_s3` - AWS S3
-
-        * `bigquery` - BigQuery
-
-        * `data_studio` - Looker Studio
-
-        * `databricks` - Databricks
-
-        * `db_agent` - DB Agent
-
-        * `db2` - DB2
-
-        * `dbt` - dbt
-
-        * `fivetran` - Fivetran
-
-        * `glue` - Glue
-
-        * `hex` - Hex
-
-        * `looker` - Looker
-
-        * `metabase` - Metabase
-
-        * `mode` - Mode
-
-        * `monte_carlo` - Monte Carlo
-
-        * `mssql` - MS SQL
-
-        * `mysql` - MySQL
-
-        * `omni` - Omni BI
-
-        * `openlineage` - Open Lineage
-
-        * `oracle` - Oracle
-
-        * `periscope` - Periscope
-
-        * `postgres` - PostgreSQL
-
-        * `power_bi` - Power BI
-
-        * `quicksight` - QuickSight
-
-        * `redshift` - Redshift
-
-        * `salesforce` - Salesforce
-
-        * `salesforce_crma` - Salesforce Analytics
-
-        * `sigma` - Sigma
-
-        * `snowflake` - Snowflake
-
-        * `tableau` - Tableau
-
-        * `thoughtspot` - ThoughtSpot
-
-        * `trial` - Trial
-
-        * `trial_redshift` - Trial Redshift'
-    PaginatedDbtWarehouseLinkList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/DbtWarehouseLink'
-    ConnectionStatusEnum:
-      enum:
-      - OK
-      - WA
-      - UN
-      - ER
-      type: string
-      description: '* `OK` - Correct
-
-        * `WA` - Warning
-
-        * `UN` - Unknown
-
-        * `ER` - Error'
-    DbtProjectDataSource:
-      type: object
-      properties:
-        guid:
-          type: string
-        type:
-          allOf:
-          - $ref: '#/components/schemas/Type6b6Enum'
-          readOnly: true
-        name:
-          type: string
-          readOnly: true
-        last_ingested_on:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        last_fully_ingested_on:
-          type: string
-          format: date-time
-          readOnly: true
-        is_ingesting:
-          type: boolean
-          readOnly: true
-        is_syncing_paused:
-          type: boolean
-          readOnly: true
-        connection_status:
-          $ref: '#/components/schemas/ConnectionStatusEnum'
-        connection_error_message:
-          type: string
-          description: Exception message if health check failed
-        external_uuid:
-          type:
-          - string
-          - 'null'
-          description: UUID used for running aws cloudformation.
-          maxLength: 64
-        iam_principal:
-          type:
-          - string
-          - 'null'
-          description: IAM Principal used for running aws cloudformation.
-          maxLength: 64
-        is_credentials_setup_incomplete:
-          type: boolean
-          readOnly: true
-        data_types:
-          allOf:
-          - $ref: '#/components/schemas/BaseType'
-          readOnly: true
-      required:
-      - data_types
-      - guid
-      - is_credentials_setup_incomplete
-      - is_ingesting
-      - is_syncing_paused
-      - last_fully_ingested_on
-      - name
-      - type
-    TableTypeEnum:
-      enum:
-      - table
-      - view
-      - materialized_view
-      - external_table
-      - dynamic_table
-      - incremental
-      - ephemeral
-      - source
-      - seed
-      - model
-      type: string
-      description: '* `table` - table
-
-        * `view` - view
-
-        * `materialized_view` - materialized_view
-
-        * `external_table` - external_table
-
-        * `dynamic_table` - dynamic_table
-
-        * `incremental` - dbt_incremental
-
-        * `ephemeral` - dbt_ephemeral
-
-        * `source` - dbt_source
-
-        * `seed` - dbt_seed
-
-        * `model` - dbt_model_legacy'
-    BaseType:
-      type: object
-      description: 'Base Serializer to inject the following `type` information:
-
-        - Object Type: Model Name of the Object: Table, Dashboard, ReportQuery
-
-        - Data Source Type: snowflake, databricks etc.
-
-        - Data Type: Additional type like tile, visual, card etc.'
-      properties:
-        object_type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        data_source_type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        data_type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        external_database_type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-      required:
-      - data_source_type
-      - data_type
-      - external_database_type
-      - object_type
     DialectEnum:
       enum:
       - airflow
@@ -911,410 +1315,6 @@ components:
         * `trial` - Trial
 
         * `trial_redshift` - Trial Redshift'
-    PaginatedDbtProjectList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/DbtProject'
-    TargetDataSourceTypeEnum:
-      enum:
-      - airflow
-      - aws_s3
-      - bigquery
-      - data_studio
-      - databricks
-      - db_agent
-      - db2
-      - dbt
-      - fivetran
-      - glue
-      - hex
-      - looker
-      - metabase
-      - mode
-      - monte_carlo
-      - mssql
-      - mysql
-      - omni
-      - openlineage
-      - oracle
-      - periscope
-      - postgres
-      - power_bi
-      - quicksight
-      - redshift
-      - salesforce
-      - salesforce_crma
-      - sigma
-      - snowflake
-      - tableau
-      - thoughtspot
-      - trial
-      - trial_redshift
-      type: string
-      description: '* `airflow` - Airflow
-
-        * `aws_s3` - AWS S3
-
-        * `bigquery` - BigQuery
-
-        * `data_studio` - Looker Studio
-
-        * `databricks` - Databricks
-
-        * `db_agent` - DB Agent
-
-        * `db2` - DB2
-
-        * `dbt` - dbt
-
-        * `fivetran` - Fivetran
-
-        * `glue` - Glue
-
-        * `hex` - Hex
-
-        * `looker` - Looker
-
-        * `metabase` - Metabase
-
-        * `mode` - Mode
-
-        * `monte_carlo` - Monte Carlo
-
-        * `mssql` - MS SQL
-
-        * `mysql` - MySQL
-
-        * `omni` - Omni BI
-
-        * `openlineage` - Open Lineage
-
-        * `oracle` - Oracle
-
-        * `periscope` - Periscope
-
-        * `postgres` - PostgreSQL
-
-        * `power_bi` - Power BI
-
-        * `quicksight` - QuickSight
-
-        * `redshift` - Redshift
-
-        * `salesforce` - Salesforce
-
-        * `salesforce_crma` - Salesforce Analytics
-
-        * `sigma` - Sigma
-
-        * `snowflake` - Snowflake
-
-        * `tableau` - Tableau
-
-        * `thoughtspot` - ThoughtSpot
-
-        * `trial` - Trial
-
-        * `trial_redshift` - Trial Redshift'
-    PatchedDbtProjectRequest:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-          description: The name of the dbt project
-          maxLength: 255
-        data_source:
-          $ref: '#/components/schemas/DbtProjectDataSourceRequest'
-        dialect:
-          allOf:
-          - $ref: '#/components/schemas/DialectEnum'
-          description: 'the dialect of this dbt project
-
-
-            * `airflow` - Airflow
-
-            * `aws_s3` - AWS S3
-
-            * `bigquery` - BigQuery
-
-            * `data_studio` - Looker Studio
-
-            * `databricks` - Databricks
-
-            * `db_agent` - DB Agent
-
-            * `db2` - DB2
-
-            * `dbt` - dbt
-
-            * `fivetran` - Fivetran
-
-            * `glue` - Glue
-
-            * `hex` - Hex
-
-            * `looker` - Looker
-
-            * `metabase` - Metabase
-
-            * `mode` - Mode
-
-            * `monte_carlo` - Monte Carlo
-
-            * `mssql` - MS SQL
-
-            * `mysql` - MySQL
-
-            * `omni` - Omni BI
-
-            * `openlineage` - Open Lineage
-
-            * `oracle` - Oracle
-
-            * `periscope` - Periscope
-
-            * `postgres` - PostgreSQL
-
-            * `power_bi` - Power BI
-
-            * `quicksight` - QuickSight
-
-            * `redshift` - Redshift
-
-            * `salesforce` - Salesforce
-
-            * `salesforce_crma` - Salesforce Analytics
-
-            * `sigma` - Sigma
-
-            * `snowflake` - Snowflake
-
-            * `tableau` - Tableau
-
-            * `thoughtspot` - ThoughtSpot
-
-            * `trial` - Trial
-
-            * `trial_redshift` - Trial Redshift'
-        target_data_source:
-          $ref: '#/components/schemas/DbtProjectDataSourceRequest'
-        dbt_type:
-          $ref: '#/components/schemas/DbtTypeEnum'
-        core_manifest_json:
-          type: object
-          additionalProperties: {}
-          writeOnly: true
-        core_catalog_json:
-          type: object
-          additionalProperties: {}
-          writeOnly: true
-        core_run_results_json:
-          type: object
-          additionalProperties: {}
-          writeOnly: true
-        cloud_token:
-          type: string
-          writeOnly: true
-          minLength: 1
-        cloud_job_id:
-          type: string
-          writeOnly: true
-          minLength: 1
-        cloud_base_url:
-          type: string
-          writeOnly: true
-          minLength: 1
-    DbtProjectDataSourceRequest:
-      type: object
-      properties:
-        guid:
-          type: string
-          minLength: 1
-        last_ingested_on:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        connection_status:
-          $ref: '#/components/schemas/ConnectionStatusEnum'
-        connection_error_message:
-          type: string
-          minLength: 1
-          description: Exception message if health check failed
-        external_uuid:
-          type:
-          - string
-          - 'null'
-          description: UUID used for running aws cloudformation.
-          maxLength: 64
-        iam_principal:
-          type:
-          - string
-          - 'null'
-          description: IAM Principal used for running aws cloudformation.
-          maxLength: 64
-      required:
-      - guid
-    DbtProject:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-          description: The name of the dbt project
-          maxLength: 255
-        guid:
-          type: string
-          readOnly: true
-        data_source:
-          $ref: '#/components/schemas/DbtProjectDataSource'
-        dialect:
-          allOf:
-          - $ref: '#/components/schemas/DialectEnum'
-          description: 'the dialect of this dbt project
-
-
-            * `airflow` - Airflow
-
-            * `aws_s3` - AWS S3
-
-            * `bigquery` - BigQuery
-
-            * `data_studio` - Looker Studio
-
-            * `databricks` - Databricks
-
-            * `db_agent` - DB Agent
-
-            * `db2` - DB2
-
-            * `dbt` - dbt
-
-            * `fivetran` - Fivetran
-
-            * `glue` - Glue
-
-            * `hex` - Hex
-
-            * `looker` - Looker
-
-            * `metabase` - Metabase
-
-            * `mode` - Mode
-
-            * `monte_carlo` - Monte Carlo
-
-            * `mssql` - MS SQL
-
-            * `mysql` - MySQL
-
-            * `omni` - Omni BI
-
-            * `openlineage` - Open Lineage
-
-            * `oracle` - Oracle
-
-            * `periscope` - Periscope
-
-            * `postgres` - PostgreSQL
-
-            * `power_bi` - Power BI
-
-            * `quicksight` - QuickSight
-
-            * `redshift` - Redshift
-
-            * `salesforce` - Salesforce
-
-            * `salesforce_crma` - Salesforce Analytics
-
-            * `sigma` - Sigma
-
-            * `snowflake` - Snowflake
-
-            * `tableau` - Tableau
-
-            * `thoughtspot` - ThoughtSpot
-
-            * `trial` - Trial
-
-            * `trial_redshift` - Trial Redshift'
-        target_data_source:
-          $ref: '#/components/schemas/DbtProjectDataSource'
-        updated_on:
-          type: string
-          format: date-time
-          readOnly: true
-        dbt_type:
-          $ref: '#/components/schemas/DbtTypeEnum'
-        data_types:
-          allOf:
-          - $ref: '#/components/schemas/BaseType'
-          readOnly: true
-      required:
-      - data_types
-      - dialect
-      - guid
-      - updated_on
-    Breadcrumb:
-      type: object
-      properties:
-        guid:
-          type: string
-          maxLength: 25
-        target_guid:
-          type: string
-          maxLength: 256
-        target_name:
-          type: string
-          readOnly: true
-        target_object_type:
-          type: string
-        target_data_type:
-          type: string
-        target_data_source_guid:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        target_data_source_type:
-          allOf:
-          - $ref: '#/components/schemas/TargetDataSourceTypeEnum'
-        ordinal:
-          type: integer
-          maximum: 2147483647
-          minimum: 0
-          description: Ordering of breadcrumb within the table
-      required:
-      - target_data_source_guid
-      - target_data_type
-      - target_guid
-      - target_name
-      - target_object_type
   securitySchemes:
     JWTAuthentication:
       type: http

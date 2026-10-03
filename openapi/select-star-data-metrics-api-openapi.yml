@@ -299,169 +299,31 @@ components:
       - first_name
       - guid
       - last_name
-    Type6b6Enum:
-      enum:
-      - airflow
-      - aws_s3
-      - bigquery
-      - data_studio
-      - databricks
-      - db_agent
-      - db2
-      - dbt
-      - fivetran
-      - glue
-      - hex
-      - looker
-      - metabase
-      - mode
-      - monte_carlo
-      - mssql
-      - mysql
-      - omni
-      - openlineage
-      - oracle
-      - periscope
-      - postgres
-      - power_bi
-      - quicksight
-      - redshift
-      - salesforce
-      - salesforce_crma
-      - sigma
-      - snowflake
-      - tableau
-      - thoughtspot
-      - trial
-      - trial_redshift
-      type: string
-      description: '* `airflow` - Airflow
-
-        * `aws_s3` - AWS S3
-
-        * `bigquery` - BigQuery
-
-        * `data_studio` - Looker Studio
-
-        * `databricks` - Databricks
-
-        * `db_agent` - DB Agent
-
-        * `db2` - DB2
-
-        * `dbt` - dbt
-
-        * `fivetran` - Fivetran
-
-        * `glue` - Glue
-
-        * `hex` - Hex
-
-        * `looker` - Looker
-
-        * `metabase` - Metabase
-
-        * `mode` - Mode
-
-        * `monte_carlo` - Monte Carlo
-
-        * `mssql` - MS SQL
-
-        * `mysql` - MySQL
-
-        * `omni` - Omni BI
-
-        * `openlineage` - Open Lineage
-
-        * `oracle` - Oracle
-
-        * `periscope` - Periscope
-
-        * `postgres` - PostgreSQL
-
-        * `power_bi` - Power BI
-
-        * `quicksight` - QuickSight
-
-        * `redshift` - Redshift
-
-        * `salesforce` - Salesforce
-
-        * `salesforce_crma` - Salesforce Analytics
-
-        * `sigma` - Sigma
-
-        * `snowflake` - Snowflake
-
-        * `tableau` - Tableau
-
-        * `thoughtspot` - ThoughtSpot
-
-        * `trial` - Trial
-
-        * `trial_redshift` - Trial Redshift'
-    BaseDataSource:
+    PaginatedActivityAnalyticsList:
       type: object
-      properties:
-        guid:
-          type: string
-          maxLength: 25
-        type:
-          $ref: '#/components/schemas/Type6b6Enum'
-        name:
-          type: string
-          maxLength: 100
       required:
-      - name
-      - type
-    ActivityMessageData:
-      type: object
+      - count
+      - results
       properties:
-        object_type:
+        count:
+          type: integer
+          example: 123
+        next:
           type:
           - string
           - 'null'
-        data:
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
           type:
-          - object
+          - string
           - 'null'
-          oneOf:
-          - type: object
-            properties:
-              first_name:
-                type: string
-              last_name:
-                type: string
-              guid:
-                type: string
-              avatar:
-                type:
-                - string
-                - 'null'
-          - type: object
-            properties:
-              guid:
-                type: string
-              name:
-                type: string
-              data_types:
-                type: object
-              parent_guid:
-                type:
-                - string
-                - 'null'
-          - type: object
-            properties:
-              guid:
-                type: string
-              name:
-                type: string
-              data_types:
-                type: object
-          readOnly: true
-      required:
-      - data
-      - object_type
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ActivityAnalytics'
     ActivityAnalytics:
       type: object
       properties:
@@ -522,100 +384,55 @@ components:
       - target_object_type
       - target_parent_guid
       - user
-    ActivityMessage:
+    ActivityMessageData:
       type: object
-      description: 'Activity Message Serializer is written to handle the
-
-        different types of messages that possible for activity
-
-        to display.
-
-        For this serializer to work, context must be passed in
-
-        with the key.
-
-        target_data_source.type.value'
-      properties:
-        template:
-          type: string
-        values:
-          $ref: '#/components/schemas/ActivityMessageValue'
-      required:
-      - template
-      - values
-    ActivityMessageValue:
-      type: object
-      properties:
-        user:
-          allOf:
-          - $ref: '#/components/schemas/ActivityMessageData'
-        target:
-          allOf:
-          - $ref: '#/components/schemas/ActivityMessageData'
-        parent:
-          allOf:
-          - $ref: '#/components/schemas/ActivityMessageData'
-    BaseType:
-      type: object
-      description: 'Base Serializer to inject the following `type` information:
-
-        - Object Type: Model Name of the Object: Table, Dashboard, ReportQuery
-
-        - Data Source Type: snowflake, databricks etc.
-
-        - Data Type: Additional type like tile, visual, card etc.'
       properties:
         object_type:
           type:
           - string
           - 'null'
-          readOnly: true
-        data_source_type:
+        data:
           type:
-          - string
+          - object
           - 'null'
-          readOnly: true
-        data_type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        external_database_type:
-          type:
-          - string
-          - 'null'
+          oneOf:
+          - type: object
+            properties:
+              first_name:
+                type: string
+              last_name:
+                type: string
+              guid:
+                type: string
+              avatar:
+                type:
+                - string
+                - 'null'
+          - type: object
+            properties:
+              guid:
+                type: string
+              name:
+                type: string
+              data_types:
+                type: object
+              parent_guid:
+                type:
+                - string
+                - 'null'
+          - type: object
+            properties:
+              guid:
+                type: string
+              name:
+                type: string
+              data_types:
+                type: object
           readOnly: true
       required:
-      - data_source_type
-      - data_type
-      - external_database_type
+      - data
       - object_type
-    PaginatedActivityAnalyticsList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/ActivityAnalytics'
-    TargetDataSourceTypeEnum:
+    Type6b6Enum:
       enum:
       - airflow
       - aws_s3
@@ -799,6 +616,189 @@ components:
       - target_guid
       - target_name
       - target_object_type
+    ActivityMessageValue:
+      type: object
+      properties:
+        user:
+          allOf:
+          - $ref: '#/components/schemas/ActivityMessageData'
+        target:
+          allOf:
+          - $ref: '#/components/schemas/ActivityMessageData'
+        parent:
+          allOf:
+          - $ref: '#/components/schemas/ActivityMessageData'
+    BaseType:
+      type: object
+      description: 'Base Serializer to inject the following `type` information:
+
+        - Object Type: Model Name of the Object: Table, Dashboard, ReportQuery
+
+        - Data Source Type: snowflake, databricks etc.
+
+        - Data Type: Additional type like tile, visual, card etc.'
+      properties:
+        object_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        data_source_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        data_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        external_database_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+      required:
+      - data_source_type
+      - data_type
+      - external_database_type
+      - object_type
+    BaseDataSource:
+      type: object
+      properties:
+        guid:
+          type: string
+          maxLength: 25
+        type:
+          $ref: '#/components/schemas/Type6b6Enum'
+        name:
+          type: string
+          maxLength: 100
+      required:
+      - name
+      - type
+    TargetDataSourceTypeEnum:
+      enum:
+      - airflow
+      - aws_s3
+      - bigquery
+      - data_studio
+      - databricks
+      - db_agent
+      - db2
+      - dbt
+      - fivetran
+      - glue
+      - hex
+      - looker
+      - metabase
+      - mode
+      - monte_carlo
+      - mssql
+      - mysql
+      - omni
+      - openlineage
+      - oracle
+      - periscope
+      - postgres
+      - power_bi
+      - quicksight
+      - redshift
+      - salesforce
+      - salesforce_crma
+      - sigma
+      - snowflake
+      - tableau
+      - thoughtspot
+      - trial
+      - trial_redshift
+      type: string
+      description: '* `airflow` - Airflow
+
+        * `aws_s3` - AWS S3
+
+        * `bigquery` - BigQuery
+
+        * `data_studio` - Looker Studio
+
+        * `databricks` - Databricks
+
+        * `db_agent` - DB Agent
+
+        * `db2` - DB2
+
+        * `dbt` - dbt
+
+        * `fivetran` - Fivetran
+
+        * `glue` - Glue
+
+        * `hex` - Hex
+
+        * `looker` - Looker
+
+        * `metabase` - Metabase
+
+        * `mode` - Mode
+
+        * `monte_carlo` - Monte Carlo
+
+        * `mssql` - MS SQL
+
+        * `mysql` - MySQL
+
+        * `omni` - Omni BI
+
+        * `openlineage` - Open Lineage
+
+        * `oracle` - Oracle
+
+        * `periscope` - Periscope
+
+        * `postgres` - PostgreSQL
+
+        * `power_bi` - Power BI
+
+        * `quicksight` - QuickSight
+
+        * `redshift` - Redshift
+
+        * `salesforce` - Salesforce
+
+        * `salesforce_crma` - Salesforce Analytics
+
+        * `sigma` - Sigma
+
+        * `snowflake` - Snowflake
+
+        * `tableau` - Tableau
+
+        * `thoughtspot` - ThoughtSpot
+
+        * `trial` - Trial
+
+        * `trial_redshift` - Trial Redshift'
+    ActivityMessage:
+      type: object
+      description: 'Activity Message Serializer is written to handle the
+
+        different types of messages that possible for activity
+
+        to display.
+
+        For this serializer to work, context must be passed in
+
+        with the key.
+
+        target_data_source.type.value'
+      properties:
+        template:
+          type: string
+        values:
+          $ref: '#/components/schemas/ActivityMessageValue'
+      required:
+      - template
+      - values
   securitySchemes:
     JWTAuthentication:
       type: http

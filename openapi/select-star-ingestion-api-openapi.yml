@@ -110,14 +110,33 @@ paths:
       x-role-requirements: Admin (or RBAC policy)
 components:
   schemas:
-    KeyPair:
+    ProcessedThroughEntry:
       type: object
       properties:
-        public_key:
-          type:
-          - string
-          - 'null'
-          maxLength: 1000
+        key:
+          type: string
+          readOnly: true
+        date:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - date
+      - key
+    ConnectionStatusEnum:
+      enum:
+      - OK
+      - WA
+      - UN
+      - ER
+      type: string
+      description: '* `OK` - Correct
+
+        * `WA` - Warning
+
+        * `UN` - Unknown
+
+        * `ER` - Error'
     Type6b6Enum:
       enum:
       - airflow
@@ -219,20 +238,18 @@ components:
         * `trial` - Trial
 
         * `trial_redshift` - Trial Redshift'
-    ConnectionStatusEnum:
-      enum:
-      - OK
-      - WA
-      - UN
-      - ER
-      type: string
-      description: '* `OK` - Correct
-
-        * `WA` - Warning
-
-        * `UN` - Unknown
-
-        * `ER` - Error'
+    ManifestJsonSerializerOutput:
+      type: object
+      properties:
+        data_source:
+          type: string
+          description: the guid of the data source you updated
+        dbt_project:
+          type: string
+          description: the guid of the dbt project you updated
+      required:
+      - data_source
+      - dbt_project
     ManifestJsonRequest:
       type: object
       properties:
@@ -274,6 +291,41 @@ components:
           description: the run_results.json file encoded in `utf8`
       required:
       - data_source
+    BaseType:
+      type: object
+      description: 'Base Serializer to inject the following `type` information:
+
+        - Object Type: Model Name of the Object: Table, Dashboard, ReportQuery
+
+        - Data Source Type: snowflake, databricks etc.
+
+        - Data Type: Additional type like tile, visual, card etc.'
+      properties:
+        object_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        data_source_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        data_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        external_database_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+      required:
+      - data_source_type
+      - data_type
+      - external_database_type
+      - object_type
     DataSource:
       type: object
       properties:
@@ -358,66 +410,14 @@ components:
             $ref: '#/components/schemas/ProcessedThroughEntry'
       required:
       - start_time
-    BaseType:
-      type: object
-      description: 'Base Serializer to inject the following `type` information:
-
-        - Object Type: Model Name of the Object: Table, Dashboard, ReportQuery
-
-        - Data Source Type: snowflake, databricks etc.
-
-        - Data Type: Additional type like tile, visual, card etc.'
-      properties:
-        object_type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        data_source_type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        data_type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        external_database_type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-      required:
-      - data_source_type
-      - data_type
-      - external_database_type
-      - object_type
-    ManifestJsonSerializerOutput:
+    KeyPair:
       type: object
       properties:
-        data_source:
-          type: string
-          description: the guid of the data source you updated
-        dbt_project:
-          type: string
-          description: the guid of the dbt project you updated
-      required:
-      - data_source
-      - dbt_project
-    ProcessedThroughEntry:
-      type: object
-      properties:
-        key:
-          type: string
-          readOnly: true
-        date:
-          type: string
-          format: date-time
-          readOnly: true
-      required:
-      - date
-      - key
+        public_key:
+          type:
+          - string
+          - 'null'
+          maxLength: 1000
   securitySchemes:
     JWTAuthentication:
       type: http

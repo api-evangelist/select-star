@@ -253,6 +253,113 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    CustomAttributeType:
+      enum:
+      - text
+      type: string
+      description: '* `text` - text'
+    PaginatedCustomAttributeRetrieveValueList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttributeRetrieveValue'
+    CustomAttributeLite:
+      type: object
+      properties:
+        guid:
+          type: string
+          readOnly: true
+        type:
+          allOf:
+          - $ref: '#/components/schemas/CustomAttributeType'
+          readOnly: true
+          description: 'Custom Attribute type, either category or status
+
+
+            * `text` - text'
+        name:
+          type: string
+          readOnly: true
+          description: Custom attribute display name
+      required:
+      - guid
+      - name
+      - type
+    PatchedCustomAttributeValueRequest:
+      type: object
+      properties:
+        guid:
+          type: string
+          minLength: 1
+          maxLength: 25
+        custom_attribute:
+          type: string
+          writeOnly: true
+          minLength: 1
+          description: GUID of a Custom Attribute
+        item:
+          type: string
+          minLength: 1
+        value:
+          type:
+          - string
+          - 'null'
+          description: The value of the attribute
+        richtext_value:
+          type:
+          - string
+          - 'null'
+          description: The richtext formatted value of the attribute
+    CustomAttributeValue:
+      type: object
+      properties:
+        guid:
+          type: string
+          maxLength: 25
+        data_source:
+          type: string
+          readOnly: true
+          description: The data source guid
+        organization:
+          type: string
+          readOnly: true
+          description: The organization guid
+        item:
+          type: string
+        value:
+          type:
+          - string
+          - 'null'
+          description: The value of the attribute
+        richtext_value:
+          type:
+          - string
+          - 'null'
+          description: The richtext formatted value of the attribute
+      required:
+      - data_source
+      - item
+      - organization
     CustomAttributeValueRequest:
       type: object
       properties:
@@ -316,113 +423,6 @@ components:
       - data_source
       - item
       - organization
-    PatchedCustomAttributeValueRequest:
-      type: object
-      properties:
-        guid:
-          type: string
-          minLength: 1
-          maxLength: 25
-        custom_attribute:
-          type: string
-          writeOnly: true
-          minLength: 1
-          description: GUID of a Custom Attribute
-        item:
-          type: string
-          minLength: 1
-        value:
-          type:
-          - string
-          - 'null'
-          description: The value of the attribute
-        richtext_value:
-          type:
-          - string
-          - 'null'
-          description: The richtext formatted value of the attribute
-    CustomAttributeLite:
-      type: object
-      properties:
-        guid:
-          type: string
-          readOnly: true
-        type:
-          allOf:
-          - $ref: '#/components/schemas/CustomAttributeType'
-          readOnly: true
-          description: 'Custom Attribute type, either category or status
-
-
-            * `text` - text'
-        name:
-          type: string
-          readOnly: true
-          description: Custom attribute display name
-      required:
-      - guid
-      - name
-      - type
-    CustomAttributeValue:
-      type: object
-      properties:
-        guid:
-          type: string
-          maxLength: 25
-        data_source:
-          type: string
-          readOnly: true
-          description: The data source guid
-        organization:
-          type: string
-          readOnly: true
-          description: The organization guid
-        item:
-          type: string
-        value:
-          type:
-          - string
-          - 'null'
-          description: The value of the attribute
-        richtext_value:
-          type:
-          - string
-          - 'null'
-          description: The richtext formatted value of the attribute
-      required:
-      - data_source
-      - item
-      - organization
-    CustomAttributeType:
-      enum:
-      - text
-      type: string
-      description: '* `text` - text'
-    PaginatedCustomAttributeRetrieveValueList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomAttributeRetrieveValue'
   securitySchemes:
     JWTAuthentication:
       type: http

@@ -355,16 +355,16 @@ components:
       - score
       - search_name
       - tagged_items
-    SearchResultCustomAttribute:
+    SearchResultTeam:
       type: object
       properties:
+        guid:
+          type: string
         name:
           type: string
-        value:
-          type: string
       required:
+      - guid
       - name
-      - value
     TableTypeEnum:
       enum:
       - table
@@ -397,16 +397,101 @@ components:
         * `seed` - dbt_seed
 
         * `model` - dbt_model_legacy'
-    SearchResultTeam:
+    SearchResultTaggedItems:
+      type: object
+      properties:
+        tag:
+          $ref: '#/components/schemas/SearchResultTag'
+        kind:
+          type: string
+      required:
+      - kind
+      - tag
+    PaginatedSearchResultList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchResult'
+    SearchResultCollection:
       type: object
       properties:
         guid:
           type: string
         name:
           type: string
+        icon:
+          type: string
+        emoji:
+          type: string
+        color_scheme:
+          type: string
+        breadcrumbs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Breadcrumb'
+          readOnly: true
       required:
+      - breadcrumbs
+      - color_scheme
+      - emoji
       - guid
+      - icon
       - name
+    Breadcrumb:
+      type: object
+      properties:
+        guid:
+          type: string
+          maxLength: 25
+        target_guid:
+          type: string
+          maxLength: 256
+        target_name:
+          type: string
+          readOnly: true
+        target_object_type:
+          type: string
+        target_data_type:
+          type: string
+        target_data_source_guid:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        target_data_source_type:
+          allOf:
+          - $ref: '#/components/schemas/TargetDataSourceTypeEnum'
+        ordinal:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          description: Ordering of breadcrumb within the table
+      required:
+      - target_data_source_guid
+      - target_data_type
+      - target_guid
+      - target_name
+      - target_object_type
     BaseType:
       type: object
       description: 'Base Serializer to inject the following `type` information:
@@ -442,60 +527,6 @@ components:
       - data_type
       - external_database_type
       - object_type
-    SearchResultTag:
-      type: object
-      properties:
-        guid:
-          type: string
-        type:
-          type: string
-        name:
-          type: string
-        icon:
-          type: string
-        color:
-          type: string
-        visible:
-          type: boolean
-        breadcrumbs:
-          type: array
-          items:
-            $ref: '#/components/schemas/Breadcrumb'
-          readOnly: true
-        links_to:
-          type: string
-      required:
-      - breadcrumbs
-      - color
-      - guid
-      - icon
-      - name
-      - type
-    SearchResultCollection:
-      type: object
-      properties:
-        guid:
-          type: string
-        name:
-          type: string
-        icon:
-          type: string
-        emoji:
-          type: string
-        color_scheme:
-          type: string
-        breadcrumbs:
-          type: array
-          items:
-            $ref: '#/components/schemas/Breadcrumb'
-          readOnly: true
-      required:
-      - breadcrumbs
-      - color_scheme
-      - emoji
-      - guid
-      - icon
-      - name
     TargetDataSourceTypeEnum:
       enum:
       - airflow
@@ -597,76 +628,45 @@ components:
         * `trial` - Trial
 
         * `trial_redshift` - Trial Redshift'
-    SearchResultTaggedItems:
+    SearchResultCustomAttribute:
       type: object
       properties:
-        tag:
-          $ref: '#/components/schemas/SearchResultTag'
-        kind:
+        name:
+          type: string
+        value:
           type: string
       required:
-      - kind
-      - tag
-    PaginatedSearchResultList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/SearchResult'
-    Breadcrumb:
+      - name
+      - value
+    SearchResultTag:
       type: object
       properties:
         guid:
           type: string
-          maxLength: 25
-        target_guid:
+        type:
           type: string
-          maxLength: 256
-        target_name:
+        name:
           type: string
+        icon:
+          type: string
+        color:
+          type: string
+        visible:
+          type: boolean
+        breadcrumbs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Breadcrumb'
           readOnly: true
-        target_object_type:
+        links_to:
           type: string
-        target_data_type:
-          type: string
-        target_data_source_guid:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        target_data_source_type:
-          allOf:
-          - $ref: '#/components/schemas/TargetDataSourceTypeEnum'
-        ordinal:
-          type: integer
-          maximum: 2147483647
-          minimum: 0
-          description: Ordering of breadcrumb within the table
       required:
-      - target_data_source_guid
-      - target_data_type
-      - target_guid
-      - target_name
-      - target_object_type
+      - breadcrumbs
+      - color
+      - guid
+      - icon
+      - name
+      - type
   securitySchemes:
     JWTAuthentication:
       type: http

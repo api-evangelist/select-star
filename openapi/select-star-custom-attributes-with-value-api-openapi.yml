@@ -86,6 +86,16 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    TeamShortcut:
+      type: object
+      properties:
+        guid:
+          type: string
+        name:
+          type: string
+      required:
+      - guid
+      - name
     PaginatedCustomAttributeWithValueList:
       type: object
       required:
@@ -111,16 +121,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CustomAttributeWithValue'
-    TeamShortcut:
-      type: object
-      properties:
-        guid:
-          type: string
-        name:
-          type: string
-      required:
-      - guid
-      - name
     DataSourceTypesEnum:
       enum:
       - airflow
@@ -222,6 +222,71 @@ components:
         * `trial` - Trial
 
         * `trial_redshift` - Trial Redshift'
+    UserLite:
+      type: object
+      properties:
+        guid:
+          type: string
+          readOnly: true
+        first_name:
+          type: string
+          readOnly: true
+        last_name:
+          type: string
+          readOnly: true
+        team:
+          allOf:
+          - $ref: '#/components/schemas/TeamShortcut'
+          readOnly: true
+        email:
+          type: string
+          format: email
+          readOnly: true
+          title: Email address
+        avatar:
+          type:
+          - string
+          - 'null'
+          format: uri
+          readOnly: true
+        is_active:
+          type: boolean
+          readOnly: true
+      required:
+      - avatar
+      - email
+      - first_name
+      - guid
+      - is_active
+      - last_name
+      - team
+    CustomAttributeType:
+      enum:
+      - text
+      type: string
+      description: '* `text` - text'
+    CustomAttributeLite:
+      type: object
+      properties:
+        guid:
+          type: string
+          readOnly: true
+        type:
+          allOf:
+          - $ref: '#/components/schemas/CustomAttributeType'
+          readOnly: true
+          description: 'Custom Attribute type, either category or status
+
+
+            * `text` - text'
+        name:
+          type: string
+          readOnly: true
+          description: Custom attribute display name
+      required:
+      - guid
+      - name
+      - type
     CustomAttributeObjectType:
       enum:
       - database
@@ -307,28 +372,6 @@ components:
         * `job` - job
 
         * `` - empty'
-    CustomAttributeLite:
-      type: object
-      properties:
-        guid:
-          type: string
-          readOnly: true
-        type:
-          allOf:
-          - $ref: '#/components/schemas/CustomAttributeType'
-          readOnly: true
-          description: 'Custom Attribute type, either category or status
-
-
-            * `text` - text'
-        name:
-          type: string
-          readOnly: true
-          description: Custom attribute display name
-      required:
-      - guid
-      - name
-      - type
     CustomAttributeWithValue:
       type: object
       properties:
@@ -476,6 +519,41 @@ components:
       - object_types
       - type
       - value
+    CustomAttributeRetrieveValue:
+      type: object
+      properties:
+        guid:
+          type: string
+          maxLength: 25
+        data_source:
+          type: string
+          readOnly: true
+          description: The data source guid
+        organization:
+          type: string
+          readOnly: true
+          description: The organization guid
+        custom_attribute:
+          allOf:
+          - $ref: '#/components/schemas/CustomAttributeLite'
+          readOnly: true
+        item:
+          type: string
+        value:
+          type:
+          - string
+          - 'null'
+          description: The value of the attribute
+        richtext_value:
+          type:
+          - string
+          - 'null'
+          description: The richtext formatted value of the attribute
+      required:
+      - custom_attribute
+      - data_source
+      - item
+      - organization
     DataTypesEnum:
       enum:
       - column
@@ -525,84 +603,6 @@ components:
         * `table` - table
 
         * `` - empty'
-    CustomAttributeType:
-      enum:
-      - text
-      type: string
-      description: '* `text` - text'
-    CustomAttributeRetrieveValue:
-      type: object
-      properties:
-        guid:
-          type: string
-          maxLength: 25
-        data_source:
-          type: string
-          readOnly: true
-          description: The data source guid
-        organization:
-          type: string
-          readOnly: true
-          description: The organization guid
-        custom_attribute:
-          allOf:
-          - $ref: '#/components/schemas/CustomAttributeLite'
-          readOnly: true
-        item:
-          type: string
-        value:
-          type:
-          - string
-          - 'null'
-          description: The value of the attribute
-        richtext_value:
-          type:
-          - string
-          - 'null'
-          description: The richtext formatted value of the attribute
-      required:
-      - custom_attribute
-      - data_source
-      - item
-      - organization
-    UserLite:
-      type: object
-      properties:
-        guid:
-          type: string
-          readOnly: true
-        first_name:
-          type: string
-          readOnly: true
-        last_name:
-          type: string
-          readOnly: true
-        team:
-          allOf:
-          - $ref: '#/components/schemas/TeamShortcut'
-          readOnly: true
-        email:
-          type: string
-          format: email
-          readOnly: true
-          title: Email address
-        avatar:
-          type:
-          - string
-          - 'null'
-          format: uri
-          readOnly: true
-        is_active:
-          type: boolean
-          readOnly: true
-      required:
-      - avatar
-      - email
-      - first_name
-      - guid
-      - is_active
-      - last_name
-      - team
   securitySchemes:
     JWTAuthentication:
       type: http
