@@ -83,6 +83,125 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    KeyPair:
+      type: object
+      properties:
+        public_key:
+          type:
+          - string
+          - 'null'
+          maxLength: 1000
+    TaggedItemsLiteWithSource:
+      type: object
+      properties:
+        guid:
+          type: string
+          readOnly: true
+        tag:
+          $ref: '#/components/schemas/TagLite'
+        kind:
+          type: string
+        suggested_source_kind:
+          type: string
+        suggestion_source:
+          $ref: '#/components/schemas/TaggedItemsSource'
+        suggestion_source_object:
+          $ref: '#/components/schemas/TaggedItemsLiteWithSourceSerializer.GuidReferenceField.suggestion_source_object'
+      required:
+      - guid
+      - kind
+      - suggested_source_kind
+      - suggestion_source_object
+      - tag
+    UserListTypeEnum:
+      enum:
+      - downstream_owners
+      - top_users
+      type: string
+      description: '* `downstream_owners` - downstream_owners
+
+        * `top_users` - top_users'
+    ConnectionStatusEnum:
+      enum:
+      - OK
+      - WA
+      - UN
+      - ER
+      type: string
+      description: '* `OK` - Correct
+
+        * `WA` - Warning
+
+        * `UN` - Unknown
+
+        * `ER` - Error'
+    TaggedItemsLiteWithSourceSerializer.GuidReferenceField.suggestion_source_object:
+      anyOf:
+      - $ref: '#/components/schemas/PiiRule'
+      - $ref: '#/components/schemas/TaggedItemsLite'
+      discriminator:
+        propertyName: object_type
+        mapping:
+          piirule: '#/components/schemas/PiiRule'
+          taggeditems: '#/components/schemas/TaggedItemsLite'
+    UserList:
+      type: object
+      properties:
+        guid:
+          type: string
+          maxLength: 25
+        user_list_type:
+          allOf:
+          - $ref: '#/components/schemas/UserListTypeEnum'
+          description: 'User List type that determines how the list is calculated.
+
+
+            * `downstream_owners` - downstream_owners
+
+            * `top_users` - top_users'
+        name:
+          type: string
+          description: User list display name
+          maxLength: 30
+        target_types:
+          type: array
+          items:
+            $ref: '#/components/schemas/TargetTypesEnum'
+          description: List of target object types this UserList applies to.
+        user_type:
+          allOf:
+          - $ref: '#/components/schemas/UserTypeEnum'
+          description: 'User type that determines what type of users are in the list.
+
+
+            * `user` - user
+
+            * `table` - table
+
+            * `bi` - bi
+
+            * `team` - team
+
+            * `any` - any'
+      required:
+      - name
+      - user_list_type
+    ExploreGroup:
+      type: object
+      properties:
+        guid:
+          type: string
+          maxLength: 25
+        name:
+          type: string
+          maxLength: 1024
+        data_types:
+          allOf:
+          - $ref: '#/components/schemas/BaseType'
+          readOnly: true
+      required:
+      - data_types
+      - name
     PIIType:
       enum:
       - address
@@ -136,582 +255,6 @@ components:
         * `ssn` - ssn
 
         * `username` - username'
-    Type6b6Enum:
-      enum:
-      - airflow
-      - aws_s3
-      - bigquery
-      - data_studio
-      - databricks
-      - db_agent
-      - db2
-      - dbt
-      - fivetran
-      - glue
-      - hex
-      - looker
-      - metabase
-      - mode
-      - monte_carlo
-      - mssql
-      - mysql
-      - omni
-      - openlineage
-      - oracle
-      - periscope
-      - postgres
-      - power_bi
-      - quicksight
-      - redshift
-      - salesforce
-      - salesforce_crma
-      - sigma
-      - snowflake
-      - tableau
-      - thoughtspot
-      - trial
-      - trial_redshift
-      type: string
-      description: '* `airflow` - Airflow
-
-        * `aws_s3` - AWS S3
-
-        * `bigquery` - BigQuery
-
-        * `data_studio` - Looker Studio
-
-        * `databricks` - Databricks
-
-        * `db_agent` - DB Agent
-
-        * `db2` - DB2
-
-        * `dbt` - dbt
-
-        * `fivetran` - Fivetran
-
-        * `glue` - Glue
-
-        * `hex` - Hex
-
-        * `looker` - Looker
-
-        * `metabase` - Metabase
-
-        * `mode` - Mode
-
-        * `monte_carlo` - Monte Carlo
-
-        * `mssql` - MS SQL
-
-        * `mysql` - MySQL
-
-        * `omni` - Omni BI
-
-        * `openlineage` - Open Lineage
-
-        * `oracle` - Oracle
-
-        * `periscope` - Periscope
-
-        * `postgres` - PostgreSQL
-
-        * `power_bi` - Power BI
-
-        * `quicksight` - QuickSight
-
-        * `redshift` - Redshift
-
-        * `salesforce` - Salesforce
-
-        * `salesforce_crma` - Salesforce Analytics
-
-        * `sigma` - Sigma
-
-        * `snowflake` - Snowflake
-
-        * `tableau` - Tableau
-
-        * `thoughtspot` - ThoughtSpot
-
-        * `trial` - Trial
-
-        * `trial_redshift` - Trial Redshift'
-    TagLite:
-      type: object
-      properties:
-        guid:
-          type: string
-          maxLength: 25
-        type:
-          $ref: '#/components/schemas/TypeB32Enum'
-        name:
-          type: string
-          readOnly: true
-          description: Tag display name
-        icon:
-          type: string
-          readOnly: true
-          description: Icon identifier (for status tags)
-        color:
-          type: string
-          readOnly: true
-          description: 'Tag color (for category tags). Allowed formats: ''#ffeedd'' and ''#ffeeddcc'' (RGB/ARGB hexadecimal)'
-          deprecated: true
-        visible:
-          type: boolean
-          readOnly: true
-        links_to:
-          type:
-          - string
-          - 'null'
-        breadcrumbs:
-          type: array
-          items:
-            $ref: '#/components/schemas/Breadcrumb'
-          readOnly: true
-      required:
-      - breadcrumbs
-      - color
-      - icon
-      - name
-      - type
-      - visible
-    CommentRecipient:
-      type: object
-      properties:
-        recipient:
-          $ref: '#/components/schemas/CommentRecipientSerializer.GuidReferenceField.recipient'
-      required:
-      - recipient
-    TaggedItemsSourceSerializer.GuidReferenceField.item:
-      $ref: '#/components/schemas/BaseMetadata'
-    TargetDataSourceTypeEnum:
-      enum:
-      - airflow
-      - aws_s3
-      - bigquery
-      - data_studio
-      - databricks
-      - db_agent
-      - db2
-      - dbt
-      - fivetran
-      - glue
-      - hex
-      - looker
-      - metabase
-      - mode
-      - monte_carlo
-      - mssql
-      - mysql
-      - omni
-      - openlineage
-      - oracle
-      - periscope
-      - postgres
-      - power_bi
-      - quicksight
-      - redshift
-      - salesforce
-      - salesforce_crma
-      - sigma
-      - snowflake
-      - tableau
-      - thoughtspot
-      - trial
-      - trial_redshift
-      type: string
-      description: '* `airflow` - Airflow
-
-        * `aws_s3` - AWS S3
-
-        * `bigquery` - BigQuery
-
-        * `data_studio` - Looker Studio
-
-        * `databricks` - Databricks
-
-        * `db_agent` - DB Agent
-
-        * `db2` - DB2
-
-        * `dbt` - dbt
-
-        * `fivetran` - Fivetran
-
-        * `glue` - Glue
-
-        * `hex` - Hex
-
-        * `looker` - Looker
-
-        * `metabase` - Metabase
-
-        * `mode` - Mode
-
-        * `monte_carlo` - Monte Carlo
-
-        * `mssql` - MS SQL
-
-        * `mysql` - MySQL
-
-        * `omni` - Omni BI
-
-        * `openlineage` - Open Lineage
-
-        * `oracle` - Oracle
-
-        * `periscope` - Periscope
-
-        * `postgres` - PostgreSQL
-
-        * `power_bi` - Power BI
-
-        * `quicksight` - QuickSight
-
-        * `redshift` - Redshift
-
-        * `salesforce` - Salesforce
-
-        * `salesforce_crma` - Salesforce Analytics
-
-        * `sigma` - Sigma
-
-        * `snowflake` - Snowflake
-
-        * `tableau` - Tableau
-
-        * `thoughtspot` - ThoughtSpot
-
-        * `trial` - Trial
-
-        * `trial_redshift` - Trial Redshift'
-    CollectionLite:
-      type: object
-      properties:
-        guid:
-          type: string
-          readOnly: true
-        name:
-          type: string
-          readOnly: true
-        icon:
-          type: string
-          readOnly: true
-        data_types:
-          allOf:
-          - $ref: '#/components/schemas/BaseType'
-          readOnly: true
-        breadcrumbs:
-          type: array
-          items:
-            $ref: '#/components/schemas/Breadcrumb'
-          readOnly: true
-        emoji:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          description: Unicode representation of the selected emoji
-        color_scheme:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          description: Color scheme selected by the user for the icon
-        linked_from:
-          type: array
-          items:
-            type: string
-          readOnly: true
-          description: Tags having a link to this collection
-      required:
-      - breadcrumbs
-      - color_scheme
-      - data_types
-      - emoji
-      - guid
-      - icon
-      - linked_from
-      - name
-    TargetTypesEnum:
-      enum:
-      - table
-      - dashboard
-      - explore
-      - lookmlview
-      type: string
-      description: '* `table` - table
-
-        * `dashboard` - dashboard
-
-        * `explore` - explore
-
-        * `lookmlview` - lookmlview'
-    DataSource:
-      type: object
-      properties:
-        guid:
-          type: string
-          readOnly: true
-        type:
-          $ref: '#/components/schemas/Type6b6Enum'
-        name:
-          type: string
-          maxLength: 100
-        keypair:
-          $ref: '#/components/schemas/KeyPair'
-        last_ingested_on:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        last_fully_ingested_on:
-          type: string
-          format: date-time
-          readOnly: true
-        is_ingesting:
-          type: boolean
-          readOnly: true
-        is_syncing_paused:
-          type: boolean
-          readOnly: true
-        connection_status:
-          $ref: '#/components/schemas/ConnectionStatusEnum'
-        connection_error_message:
-          type: string
-          description: Exception message if health check failed
-        is_mode_discovery_db_added:
-          type: boolean
-          readOnly: true
-        external_uuid:
-          type:
-          - string
-          - 'null'
-          description: UUID used for running aws cloudformation.
-          maxLength: 64
-        iam_principal:
-          type:
-          - string
-          - 'null'
-          description: IAM Principal used for running aws cloudformation.
-          maxLength: 64
-        cloudformation_url:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type: string
-          readOnly: true
-        is_credentials_setup_incomplete:
-          type: boolean
-          readOnly: true
-        processed_through:
-          $ref: '#/components/schemas/ProcessedThrough'
-        data_types:
-          allOf:
-          - $ref: '#/components/schemas/BaseType'
-          readOnly: true
-      required:
-      - cloudformation_url
-      - data_types
-      - guid
-      - is_credentials_setup_incomplete
-      - is_ingesting
-      - is_mode_discovery_db_added
-      - is_syncing_paused
-      - last_fully_ingested_on
-      - name
-      - type
-    DataSourceInfo:
-      type: object
-      properties:
-        guid:
-          type: string
-          maxLength: 25
-        type:
-          $ref: '#/components/schemas/Type6b6Enum'
-        name:
-          type: string
-          maxLength: 100
-        last_ingested_on:
-          type:
-          - string
-          - 'null'
-          format: date-time
-      required:
-      - name
-      - type
-    Breadcrumb:
-      type: object
-      properties:
-        guid:
-          type: string
-          maxLength: 25
-        target_guid:
-          type: string
-          maxLength: 256
-        target_name:
-          type: string
-          readOnly: true
-        target_object_type:
-          type: string
-        target_data_type:
-          type: string
-        target_data_source_guid:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        target_data_source_type:
-          allOf:
-          - $ref: '#/components/schemas/TargetDataSourceTypeEnum'
-        ordinal:
-          type: integer
-          maximum: 2147483647
-          minimum: 0
-          description: Ordering of breadcrumb within the table
-      required:
-      - target_data_source_guid
-      - target_data_type
-      - target_guid
-      - target_name
-      - target_object_type
-    UserTypeEnum:
-      enum:
-      - user
-      - table
-      - bi
-      - team
-      - any
-      type: string
-      description: '* `user` - user
-
-        * `table` - table
-
-        * `bi` - bi
-
-        * `team` - team
-
-        * `any` - any'
-    DSUserName:
-      type: object
-      properties:
-        guid:
-          type: string
-          maxLength: 25
-        display_name:
-          type:
-          - string
-          - 'null'
-          description: The username field for the user used by the datasource
-          maxLength: 100
-        name:
-          type: string
-          maxLength: 100
-        data_source:
-          $ref: '#/components/schemas/DataSourceInfo'
-      required:
-      - data_source
-      - name
-    ExploreSerializer.GuidReferenceField.business_owner:
-      anyOf:
-      - $ref: '#/components/schemas/DSUserName'
-      - $ref: '#/components/schemas/Team'
-      - $ref: '#/components/schemas/UserLite'
-      discriminator:
-        propertyName: object_type
-        mapping:
-          dsuser: '#/components/schemas/DSUserName'
-          team: '#/components/schemas/Team'
-          user: '#/components/schemas/UserLite'
-    SuggestedDescriptionSourceObject:
-      type: object
-      properties:
-        object_type:
-          type: string
-          readOnly: true
-        guid:
-          type: string
-          readOnly: true
-        name:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        breadcrumbs:
-          type: array
-          items:
-            $ref: '#/components/schemas/Breadcrumb'
-          readOnly: true
-        data_types:
-          allOf:
-          - $ref: '#/components/schemas/BaseType'
-          readOnly: true
-        parent_guid:
-          type: string
-      required:
-      - breadcrumbs
-      - data_types
-      - guid
-      - name
-      - object_type
-    KeyPair:
-      type: object
-      properties:
-        public_key:
-          type:
-          - string
-          - 'null'
-          maxLength: 1000
-    TaggedItemsLite:
-      type: object
-      description: Serializer without suggestion source
-      properties:
-        item:
-          $ref: '#/components/schemas/TaggedItemsLiteSerializer.GuidReferenceField.item'
-        guid:
-          type: string
-          readOnly: true
-        tag:
-          $ref: '#/components/schemas/TagLite'
-        kind:
-          type: string
-        suggested_source_kind:
-          type: string
-      required:
-      - guid
-      - item
-      - kind
-      - suggested_source_kind
-      - tag
-    TeamShortcut:
-      type: object
-      properties:
-        guid:
-          type: string
-        name:
-          type: string
-      required:
-      - guid
-      - name
-    TypeB32Enum:
-      enum:
-      - status
-      - dbt
-      type: string
-      description: '* `status` - status
-
-        * `dbt` - dbt'
-    UserListTypeEnum:
-      enum:
-      - downstream_owners
-      - top_users
-      type: string
-      description: '* `downstream_owners` - downstream_owners
-
-        * `top_users` - top_users'
     BaseMetadata:
       type: object
       properties:
@@ -736,247 +279,6 @@ components:
       - guid
       - name
       - object_type
-    ConnectionStatusEnum:
-      enum:
-      - OK
-      - WA
-      - UN
-      - ER
-      type: string
-      description: '* `OK` - Correct
-
-        * `WA` - Warning
-
-        * `UN` - Unknown
-
-        * `ER` - Error'
-    ExploreSerializer.GuidReferenceField.technical_owner:
-      anyOf:
-      - $ref: '#/components/schemas/DSUserName'
-      - $ref: '#/components/schemas/Team'
-      - $ref: '#/components/schemas/UserLite'
-      discriminator:
-        propertyName: object_type
-        mapping:
-          dsuser: '#/components/schemas/DSUserName'
-          team: '#/components/schemas/Team'
-          user: '#/components/schemas/UserLite'
-    TaggedItemsLiteWithSource:
-      type: object
-      properties:
-        guid:
-          type: string
-          readOnly: true
-        tag:
-          $ref: '#/components/schemas/TagLite'
-        kind:
-          type: string
-        suggested_source_kind:
-          type: string
-        suggestion_source:
-          $ref: '#/components/schemas/TaggedItemsSource'
-        suggestion_source_object:
-          $ref: '#/components/schemas/TaggedItemsLiteWithSourceSerializer.GuidReferenceField.suggestion_source_object'
-      required:
-      - guid
-      - kind
-      - suggested_source_kind
-      - suggestion_source_object
-      - tag
-    Explore:
-      type: object
-      description: 'Adds support for reading a description from metadata
-
-        that support modifying description'
-      properties:
-        guid:
-          type: string
-          maxLength: 25
-        lookml_model:
-          $ref: '#/components/schemas/LookMLModel'
-        name:
-          type: string
-        label:
-          type: string
-        group_label:
-          type:
-          - string
-          - 'null'
-          description: The custom group_label for Explore (if any)
-        group:
-          $ref: '#/components/schemas/ExploreGroup'
-        description:
-          type:
-          - string
-          - 'null'
-          description: Active description
-        description_source:
-          allOf:
-          - $ref: '#/components/schemas/DescriptionSourceEnum'
-        user_description:
-          type:
-          - string
-          - 'null'
-          description: User description
-        user_description_author:
-          allOf:
-          - $ref: '#/components/schemas/UserLite'
-          readOnly: true
-        ai_description:
-          type:
-          - string
-          - 'null'
-          description: AI-generated description
-        ingested_description:
-          type:
-          - string
-          - 'null'
-          description: Unmodified description from the data source
-        richtext_description:
-          type:
-          - string
-          - 'null'
-          description: Richtext formatted description. Can be in Slatejs or Draftjs format.
-        project_name:
-          type:
-          - string
-          - 'null'
-          description: Name of project containing the model
-        business_owner:
-          $ref: '#/components/schemas/ExploreSerializer.GuidReferenceField.business_owner'
-        technical_owner:
-          $ref: '#/components/schemas/ExploreSerializer.GuidReferenceField.technical_owner'
-        popularity:
-          allOf:
-          - $ref: '#/components/schemas/LookerExplorePopularity'
-          readOnly: true
-        url:
-          type:
-          - string
-          - 'null'
-          format: uri
-          description: The full url of the explore generated from the ingestion
-          maxLength: 200
-        tagged_items:
-          type: array
-          items:
-            $ref: '#/components/schemas/TaggedItemsLiteWithSource'
-          readOnly: true
-        is_hidden:
-          type: boolean
-          readOnly: true
-        data_source_type:
-          type: string
-          readOnly: true
-        search_name:
-          type: string
-          readOnly: true
-        downstream_objects_counts:
-          allOf:
-          - $ref: '#/components/schemas/RelatedObjectsCounts'
-          readOnly: true
-        upstream_objects_counts:
-          allOf:
-          - $ref: '#/components/schemas/RelatedObjectsCounts'
-          readOnly: true
-        breadcrumbs:
-          type: array
-          items:
-            $ref: '#/components/schemas/Breadcrumb'
-          readOnly: true
-        data_types:
-          allOf:
-          - $ref: '#/components/schemas/BaseType'
-          readOnly: true
-        collections:
-          type: array
-          items:
-            $ref: '#/components/schemas/CollectionLite'
-          readOnly: true
-      required:
-      - breadcrumbs
-      - collections
-      - data_source_type
-      - data_types
-      - downstream_objects_counts
-      - group
-      - is_hidden
-      - label
-      - lookml_model
-      - name
-      - popularity
-      - search_name
-      - tagged_items
-      - upstream_objects_counts
-      - user_description_author
-    Team:
-      type: object
-      properties:
-        guid:
-          type: string
-          readOnly: true
-        name:
-          type: string
-          maxLength: 100
-        description:
-          type:
-          - string
-          - 'null'
-          description: Active description
-        richtext_description:
-          type:
-          - string
-          - 'null'
-          description: Richtext formatted description. Can be in Slatejs or Draftjs format.
-        members_count:
-          type: integer
-          readOnly: true
-      required:
-      - guid
-      - members_count
-      - name
-    UserList:
-      type: object
-      properties:
-        guid:
-          type: string
-          maxLength: 25
-        user_list_type:
-          allOf:
-          - $ref: '#/components/schemas/UserListTypeEnum'
-          description: 'User List type that determines how the list is calculated.
-
-
-            * `downstream_owners` - downstream_owners
-
-            * `top_users` - top_users'
-        name:
-          type: string
-          description: User list display name
-          maxLength: 30
-        target_types:
-          type: array
-          items:
-            $ref: '#/components/schemas/TargetTypesEnum'
-          description: List of target object types this UserList applies to.
-        user_type:
-          allOf:
-          - $ref: '#/components/schemas/UserTypeEnum'
-          description: 'User type that determines what type of users are in the list.
-
-
-            * `user` - user
-
-            * `table` - table
-
-            * `bi` - bi
-
-            * `team` - team
-
-            * `any` - any'
-      required:
-      - name
-      - user_list_type
     Metadata:
       type: object
       description: 'Adds support for reading a description from metadata
@@ -1128,55 +430,77 @@ components:
       - url
       - user_description
       - user_description_author
-    ProcessedThrough:
+    TaggedItemsSource:
       type: object
       properties:
-        start_time:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProcessedThroughEntry'
+        item:
+          $ref: '#/components/schemas/TaggedItemsSourceSerializer.GuidReferenceField.item'
       required:
-      - start_time
+      - item
+    CommentRecipientSerializer.GuidReferenceField.recipient:
+      anyOf:
+      - $ref: '#/components/schemas/Team'
+      - $ref: '#/components/schemas/UserList'
+      - $ref: '#/components/schemas/UserLite'
+      discriminator:
+        propertyName: object_type
+        mapping:
+          team: '#/components/schemas/Team'
+          user: '#/components/schemas/UserLite'
+          userlist: '#/components/schemas/UserList'
+    TaggedItemsSourceSerializer.GuidReferenceField.item:
+      $ref: '#/components/schemas/BaseMetadata'
     TaggedItemsLiteSerializer.GuidReferenceField.item:
       $ref: '#/components/schemas/BaseMetadata'
-    LookerExplorePopularity:
+    UserTypeEnum:
+      enum:
+      - user
+      - table
+      - bi
+      - team
+      - any
+      type: string
+      description: '* `user` - user
+
+        * `table` - table
+
+        * `bi` - bi
+
+        * `team` - team
+
+        * `any` - any'
+    ExploreSerializer.GuidReferenceField.business_owner:
+      anyOf:
+      - $ref: '#/components/schemas/DSUserName'
+      - $ref: '#/components/schemas/Team'
+      - $ref: '#/components/schemas/UserLite'
+      discriminator:
+        propertyName: object_type
+        mapping:
+          dsuser: '#/components/schemas/DSUserName'
+          team: '#/components/schemas/Team'
+          user: '#/components/schemas/UserLite'
+    TaggedItemsLite:
       type: object
+      description: Serializer without suggestion source
       properties:
-        timeframe:
-          type: integer
-          readOnly: true
-          default: 90
-        user_count:
-          type: integer
-          readOnly: true
-        service_query_count:
-          type: integer
-          readOnly: true
-        popularity:
-          type: integer
-          readOnly: true
-          description: Popularity score for this object from 0-100
-        query_count:
-          type: integer
-      required:
-      - popularity
-      - query_count
-      - service_query_count
-      - timeframe
-      - user_count
-    ProcessedThroughEntry:
-      type: object
-      properties:
-        key:
+        item:
+          $ref: '#/components/schemas/TaggedItemsLiteSerializer.GuidReferenceField.item'
+        guid:
           type: string
           readOnly: true
-        date:
+        tag:
+          $ref: '#/components/schemas/TagLite'
+        kind:
           type: string
-          format: date-time
-          readOnly: true
+        suggested_source_kind:
+          type: string
       required:
-      - date
-      - key
+      - guid
+      - item
+      - kind
+      - suggested_source_kind
+      - tag
     Comment:
       type: object
       properties:
@@ -1232,133 +556,388 @@ components:
       - replies
       - richtext_message
       - target
-    TaggedItemsLiteWithSourceSerializer.GuidReferenceField.suggestion_source_object:
-      anyOf:
-      - $ref: '#/components/schemas/PiiRule'
-      - $ref: '#/components/schemas/TaggedItemsLite'
-      discriminator:
-        propertyName: object_type
-        mapping:
-          piirule: '#/components/schemas/PiiRule'
-          taggeditems: '#/components/schemas/TaggedItemsLite'
-    PaginatedCommentList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Comment'
-    CommentSerializer.GuidReferenceField.target:
-      anyOf:
-      - $ref: '#/components/schemas/Explore'
-      - $ref: '#/components/schemas/Metadata'
-      - $ref: '#/components/schemas/TagLite'
-      - $ref: '#/components/schemas/Team'
-      discriminator:
-        propertyName: object_type
-        mapping:
-          bidataset: '#/components/schemas/Metadata'
-          bifolder: '#/components/schemas/Metadata'
-          collection: '#/components/schemas/Metadata'
-          conversationevaluation: '#/components/schemas/Metadata'
-          dashboard: '#/components/schemas/Metadata'
-          document: '#/components/schemas/Metadata'
-          explore: '#/components/schemas/Explore'
-          job: '#/components/schemas/Metadata'
-          lookmlview: '#/components/schemas/Metadata'
-          metabasetable: '#/components/schemas/Metadata'
-          metric: '#/components/schemas/Metadata'
-          notebook: '#/components/schemas/Metadata'
-          powerbidataset: '#/components/schemas/Metadata'
-          table: '#/components/schemas/Metadata'
-          tableaudatasource: '#/components/schemas/Metadata'
-          tableaufield: '#/components/schemas/Metadata'
-          tableauview: '#/components/schemas/Metadata'
-          tag: '#/components/schemas/TagLite'
-          team: '#/components/schemas/Team'
-          term: '#/components/schemas/Metadata'
-          thoughtspottable: '#/components/schemas/Metadata'
-    TaggedItemsSource:
-      type: object
-      properties:
-        item:
-          $ref: '#/components/schemas/TaggedItemsSourceSerializer.GuidReferenceField.item'
-      required:
-      - item
-    CommentRecipientSerializer.GuidReferenceField.recipient:
-      anyOf:
-      - $ref: '#/components/schemas/Team'
-      - $ref: '#/components/schemas/UserList'
-      - $ref: '#/components/schemas/UserLite'
-      discriminator:
-        propertyName: object_type
-        mapping:
-          team: '#/components/schemas/Team'
-          user: '#/components/schemas/UserLite'
-          userlist: '#/components/schemas/UserList'
-    DescriptionSourceEnum:
-      enum:
-      - user
-      - ingestion
-      - ai
-      - public_docs
-      - lineage
-      - downstream_lineage
-      - upstream_lineage
-      - similarity
-      - unknown
-      type: string
-      description: '* `user` - User
-
-        * `ingestion` - Ingestion
-
-        * `ai` - Ai
-
-        * `public_docs` - Public Docs
-
-        * `lineage` - Lineage
-
-        * `downstream_lineage` - Downstream Lineage
-
-        * `upstream_lineage` - Upstream Lineage
-
-        * `similarity` - Similarity
-
-        * `unknown` - Unknown'
-    ExploreGroup:
+    DataSourceInfo:
       type: object
       properties:
         guid:
           type: string
           maxLength: 25
+        type:
+          $ref: '#/components/schemas/Type6b6Enum'
         name:
           type: string
-          maxLength: 1024
+          maxLength: 100
+        last_ingested_on:
+          type:
+          - string
+          - 'null'
+          format: date-time
+      required:
+      - name
+      - type
+    Type6b6Enum:
+      enum:
+      - airflow
+      - aws_s3
+      - bigquery
+      - data_studio
+      - databricks
+      - db_agent
+      - db2
+      - dbt
+      - fivetran
+      - glue
+      - hex
+      - looker
+      - metabase
+      - mode
+      - monte_carlo
+      - mssql
+      - mysql
+      - omni
+      - openlineage
+      - oracle
+      - periscope
+      - postgres
+      - power_bi
+      - quicksight
+      - redshift
+      - salesforce
+      - salesforce_crma
+      - sigma
+      - snowflake
+      - tableau
+      - thoughtspot
+      - trial
+      - trial_redshift
+      type: string
+      description: '* `airflow` - Airflow
+
+        * `aws_s3` - AWS S3
+
+        * `bigquery` - BigQuery
+
+        * `data_studio` - Looker Studio
+
+        * `databricks` - Databricks
+
+        * `db_agent` - DB Agent
+
+        * `db2` - DB2
+
+        * `dbt` - dbt
+
+        * `fivetran` - Fivetran
+
+        * `glue` - Glue
+
+        * `hex` - Hex
+
+        * `looker` - Looker
+
+        * `metabase` - Metabase
+
+        * `mode` - Mode
+
+        * `monte_carlo` - Monte Carlo
+
+        * `mssql` - MS SQL
+
+        * `mysql` - MySQL
+
+        * `omni` - Omni BI
+
+        * `openlineage` - Open Lineage
+
+        * `oracle` - Oracle
+
+        * `periscope` - Periscope
+
+        * `postgres` - PostgreSQL
+
+        * `power_bi` - Power BI
+
+        * `quicksight` - QuickSight
+
+        * `redshift` - Redshift
+
+        * `salesforce` - Salesforce
+
+        * `salesforce_crma` - Salesforce Analytics
+
+        * `sigma` - Sigma
+
+        * `snowflake` - Snowflake
+
+        * `tableau` - Tableau
+
+        * `thoughtspot` - ThoughtSpot
+
+        * `trial` - Trial
+
+        * `trial_redshift` - Trial Redshift'
+    Breadcrumb:
+      type: object
+      properties:
+        guid:
+          type: string
+          maxLength: 25
+        target_guid:
+          type: string
+          maxLength: 256
+        target_name:
+          type: string
+          readOnly: true
+        target_object_type:
+          type: string
+        target_data_type:
+          type: string
+        target_data_source_guid:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        target_data_source_type:
+          allOf:
+          - $ref: '#/components/schemas/TargetDataSourceTypeEnum'
+        ordinal:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          description: Ordering of breadcrumb within the table
+      required:
+      - target_data_source_guid
+      - target_data_type
+      - target_guid
+      - target_name
+      - target_object_type
+    BaseDataSource:
+      type: object
+      properties:
+        guid:
+          type: string
+          maxLength: 25
+        type:
+          $ref: '#/components/schemas/Type6b6Enum'
+        name:
+          type: string
+          maxLength: 100
+      required:
+      - name
+      - type
+    SuggestedDescriptionSourceObject:
+      type: object
+      properties:
+        object_type:
+          type: string
+          readOnly: true
+        guid:
+          type: string
+          readOnly: true
+        name:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        breadcrumbs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Breadcrumb'
+          readOnly: true
         data_types:
           allOf:
           - $ref: '#/components/schemas/BaseType'
           readOnly: true
+        parent_guid:
+          type: string
       required:
+      - breadcrumbs
       - data_types
+      - guid
       - name
+      - object_type
+    CollectionLite:
+      type: object
+      properties:
+        guid:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          readOnly: true
+        icon:
+          type: string
+          readOnly: true
+        data_types:
+          allOf:
+          - $ref: '#/components/schemas/BaseType'
+          readOnly: true
+        breadcrumbs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Breadcrumb'
+          readOnly: true
+        emoji:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          description: Unicode representation of the selected emoji
+        color_scheme:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          description: Color scheme selected by the user for the icon
+        linked_from:
+          type: array
+          items:
+            type: string
+          readOnly: true
+          description: Tags having a link to this collection
+      required:
+      - breadcrumbs
+      - color_scheme
+      - data_types
+      - emoji
+      - guid
+      - icon
+      - linked_from
+      - name
+    TypeB32Enum:
+      enum:
+      - status
+      - dbt
+      type: string
+      description: '* `status` - status
+
+        * `dbt` - dbt'
+    Explore:
+      type: object
+      description: 'Adds support for reading a description from metadata
+
+        that support modifying description'
+      properties:
+        guid:
+          type: string
+          maxLength: 25
+        lookml_model:
+          $ref: '#/components/schemas/LookMLModel'
+        name:
+          type: string
+        label:
+          type: string
+        group_label:
+          type:
+          - string
+          - 'null'
+          description: The custom group_label for Explore (if any)
+        group:
+          $ref: '#/components/schemas/ExploreGroup'
+        description:
+          type:
+          - string
+          - 'null'
+          description: Active description
+        description_source:
+          allOf:
+          - $ref: '#/components/schemas/DescriptionSourceEnum'
+        user_description:
+          type:
+          - string
+          - 'null'
+          description: User description
+        user_description_author:
+          allOf:
+          - $ref: '#/components/schemas/UserLite'
+          readOnly: true
+        ai_description:
+          type:
+          - string
+          - 'null'
+          description: AI-generated description
+        ingested_description:
+          type:
+          - string
+          - 'null'
+          description: Unmodified description from the data source
+        richtext_description:
+          type:
+          - string
+          - 'null'
+          description: Richtext formatted description. Can be in Slatejs or Draftjs format.
+        project_name:
+          type:
+          - string
+          - 'null'
+          description: Name of project containing the model
+        business_owner:
+          $ref: '#/components/schemas/ExploreSerializer.GuidReferenceField.business_owner'
+        technical_owner:
+          $ref: '#/components/schemas/ExploreSerializer.GuidReferenceField.technical_owner'
+        popularity:
+          allOf:
+          - $ref: '#/components/schemas/LookerExplorePopularity'
+          readOnly: true
+        url:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: The full url of the explore generated from the ingestion
+          maxLength: 200
+        tagged_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaggedItemsLiteWithSource'
+          readOnly: true
+        is_hidden:
+          type: boolean
+          readOnly: true
+        data_source_type:
+          type: string
+          readOnly: true
+        search_name:
+          type: string
+          readOnly: true
+        downstream_objects_counts:
+          allOf:
+          - $ref: '#/components/schemas/RelatedObjectsCounts'
+          readOnly: true
+        upstream_objects_counts:
+          allOf:
+          - $ref: '#/components/schemas/RelatedObjectsCounts'
+          readOnly: true
+        breadcrumbs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Breadcrumb'
+          readOnly: true
+        data_types:
+          allOf:
+          - $ref: '#/components/schemas/BaseType'
+          readOnly: true
+        collections:
+          type: array
+          items:
+            $ref: '#/components/schemas/CollectionLite'
+          readOnly: true
+      required:
+      - breadcrumbs
+      - collections
+      - data_source_type
+      - data_types
+      - downstream_objects_counts
+      - group
+      - is_hidden
+      - label
+      - lookml_model
+      - name
+      - popularity
+      - search_name
+      - tagged_items
+      - upstream_objects_counts
+      - user_description_author
     PiiRule:
       type: object
       properties:
@@ -1426,55 +1005,118 @@ components:
       - name
       - regex
       - type
-    BaseType:
+    CommentRecipient:
       type: object
-      description: 'Base Serializer to inject the following `type` information:
-
-        - Object Type: Model Name of the Object: Table, Dashboard, ReportQuery
-
-        - Data Source Type: snowflake, databricks etc.
-
-        - Data Type: Additional type like tile, visual, card etc.'
       properties:
-        object_type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        data_source_type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        data_type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        external_database_type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
+        recipient:
+          $ref: '#/components/schemas/CommentRecipientSerializer.GuidReferenceField.recipient'
       required:
-      - data_source_type
-      - data_type
-      - external_database_type
-      - object_type
-    BaseDataSource:
+      - recipient
+    PaginatedCommentList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Comment'
+    TargetTypesEnum:
+      enum:
+      - table
+      - dashboard
+      - explore
+      - lookmlview
+      type: string
+      description: '* `table` - table
+
+        * `dashboard` - dashboard
+
+        * `explore` - explore
+
+        * `lookmlview` - lookmlview'
+    LookMLModel:
       type: object
       properties:
         guid:
           type: string
           maxLength: 25
-        type:
-          $ref: '#/components/schemas/Type6b6Enum'
+        data_source:
+          $ref: '#/components/schemas/DataSource'
         name:
           type: string
-          maxLength: 100
+          maxLength: 255
+        label:
+          type: string
+          maxLength: 255
+        project_name:
+          type:
+          - string
+          - 'null'
+          description: Name of project containing the model
+          maxLength: 255
       required:
+      - data_source
+      - label
       - name
-      - type
+    ProcessedThroughEntry:
+      type: object
+      properties:
+        key:
+          type: string
+          readOnly: true
+        date:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - date
+      - key
+    DescriptionSourceEnum:
+      enum:
+      - user
+      - ingestion
+      - ai
+      - public_docs
+      - lineage
+      - downstream_lineage
+      - upstream_lineage
+      - similarity
+      - unknown
+      type: string
+      description: '* `user` - User
+
+        * `ingestion` - Ingestion
+
+        * `ai` - Ai
+
+        * `public_docs` - Public Docs
+
+        * `lineage` - Lineage
+
+        * `downstream_lineage` - Downstream Lineage
+
+        * `upstream_lineage` - Upstream Lineage
+
+        * `similarity` - Similarity
+
+        * `unknown` - Unknown'
     UserLite:
       type: object
       properties:
@@ -1513,6 +1155,362 @@ components:
       - is_active
       - last_name
       - team
+    TagLite:
+      type: object
+      properties:
+        guid:
+          type: string
+          maxLength: 25
+        type:
+          $ref: '#/components/schemas/TypeB32Enum'
+        name:
+          type: string
+          readOnly: true
+          description: Tag display name
+        icon:
+          type: string
+          readOnly: true
+          description: Icon identifier (for status tags)
+        color:
+          type: string
+          readOnly: true
+          description: 'Tag color (for category tags). Allowed formats: ''#ffeedd'' and ''#ffeeddcc'' (RGB/ARGB hexadecimal)'
+          deprecated: true
+        visible:
+          type: boolean
+          readOnly: true
+        links_to:
+          type:
+          - string
+          - 'null'
+        breadcrumbs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Breadcrumb'
+          readOnly: true
+      required:
+      - breadcrumbs
+      - color
+      - icon
+      - name
+      - type
+      - visible
+    TeamShortcut:
+      type: object
+      properties:
+        guid:
+          type: string
+        name:
+          type: string
+      required:
+      - guid
+      - name
+    TargetDataSourceTypeEnum:
+      enum:
+      - airflow
+      - aws_s3
+      - bigquery
+      - data_studio
+      - databricks
+      - db_agent
+      - db2
+      - dbt
+      - fivetran
+      - glue
+      - hex
+      - looker
+      - metabase
+      - mode
+      - monte_carlo
+      - mssql
+      - mysql
+      - omni
+      - openlineage
+      - oracle
+      - periscope
+      - postgres
+      - power_bi
+      - quicksight
+      - redshift
+      - salesforce
+      - salesforce_crma
+      - sigma
+      - snowflake
+      - tableau
+      - thoughtspot
+      - trial
+      - trial_redshift
+      type: string
+      description: '* `airflow` - Airflow
+
+        * `aws_s3` - AWS S3
+
+        * `bigquery` - BigQuery
+
+        * `data_studio` - Looker Studio
+
+        * `databricks` - Databricks
+
+        * `db_agent` - DB Agent
+
+        * `db2` - DB2
+
+        * `dbt` - dbt
+
+        * `fivetran` - Fivetran
+
+        * `glue` - Glue
+
+        * `hex` - Hex
+
+        * `looker` - Looker
+
+        * `metabase` - Metabase
+
+        * `mode` - Mode
+
+        * `monte_carlo` - Monte Carlo
+
+        * `mssql` - MS SQL
+
+        * `mysql` - MySQL
+
+        * `omni` - Omni BI
+
+        * `openlineage` - Open Lineage
+
+        * `oracle` - Oracle
+
+        * `periscope` - Periscope
+
+        * `postgres` - PostgreSQL
+
+        * `power_bi` - Power BI
+
+        * `quicksight` - QuickSight
+
+        * `redshift` - Redshift
+
+        * `salesforce` - Salesforce
+
+        * `salesforce_crma` - Salesforce Analytics
+
+        * `sigma` - Sigma
+
+        * `snowflake` - Snowflake
+
+        * `tableau` - Tableau
+
+        * `thoughtspot` - ThoughtSpot
+
+        * `trial` - Trial
+
+        * `trial_redshift` - Trial Redshift'
+    ExploreSerializer.GuidReferenceField.technical_owner:
+      anyOf:
+      - $ref: '#/components/schemas/DSUserName'
+      - $ref: '#/components/schemas/Team'
+      - $ref: '#/components/schemas/UserLite'
+      discriminator:
+        propertyName: object_type
+        mapping:
+          dsuser: '#/components/schemas/DSUserName'
+          team: '#/components/schemas/Team'
+          user: '#/components/schemas/UserLite'
+    ProcessedThrough:
+      type: object
+      properties:
+        start_time:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcessedThroughEntry'
+      required:
+      - start_time
+    LookerExplorePopularity:
+      type: object
+      properties:
+        timeframe:
+          type: integer
+          readOnly: true
+          default: 90
+        user_count:
+          type: integer
+          readOnly: true
+        service_query_count:
+          type: integer
+          readOnly: true
+        popularity:
+          type: integer
+          readOnly: true
+          description: Popularity score for this object from 0-100
+        query_count:
+          type: integer
+      required:
+      - popularity
+      - query_count
+      - service_query_count
+      - timeframe
+      - user_count
+    CommentSerializer.GuidReferenceField.target:
+      anyOf:
+      - $ref: '#/components/schemas/Explore'
+      - $ref: '#/components/schemas/Metadata'
+      - $ref: '#/components/schemas/TagLite'
+      - $ref: '#/components/schemas/Team'
+      discriminator:
+        propertyName: object_type
+        mapping:
+          bidataset: '#/components/schemas/Metadata'
+          bifolder: '#/components/schemas/Metadata'
+          collection: '#/components/schemas/Metadata'
+          conversationevaluation: '#/components/schemas/Metadata'
+          dashboard: '#/components/schemas/Metadata'
+          document: '#/components/schemas/Metadata'
+          explore: '#/components/schemas/Explore'
+          job: '#/components/schemas/Metadata'
+          lookmlview: '#/components/schemas/Metadata'
+          metabasetable: '#/components/schemas/Metadata'
+          metric: '#/components/schemas/Metadata'
+          notebook: '#/components/schemas/Metadata'
+          powerbidataset: '#/components/schemas/Metadata'
+          table: '#/components/schemas/Metadata'
+          tableaudatasource: '#/components/schemas/Metadata'
+          tableaufield: '#/components/schemas/Metadata'
+          tableauview: '#/components/schemas/Metadata'
+          tag: '#/components/schemas/TagLite'
+          team: '#/components/schemas/Team'
+          term: '#/components/schemas/Metadata'
+          thoughtspottable: '#/components/schemas/Metadata'
+    BaseType:
+      type: object
+      description: 'Base Serializer to inject the following `type` information:
+
+        - Object Type: Model Name of the Object: Table, Dashboard, ReportQuery
+
+        - Data Source Type: snowflake, databricks etc.
+
+        - Data Type: Additional type like tile, visual, card etc.'
+      properties:
+        object_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        data_source_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        data_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        external_database_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+      required:
+      - data_source_type
+      - data_type
+      - external_database_type
+      - object_type
+    DataSource:
+      type: object
+      properties:
+        guid:
+          type: string
+          readOnly: true
+        type:
+          $ref: '#/components/schemas/Type6b6Enum'
+        name:
+          type: string
+          maxLength: 100
+        keypair:
+          $ref: '#/components/schemas/KeyPair'
+        last_ingested_on:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        last_fully_ingested_on:
+          type: string
+          format: date-time
+          readOnly: true
+        is_ingesting:
+          type: boolean
+          readOnly: true
+        is_syncing_paused:
+          type: boolean
+          readOnly: true
+        connection_status:
+          $ref: '#/components/schemas/ConnectionStatusEnum'
+        connection_error_message:
+          type: string
+          description: Exception message if health check failed
+        is_mode_discovery_db_added:
+          type: boolean
+          readOnly: true
+        external_uuid:
+          type:
+          - string
+          - 'null'
+          description: UUID used for running aws cloudformation.
+          maxLength: 64
+        iam_principal:
+          type:
+          - string
+          - 'null'
+          description: IAM Principal used for running aws cloudformation.
+          maxLength: 64
+        cloudformation_url:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+          readOnly: true
+        is_credentials_setup_incomplete:
+          type: boolean
+          readOnly: true
+        processed_through:
+          $ref: '#/components/schemas/ProcessedThrough'
+        data_types:
+          allOf:
+          - $ref: '#/components/schemas/BaseType'
+          readOnly: true
+      required:
+      - cloudformation_url
+      - data_types
+      - guid
+      - is_credentials_setup_incomplete
+      - is_ingesting
+      - is_mode_discovery_db_added
+      - is_syncing_paused
+      - last_fully_ingested_on
+      - name
+      - type
+    DSUserName:
+      type: object
+      properties:
+        guid:
+          type: string
+          maxLength: 25
+        display_name:
+          type:
+          - string
+          - 'null'
+          description: The username field for the user used by the datasource
+          maxLength: 100
+        name:
+          type: string
+          maxLength: 100
+        data_source:
+          $ref: '#/components/schemas/DataSourceInfo'
+      required:
+      - data_source
+      - name
     RelatedObjectsCounts:
       type: object
       properties:
@@ -1594,29 +1592,31 @@ components:
           type: integer
         impacted_object_count:
           type: integer
-    LookMLModel:
+    Team:
       type: object
       properties:
         guid:
           type: string
-          maxLength: 25
-        data_source:
-          $ref: '#/components/schemas/DataSource'
+          readOnly: true
         name:
           type: string
-          maxLength: 255
-        label:
-          type: string
-          maxLength: 255
-        project_name:
+          maxLength: 100
+        description:
           type:
           - string
           - 'null'
-          description: Name of project containing the model
-          maxLength: 255
+          description: Active description
+        richtext_description:
+          type:
+          - string
+          - 'null'
+          description: Richtext formatted description. Can be in Slatejs or Draftjs format.
+        members_count:
+          type: integer
+          readOnly: true
       required:
-      - data_source
-      - label
+      - guid
+      - members_count
       - name
   securitySchemes:
     JWTAuthentication:

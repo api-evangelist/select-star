@@ -238,6 +238,206 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    Breadcrumb:
+      type: object
+      properties:
+        guid:
+          type: string
+          maxLength: 25
+        target_guid:
+          type: string
+          maxLength: 256
+        target_name:
+          type: string
+          readOnly: true
+        target_object_type:
+          type: string
+        target_data_type:
+          type: string
+        target_data_source_guid:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        target_data_source_type:
+          allOf:
+          - $ref: '#/components/schemas/TargetDataSourceTypeEnum'
+        ordinal:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          description: Ordering of breadcrumb within the table
+      required:
+      - target_data_source_guid
+      - target_data_type
+      - target_guid
+      - target_name
+      - target_object_type
+    TargetDataSourceTypeEnum:
+      enum:
+      - airflow
+      - aws_s3
+      - bigquery
+      - data_studio
+      - databricks
+      - db_agent
+      - db2
+      - dbt
+      - fivetran
+      - glue
+      - hex
+      - looker
+      - metabase
+      - mode
+      - monte_carlo
+      - mssql
+      - mysql
+      - omni
+      - openlineage
+      - oracle
+      - periscope
+      - postgres
+      - power_bi
+      - quicksight
+      - redshift
+      - salesforce
+      - salesforce_crma
+      - sigma
+      - snowflake
+      - tableau
+      - thoughtspot
+      - trial
+      - trial_redshift
+      type: string
+      description: '* `airflow` - Airflow
+
+        * `aws_s3` - AWS S3
+
+        * `bigquery` - BigQuery
+
+        * `data_studio` - Looker Studio
+
+        * `databricks` - Databricks
+
+        * `db_agent` - DB Agent
+
+        * `db2` - DB2
+
+        * `dbt` - dbt
+
+        * `fivetran` - Fivetran
+
+        * `glue` - Glue
+
+        * `hex` - Hex
+
+        * `looker` - Looker
+
+        * `metabase` - Metabase
+
+        * `mode` - Mode
+
+        * `monte_carlo` - Monte Carlo
+
+        * `mssql` - MS SQL
+
+        * `mysql` - MySQL
+
+        * `omni` - Omni BI
+
+        * `openlineage` - Open Lineage
+
+        * `oracle` - Oracle
+
+        * `periscope` - Periscope
+
+        * `postgres` - PostgreSQL
+
+        * `power_bi` - Power BI
+
+        * `quicksight` - QuickSight
+
+        * `redshift` - Redshift
+
+        * `salesforce` - Salesforce
+
+        * `salesforce_crma` - Salesforce Analytics
+
+        * `sigma` - Sigma
+
+        * `snowflake` - Snowflake
+
+        * `tableau` - Tableau
+
+        * `thoughtspot` - ThoughtSpot
+
+        * `trial` - Trial
+
+        * `trial_redshift` - Trial Redshift'
+    PaginatedSearchResultList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchResult'
+    SearchResultTaggedItems:
+      type: object
+      properties:
+        tag:
+          $ref: '#/components/schemas/SearchResultTag'
+        kind:
+          type: string
+      required:
+      - kind
+      - tag
+    SearchResultTag:
+      type: object
+      properties:
+        guid:
+          type: string
+        type:
+          type: string
+        name:
+          type: string
+        icon:
+          type: string
+        color:
+          type: string
+        visible:
+          type: boolean
+        breadcrumbs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Breadcrumb'
+          readOnly: true
+        links_to:
+          type: string
+      required:
+      - breadcrumbs
+      - color
+      - guid
+      - icon
+      - name
+      - type
     SearchResult:
       type: object
       properties:
@@ -355,143 +555,6 @@ components:
       - score
       - search_name
       - tagged_items
-    SearchResultTeam:
-      type: object
-      properties:
-        guid:
-          type: string
-        name:
-          type: string
-      required:
-      - guid
-      - name
-    TableTypeEnum:
-      enum:
-      - table
-      - view
-      - materialized_view
-      - external_table
-      - dynamic_table
-      - incremental
-      - ephemeral
-      - source
-      - seed
-      - model
-      type: string
-      description: '* `table` - table
-
-        * `view` - view
-
-        * `materialized_view` - materialized_view
-
-        * `external_table` - external_table
-
-        * `dynamic_table` - dynamic_table
-
-        * `incremental` - dbt_incremental
-
-        * `ephemeral` - dbt_ephemeral
-
-        * `source` - dbt_source
-
-        * `seed` - dbt_seed
-
-        * `model` - dbt_model_legacy'
-    SearchResultTaggedItems:
-      type: object
-      properties:
-        tag:
-          $ref: '#/components/schemas/SearchResultTag'
-        kind:
-          type: string
-      required:
-      - kind
-      - tag
-    PaginatedSearchResultList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/SearchResult'
-    SearchResultCollection:
-      type: object
-      properties:
-        guid:
-          type: string
-        name:
-          type: string
-        icon:
-          type: string
-        emoji:
-          type: string
-        color_scheme:
-          type: string
-        breadcrumbs:
-          type: array
-          items:
-            $ref: '#/components/schemas/Breadcrumb'
-          readOnly: true
-      required:
-      - breadcrumbs
-      - color_scheme
-      - emoji
-      - guid
-      - icon
-      - name
-    Breadcrumb:
-      type: object
-      properties:
-        guid:
-          type: string
-          maxLength: 25
-        target_guid:
-          type: string
-          maxLength: 256
-        target_name:
-          type: string
-          readOnly: true
-        target_object_type:
-          type: string
-        target_data_type:
-          type: string
-        target_data_source_guid:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        target_data_source_type:
-          allOf:
-          - $ref: '#/components/schemas/TargetDataSourceTypeEnum'
-        ordinal:
-          type: integer
-          maximum: 2147483647
-          minimum: 0
-          description: Ordering of breadcrumb within the table
-      required:
-      - target_data_source_guid
-      - target_data_type
-      - target_guid
-      - target_name
-      - target_object_type
     BaseType:
       type: object
       description: 'Base Serializer to inject the following `type` information:
@@ -527,107 +590,73 @@ components:
       - data_type
       - external_database_type
       - object_type
-    TargetDataSourceTypeEnum:
+    TableTypeEnum:
       enum:
-      - airflow
-      - aws_s3
-      - bigquery
-      - data_studio
-      - databricks
-      - db_agent
-      - db2
-      - dbt
-      - fivetran
-      - glue
-      - hex
-      - looker
-      - metabase
-      - mode
-      - monte_carlo
-      - mssql
-      - mysql
-      - omni
-      - openlineage
-      - oracle
-      - periscope
-      - postgres
-      - power_bi
-      - quicksight
-      - redshift
-      - salesforce
-      - salesforce_crma
-      - sigma
-      - snowflake
-      - tableau
-      - thoughtspot
-      - trial
-      - trial_redshift
+      - table
+      - view
+      - materialized_view
+      - external_table
+      - dynamic_table
+      - incremental
+      - ephemeral
+      - source
+      - seed
+      - model
       type: string
-      description: '* `airflow` - Airflow
+      description: '* `table` - table
 
-        * `aws_s3` - AWS S3
+        * `view` - view
 
-        * `bigquery` - BigQuery
+        * `materialized_view` - materialized_view
 
-        * `data_studio` - Looker Studio
+        * `external_table` - external_table
 
-        * `databricks` - Databricks
+        * `dynamic_table` - dynamic_table
 
-        * `db_agent` - DB Agent
+        * `incremental` - dbt_incremental
 
-        * `db2` - DB2
+        * `ephemeral` - dbt_ephemeral
 
-        * `dbt` - dbt
+        * `source` - dbt_source
 
-        * `fivetran` - Fivetran
+        * `seed` - dbt_seed
 
-        * `glue` - Glue
-
-        * `hex` - Hex
-
-        * `looker` - Looker
-
-        * `metabase` - Metabase
-
-        * `mode` - Mode
-
-        * `monte_carlo` - Monte Carlo
-
-        * `mssql` - MS SQL
-
-        * `mysql` - MySQL
-
-        * `omni` - Omni BI
-
-        * `openlineage` - Open Lineage
-
-        * `oracle` - Oracle
-
-        * `periscope` - Periscope
-
-        * `postgres` - PostgreSQL
-
-        * `power_bi` - Power BI
-
-        * `quicksight` - QuickSight
-
-        * `redshift` - Redshift
-
-        * `salesforce` - Salesforce
-
-        * `salesforce_crma` - Salesforce Analytics
-
-        * `sigma` - Sigma
-
-        * `snowflake` - Snowflake
-
-        * `tableau` - Tableau
-
-        * `thoughtspot` - ThoughtSpot
-
-        * `trial` - Trial
-
-        * `trial_redshift` - Trial Redshift'
+        * `model` - dbt_model_legacy'
+    SearchResultCollection:
+      type: object
+      properties:
+        guid:
+          type: string
+        name:
+          type: string
+        icon:
+          type: string
+        emoji:
+          type: string
+        color_scheme:
+          type: string
+        breadcrumbs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Breadcrumb'
+          readOnly: true
+      required:
+      - breadcrumbs
+      - color_scheme
+      - emoji
+      - guid
+      - icon
+      - name
+    SearchResultTeam:
+      type: object
+      properties:
+        guid:
+          type: string
+        name:
+          type: string
+      required:
+      - guid
+      - name
     SearchResultCustomAttribute:
       type: object
       properties:
@@ -638,35 +667,6 @@ components:
       required:
       - name
       - value
-    SearchResultTag:
-      type: object
-      properties:
-        guid:
-          type: string
-        type:
-          type: string
-        name:
-          type: string
-        icon:
-          type: string
-        color:
-          type: string
-        visible:
-          type: boolean
-        breadcrumbs:
-          type: array
-          items:
-            $ref: '#/components/schemas/Breadcrumb'
-          readOnly: true
-        links_to:
-          type: string
-      required:
-      - breadcrumbs
-      - color
-      - guid
-      - icon
-      - name
-      - type
   securitySchemes:
     JWTAuthentication:
       type: http

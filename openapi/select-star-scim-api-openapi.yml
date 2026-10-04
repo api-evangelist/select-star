@@ -251,36 +251,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    SCIMUserListResponse:
-      type: object
-      properties:
-        schemas:
-          type: array
-          items:
-            type: string
-            maxLength: 255
-        totalResults:
-          type:
-          - integer
-          - 'null'
-        startIndex:
-          type:
-          - integer
-          - 'null'
-        itemsPerPage:
-          type:
-          - integer
-          - 'null'
-        resources:
-          type: array
-          items:
-            $ref: '#/components/schemas/SCIMUser'
-      required:
-      - itemsPerPage
-      - resources
-      - schemas
-      - startIndex
-      - totalResults
     SCIMUser:
       type: object
       properties:
@@ -340,25 +310,6 @@ components:
       - name
       - schemas
       - userName
-    TeamRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          minLength: 1
-          maxLength: 100
-        description:
-          type:
-          - string
-          - 'null'
-          description: Active description
-        richtext_description:
-          type:
-          - string
-          - 'null'
-          description: Richtext formatted description. Can be in Slatejs or Draftjs format.
-      required:
-      - name
     SCIMUserUpdateRequest:
       type: object
       properties:
@@ -387,14 +338,12 @@ components:
       - active
       - name
       - userName
-    Team:
+    TeamRequest:
       type: object
       properties:
-        guid:
-          type: string
-          readOnly: true
         name:
           type: string
+          minLength: 1
           maxLength: 100
         description:
           type:
@@ -406,13 +355,38 @@ components:
           - string
           - 'null'
           description: Richtext formatted description. Can be in Slatejs or Draftjs format.
-        members_count:
-          type: integer
-          readOnly: true
       required:
-      - guid
-      - members_count
       - name
+    SCIMUserListResponse:
+      type: object
+      properties:
+        schemas:
+          type: array
+          items:
+            type: string
+            maxLength: 255
+        totalResults:
+          type:
+          - integer
+          - 'null'
+        startIndex:
+          type:
+          - integer
+          - 'null'
+        itemsPerPage:
+          type:
+          - integer
+          - 'null'
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/SCIMUser'
+      required:
+      - itemsPerPage
+      - resources
+      - schemas
+      - startIndex
+      - totalResults
     SCIMUserCreateRequest:
       type: object
       properties:
@@ -446,6 +420,32 @@ components:
       - name
       - password
       - userName
+    Team:
+      type: object
+      properties:
+        guid:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type:
+          - string
+          - 'null'
+          description: Active description
+        richtext_description:
+          type:
+          - string
+          - 'null'
+          description: Richtext formatted description. Can be in Slatejs or Draftjs format.
+        members_count:
+          type: integer
+          readOnly: true
+      required:
+      - guid
+      - members_count
+      - name
   securitySchemes:
     JWTAuthentication:
       type: http

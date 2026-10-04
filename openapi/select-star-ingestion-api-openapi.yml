@@ -110,19 +110,55 @@ paths:
       x-role-requirements: Admin (or RBAC policy)
 components:
   schemas:
-    ProcessedThroughEntry:
+    KeyPair:
       type: object
       properties:
-        key:
+        public_key:
+          type:
+          - string
+          - 'null'
+          maxLength: 1000
+    ManifestJsonRequest:
+      type: object
+      properties:
+        data_source:
           type: string
-          readOnly: true
-        date:
+          minLength: 1
+          description: the guid of the data source you want to update
+        dbt_project:
           type: string
-          format: date-time
-          readOnly: true
+          minLength: 1
+          writeOnly: true
+          description: the guid of the dbt project you want to update. (REQUIRED if you have multiple dbt projects in the same data source)
+        manifest:
+          type: string
+          writeOnly: true
+          minLength: 1
+          description: the contents of the catalog.json file, use `catalog_file` instead
+          deprecated: true
+        catalog:
+          type: string
+          writeOnly: true
+          minLength: 1
+          description: the contents of the manifest.json file, use `manifest_file` instead
+          deprecated: true
+        manifest_file:
+          type: string
+          format: binary
+          writeOnly: true
+          description: the manifest.json file encoded in `utf8` (mutually exclusive with manifest)
+        catalog_file:
+          type: string
+          format: binary
+          writeOnly: true
+          description: the catalog.json file encoded in `utf8` (mutually exclusive with catalog)
+        run_results_file:
+          type: string
+          format: binary
+          writeOnly: true
+          description: the run_results.json file encoded in `utf8`
       required:
-      - date
-      - key
+      - data_source
     ConnectionStatusEnum:
       enum:
       - OK
@@ -238,94 +274,28 @@ components:
         * `trial` - Trial
 
         * `trial_redshift` - Trial Redshift'
-    ManifestJsonSerializerOutput:
+    ProcessedThroughEntry:
       type: object
       properties:
-        data_source:
+        key:
           type: string
-          description: the guid of the data source you updated
-        dbt_project:
+          readOnly: true
+        date:
           type: string
-          description: the guid of the dbt project you updated
+          format: date-time
+          readOnly: true
       required:
-      - data_source
-      - dbt_project
-    ManifestJsonRequest:
+      - date
+      - key
+    ProcessedThrough:
       type: object
       properties:
-        data_source:
-          type: string
-          minLength: 1
-          description: the guid of the data source you want to update
-        dbt_project:
-          type: string
-          minLength: 1
-          writeOnly: true
-          description: the guid of the dbt project you want to update. (REQUIRED if you have multiple dbt projects in the same data source)
-        manifest:
-          type: string
-          writeOnly: true
-          minLength: 1
-          description: the contents of the catalog.json file, use `catalog_file` instead
-          deprecated: true
-        catalog:
-          type: string
-          writeOnly: true
-          minLength: 1
-          description: the contents of the manifest.json file, use `manifest_file` instead
-          deprecated: true
-        manifest_file:
-          type: string
-          format: binary
-          writeOnly: true
-          description: the manifest.json file encoded in `utf8` (mutually exclusive with manifest)
-        catalog_file:
-          type: string
-          format: binary
-          writeOnly: true
-          description: the catalog.json file encoded in `utf8` (mutually exclusive with catalog)
-        run_results_file:
-          type: string
-          format: binary
-          writeOnly: true
-          description: the run_results.json file encoded in `utf8`
+        start_time:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcessedThroughEntry'
       required:
-      - data_source
-    BaseType:
-      type: object
-      description: 'Base Serializer to inject the following `type` information:
-
-        - Object Type: Model Name of the Object: Table, Dashboard, ReportQuery
-
-        - Data Source Type: snowflake, databricks etc.
-
-        - Data Type: Additional type like tile, visual, card etc.'
-      properties:
-        object_type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        data_source_type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        data_type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        external_database_type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-      required:
-      - data_source_type
-      - data_type
-      - external_database_type
-      - object_type
+      - start_time
     DataSource:
       type: object
       properties:
@@ -401,23 +371,53 @@ components:
       - last_fully_ingested_on
       - name
       - type
-    ProcessedThrough:
+    BaseType:
       type: object
+      description: 'Base Serializer to inject the following `type` information:
+
+        - Object Type: Model Name of the Object: Table, Dashboard, ReportQuery
+
+        - Data Source Type: snowflake, databricks etc.
+
+        - Data Type: Additional type like tile, visual, card etc.'
       properties:
-        start_time:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProcessedThroughEntry'
-      required:
-      - start_time
-    KeyPair:
-      type: object
-      properties:
-        public_key:
+        object_type:
           type:
           - string
           - 'null'
-          maxLength: 1000
+          readOnly: true
+        data_source_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        data_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        external_database_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+      required:
+      - data_source_type
+      - data_type
+      - external_database_type
+      - object_type
+    ManifestJsonSerializerOutput:
+      type: object
+      properties:
+        data_source:
+          type: string
+          description: the guid of the data source you updated
+        dbt_project:
+          type: string
+          description: the guid of the dbt project you updated
+      required:
+      - data_source
+      - dbt_project
   securitySchemes:
     JWTAuthentication:
       type: http

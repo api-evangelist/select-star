@@ -99,19 +99,28 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ProcessedThroughEntry:
+    KeyPair:
       type: object
       properties:
-        key:
-          type: string
-          readOnly: true
-        date:
-          type: string
-          format: date-time
-          readOnly: true
-      required:
-      - date
-      - key
+        public_key:
+          type:
+          - string
+          - 'null'
+          maxLength: 1000
+    ConnectionStatusEnum:
+      enum:
+      - OK
+      - WA
+      - UN
+      - ER
+      type: string
+      description: '* `OK` - Correct
+
+        * `WA` - Warning
+
+        * `UN` - Unknown
+
+        * `ER` - Error'
     PaginatedDataSourceList:
       type: object
       required:
@@ -137,20 +146,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DataSource'
-    ConnectionStatusEnum:
-      enum:
-      - OK
-      - WA
-      - UN
-      - ER
-      type: string
-      description: '* `OK` - Correct
-
-        * `WA` - Warning
-
-        * `UN` - Unknown
-
-        * `ER` - Error'
     Type6b6Enum:
       enum:
       - airflow
@@ -252,41 +247,28 @@ components:
         * `trial` - Trial
 
         * `trial_redshift` - Trial Redshift'
-    BaseType:
+    ProcessedThroughEntry:
       type: object
-      description: 'Base Serializer to inject the following `type` information:
-
-        - Object Type: Model Name of the Object: Table, Dashboard, ReportQuery
-
-        - Data Source Type: snowflake, databricks etc.
-
-        - Data Type: Additional type like tile, visual, card etc.'
       properties:
-        object_type:
-          type:
-          - string
-          - 'null'
+        key:
+          type: string
           readOnly: true
-        data_source_type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        data_type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        external_database_type:
-          type:
-          - string
-          - 'null'
+        date:
+          type: string
+          format: date-time
           readOnly: true
       required:
-      - data_source_type
-      - data_type
-      - external_database_type
-      - object_type
+      - date
+      - key
+    ProcessedThrough:
+      type: object
+      properties:
+        start_time:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcessedThroughEntry'
+      required:
+      - start_time
     DataSource:
       type: object
       properties:
@@ -362,23 +344,41 @@ components:
       - last_fully_ingested_on
       - name
       - type
-    ProcessedThrough:
+    BaseType:
       type: object
+      description: 'Base Serializer to inject the following `type` information:
+
+        - Object Type: Model Name of the Object: Table, Dashboard, ReportQuery
+
+        - Data Source Type: snowflake, databricks etc.
+
+        - Data Type: Additional type like tile, visual, card etc.'
       properties:
-        start_time:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProcessedThroughEntry'
-      required:
-      - start_time
-    KeyPair:
-      type: object
-      properties:
-        public_key:
+        object_type:
           type:
           - string
           - 'null'
-          maxLength: 1000
+          readOnly: true
+        data_source_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        data_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        external_database_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+      required:
+      - data_source_type
+      - data_type
+      - external_database_type
+      - object_type
   securitySchemes:
     JWTAuthentication:
       type: http

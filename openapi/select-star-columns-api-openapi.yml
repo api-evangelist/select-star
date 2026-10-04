@@ -326,1082 +326,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    PIIType:
-      enum:
-      - address
-      - banking
-      - birthdate
-      - document
-      - email
-      - face_photo
-      - gender
-      - marital_status
-      - nationality
-      - online_account
-      - online_address
-      - password
-      - person
-      - phone
-      - salary
-      - ssn
-      - username
-      type: string
-      description: '* `address` - address
-
-        * `banking` - banking
-
-        * `birthdate` - birthdate
-
-        * `document` - document
-
-        * `email` - email
-
-        * `face_photo` - face_photo
-
-        * `gender` - gender
-
-        * `marital_status` - marital_status
-
-        * `nationality` - nationality
-
-        * `online_account` - online_account
-
-        * `online_address` - online_address
-
-        * `password` - password
-
-        * `person` - person
-
-        * `phone` - phone
-
-        * `salary` - salary
-
-        * `ssn` - ssn
-
-        * `username` - username'
-    TableLite:
-      type: object
-      properties:
-        guid:
-          type: string
-          maxLength: 25
-        name:
-          type: string
-        table_type:
-          allOf:
-          - $ref: '#/components/schemas/TableTypeEnum'
-          description: 'Table type as defined in the datasource
-
-
-            * `table` - table
-
-            * `view` - view
-
-            * `materialized_view` - materialized_view
-
-            * `external_table` - external_table
-
-            * `dynamic_table` - dynamic_table
-
-            * `incremental` - dbt_incremental
-
-            * `ephemeral` - dbt_ephemeral
-
-            * `source` - dbt_source
-
-            * `seed` - dbt_seed
-
-            * `model` - dbt_model_legacy'
-        data_types:
-          allOf:
-          - $ref: '#/components/schemas/BaseType'
-          readOnly: true
-        updated_on:
-          type: string
-          format: date-time
-          readOnly: true
-      required:
-      - data_types
-      - name
-      - updated_on
-    TagSetRequest:
-      type: object
-      description: 'This serializer represents a list of tag guids to be applied
-
-        to a given item'
-      properties:
-        tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/ListSerializer.GuidReferenceField.Request'
-        replace_existing:
-          type: boolean
-          default: false
-      required:
-      - tags
-    TableTypeEnum:
-      enum:
-      - table
-      - view
-      - materialized_view
-      - external_table
-      - dynamic_table
-      - incremental
-      - ephemeral
-      - source
-      - seed
-      - model
-      type: string
-      description: '* `table` - table
-
-        * `view` - view
-
-        * `materialized_view` - materialized_view
-
-        * `external_table` - external_table
-
-        * `dynamic_table` - dynamic_table
-
-        * `incremental` - dbt_incremental
-
-        * `ephemeral` - dbt_ephemeral
-
-        * `source` - dbt_source
-
-        * `seed` - dbt_seed
-
-        * `model` - dbt_model_legacy'
-    Type6b6Enum:
-      enum:
-      - airflow
-      - aws_s3
-      - bigquery
-      - data_studio
-      - databricks
-      - db_agent
-      - db2
-      - dbt
-      - fivetran
-      - glue
-      - hex
-      - looker
-      - metabase
-      - mode
-      - monte_carlo
-      - mssql
-      - mysql
-      - omni
-      - openlineage
-      - oracle
-      - periscope
-      - postgres
-      - power_bi
-      - quicksight
-      - redshift
-      - salesforce
-      - salesforce_crma
-      - sigma
-      - snowflake
-      - tableau
-      - thoughtspot
-      - trial
-      - trial_redshift
-      type: string
-      description: '* `airflow` - Airflow
-
-        * `aws_s3` - AWS S3
-
-        * `bigquery` - BigQuery
-
-        * `data_studio` - Looker Studio
-
-        * `databricks` - Databricks
-
-        * `db_agent` - DB Agent
-
-        * `db2` - DB2
-
-        * `dbt` - dbt
-
-        * `fivetran` - Fivetran
-
-        * `glue` - Glue
-
-        * `hex` - Hex
-
-        * `looker` - Looker
-
-        * `metabase` - Metabase
-
-        * `mode` - Mode
-
-        * `monte_carlo` - Monte Carlo
-
-        * `mssql` - MS SQL
-
-        * `mysql` - MySQL
-
-        * `omni` - Omni BI
-
-        * `openlineage` - Open Lineage
-
-        * `oracle` - Oracle
-
-        * `periscope` - Periscope
-
-        * `postgres` - PostgreSQL
-
-        * `power_bi` - Power BI
-
-        * `quicksight` - QuickSight
-
-        * `redshift` - Redshift
-
-        * `salesforce` - Salesforce
-
-        * `salesforce_crma` - Salesforce Analytics
-
-        * `sigma` - Sigma
-
-        * `snowflake` - Snowflake
-
-        * `tableau` - Tableau
-
-        * `thoughtspot` - ThoughtSpot
-
-        * `trial` - Trial
-
-        * `trial_redshift` - Trial Redshift'
-    Database:
-      type: object
-      description: 'Adds support for reading a description from metadata
-
-        that support modifying description'
-      properties:
-        guid:
-          type: string
-          maxLength: 25
-        data_source:
-          $ref: '#/components/schemas/DataSourceInfo'
-        name:
-          type: string
-          readOnly: true
-        description:
-          type:
-          - string
-          - 'null'
-          description: Active description
-        richtext_description:
-          type:
-          - string
-          - 'null'
-          description: Richtext formatted description. Can be in Slatejs or Draftjs format.
-        breadcrumbs:
-          type: array
-          items:
-            $ref: '#/components/schemas/Breadcrumb'
-          readOnly: true
-        search_name:
-          type: string
-          description: Full path for Database is just database name.
-          readOnly: true
-        data_types:
-          allOf:
-          - $ref: '#/components/schemas/BaseType'
-          readOnly: true
-        business_owner:
-          allOf:
-          - $ref: '#/components/schemas/DatabaseSerializer.GuidReferenceField.business_owner'
-          readOnly: true
-        technical_owner:
-          allOf:
-          - $ref: '#/components/schemas/DatabaseSerializer.GuidReferenceField.technical_owner'
-          readOnly: true
-        popularity:
-          allOf:
-          - $ref: '#/components/schemas/DatabasePopularity'
-          readOnly: true
-        tagged_items:
-          type: array
-          items:
-            $ref: '#/components/schemas/TaggedItemsLiteWithSource'
-          readOnly: true
-        collections:
-          type: array
-          items:
-            $ref: '#/components/schemas/CollectionLite'
-          readOnly: true
-        table_counts:
-          readOnly: true
-        deactivation_scheduled_on:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: A time when objects is fully deactivated, so deactivate grace period pass too
-          readOnly: true
-      required:
-      - breadcrumbs
-      - business_owner
-      - collections
-      - data_source
-      - data_types
-      - deactivation_scheduled_on
-      - name
-      - popularity
-      - search_name
-      - table_counts
-      - tagged_items
-      - technical_owner
-    TagLite:
-      type: object
-      properties:
-        guid:
-          type: string
-          maxLength: 25
-        type:
-          $ref: '#/components/schemas/TypeB32Enum'
-        name:
-          type: string
-          readOnly: true
-          description: Tag display name
-        icon:
-          type: string
-          readOnly: true
-          description: Icon identifier (for status tags)
-        color:
-          type: string
-          readOnly: true
-          description: 'Tag color (for category tags). Allowed formats: ''#ffeedd'' and ''#ffeeddcc'' (RGB/ARGB hexadecimal)'
-          deprecated: true
-        visible:
-          type: boolean
-          readOnly: true
-        links_to:
-          type:
-          - string
-          - 'null'
-        breadcrumbs:
-          type: array
-          items:
-            $ref: '#/components/schemas/Breadcrumb'
-          readOnly: true
-      required:
-      - breadcrumbs
-      - color
-      - icon
-      - name
-      - type
-      - visible
-    PatchedColumnRequest:
-      type: object
-      description: 'Adds support for reading a description from metadata
-
-        that support modifying description'
-      properties:
-        table:
-          $ref: '#/components/schemas/TableInfoRequest'
-        is_primary_key:
-          type: boolean
-          description: Whether this column is part of table's primary key
-        field_type:
-          type: string
-          minLength: 1
-        richtext_description:
-          type:
-          - string
-          - 'null'
-          description: Richtext formatted description. Can be in Slatejs or Draftjs format.
-        tag_set:
-          allOf:
-          - $ref: '#/components/schemas/TagSetRequest'
-          writeOnly: true
-    TaggedItemsSourceSerializer.GuidReferenceField.item:
-      $ref: '#/components/schemas/BaseMetadata'
-    TargetDataSourceTypeEnum:
-      enum:
-      - airflow
-      - aws_s3
-      - bigquery
-      - data_studio
-      - databricks
-      - db_agent
-      - db2
-      - dbt
-      - fivetran
-      - glue
-      - hex
-      - looker
-      - metabase
-      - mode
-      - monte_carlo
-      - mssql
-      - mysql
-      - omni
-      - openlineage
-      - oracle
-      - periscope
-      - postgres
-      - power_bi
-      - quicksight
-      - redshift
-      - salesforce
-      - salesforce_crma
-      - sigma
-      - snowflake
-      - tableau
-      - thoughtspot
-      - trial
-      - trial_redshift
-      type: string
-      description: '* `airflow` - Airflow
-
-        * `aws_s3` - AWS S3
-
-        * `bigquery` - BigQuery
-
-        * `data_studio` - Looker Studio
-
-        * `databricks` - Databricks
-
-        * `db_agent` - DB Agent
-
-        * `db2` - DB2
-
-        * `dbt` - dbt
-
-        * `fivetran` - Fivetran
-
-        * `glue` - Glue
-
-        * `hex` - Hex
-
-        * `looker` - Looker
-
-        * `metabase` - Metabase
-
-        * `mode` - Mode
-
-        * `monte_carlo` - Monte Carlo
-
-        * `mssql` - MS SQL
-
-        * `mysql` - MySQL
-
-        * `omni` - Omni BI
-
-        * `openlineage` - Open Lineage
-
-        * `oracle` - Oracle
-
-        * `periscope` - Periscope
-
-        * `postgres` - PostgreSQL
-
-        * `power_bi` - Power BI
-
-        * `quicksight` - QuickSight
-
-        * `redshift` - Redshift
-
-        * `salesforce` - Salesforce
-
-        * `salesforce_crma` - Salesforce Analytics
-
-        * `sigma` - Sigma
-
-        * `snowflake` - Snowflake
-
-        * `tableau` - Tableau
-
-        * `thoughtspot` - ThoughtSpot
-
-        * `trial` - Trial
-
-        * `trial_redshift` - Trial Redshift'
-    CollectionLite:
-      type: object
-      properties:
-        guid:
-          type: string
-          readOnly: true
-        name:
-          type: string
-          readOnly: true
-        icon:
-          type: string
-          readOnly: true
-        data_types:
-          allOf:
-          - $ref: '#/components/schemas/BaseType'
-          readOnly: true
-        breadcrumbs:
-          type: array
-          items:
-            $ref: '#/components/schemas/Breadcrumb'
-          readOnly: true
-        emoji:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          description: Unicode representation of the selected emoji
-        color_scheme:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-          description: Color scheme selected by the user for the icon
-        linked_from:
-          type: array
-          items:
-            type: string
-          readOnly: true
-          description: Tags having a link to this collection
-      required:
-      - breadcrumbs
-      - color_scheme
-      - data_types
-      - emoji
-      - guid
-      - icon
-      - linked_from
-      - name
-    QueryLite:
-      type: object
-      properties:
-        guid:
-          type: string
-          maxLength: 25
-        name:
-          type: string
-          maxLength: 100
-        raw_sql:
-          type: string
-        last_executed_on:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        created_by:
-          allOf:
-          - $ref: '#/components/schemas/User'
-          readOnly: true
-        dsuser_created_by:
-          allOf:
-          - $ref: '#/components/schemas/DSUserName'
-          readOnly: true
-      required:
-      - created_by
-      - dsuser_created_by
-      - raw_sql
-    DataSourceInfo:
-      type: object
-      properties:
-        guid:
-          type: string
-          maxLength: 25
-        type:
-          $ref: '#/components/schemas/Type6b6Enum'
-        name:
-          type: string
-          maxLength: 100
-        last_ingested_on:
-          type:
-          - string
-          - 'null'
-          format: date-time
-      required:
-      - name
-      - type
-    Schema:
-      type: object
-      description: 'Adds support for reading a description from metadata
-
-        that support modifying description'
-      properties:
-        deactivation_scheduled_on:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: A time when objects is fully deactivated, so deactivate grace period pass too
-          readOnly: true
-        guid:
-          type: string
-          maxLength: 25
-        database:
-          $ref: '#/components/schemas/Database'
-        name:
-          type: string
-        description:
-          type:
-          - string
-          - 'null'
-          description: Active description
-        richtext_description:
-          type:
-          - string
-          - 'null'
-          description: Richtext formatted description. Can be in Slatejs or Draftjs format.
-        breadcrumbs:
-          type: array
-          items:
-            $ref: '#/components/schemas/Breadcrumb'
-          readOnly: true
-        search_name:
-          type: string
-          description: Full path for Schema is 'DATABASE.SCHEMA'.
-          readOnly: true
-        data_types:
-          allOf:
-          - $ref: '#/components/schemas/BaseType'
-          readOnly: true
-        business_owner:
-          allOf:
-          - $ref: '#/components/schemas/SchemaSerializer.GuidReferenceField.business_owner'
-          readOnly: true
-        technical_owner:
-          allOf:
-          - $ref: '#/components/schemas/SchemaSerializer.GuidReferenceField.technical_owner'
-          readOnly: true
-        popularity:
-          allOf:
-          - $ref: '#/components/schemas/SchemaPopularity'
-          readOnly: true
-        tagged_items:
-          type: array
-          items:
-            $ref: '#/components/schemas/TaggedItemsLiteWithSource'
-          readOnly: true
-        collections:
-          type: array
-          items:
-            $ref: '#/components/schemas/CollectionLite'
-          readOnly: true
-      required:
-      - breadcrumbs
-      - business_owner
-      - collections
-      - data_types
-      - database
-      - deactivation_scheduled_on
-      - name
-      - popularity
-      - search_name
-      - tagged_items
-      - technical_owner
-    DatabasePopularity:
-      type: object
-      properties:
-        timeframe:
-          type: integer
-          readOnly: true
-          default: 90
-        user_count:
-          type: integer
-          readOnly: true
-        service_query_count:
-          type: integer
-          readOnly: true
-        popularity:
-          type: integer
-          readOnly: true
-          description: Popularity score for this object from 0-100
-        query_count:
-          type: integer
-      required:
-      - popularity
-      - query_count
-      - service_query_count
-      - timeframe
-      - user_count
-    DefaultDatabaseTableColumnOrderEnum:
-      enum:
-      - popularity
-      - column_ordinal_position
-      - alphabetical
-      type: string
-      description: '* `popularity` - popularity
-
-        * `column_ordinal_position` - column_ordinal_position
-
-        * `alphabetical` - alphabetical'
-    Breadcrumb:
-      type: object
-      properties:
-        guid:
-          type: string
-          maxLength: 25
-        target_guid:
-          type: string
-          maxLength: 256
-        target_name:
-          type: string
-          readOnly: true
-        target_object_type:
-          type: string
-        target_data_type:
-          type: string
-        target_data_source_guid:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        target_data_source_type:
-          allOf:
-          - $ref: '#/components/schemas/TargetDataSourceTypeEnum'
-        ordinal:
-          type: integer
-          maximum: 2147483647
-          minimum: 0
-          description: Ordering of breadcrumb within the table
-      required:
-      - target_data_source_guid
-      - target_data_type
-      - target_guid
-      - target_name
-      - target_object_type
-    User:
-      type: object
-      properties:
-        guid:
-          type: string
-          readOnly: true
-        first_name:
-          type: string
-        last_name:
-          type: string
-        email:
-          type: string
-          format: email
-          pattern: ''
-          description: Email address of the user. Only corporate email addresses are allowed.
-        avatar:
-          type:
-          - string
-          - 'null'
-          format: uri
-          readOnly: true
-        team:
-          allOf:
-          - $ref: '#/components/schemas/TeamShortcut'
-          readOnly: true
-        last_login:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          readOnly: true
-        last_activity:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          readOnly: true
-        is_invitation_pending:
-          readOnly: true
-        is_active:
-          type: boolean
-          readOnly: true
-        is_verified:
-          type: boolean
-          readOnly: true
-          description: Whether the user has verified email or not
-        is_agreed_to_terms:
-          type: boolean
-        settings:
-          $ref: '#/components/schemas/UserSetting'
-        created_on:
-          type: string
-          format: date-time
-          readOnly: true
-      required:
-      - avatar
-      - created_on
-      - email
-      - first_name
-      - guid
-      - is_active
-      - is_agreed_to_terms
-      - is_invitation_pending
-      - is_verified
-      - last_activity
-      - last_login
-      - last_name
-      - team
-    BaseColumn:
-      type: object
-      description: 'Adds support for reading a description from metadata
-
-        that support modifying description'
-      properties:
-        guid:
-          type: string
-          maxLength: 25
-        search_name:
-          type: string
-          description: 'Full path for Column is ''DATABASE.SCHEMA.TABLE.COLUMN'' or
-
-            ''DATABASE.TABLE.COLUMN'' if there''s no schema.'
-          readOnly: true
-        name:
-          type: string
-      required:
-      - name
-      - search_name
-    DSUserName:
-      type: object
-      properties:
-        guid:
-          type: string
-          maxLength: 25
-        display_name:
-          type:
-          - string
-          - 'null'
-          description: The username field for the user used by the datasource
-          maxLength: 100
-        name:
-          type: string
-          maxLength: 100
-        data_source:
-          $ref: '#/components/schemas/DataSourceInfo'
-      required:
-      - data_source
-      - name
-    TableInfo:
-      type: object
-      properties:
-        guid:
-          type: string
-          maxLength: 25
-        name:
-          type: string
-        table_type:
-          allOf:
-          - $ref: '#/components/schemas/TableTypeEnum'
-          description: 'Table type as defined in the datasource
-
-
-            * `table` - table
-
-            * `view` - view
-
-            * `materialized_view` - materialized_view
-
-            * `external_table` - external_table
-
-            * `dynamic_table` - dynamic_table
-
-            * `incremental` - dbt_incremental
-
-            * `ephemeral` - dbt_ephemeral
-
-            * `source` - dbt_source
-
-            * `seed` - dbt_seed
-
-            * `model` - dbt_model_legacy'
-        data_types:
-          allOf:
-          - $ref: '#/components/schemas/BaseType'
-          readOnly: true
-        updated_on:
-          type: string
-          format: date-time
-          readOnly: true
-        schema:
-          allOf:
-          - $ref: '#/components/schemas/Schema'
-        database:
-          $ref: '#/components/schemas/Database'
-      required:
-      - data_types
-      - database
-      - name
-      - updated_on
-    SuggestedDescriptionSourceObject:
-      type: object
-      properties:
-        object_type:
-          type: string
-          readOnly: true
-        guid:
-          type: string
-          readOnly: true
-        name:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        breadcrumbs:
-          type: array
-          items:
-            $ref: '#/components/schemas/Breadcrumb'
-          readOnly: true
-        data_types:
-          allOf:
-          - $ref: '#/components/schemas/BaseType'
-          readOnly: true
-        parent_guid:
-          type: string
-      required:
-      - breadcrumbs
-      - data_types
-      - guid
-      - name
-      - object_type
-    TableInfoRequest:
-      type: object
-      properties:
-        guid:
-          type: string
-          minLength: 1
-          maxLength: 25
-        name:
-          type: string
-          minLength: 1
-        table_type:
-          allOf:
-          - $ref: '#/components/schemas/TableTypeEnum'
-          description: 'Table type as defined in the datasource
-
-
-            * `table` - table
-
-            * `view` - view
-
-            * `materialized_view` - materialized_view
-
-            * `external_table` - external_table
-
-            * `dynamic_table` - dynamic_table
-
-            * `incremental` - dbt_incremental
-
-            * `ephemeral` - dbt_ephemeral
-
-            * `source` - dbt_source
-
-            * `seed` - dbt_seed
-
-            * `model` - dbt_model_legacy'
-        schema:
-          allOf:
-          - $ref: '#/components/schemas/SchemaRequest'
-        database:
-          $ref: '#/components/schemas/DatabaseRequest'
-      required:
-      - database
-      - name
-    TaggedItemsLite:
-      type: object
-      description: Serializer without suggestion source
-      properties:
-        item:
-          $ref: '#/components/schemas/TaggedItemsLiteSerializer.GuidReferenceField.item'
-        guid:
-          type: string
-          readOnly: true
-        tag:
-          $ref: '#/components/schemas/TagLite'
-        kind:
-          type: string
-        suggested_source_kind:
-          type: string
-      required:
-      - guid
-      - item
-      - kind
-      - suggested_source_kind
-      - tag
-    TypeB32Enum:
-      enum:
-      - status
-      - dbt
-      type: string
-      description: '* `status` - status
-
-        * `dbt` - dbt'
-    TeamShortcut:
-      type: object
-      properties:
-        guid:
-          type: string
-        name:
-          type: string
-      required:
-      - guid
-      - name
-    BaseMetadata:
-      type: object
-      properties:
-        object_type:
-          type: string
-          readOnly: true
-        guid:
-          type: string
-          readOnly: true
-        name:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        breadcrumbs:
-          type: array
-          items:
-            $ref: '#/components/schemas/Breadcrumb'
-          readOnly: true
-      required:
-      - breadcrumbs
-      - guid
-      - name
-      - object_type
-    SchemaPopularity:
-      type: object
-      properties:
-        timeframe:
-          type: integer
-          readOnly: true
-          default: 90
-        user_count:
-          type: integer
-          readOnly: true
-        service_query_count:
-          type: integer
-          readOnly: true
-        popularity:
-          type: integer
-          readOnly: true
-          description: Popularity score for this object from 0-100
-        query_count:
-          type: integer
-      required:
-      - popularity
-      - query_count
-      - service_query_count
-      - timeframe
-      - user_count
-    DefaultTableDashboardTabEnum:
-      enum:
-      - overview
-      - columns_charts
-      type: string
-      description: '* `overview` - overview
-
-        * `columns_charts` - columns_charts'
-    DatabaseSerializer.GuidReferenceField.business_owner:
-      anyOf:
-      - $ref: '#/components/schemas/DSUserName'
-      - $ref: '#/components/schemas/Team'
-      - $ref: '#/components/schemas/UserLite'
-      discriminator:
-        propertyName: object_type
-        mapping:
-          dsuser: '#/components/schemas/DSUserName'
-          team: '#/components/schemas/Team'
-          user: '#/components/schemas/UserLite'
     TaggedItemsLiteWithSource:
       type: object
       properties:
@@ -1424,214 +348,26 @@ components:
       - suggested_source_kind
       - suggestion_source_object
       - tag
-    ForeignKey:
-      type: object
-      properties:
-        guid:
-          type: string
-          maxLength: 25
-        source:
-          $ref: '#/components/schemas/TableLite'
-        target:
-          $ref: '#/components/schemas/TableLite'
-        source_columns:
-          type: array
-          items:
-            $ref: '#/components/schemas/BaseColumn'
-        target_columns:
-          type: array
-          items:
-            $ref: '#/components/schemas/BaseColumn'
-      required:
-      - source
-      - source_columns
-      - target
-      - target_columns
-    SchemaRequest:
-      type: object
-      description: 'Adds support for reading a description from metadata
-
-        that support modifying description'
-      properties:
-        guid:
-          type: string
-          minLength: 1
-          maxLength: 25
-        database:
-          $ref: '#/components/schemas/DatabaseRequest'
-        name:
-          type: string
-          minLength: 1
-        description:
-          type:
-          - string
-          - 'null'
-          description: Active description
-        richtext_description:
-          type:
-          - string
-          - 'null'
-          description: Richtext formatted description. Can be in Slatejs or Draftjs format.
-      required:
-      - database
-      - name
-    Team:
-      type: object
-      properties:
-        guid:
-          type: string
-          readOnly: true
-        name:
-          type: string
-          maxLength: 100
-        description:
-          type:
-          - string
-          - 'null'
-          description: Active description
-        richtext_description:
-          type:
-          - string
-          - 'null'
-          description: Richtext formatted description. Can be in Slatejs or Draftjs format.
-        members_count:
-          type: integer
-          readOnly: true
-      required:
-      - guid
-      - members_count
-      - name
-    ListSerializer.GuidReferenceField.Request:
-      type: string
-      description: GUID
-    TaggedItemsLiteSerializer.GuidReferenceField.item:
-      $ref: '#/components/schemas/BaseMetadata'
-    SuggestedDescriptionSourceEnum:
+    DefaultDatabaseTableColumnOrderEnum:
       enum:
-      - public_docs
-      - lineage
-      - downstream_lineage
-      - upstream_lineage
-      - similarity
-      - unknown
+      - popularity
+      - column_ordinal_position
+      - alphabetical
       type: string
-      description: '* `public_docs` - Public Docs
+      description: '* `popularity` - popularity
 
-        * `lineage` - Lineage
+        * `column_ordinal_position` - column_ordinal_position
 
-        * `downstream_lineage` - Downstream Lineage
-
-        * `upstream_lineage` - Upstream Lineage
-
-        * `similarity` - Similarity
-
-        * `unknown` - Unknown'
-    PaginatedColumnList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Column'
-    DataSourceInfoRequest:
-      type: object
-      properties:
-        guid:
-          type: string
-          minLength: 1
-          maxLength: 25
-        type:
-          $ref: '#/components/schemas/Type6b6Enum'
-        name:
-          type: string
-          minLength: 1
-          maxLength: 100
-        last_ingested_on:
-          type:
-          - string
-          - 'null'
-          format: date-time
-      required:
-      - name
-      - type
-    ColumnSerializer.GuidReferenceField.suggested_description_source_object:
-      $ref: '#/components/schemas/SuggestedDescriptionSourceObject'
-    DatabaseSerializer.GuidReferenceField.technical_owner:
+        * `alphabetical` - alphabetical'
+    TaggedItemsLiteWithSourceSerializer.GuidReferenceField.suggestion_source_object:
       anyOf:
-      - $ref: '#/components/schemas/DSUserName'
-      - $ref: '#/components/schemas/Team'
-      - $ref: '#/components/schemas/UserLite'
+      - $ref: '#/components/schemas/PiiRule'
+      - $ref: '#/components/schemas/TaggedItemsLite'
       discriminator:
         propertyName: object_type
         mapping:
-          dsuser: '#/components/schemas/DSUserName'
-          team: '#/components/schemas/Team'
-          user: '#/components/schemas/UserLite'
-    UserSetting:
-      type: object
-      properties:
-        enable_email_notifications:
-          type: boolean
-          description: Whether this user wants an email notification or not
-        enable_slack_notifications:
-          type: boolean
-          description: Whether this user wants a slack notification or not
-        enable_notifications_for_schema_changes:
-          type: boolean
-          description: Whether this user wants a slack notification for schema changes or not
-        enable_notifications_for_metadata_changes:
-          type: boolean
-          description: Whether this user wants a slack notification for metadata changes or not
-        enable_discussions_notifications:
-          type: boolean
-          description: Whether this user wants a notification for new discussions or not
-        enable_favorites_notifications_for_schema_changes:
-          type: boolean
-          description: Whether this user wants a schema change notification for favorited items or not
-        enable_favorites_notifications_for_metadata_changes:
-          type: boolean
-          description: Whether this user wants a metadata change notification for favorited items or not
-        enable_favorites_notifications_for_discussions:
-          type: boolean
-          description: Whether this user wants a discussion notification for favorited items or not
-        default_database_table_column_order:
-          allOf:
-          - $ref: '#/components/schemas/DefaultDatabaseTableColumnOrderEnum'
-          description: 'Database table column order. There are several different ways to order columns
-
-
-            * `popularity` - popularity
-
-            * `column_ordinal_position` - column_ordinal_position
-
-            * `alphabetical` - alphabetical'
-        default_table_dashboard_tab:
-          allOf:
-          - $ref: '#/components/schemas/DefaultTableDashboardTabEnum'
-          description: 'Default tab for table / dashboard page
-
-
-            * `overview` - overview
-
-            * `columns_charts` - columns_charts'
+          piirule: '#/components/schemas/PiiRule'
+          taggeditems: '#/components/schemas/TaggedItemsLite'
     Column:
       type: object
       description: 'Adds support for reading a description from metadata
@@ -1839,6 +575,582 @@ components:
       - upstream_objects_counts
       - user_description
       - user_description_author
+    DatabaseSerializer.GuidReferenceField.technical_owner:
+      anyOf:
+      - $ref: '#/components/schemas/DSUserName'
+      - $ref: '#/components/schemas/Team'
+      - $ref: '#/components/schemas/UserLite'
+      discriminator:
+        propertyName: object_type
+        mapping:
+          dsuser: '#/components/schemas/DSUserName'
+          team: '#/components/schemas/Team'
+          user: '#/components/schemas/UserLite'
+    PIIType:
+      enum:
+      - address
+      - banking
+      - birthdate
+      - document
+      - email
+      - face_photo
+      - gender
+      - marital_status
+      - nationality
+      - online_account
+      - online_address
+      - password
+      - person
+      - phone
+      - salary
+      - ssn
+      - username
+      type: string
+      description: '* `address` - address
+
+        * `banking` - banking
+
+        * `birthdate` - birthdate
+
+        * `document` - document
+
+        * `email` - email
+
+        * `face_photo` - face_photo
+
+        * `gender` - gender
+
+        * `marital_status` - marital_status
+
+        * `nationality` - nationality
+
+        * `online_account` - online_account
+
+        * `online_address` - online_address
+
+        * `password` - password
+
+        * `person` - person
+
+        * `phone` - phone
+
+        * `salary` - salary
+
+        * `ssn` - ssn
+
+        * `username` - username'
+    BaseMetadata:
+      type: object
+      properties:
+        object_type:
+          type: string
+          readOnly: true
+        guid:
+          type: string
+          readOnly: true
+        name:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        breadcrumbs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Breadcrumb'
+          readOnly: true
+      required:
+      - breadcrumbs
+      - guid
+      - name
+      - object_type
+    TableInfo:
+      type: object
+      properties:
+        guid:
+          type: string
+          maxLength: 25
+        name:
+          type: string
+        table_type:
+          allOf:
+          - $ref: '#/components/schemas/TableTypeEnum'
+          description: 'Table type as defined in the datasource
+
+
+            * `table` - table
+
+            * `view` - view
+
+            * `materialized_view` - materialized_view
+
+            * `external_table` - external_table
+
+            * `dynamic_table` - dynamic_table
+
+            * `incremental` - dbt_incremental
+
+            * `ephemeral` - dbt_ephemeral
+
+            * `source` - dbt_source
+
+            * `seed` - dbt_seed
+
+            * `model` - dbt_model_legacy'
+        data_types:
+          allOf:
+          - $ref: '#/components/schemas/BaseType'
+          readOnly: true
+        updated_on:
+          type: string
+          format: date-time
+          readOnly: true
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/Schema'
+        database:
+          $ref: '#/components/schemas/Database'
+      required:
+      - data_types
+      - database
+      - name
+      - updated_on
+    DatabasePopularity:
+      type: object
+      properties:
+        timeframe:
+          type: integer
+          readOnly: true
+          default: 90
+        user_count:
+          type: integer
+          readOnly: true
+        service_query_count:
+          type: integer
+          readOnly: true
+        popularity:
+          type: integer
+          readOnly: true
+          description: Popularity score for this object from 0-100
+        query_count:
+          type: integer
+      required:
+      - popularity
+      - query_count
+      - service_query_count
+      - timeframe
+      - user_count
+    UserSetting:
+      type: object
+      properties:
+        enable_email_notifications:
+          type: boolean
+          description: Whether this user wants an email notification or not
+        enable_slack_notifications:
+          type: boolean
+          description: Whether this user wants a slack notification or not
+        enable_notifications_for_schema_changes:
+          type: boolean
+          description: Whether this user wants a slack notification for schema changes or not
+        enable_notifications_for_metadata_changes:
+          type: boolean
+          description: Whether this user wants a slack notification for metadata changes or not
+        enable_discussions_notifications:
+          type: boolean
+          description: Whether this user wants a notification for new discussions or not
+        enable_favorites_notifications_for_schema_changes:
+          type: boolean
+          description: Whether this user wants a schema change notification for favorited items or not
+        enable_favorites_notifications_for_metadata_changes:
+          type: boolean
+          description: Whether this user wants a metadata change notification for favorited items or not
+        enable_favorites_notifications_for_discussions:
+          type: boolean
+          description: Whether this user wants a discussion notification for favorited items or not
+        default_database_table_column_order:
+          allOf:
+          - $ref: '#/components/schemas/DefaultDatabaseTableColumnOrderEnum'
+          description: 'Database table column order. There are several different ways to order columns
+
+
+            * `popularity` - popularity
+
+            * `column_ordinal_position` - column_ordinal_position
+
+            * `alphabetical` - alphabetical'
+        default_table_dashboard_tab:
+          allOf:
+          - $ref: '#/components/schemas/DefaultTableDashboardTabEnum'
+          description: 'Default tab for table / dashboard page
+
+
+            * `overview` - overview
+
+            * `columns_charts` - columns_charts'
+    TaggedItemsSource:
+      type: object
+      properties:
+        item:
+          $ref: '#/components/schemas/TaggedItemsSourceSerializer.GuidReferenceField.item'
+      required:
+      - item
+    TaggedItemsSourceSerializer.GuidReferenceField.item:
+      $ref: '#/components/schemas/BaseMetadata'
+    TableLite:
+      type: object
+      properties:
+        guid:
+          type: string
+          maxLength: 25
+        name:
+          type: string
+        table_type:
+          allOf:
+          - $ref: '#/components/schemas/TableTypeEnum'
+          description: 'Table type as defined in the datasource
+
+
+            * `table` - table
+
+            * `view` - view
+
+            * `materialized_view` - materialized_view
+
+            * `external_table` - external_table
+
+            * `dynamic_table` - dynamic_table
+
+            * `incremental` - dbt_incremental
+
+            * `ephemeral` - dbt_ephemeral
+
+            * `source` - dbt_source
+
+            * `seed` - dbt_seed
+
+            * `model` - dbt_model_legacy'
+        data_types:
+          allOf:
+          - $ref: '#/components/schemas/BaseType'
+          readOnly: true
+        updated_on:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - data_types
+      - name
+      - updated_on
+    TaggedItemsLiteSerializer.GuidReferenceField.item:
+      $ref: '#/components/schemas/BaseMetadata'
+    ForeignKey:
+      type: object
+      properties:
+        guid:
+          type: string
+          maxLength: 25
+        source:
+          $ref: '#/components/schemas/TableLite'
+        target:
+          $ref: '#/components/schemas/TableLite'
+        source_columns:
+          type: array
+          items:
+            $ref: '#/components/schemas/BaseColumn'
+        target_columns:
+          type: array
+          items:
+            $ref: '#/components/schemas/BaseColumn'
+      required:
+      - source
+      - source_columns
+      - target
+      - target_columns
+    DefaultTableDashboardTabEnum:
+      enum:
+      - overview
+      - columns_charts
+      type: string
+      description: '* `overview` - overview
+
+        * `columns_charts` - columns_charts'
+    ListSerializer.GuidReferenceField.Request:
+      type: string
+      description: GUID
+    TaggedItemsLite:
+      type: object
+      description: Serializer without suggestion source
+      properties:
+        item:
+          $ref: '#/components/schemas/TaggedItemsLiteSerializer.GuidReferenceField.item'
+        guid:
+          type: string
+          readOnly: true
+        tag:
+          $ref: '#/components/schemas/TagLite'
+        kind:
+          type: string
+        suggested_source_kind:
+          type: string
+      required:
+      - guid
+      - item
+      - kind
+      - suggested_source_kind
+      - tag
+    DatabaseSerializer.GuidReferenceField.business_owner:
+      anyOf:
+      - $ref: '#/components/schemas/DSUserName'
+      - $ref: '#/components/schemas/Team'
+      - $ref: '#/components/schemas/UserLite'
+      discriminator:
+        propertyName: object_type
+        mapping:
+          dsuser: '#/components/schemas/DSUserName'
+          team: '#/components/schemas/Team'
+          user: '#/components/schemas/UserLite'
+    Schema:
+      type: object
+      description: 'Adds support for reading a description from metadata
+
+        that support modifying description'
+      properties:
+        deactivation_scheduled_on:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: A time when objects is fully deactivated, so deactivate grace period pass too
+          readOnly: true
+        guid:
+          type: string
+          maxLength: 25
+        database:
+          $ref: '#/components/schemas/Database'
+        name:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+          description: Active description
+        richtext_description:
+          type:
+          - string
+          - 'null'
+          description: Richtext formatted description. Can be in Slatejs or Draftjs format.
+        breadcrumbs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Breadcrumb'
+          readOnly: true
+        search_name:
+          type: string
+          description: Full path for Schema is 'DATABASE.SCHEMA'.
+          readOnly: true
+        data_types:
+          allOf:
+          - $ref: '#/components/schemas/BaseType'
+          readOnly: true
+        business_owner:
+          allOf:
+          - $ref: '#/components/schemas/SchemaSerializer.GuidReferenceField.business_owner'
+          readOnly: true
+        technical_owner:
+          allOf:
+          - $ref: '#/components/schemas/SchemaSerializer.GuidReferenceField.technical_owner'
+          readOnly: true
+        popularity:
+          allOf:
+          - $ref: '#/components/schemas/SchemaPopularity'
+          readOnly: true
+        tagged_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaggedItemsLiteWithSource'
+          readOnly: true
+        collections:
+          type: array
+          items:
+            $ref: '#/components/schemas/CollectionLite'
+          readOnly: true
+      required:
+      - breadcrumbs
+      - business_owner
+      - collections
+      - data_types
+      - database
+      - deactivation_scheduled_on
+      - name
+      - popularity
+      - search_name
+      - tagged_items
+      - technical_owner
+    DataSourceInfo:
+      type: object
+      properties:
+        guid:
+          type: string
+          maxLength: 25
+        type:
+          $ref: '#/components/schemas/Type6b6Enum'
+        name:
+          type: string
+          maxLength: 100
+        last_ingested_on:
+          type:
+          - string
+          - 'null'
+          format: date-time
+      required:
+      - name
+      - type
+    Type6b6Enum:
+      enum:
+      - airflow
+      - aws_s3
+      - bigquery
+      - data_studio
+      - databricks
+      - db_agent
+      - db2
+      - dbt
+      - fivetran
+      - glue
+      - hex
+      - looker
+      - metabase
+      - mode
+      - monte_carlo
+      - mssql
+      - mysql
+      - omni
+      - openlineage
+      - oracle
+      - periscope
+      - postgres
+      - power_bi
+      - quicksight
+      - redshift
+      - salesforce
+      - salesforce_crma
+      - sigma
+      - snowflake
+      - tableau
+      - thoughtspot
+      - trial
+      - trial_redshift
+      type: string
+      description: '* `airflow` - Airflow
+
+        * `aws_s3` - AWS S3
+
+        * `bigquery` - BigQuery
+
+        * `data_studio` - Looker Studio
+
+        * `databricks` - Databricks
+
+        * `db_agent` - DB Agent
+
+        * `db2` - DB2
+
+        * `dbt` - dbt
+
+        * `fivetran` - Fivetran
+
+        * `glue` - Glue
+
+        * `hex` - Hex
+
+        * `looker` - Looker
+
+        * `metabase` - Metabase
+
+        * `mode` - Mode
+
+        * `monte_carlo` - Monte Carlo
+
+        * `mssql` - MS SQL
+
+        * `mysql` - MySQL
+
+        * `omni` - Omni BI
+
+        * `openlineage` - Open Lineage
+
+        * `oracle` - Oracle
+
+        * `periscope` - Periscope
+
+        * `postgres` - PostgreSQL
+
+        * `power_bi` - Power BI
+
+        * `quicksight` - QuickSight
+
+        * `redshift` - Redshift
+
+        * `salesforce` - Salesforce
+
+        * `salesforce_crma` - Salesforce Analytics
+
+        * `sigma` - Sigma
+
+        * `snowflake` - Snowflake
+
+        * `tableau` - Tableau
+
+        * `thoughtspot` - ThoughtSpot
+
+        * `trial` - Trial
+
+        * `trial_redshift` - Trial Redshift'
+    SchemaSerializer.GuidReferenceField.technical_owner:
+      anyOf:
+      - $ref: '#/components/schemas/DSUserName'
+      - $ref: '#/components/schemas/Team'
+      - $ref: '#/components/schemas/UserLite'
+      discriminator:
+        propertyName: object_type
+        mapping:
+          dsuser: '#/components/schemas/DSUserName'
+          team: '#/components/schemas/Team'
+          user: '#/components/schemas/UserLite'
+    Breadcrumb:
+      type: object
+      properties:
+        guid:
+          type: string
+          maxLength: 25
+        target_guid:
+          type: string
+          maxLength: 256
+        target_name:
+          type: string
+          readOnly: true
+        target_object_type:
+          type: string
+        target_data_type:
+          type: string
+        target_data_source_guid:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        target_data_source_type:
+          allOf:
+          - $ref: '#/components/schemas/TargetDataSourceTypeEnum'
+        ordinal:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          description: Ordering of breadcrumb within the table
+      required:
+      - target_data_source_guid
+      - target_data_type
+      - target_guid
+      - target_name
+      - target_object_type
     ColumnPopularity:
       type: object
       properties:
@@ -1864,16 +1176,139 @@ components:
       - service_query_count
       - timeframe
       - user_count
-    TaggedItemsLiteWithSourceSerializer.GuidReferenceField.suggestion_source_object:
-      anyOf:
-      - $ref: '#/components/schemas/PiiRule'
-      - $ref: '#/components/schemas/TaggedItemsLite'
-      discriminator:
-        propertyName: object_type
-        mapping:
-          piirule: '#/components/schemas/PiiRule'
-          taggeditems: '#/components/schemas/TaggedItemsLite'
-    DatabaseRequest:
+    SuggestedDescriptionSourceObject:
+      type: object
+      properties:
+        object_type:
+          type: string
+          readOnly: true
+        guid:
+          type: string
+          readOnly: true
+        name:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        breadcrumbs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Breadcrumb'
+          readOnly: true
+        data_types:
+          allOf:
+          - $ref: '#/components/schemas/BaseType'
+          readOnly: true
+        parent_guid:
+          type: string
+      required:
+      - breadcrumbs
+      - data_types
+      - guid
+      - name
+      - object_type
+    CollectionLite:
+      type: object
+      properties:
+        guid:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          readOnly: true
+        icon:
+          type: string
+          readOnly: true
+        data_types:
+          allOf:
+          - $ref: '#/components/schemas/BaseType'
+          readOnly: true
+        breadcrumbs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Breadcrumb'
+          readOnly: true
+        emoji:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          description: Unicode representation of the selected emoji
+        color_scheme:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          description: Color scheme selected by the user for the icon
+        linked_from:
+          type: array
+          items:
+            type: string
+          readOnly: true
+          description: Tags having a link to this collection
+      required:
+      - breadcrumbs
+      - color_scheme
+      - data_types
+      - emoji
+      - guid
+      - icon
+      - linked_from
+      - name
+    SuggestedDescriptionSourceEnum:
+      enum:
+      - public_docs
+      - lineage
+      - downstream_lineage
+      - upstream_lineage
+      - similarity
+      - unknown
+      type: string
+      description: '* `public_docs` - Public Docs
+
+        * `lineage` - Lineage
+
+        * `downstream_lineage` - Downstream Lineage
+
+        * `upstream_lineage` - Upstream Lineage
+
+        * `similarity` - Similarity
+
+        * `unknown` - Unknown'
+    PaginatedColumnList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Column'
+    TypeB32Enum:
+      enum:
+      - status
+      - dbt
+      type: string
+      description: '* `status` - status
+
+        * `dbt` - dbt'
+    SchemaRequest:
       type: object
       description: 'Adds support for reading a description from metadata
 
@@ -1883,8 +1318,11 @@ components:
           type: string
           minLength: 1
           maxLength: 25
-        data_source:
-          $ref: '#/components/schemas/DataSourceInfoRequest'
+        database:
+          $ref: '#/components/schemas/DatabaseRequest'
+        name:
+          type: string
+          minLength: 1
         description:
           type:
           - string
@@ -1896,25 +1334,28 @@ components:
           - 'null'
           description: Richtext formatted description. Can be in Slatejs or Draftjs format.
       required:
-      - data_source
-    SchemaSerializer.GuidReferenceField.technical_owner:
-      anyOf:
-      - $ref: '#/components/schemas/DSUserName'
-      - $ref: '#/components/schemas/Team'
-      - $ref: '#/components/schemas/UserLite'
-      discriminator:
-        propertyName: object_type
-        mapping:
-          dsuser: '#/components/schemas/DSUserName'
-          team: '#/components/schemas/Team'
-          user: '#/components/schemas/UserLite'
-    TaggedItemsSource:
+      - database
+      - name
+    BaseColumn:
       type: object
+      description: 'Adds support for reading a description from metadata
+
+        that support modifying description'
       properties:
-        item:
-          $ref: '#/components/schemas/TaggedItemsSourceSerializer.GuidReferenceField.item'
+        guid:
+          type: string
+          maxLength: 25
+        search_name:
+          type: string
+          description: 'Full path for Column is ''DATABASE.SCHEMA.TABLE.COLUMN'' or
+
+            ''DATABASE.TABLE.COLUMN'' if there''s no schema.'
+          readOnly: true
+        name:
+          type: string
       required:
-      - item
+      - name
+      - search_name
     PiiRule:
       type: object
       properties:
@@ -1982,6 +1423,168 @@ components:
       - name
       - regex
       - type
+    User:
+      type: object
+      properties:
+        guid:
+          type: string
+          readOnly: true
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+          pattern: ''
+          description: Email address of the user. Only corporate email addresses are allowed.
+        avatar:
+          type:
+          - string
+          - 'null'
+          format: uri
+          readOnly: true
+        team:
+          allOf:
+          - $ref: '#/components/schemas/TeamShortcut'
+          readOnly: true
+        last_login:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+        last_activity:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+        is_invitation_pending:
+          readOnly: true
+        is_active:
+          type: boolean
+          readOnly: true
+        is_verified:
+          type: boolean
+          readOnly: true
+          description: Whether the user has verified email or not
+        is_agreed_to_terms:
+          type: boolean
+        settings:
+          $ref: '#/components/schemas/UserSetting'
+        created_on:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - avatar
+      - created_on
+      - email
+      - first_name
+      - guid
+      - is_active
+      - is_agreed_to_terms
+      - is_invitation_pending
+      - is_verified
+      - last_activity
+      - last_login
+      - last_name
+      - team
+    TableInfoRequest:
+      type: object
+      properties:
+        guid:
+          type: string
+          minLength: 1
+          maxLength: 25
+        name:
+          type: string
+          minLength: 1
+        table_type:
+          allOf:
+          - $ref: '#/components/schemas/TableTypeEnum'
+          description: 'Table type as defined in the datasource
+
+
+            * `table` - table
+
+            * `view` - view
+
+            * `materialized_view` - materialized_view
+
+            * `external_table` - external_table
+
+            * `dynamic_table` - dynamic_table
+
+            * `incremental` - dbt_incremental
+
+            * `ephemeral` - dbt_ephemeral
+
+            * `source` - dbt_source
+
+            * `seed` - dbt_seed
+
+            * `model` - dbt_model_legacy'
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/SchemaRequest'
+        database:
+          $ref: '#/components/schemas/DatabaseRequest'
+      required:
+      - database
+      - name
+    PatchedColumnRequest:
+      type: object
+      description: 'Adds support for reading a description from metadata
+
+        that support modifying description'
+      properties:
+        table:
+          $ref: '#/components/schemas/TableInfoRequest'
+        is_primary_key:
+          type: boolean
+          description: Whether this column is part of table's primary key
+        field_type:
+          type: string
+          minLength: 1
+        richtext_description:
+          type:
+          - string
+          - 'null'
+          description: Richtext formatted description. Can be in Slatejs or Draftjs format.
+        tag_set:
+          allOf:
+          - $ref: '#/components/schemas/TagSetRequest'
+          writeOnly: true
+    QueryLite:
+      type: object
+      properties:
+        guid:
+          type: string
+          maxLength: 25
+        name:
+          type: string
+          maxLength: 100
+        raw_sql:
+          type: string
+        last_executed_on:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        created_by:
+          allOf:
+          - $ref: '#/components/schemas/User'
+          readOnly: true
+        dsuser_created_by:
+          allOf:
+          - $ref: '#/components/schemas/DSUserName'
+          readOnly: true
+      required:
+      - created_by
+      - dsuser_created_by
+      - raw_sql
     SchemaSerializer.GuidReferenceField.business_owner:
       anyOf:
       - $ref: '#/components/schemas/DSUserName'
@@ -2022,41 +1625,6 @@ components:
         * `similarity` - Similarity
 
         * `unknown` - Unknown'
-    BaseType:
-      type: object
-      description: 'Base Serializer to inject the following `type` information:
-
-        - Object Type: Model Name of the Object: Table, Dashboard, ReportQuery
-
-        - Data Source Type: snowflake, databricks etc.
-
-        - Data Type: Additional type like tile, visual, card etc.'
-      properties:
-        object_type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        data_source_type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        data_type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        external_database_type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-      required:
-      - data_source_type
-      - data_type
-      - external_database_type
-      - object_type
     UserLite:
       type: object
       properties:
@@ -2095,6 +1663,412 @@ components:
       - is_active
       - last_name
       - team
+    SchemaPopularity:
+      type: object
+      properties:
+        timeframe:
+          type: integer
+          readOnly: true
+          default: 90
+        user_count:
+          type: integer
+          readOnly: true
+        service_query_count:
+          type: integer
+          readOnly: true
+        popularity:
+          type: integer
+          readOnly: true
+          description: Popularity score for this object from 0-100
+        query_count:
+          type: integer
+      required:
+      - popularity
+      - query_count
+      - service_query_count
+      - timeframe
+      - user_count
+    TagLite:
+      type: object
+      properties:
+        guid:
+          type: string
+          maxLength: 25
+        type:
+          $ref: '#/components/schemas/TypeB32Enum'
+        name:
+          type: string
+          readOnly: true
+          description: Tag display name
+        icon:
+          type: string
+          readOnly: true
+          description: Icon identifier (for status tags)
+        color:
+          type: string
+          readOnly: true
+          description: 'Tag color (for category tags). Allowed formats: ''#ffeedd'' and ''#ffeeddcc'' (RGB/ARGB hexadecimal)'
+          deprecated: true
+        visible:
+          type: boolean
+          readOnly: true
+        links_to:
+          type:
+          - string
+          - 'null'
+        breadcrumbs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Breadcrumb'
+          readOnly: true
+      required:
+      - breadcrumbs
+      - color
+      - icon
+      - name
+      - type
+      - visible
+    TeamShortcut:
+      type: object
+      properties:
+        guid:
+          type: string
+        name:
+          type: string
+      required:
+      - guid
+      - name
+    DataSourceInfoRequest:
+      type: object
+      properties:
+        guid:
+          type: string
+          minLength: 1
+          maxLength: 25
+        type:
+          $ref: '#/components/schemas/Type6b6Enum'
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+        last_ingested_on:
+          type:
+          - string
+          - 'null'
+          format: date-time
+      required:
+      - name
+      - type
+    TargetDataSourceTypeEnum:
+      enum:
+      - airflow
+      - aws_s3
+      - bigquery
+      - data_studio
+      - databricks
+      - db_agent
+      - db2
+      - dbt
+      - fivetran
+      - glue
+      - hex
+      - looker
+      - metabase
+      - mode
+      - monte_carlo
+      - mssql
+      - mysql
+      - omni
+      - openlineage
+      - oracle
+      - periscope
+      - postgres
+      - power_bi
+      - quicksight
+      - redshift
+      - salesforce
+      - salesforce_crma
+      - sigma
+      - snowflake
+      - tableau
+      - thoughtspot
+      - trial
+      - trial_redshift
+      type: string
+      description: '* `airflow` - Airflow
+
+        * `aws_s3` - AWS S3
+
+        * `bigquery` - BigQuery
+
+        * `data_studio` - Looker Studio
+
+        * `databricks` - Databricks
+
+        * `db_agent` - DB Agent
+
+        * `db2` - DB2
+
+        * `dbt` - dbt
+
+        * `fivetran` - Fivetran
+
+        * `glue` - Glue
+
+        * `hex` - Hex
+
+        * `looker` - Looker
+
+        * `metabase` - Metabase
+
+        * `mode` - Mode
+
+        * `monte_carlo` - Monte Carlo
+
+        * `mssql` - MS SQL
+
+        * `mysql` - MySQL
+
+        * `omni` - Omni BI
+
+        * `openlineage` - Open Lineage
+
+        * `oracle` - Oracle
+
+        * `periscope` - Periscope
+
+        * `postgres` - PostgreSQL
+
+        * `power_bi` - Power BI
+
+        * `quicksight` - QuickSight
+
+        * `redshift` - Redshift
+
+        * `salesforce` - Salesforce
+
+        * `salesforce_crma` - Salesforce Analytics
+
+        * `sigma` - Sigma
+
+        * `snowflake` - Snowflake
+
+        * `tableau` - Tableau
+
+        * `thoughtspot` - ThoughtSpot
+
+        * `trial` - Trial
+
+        * `trial_redshift` - Trial Redshift'
+    Database:
+      type: object
+      description: 'Adds support for reading a description from metadata
+
+        that support modifying description'
+      properties:
+        guid:
+          type: string
+          maxLength: 25
+        data_source:
+          $ref: '#/components/schemas/DataSourceInfo'
+        name:
+          type: string
+          readOnly: true
+        description:
+          type:
+          - string
+          - 'null'
+          description: Active description
+        richtext_description:
+          type:
+          - string
+          - 'null'
+          description: Richtext formatted description. Can be in Slatejs or Draftjs format.
+        breadcrumbs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Breadcrumb'
+          readOnly: true
+        search_name:
+          type: string
+          description: Full path for Database is just database name.
+          readOnly: true
+        data_types:
+          allOf:
+          - $ref: '#/components/schemas/BaseType'
+          readOnly: true
+        business_owner:
+          allOf:
+          - $ref: '#/components/schemas/DatabaseSerializer.GuidReferenceField.business_owner'
+          readOnly: true
+        technical_owner:
+          allOf:
+          - $ref: '#/components/schemas/DatabaseSerializer.GuidReferenceField.technical_owner'
+          readOnly: true
+        popularity:
+          allOf:
+          - $ref: '#/components/schemas/DatabasePopularity'
+          readOnly: true
+        tagged_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaggedItemsLiteWithSource'
+          readOnly: true
+        collections:
+          type: array
+          items:
+            $ref: '#/components/schemas/CollectionLite'
+          readOnly: true
+        table_counts:
+          readOnly: true
+        deactivation_scheduled_on:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: A time when objects is fully deactivated, so deactivate grace period pass too
+          readOnly: true
+      required:
+      - breadcrumbs
+      - business_owner
+      - collections
+      - data_source
+      - data_types
+      - deactivation_scheduled_on
+      - name
+      - popularity
+      - search_name
+      - table_counts
+      - tagged_items
+      - technical_owner
+    DatabaseRequest:
+      type: object
+      description: 'Adds support for reading a description from metadata
+
+        that support modifying description'
+      properties:
+        guid:
+          type: string
+          minLength: 1
+          maxLength: 25
+        data_source:
+          $ref: '#/components/schemas/DataSourceInfoRequest'
+        description:
+          type:
+          - string
+          - 'null'
+          description: Active description
+        richtext_description:
+          type:
+          - string
+          - 'null'
+          description: Richtext formatted description. Can be in Slatejs or Draftjs format.
+      required:
+      - data_source
+    BaseType:
+      type: object
+      description: 'Base Serializer to inject the following `type` information:
+
+        - Object Type: Model Name of the Object: Table, Dashboard, ReportQuery
+
+        - Data Source Type: snowflake, databricks etc.
+
+        - Data Type: Additional type like tile, visual, card etc.'
+      properties:
+        object_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        data_source_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        data_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        external_database_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+      required:
+      - data_source_type
+      - data_type
+      - external_database_type
+      - object_type
+    TableTypeEnum:
+      enum:
+      - table
+      - view
+      - materialized_view
+      - external_table
+      - dynamic_table
+      - incremental
+      - ephemeral
+      - source
+      - seed
+      - model
+      type: string
+      description: '* `table` - table
+
+        * `view` - view
+
+        * `materialized_view` - materialized_view
+
+        * `external_table` - external_table
+
+        * `dynamic_table` - dynamic_table
+
+        * `incremental` - dbt_incremental
+
+        * `ephemeral` - dbt_ephemeral
+
+        * `source` - dbt_source
+
+        * `seed` - dbt_seed
+
+        * `model` - dbt_model_legacy'
+    TagSetRequest:
+      type: object
+      description: 'This serializer represents a list of tag guids to be applied
+
+        to a given item'
+      properties:
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/ListSerializer.GuidReferenceField.Request'
+        replace_existing:
+          type: boolean
+          default: false
+      required:
+      - tags
+    ColumnSerializer.GuidReferenceField.suggested_description_source_object:
+      $ref: '#/components/schemas/SuggestedDescriptionSourceObject'
+    DSUserName:
+      type: object
+      properties:
+        guid:
+          type: string
+          maxLength: 25
+        display_name:
+          type:
+          - string
+          - 'null'
+          description: The username field for the user used by the datasource
+          maxLength: 100
+        name:
+          type: string
+          maxLength: 100
+        data_source:
+          $ref: '#/components/schemas/DataSourceInfo'
+      required:
+      - data_source
+      - name
     RelatedObjectsCounts:
       type: object
       properties:
@@ -2176,6 +2150,32 @@ components:
           type: integer
         impacted_object_count:
           type: integer
+    Team:
+      type: object
+      properties:
+        guid:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type:
+          - string
+          - 'null'
+          description: Active description
+        richtext_description:
+          type:
+          - string
+          - 'null'
+          description: Richtext formatted description. Can be in Slatejs or Draftjs format.
+        members_count:
+          type: integer
+          readOnly: true
+      required:
+      - guid
+      - members_count
+      - name
   securitySchemes:
     JWTAuthentication:
       type: http

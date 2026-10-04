@@ -527,6 +527,198 @@ components:
       required:
       - node
       - node_type
+    Lineage:
+      type: object
+      properties:
+        table_lineage:
+          type: array
+          items:
+            $ref: '#/components/schemas/TableLineage'
+        column_lineage:
+          type: array
+          items:
+            $ref: '#/components/schemas/ColumnLineage'
+      required:
+      - column_lineage
+      - table_lineage
+    PatchedUpdateManualLineageEdgeRequest:
+      type: object
+      properties:
+        usage:
+          allOf:
+          - $ref: '#/components/schemas/UsageType'
+          description: 'Only for column level lineage. For Table level lineage, this value will always be set to null
+
+
+            * `asis` - UsageType.asis
+
+            * `transformed` - UsageType.transformed
+
+            * `aggregated` - UsageType.aggregated
+
+            * `filter` - UsageType.filter'
+        source_node:
+          type: string
+          minLength: 1
+        target_node:
+          type: string
+          minLength: 1
+        create_automatic_related_lineage_edges:
+          type: boolean
+          writeOnly: true
+          default: true
+          description: Boolean to specify whether to create column level edges for matching name if table level source and target guids are given
+    TableLineage:
+      type: object
+      description: "Use as serializer mixin after ModelSerializer:\n\n    class ...Serializer(..., serializers.ModelSerializer, TypeSerializer):"
+      properties:
+        data_types:
+          allOf:
+          - $ref: '#/components/schemas/BaseType'
+          readOnly: true
+        source_edges:
+          type: object
+          additionalProperties: {}
+          readOnly: true
+        target_edges:
+          type: object
+          additionalProperties: {}
+          readOnly: true
+        key:
+          type: string
+        object_type:
+          type: string
+        guid:
+          type: string
+        name:
+          type: string
+        component_identifier:
+          type: integer
+          default: 1
+        full_name:
+          type: string
+        description:
+          type: string
+        rank:
+          type: integer
+          default: 0
+        data_type:
+          type: string
+        data_source_type:
+          type: string
+        columns:
+          type: array
+          items:
+            type: string
+        source_table_guids:
+          type: array
+          items:
+            type: string
+          deprecated: true
+        target_table_guids:
+          type: array
+          items:
+            type: string
+          deprecated: true
+        popularity:
+          $ref: '#/components/schemas/TablePopularity'
+        impact_score:
+          type: integer
+        impacted_object_count:
+          type: integer
+        tag_guids:
+          type: array
+          items:
+            type: string
+        linked_objs:
+          type: array
+          items:
+            type: string
+        query:
+          type: string
+        breadcrumbs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Breadcrumb'
+          default: []
+        is_implicit:
+          type: boolean
+        is_hidden:
+          type: boolean
+      required:
+      - columns
+      - data_source_type
+      - data_type
+      - data_types
+      - full_name
+      - guid
+      - key
+      - name
+      - object_type
+      - source_edges
+      - source_table_guids
+      - target_edges
+      - target_table_guids
+    PaginatedManualLineageEdgeList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ManualLineageEdge'
+    Breadcrumb:
+      type: object
+      properties:
+        guid:
+          type: string
+          maxLength: 25
+        target_guid:
+          type: string
+          maxLength: 256
+        target_name:
+          type: string
+          readOnly: true
+        target_object_type:
+          type: string
+        target_data_type:
+          type: string
+        target_data_source_guid:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        target_data_source_type:
+          allOf:
+          - $ref: '#/components/schemas/TargetDataSourceTypeEnum'
+        ordinal:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          description: Ordering of breadcrumb within the table
+      required:
+      - target_data_source_guid
+      - target_data_type
+      - target_guid
+      - target_name
+      - target_object_type
     TargetDataSourceTypeEnum:
       enum:
       - airflow
@@ -628,6 +820,20 @@ components:
         * `trial` - Trial
 
         * `trial_redshift` - Trial Redshift'
+    UsageType:
+      enum:
+      - asis
+      - transformed
+      - aggregated
+      - filter
+      type: string
+      description: '* `asis` - UsageType.asis
+
+        * `transformed` - UsageType.transformed
+
+        * `aggregated` - UsageType.aggregated
+
+        * `filter` - UsageType.filter'
     ColumnPopularity:
       type: object
       properties:
@@ -653,20 +859,31 @@ components:
       - service_query_count
       - timeframe
       - user_count
-    UsageType:
-      enum:
-      - asis
-      - transformed
-      - aggregated
-      - filter
-      type: string
-      description: '* `asis` - UsageType.asis
-
-        * `transformed` - UsageType.transformed
-
-        * `aggregated` - UsageType.aggregated
-
-        * `filter` - UsageType.filter'
+    TablePopularity:
+      type: object
+      properties:
+        timeframe:
+          type: integer
+          readOnly: true
+          default: 90
+        user_count:
+          type: integer
+          readOnly: true
+        service_query_count:
+          type: integer
+          readOnly: true
+        popularity:
+          type: integer
+          readOnly: true
+          description: Popularity score for this object from 0-100
+        query_count:
+          type: integer
+      required:
+      - popularity
+      - query_count
+      - service_query_count
+      - timeframe
+      - user_count
     CreateManualLineageEdgeRequest:
       type: object
       properties:
@@ -697,31 +914,41 @@ components:
       required:
       - source_node
       - target_node
-    PaginatedManualLineageEdgeList:
+    BaseType:
       type: object
-      required:
-      - count
-      - results
+      description: 'Base Serializer to inject the following `type` information:
+
+        - Object Type: Model Name of the Object: Table, Dashboard, ReportQuery
+
+        - Data Source Type: snowflake, databricks etc.
+
+        - Data Type: Additional type like tile, visual, card etc.'
       properties:
-        count:
-          type: integer
-          example: 123
-        next:
+        object_type:
           type:
           - string
           - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
+          readOnly: true
+        data_source_type:
           type:
           - string
           - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/ManualLineageEdge'
+          readOnly: true
+        data_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        external_database_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+      required:
+      - data_source_type
+      - data_type
+      - external_database_type
+      - object_type
     ColumnLineage:
       type: object
       description: "Use as serializer mixin after ModelSerializer:\n\n    class ...Serializer(..., serializers.ModelSerializer, TypeSerializer):"
@@ -808,115 +1035,6 @@ components:
       - source_edges
       - table_guid
       - target_edges
-    Lineage:
-      type: object
-      properties:
-        table_lineage:
-          type: array
-          items:
-            $ref: '#/components/schemas/TableLineage'
-        column_lineage:
-          type: array
-          items:
-            $ref: '#/components/schemas/ColumnLineage'
-      required:
-      - column_lineage
-      - table_lineage
-    TablePopularity:
-      type: object
-      properties:
-        timeframe:
-          type: integer
-          readOnly: true
-          default: 90
-        user_count:
-          type: integer
-          readOnly: true
-        service_query_count:
-          type: integer
-          readOnly: true
-        popularity:
-          type: integer
-          readOnly: true
-          description: Popularity score for this object from 0-100
-        query_count:
-          type: integer
-      required:
-      - popularity
-      - query_count
-      - service_query_count
-      - timeframe
-      - user_count
-    Breadcrumb:
-      type: object
-      properties:
-        guid:
-          type: string
-          maxLength: 25
-        target_guid:
-          type: string
-          maxLength: 256
-        target_name:
-          type: string
-          readOnly: true
-        target_object_type:
-          type: string
-        target_data_type:
-          type: string
-        target_data_source_guid:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        target_data_source_type:
-          allOf:
-          - $ref: '#/components/schemas/TargetDataSourceTypeEnum'
-        ordinal:
-          type: integer
-          maximum: 2147483647
-          minimum: 0
-          description: Ordering of breadcrumb within the table
-      required:
-      - target_data_source_guid
-      - target_data_type
-      - target_guid
-      - target_name
-      - target_object_type
-    BaseType:
-      type: object
-      description: 'Base Serializer to inject the following `type` information:
-
-        - Object Type: Model Name of the Object: Table, Dashboard, ReportQuery
-
-        - Data Source Type: snowflake, databricks etc.
-
-        - Data Type: Additional type like tile, visual, card etc.'
-      properties:
-        object_type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        data_source_type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        data_type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        external_database_type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-      required:
-      - data_source_type
-      - data_type
-      - external_database_type
-      - object_type
     ManualLineageEdge:
       type: object
       properties:
@@ -932,124 +1050,6 @@ components:
       - source_node
       - target_node
       - usage
-    TableLineage:
-      type: object
-      description: "Use as serializer mixin after ModelSerializer:\n\n    class ...Serializer(..., serializers.ModelSerializer, TypeSerializer):"
-      properties:
-        data_types:
-          allOf:
-          - $ref: '#/components/schemas/BaseType'
-          readOnly: true
-        source_edges:
-          type: object
-          additionalProperties: {}
-          readOnly: true
-        target_edges:
-          type: object
-          additionalProperties: {}
-          readOnly: true
-        key:
-          type: string
-        object_type:
-          type: string
-        guid:
-          type: string
-        name:
-          type: string
-        component_identifier:
-          type: integer
-          default: 1
-        full_name:
-          type: string
-        description:
-          type: string
-        rank:
-          type: integer
-          default: 0
-        data_type:
-          type: string
-        data_source_type:
-          type: string
-        columns:
-          type: array
-          items:
-            type: string
-        source_table_guids:
-          type: array
-          items:
-            type: string
-          deprecated: true
-        target_table_guids:
-          type: array
-          items:
-            type: string
-          deprecated: true
-        popularity:
-          $ref: '#/components/schemas/TablePopularity'
-        impact_score:
-          type: integer
-        impacted_object_count:
-          type: integer
-        tag_guids:
-          type: array
-          items:
-            type: string
-        linked_objs:
-          type: array
-          items:
-            type: string
-        query:
-          type: string
-        breadcrumbs:
-          type: array
-          items:
-            $ref: '#/components/schemas/Breadcrumb'
-          default: []
-        is_implicit:
-          type: boolean
-        is_hidden:
-          type: boolean
-      required:
-      - columns
-      - data_source_type
-      - data_type
-      - data_types
-      - full_name
-      - guid
-      - key
-      - name
-      - object_type
-      - source_edges
-      - source_table_guids
-      - target_edges
-      - target_table_guids
-    PatchedUpdateManualLineageEdgeRequest:
-      type: object
-      properties:
-        usage:
-          allOf:
-          - $ref: '#/components/schemas/UsageType'
-          description: 'Only for column level lineage. For Table level lineage, this value will always be set to null
-
-
-            * `asis` - UsageType.asis
-
-            * `transformed` - UsageType.transformed
-
-            * `aggregated` - UsageType.aggregated
-
-            * `filter` - UsageType.filter'
-        source_node:
-          type: string
-          minLength: 1
-        target_node:
-          type: string
-          minLength: 1
-        create_automatic_related_lineage_edges:
-          type: boolean
-          writeOnly: true
-          default: true
-          description: Boolean to specify whether to create column level edges for matching name if table level source and target guids are given
   securitySchemes:
     JWTAuthentication:
       type: http

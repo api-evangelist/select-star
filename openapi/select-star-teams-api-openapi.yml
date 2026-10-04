@@ -219,112 +219,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    TeamUsersTransferSerializer.GuidReferenceField.new_teamRequest:
-      type: string
-      description: GUID
-    TeamWithSampleMembers:
-      type: object
-      properties:
-        guid:
-          type: string
-          maxLength: 25
-        name:
-          type: string
-          maxLength: 100
-        description:
-          type:
-          - string
-          - 'null'
-          description: Active description
-        richtext_description:
-          type:
-          - string
-          - 'null'
-          description: Richtext formatted description. Can be in Slatejs or Draftjs format.
-        sample_users:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserLite'
-          readOnly: true
-        members_count:
-          type: integer
-          readOnly: true
-        data_types:
-          allOf:
-          - $ref: '#/components/schemas/BaseType'
-          readOnly: true
-      required:
-      - data_types
-      - members_count
-      - name
-      - sample_users
-    TeamSetting:
-      type: object
-      properties:
-        enable_notifications_for_schema_changes:
-          type: boolean
-          description: Whether this team should get notification for schema changes or not
-        enable_notifications_for_metadata_changes:
-          type: boolean
-          description: Whether this team should get notification for metadata changes or not
-        slack_channels_for_notifications:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-            maxLength: 1024
-          description: The list of Slack Channels this team will send notifications to
-        emails_for_notifications:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-            format: email
-            maxLength: 254
-            pattern: '@(?!gmail\.|hotmail\.|yahoo\.|live\.|qq\.|naver\.|protonmail\.|yopmail\.|pokemail\.|bvhrs\.|idrct\.|caraparcal\.|tryninja.io|mailinator.com|ontimeusemail\.|outlook\.|icloud\.|mail\.|instasmail\.|nevyxus\.|bvhrk\.|cazlq\.)'
-          description: The list of emails this team will send notifications to. Can contain emails from outside the Select Star
-    TeamUsersTransfer:
-      type: object
-      properties:
-        guid:
-          type: string
-          readOnly: true
-      required:
-      - guid
-    PatchedTeamUsersTransferRequest:
-      type: object
-      properties:
-        new_team:
-          allOf:
-          - $ref: '#/components/schemas/TeamUsersTransferSerializer.GuidReferenceField.new_teamRequest'
-          writeOnly: true
-    PaginatedTeamWithSampleMembersList:
-      type: object
-      required:
-      - count
-      - results
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/TeamWithSampleMembers'
     DefaultDatabaseTableColumnOrderEnum:
       enum:
       - popularity
@@ -336,14 +230,12 @@ components:
         * `column_ordinal_position` - column_ordinal_position
 
         * `alphabetical` - alphabetical'
-    TeamWithMembers:
+    PatchedTeamUpdateRequest:
       type: object
       properties:
-        guid:
-          type: string
-          readOnly: true
         name:
           type: string
+          minLength: 1
           maxLength: 100
         description:
           type:
@@ -358,134 +250,94 @@ components:
         users:
           type: array
           items:
-            $ref: '#/components/schemas/User'
-        organization:
-          $ref: '#/components/schemas/Organization'
+            $ref: '#/components/schemas/ListSerializer.GuidReferenceField.Request'
+          writeOnly: true
         settings:
-          $ref: '#/components/schemas/TeamSetting'
-        data_types:
+          $ref: '#/components/schemas/TeamSettingRequest'
+    TeamUsersTransferSerializer.GuidReferenceField.new_teamRequest:
+      type: string
+      description: GUID
+    UserSetting:
+      type: object
+      properties:
+        enable_email_notifications:
+          type: boolean
+          description: Whether this user wants an email notification or not
+        enable_slack_notifications:
+          type: boolean
+          description: Whether this user wants a slack notification or not
+        enable_notifications_for_schema_changes:
+          type: boolean
+          description: Whether this user wants a slack notification for schema changes or not
+        enable_notifications_for_metadata_changes:
+          type: boolean
+          description: Whether this user wants a slack notification for metadata changes or not
+        enable_discussions_notifications:
+          type: boolean
+          description: Whether this user wants a notification for new discussions or not
+        enable_favorites_notifications_for_schema_changes:
+          type: boolean
+          description: Whether this user wants a schema change notification for favorited items or not
+        enable_favorites_notifications_for_metadata_changes:
+          type: boolean
+          description: Whether this user wants a metadata change notification for favorited items or not
+        enable_favorites_notifications_for_discussions:
+          type: boolean
+          description: Whether this user wants a discussion notification for favorited items or not
+        default_database_table_column_order:
           allOf:
-          - $ref: '#/components/schemas/BaseType'
-          readOnly: true
-      required:
-      - data_types
-      - guid
-      - name
-    User:
+          - $ref: '#/components/schemas/DefaultDatabaseTableColumnOrderEnum'
+          description: 'Database table column order. There are several different ways to order columns
+
+
+            * `popularity` - popularity
+
+            * `column_ordinal_position` - column_ordinal_position
+
+            * `alphabetical` - alphabetical'
+        default_table_dashboard_tab:
+          allOf:
+          - $ref: '#/components/schemas/DefaultTableDashboardTabEnum'
+          description: 'Default tab for table / dashboard page
+
+
+            * `overview` - overview
+
+            * `columns_charts` - columns_charts'
+    Organization:
       type: object
       properties:
         guid:
           type: string
-          readOnly: true
-        first_name:
+          maxLength: 25
+        name:
           type: string
-        last_name:
-          type: string
-        email:
-          type: string
-          format: email
-          pattern: ''
-          description: Email address of the user. Only corporate email addresses are allowed.
-        avatar:
+          maxLength: 100
+        trial_ends_at:
           type:
           - string
           - 'null'
-          format: uri
-          readOnly: true
-        team:
-          allOf:
-          - $ref: '#/components/schemas/TeamShortcut'
-          readOnly: true
-        last_login:
+          format: date
+          description: If this organization has been created for a trial purpose
+        subscription_ends_at:
           type:
           - string
           - 'null'
           format: date-time
-          readOnly: true
-        last_activity:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          readOnly: true
-        is_invitation_pending:
-          readOnly: true
-        is_active:
+          description: The date at which this organization's subscription ends at if it has a subscription
+        is_onboarding_complete:
           type: boolean
-          readOnly: true
-        is_verified:
-          type: boolean
-          readOnly: true
-          description: Whether the user has verified email or not
-        is_agreed_to_terms:
-          type: boolean
-        settings:
-          $ref: '#/components/schemas/UserSetting'
+          description: If this organization has gone through the onboarding.
         created_on:
           type: string
           format: date-time
           readOnly: true
+        settings:
+          $ref: '#/components/schemas/OrganizationSettings'
       required:
-      - avatar
       - created_on
-      - email
-      - first_name
-      - guid
-      - is_active
-      - is_agreed_to_terms
-      - is_invitation_pending
-      - is_verified
-      - last_activity
-      - last_login
-      - last_name
-      - team
-    TeamSettingRequest:
-      type: object
-      properties:
-        enable_notifications_for_schema_changes:
-          type: boolean
-          description: Whether this team should get notification for schema changes or not
-        enable_notifications_for_metadata_changes:
-          type: boolean
-          description: Whether this team should get notification for metadata changes or not
-        slack_channels_for_notifications:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-            minLength: 1
-            maxLength: 1024
-          description: The list of Slack Channels this team will send notifications to
-        emails_for_notifications:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-            format: email
-            minLength: 1
-            maxLength: 254
-            pattern: '@(?!gmail\.|hotmail\.|yahoo\.|live\.|qq\.|naver\.|protonmail\.|yopmail\.|pokemail\.|bvhrs\.|idrct\.|caraparcal\.|tryninja.io|mailinator.com|ontimeusemail\.|outlook\.|icloud\.|mail\.|instasmail\.|nevyxus\.|bvhrk\.|cazlq\.)'
-          description: The list of emails this team will send notifications to. Can contain emails from outside the Select Star
-    TeamShortcut:
-      type: object
-      properties:
-        guid:
-          type: string
-        name:
-          type: string
-      required:
-      - guid
       - name
-    DefaultTableDashboardTabEnum:
-      enum:
-      - overview
-      - columns_charts
-      type: string
-      description: '* `overview` - overview
-
-        * `columns_charts` - columns_charts'
+      - settings
     UseAvatarInitialsEnum:
       enum:
       - english
@@ -494,6 +346,41 @@ components:
       description: '* `english` - english
 
         * `korean` - korean'
+    DefaultTableDashboardTabEnum:
+      enum:
+      - overview
+      - columns_charts
+      type: string
+      description: '* `overview` - overview
+
+        * `columns_charts` - columns_charts'
+    ListSerializer.GuidReferenceField.Request:
+      type: string
+      description: GUID
+    TeamUpdate:
+      type: object
+      properties:
+        guid:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type:
+          - string
+          - 'null'
+          description: Active description
+        richtext_description:
+          type:
+          - string
+          - 'null'
+          description: Richtext formatted description. Can be in Slatejs or Draftjs format.
+        settings:
+          $ref: '#/components/schemas/TeamSetting'
+      required:
+      - guid
+      - name
     OrganizationSettings:
       type: object
       properties:
@@ -759,130 +646,41 @@ components:
       - use_suggestion_propagation
       - use_user_lists
       - use_viewer_client_api_tokens
-    Team:
+    TeamUsersTransfer:
       type: object
       properties:
         guid:
           type: string
           readOnly: true
-        name:
-          type: string
-          maxLength: 100
-        description:
-          type:
-          - string
-          - 'null'
-          description: Active description
-        richtext_description:
-          type:
-          - string
-          - 'null'
-          description: Richtext formatted description. Can be in Slatejs or Draftjs format.
-        members_count:
-          type: integer
-          readOnly: true
       required:
       - guid
-      - members_count
-      - name
-    ListSerializer.GuidReferenceField.Request:
-      type: string
-      description: GUID
-    PatchedTeamUpdateRequest:
+    TeamSetting:
       type: object
       properties:
-        name:
-          type: string
-          minLength: 1
-          maxLength: 100
-        description:
-          type:
-          - string
-          - 'null'
-          description: Active description
-        richtext_description:
-          type:
-          - string
-          - 'null'
-          description: Richtext formatted description. Can be in Slatejs or Draftjs format.
-        users:
-          type: array
-          items:
-            $ref: '#/components/schemas/ListSerializer.GuidReferenceField.Request'
-          writeOnly: true
-        settings:
-          $ref: '#/components/schemas/TeamSettingRequest'
-    UserSetting:
-      type: object
-      properties:
-        enable_email_notifications:
-          type: boolean
-          description: Whether this user wants an email notification or not
-        enable_slack_notifications:
-          type: boolean
-          description: Whether this user wants a slack notification or not
         enable_notifications_for_schema_changes:
           type: boolean
-          description: Whether this user wants a slack notification for schema changes or not
+          description: Whether this team should get notification for schema changes or not
         enable_notifications_for_metadata_changes:
           type: boolean
-          description: Whether this user wants a slack notification for metadata changes or not
-        enable_discussions_notifications:
-          type: boolean
-          description: Whether this user wants a notification for new discussions or not
-        enable_favorites_notifications_for_schema_changes:
-          type: boolean
-          description: Whether this user wants a schema change notification for favorited items or not
-        enable_favorites_notifications_for_metadata_changes:
-          type: boolean
-          description: Whether this user wants a metadata change notification for favorited items or not
-        enable_favorites_notifications_for_discussions:
-          type: boolean
-          description: Whether this user wants a discussion notification for favorited items or not
-        default_database_table_column_order:
-          allOf:
-          - $ref: '#/components/schemas/DefaultDatabaseTableColumnOrderEnum'
-          description: 'Database table column order. There are several different ways to order columns
-
-
-            * `popularity` - popularity
-
-            * `column_ordinal_position` - column_ordinal_position
-
-            * `alphabetical` - alphabetical'
-        default_table_dashboard_tab:
-          allOf:
-          - $ref: '#/components/schemas/DefaultTableDashboardTabEnum'
-          description: 'Default tab for table / dashboard page
-
-
-            * `overview` - overview
-
-            * `columns_charts` - columns_charts'
-    TeamUpdate:
-      type: object
-      properties:
-        guid:
-          type: string
-          readOnly: true
-        name:
-          type: string
-          maxLength: 100
-        description:
+          description: Whether this team should get notification for metadata changes or not
+        slack_channels_for_notifications:
           type:
-          - string
+          - array
           - 'null'
-          description: Active description
-        richtext_description:
+          items:
+            type: string
+            maxLength: 1024
+          description: The list of Slack Channels this team will send notifications to
+        emails_for_notifications:
           type:
-          - string
+          - array
           - 'null'
-          description: Richtext formatted description. Can be in Slatejs or Draftjs format.
-        settings:
-          $ref: '#/components/schemas/TeamSetting'
-      required:
-      - guid
-      - name
+          items:
+            type: string
+            format: email
+            maxLength: 254
+            pattern: '@(?!gmail\.|hotmail\.|yahoo\.|live\.|qq\.|naver\.|protonmail\.|yopmail\.|pokemail\.|bvhrs\.|idrct\.|caraparcal\.|tryninja.io|mailinator.com|ontimeusemail\.|outlook\.|icloud\.|mail\.|instasmail\.|nevyxus\.|bvhrk\.|cazlq\.)'
+          description: The list of emails this team will send notifications to. Can contain emails from outside the Select Star
     TeamRequest:
       type: object
       properties:
@@ -902,7 +700,7 @@ components:
           description: Richtext formatted description. Can be in Slatejs or Draftjs format.
       required:
       - name
-    Organization:
+    TeamWithSampleMembers:
       type: object
       properties:
         guid:
@@ -911,66 +709,130 @@ components:
         name:
           type: string
           maxLength: 100
-        trial_ends_at:
+        description:
           type:
           - string
           - 'null'
-          format: date
-          description: If this organization has been created for a trial purpose
-        subscription_ends_at:
+          description: Active description
+        richtext_description:
+          type:
+          - string
+          - 'null'
+          description: Richtext formatted description. Can be in Slatejs or Draftjs format.
+        sample_users:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserLite'
+          readOnly: true
+        members_count:
+          type: integer
+          readOnly: true
+        data_types:
+          allOf:
+          - $ref: '#/components/schemas/BaseType'
+          readOnly: true
+      required:
+      - data_types
+      - members_count
+      - name
+      - sample_users
+    User:
+      type: object
+      properties:
+        guid:
+          type: string
+          readOnly: true
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+          pattern: ''
+          description: Email address of the user. Only corporate email addresses are allowed.
+        avatar:
+          type:
+          - string
+          - 'null'
+          format: uri
+          readOnly: true
+        team:
+          allOf:
+          - $ref: '#/components/schemas/TeamShortcut'
+          readOnly: true
+        last_login:
           type:
           - string
           - 'null'
           format: date-time
-          description: The date at which this organization's subscription ends at if it has a subscription
-        is_onboarding_complete:
+          readOnly: true
+        last_activity:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          readOnly: true
+        is_invitation_pending:
+          readOnly: true
+        is_active:
           type: boolean
-          description: If this organization has gone through the onboarding.
+          readOnly: true
+        is_verified:
+          type: boolean
+          readOnly: true
+          description: Whether the user has verified email or not
+        is_agreed_to_terms:
+          type: boolean
+        settings:
+          $ref: '#/components/schemas/UserSetting'
         created_on:
           type: string
           format: date-time
           readOnly: true
-        settings:
-          $ref: '#/components/schemas/OrganizationSettings'
       required:
+      - avatar
       - created_on
-      - name
-      - settings
-    BaseType:
+      - email
+      - first_name
+      - guid
+      - is_active
+      - is_agreed_to_terms
+      - is_invitation_pending
+      - is_verified
+      - last_activity
+      - last_login
+      - last_name
+      - team
+    TeamSettingRequest:
       type: object
-      description: 'Base Serializer to inject the following `type` information:
-
-        - Object Type: Model Name of the Object: Table, Dashboard, ReportQuery
-
-        - Data Source Type: snowflake, databricks etc.
-
-        - Data Type: Additional type like tile, visual, card etc.'
       properties:
-        object_type:
+        enable_notifications_for_schema_changes:
+          type: boolean
+          description: Whether this team should get notification for schema changes or not
+        enable_notifications_for_metadata_changes:
+          type: boolean
+          description: Whether this team should get notification for metadata changes or not
+        slack_channels_for_notifications:
           type:
-          - string
+          - array
           - 'null'
-          readOnly: true
-        data_source_type:
+          items:
+            type: string
+            minLength: 1
+            maxLength: 1024
+          description: The list of Slack Channels this team will send notifications to
+        emails_for_notifications:
           type:
-          - string
+          - array
           - 'null'
-          readOnly: true
-        data_type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        external_database_type:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-      required:
-      - data_source_type
-      - data_type
-      - external_database_type
-      - object_type
+          items:
+            type: string
+            format: email
+            minLength: 1
+            maxLength: 254
+            pattern: '@(?!gmail\.|hotmail\.|yahoo\.|live\.|qq\.|naver\.|protonmail\.|yopmail\.|pokemail\.|bvhrs\.|idrct\.|caraparcal\.|tryninja.io|mailinator.com|ontimeusemail\.|outlook\.|icloud\.|mail\.|instasmail\.|nevyxus\.|bvhrk\.|cazlq\.)'
+          description: The list of emails this team will send notifications to. Can contain emails from outside the Select Star
     UserLite:
       type: object
       properties:
@@ -1009,6 +871,144 @@ components:
       - is_active
       - last_name
       - team
+    PatchedTeamUsersTransferRequest:
+      type: object
+      properties:
+        new_team:
+          allOf:
+          - $ref: '#/components/schemas/TeamUsersTransferSerializer.GuidReferenceField.new_teamRequest'
+          writeOnly: true
+    PaginatedTeamWithSampleMembersList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/TeamWithSampleMembers'
+    TeamShortcut:
+      type: object
+      properties:
+        guid:
+          type: string
+        name:
+          type: string
+      required:
+      - guid
+      - name
+    TeamWithMembers:
+      type: object
+      properties:
+        guid:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type:
+          - string
+          - 'null'
+          description: Active description
+        richtext_description:
+          type:
+          - string
+          - 'null'
+          description: Richtext formatted description. Can be in Slatejs or Draftjs format.
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        organization:
+          $ref: '#/components/schemas/Organization'
+        settings:
+          $ref: '#/components/schemas/TeamSetting'
+        data_types:
+          allOf:
+          - $ref: '#/components/schemas/BaseType'
+          readOnly: true
+      required:
+      - data_types
+      - guid
+      - name
+    BaseType:
+      type: object
+      description: 'Base Serializer to inject the following `type` information:
+
+        - Object Type: Model Name of the Object: Table, Dashboard, ReportQuery
+
+        - Data Source Type: snowflake, databricks etc.
+
+        - Data Type: Additional type like tile, visual, card etc.'
+      properties:
+        object_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        data_source_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        data_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        external_database_type:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+      required:
+      - data_source_type
+      - data_type
+      - external_database_type
+      - object_type
+    Team:
+      type: object
+      properties:
+        guid:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type:
+          - string
+          - 'null'
+          description: Active description
+        richtext_description:
+          type:
+          - string
+          - 'null'
+          description: Richtext formatted description. Can be in Slatejs or Draftjs format.
+        members_count:
+          type: integer
+          readOnly: true
+      required:
+      - guid
+      - members_count
+      - name
   securitySchemes:
     JWTAuthentication:
       type: http

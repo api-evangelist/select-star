@@ -86,16 +86,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    TeamShortcut:
-      type: object
-      properties:
-        guid:
-          type: string
-        name:
-          type: string
-      required:
-      - guid
-      - name
     PaginatedCustomAttributeWithValueList:
       type: object
       required:
@@ -121,6 +111,38 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CustomAttributeWithValue'
+    CustomAttributeLite:
+      type: object
+      properties:
+        guid:
+          type: string
+          readOnly: true
+        type:
+          allOf:
+          - $ref: '#/components/schemas/CustomAttributeType'
+          readOnly: true
+          description: 'Custom Attribute type, either category or status
+
+
+            * `text` - text'
+        name:
+          type: string
+          readOnly: true
+          description: Custom attribute display name
+      required:
+      - guid
+      - name
+      - type
+    TeamShortcut:
+      type: object
+      properties:
+        guid:
+          type: string
+        name:
+          type: string
+      required:
+      - guid
+      - name
     DataSourceTypesEnum:
       enum:
       - airflow
@@ -222,71 +244,60 @@ components:
         * `trial` - Trial
 
         * `trial_redshift` - Trial Redshift'
-    UserLite:
-      type: object
-      properties:
-        guid:
-          type: string
-          readOnly: true
-        first_name:
-          type: string
-          readOnly: true
-        last_name:
-          type: string
-          readOnly: true
-        team:
-          allOf:
-          - $ref: '#/components/schemas/TeamShortcut'
-          readOnly: true
-        email:
-          type: string
-          format: email
-          readOnly: true
-          title: Email address
-        avatar:
-          type:
-          - string
-          - 'null'
-          format: uri
-          readOnly: true
-        is_active:
-          type: boolean
-          readOnly: true
-      required:
-      - avatar
-      - email
-      - first_name
-      - guid
-      - is_active
-      - last_name
-      - team
     CustomAttributeType:
       enum:
       - text
       type: string
       description: '* `text` - text'
-    CustomAttributeLite:
-      type: object
-      properties:
-        guid:
-          type: string
-          readOnly: true
-        type:
-          allOf:
-          - $ref: '#/components/schemas/CustomAttributeType'
-          readOnly: true
-          description: 'Custom Attribute type, either category or status
+    DataTypesEnum:
+      enum:
+      - column
+      - tile
+      - page
+      - card
+      - element
+      - dashboard
+      - report
+      - metric
+      - visual
+      - worksheet
+      - one_to_one_logical
+      - sql_view
+      - question
+      - model
+      - table
+      type: string
+      description: '* `column` - column
 
+        * `tile` - tile
 
-            * `text` - text'
-        name:
-          type: string
-          readOnly: true
-          description: Custom attribute display name
-      required:
-      - guid
-      - name
-      - type
+        * `page` - page
+
+        * `card` - card
+
+        * `element` - element
+
+        * `dashboard` - dashboard
+
+        * `report` - report
+
+        * `metric` - metric
+
+        * `visual` - visual
+
+        * `worksheet` - worksheet
+
+        * `one_to_one_logical` - one_to_one_logical
+
+        * `sql_view` - sql_view
+
+        * `question` - question
+
+        * `model` - model
+
+        * `table` - table
+
+        * `` - empty'
     CustomAttributeObjectType:
       enum:
       - database
@@ -372,6 +383,44 @@ components:
         * `job` - job
 
         * `` - empty'
+    UserLite:
+      type: object
+      properties:
+        guid:
+          type: string
+          readOnly: true
+        first_name:
+          type: string
+          readOnly: true
+        last_name:
+          type: string
+          readOnly: true
+        team:
+          allOf:
+          - $ref: '#/components/schemas/TeamShortcut'
+          readOnly: true
+        email:
+          type: string
+          format: email
+          readOnly: true
+          title: Email address
+        avatar:
+          type:
+          - string
+          - 'null'
+          format: uri
+          readOnly: true
+        is_active:
+          type: boolean
+          readOnly: true
+      required:
+      - avatar
+      - email
+      - first_name
+      - guid
+      - is_active
+      - last_name
+      - team
     CustomAttributeWithValue:
       type: object
       properties:
@@ -554,55 +603,6 @@ components:
       - data_source
       - item
       - organization
-    DataTypesEnum:
-      enum:
-      - column
-      - tile
-      - page
-      - card
-      - element
-      - dashboard
-      - report
-      - metric
-      - visual
-      - worksheet
-      - one_to_one_logical
-      - sql_view
-      - question
-      - model
-      - table
-      type: string
-      description: '* `column` - column
-
-        * `tile` - tile
-
-        * `page` - page
-
-        * `card` - card
-
-        * `element` - element
-
-        * `dashboard` - dashboard
-
-        * `report` - report
-
-        * `metric` - metric
-
-        * `visual` - visual
-
-        * `worksheet` - worksheet
-
-        * `one_to_one_logical` - one_to_one_logical
-
-        * `sql_view` - sql_view
-
-        * `question` - question
-
-        * `model` - model
-
-        * `table` - table
-
-        * `` - empty'
   securitySchemes:
     JWTAuthentication:
       type: http
