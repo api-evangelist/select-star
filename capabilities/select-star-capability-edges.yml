@@ -1,0 +1,87 @@
+slug: select-star
+provider: Select Star
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 7
+edges:
+- tag: Databases
+  spec_file: select-star-databases-api-openapi.yml
+  capability_id: BC-610.10
+  capability_id_l1: BC-610
+  capability_name: Data Governance Management
+  confidence: 0.72
+  evidence: PATCH /v1/databases/owners/ 'Databases owners partial update'; schemas DatabaseOwnersBulkEditSerializer.GuidReferenceField.business_owner,
+    PIIType, TagLite
+  reason: Catalogues database assets and assigns business/technical owners plus PII tags — ownership,
+    stewardship and classification of data assets is data governance.
+- tag: Metadata
+  spec_file: select-star-metadata-api-openapi.yml
+  capability_id: BC-610.10
+  capability_id_l1: BC-610
+  capability_name: Data Governance Management
+  confidence: 0.72
+  evidence: GET /v1/metadata/{guid}/owners/ 'Metadata owners retrieve'; schemas MetadataSerializerWithOwners.GuidReferenceField.business_owner,
+    PIIType, TagLite
+  reason: 'Generic metadata curation surface: descriptions, tags, PII classification and business/technical
+    ownership across catalog objects — data governance and stewardship.'
+- tag: Collections
+  spec_file: select-star-collections-api-openapi.yml
+  capability_id: BC-610.10
+  capability_id_l1: BC-610
+  capability_name: Data Governance Management
+  confidence: 0.7
+  evidence: POST /v1/collections/ collections_create; PATCH /v1/collections/owners/ collections_owners_partial_update;
+    schemas CollectionOwnersBulkEdit, business_owner, technical_owner, PIIType
+  reason: Select Star is a data catalog; Collections curate catalog items with business and technical
+    owners and PII tagging, which is data governance/stewardship. Sub-capability slightly uncertain (curation
+    vs governance), hence moderate confidence.
+- tag: Columns
+  spec_file: select-star-columns-api-openapi.yml
+  capability_id: BC-610.10
+  capability_id_l1: BC-610
+  capability_name: Data Governance Management
+  confidence: 0.7
+  evidence: GET /v1/columns/ columns_list; PATCH /v1/columns/{guid}/; schemas PIIType, TagSetRequest,
+    BaseColumn, Breadcrumb
+  reason: Column-level metadata catalog entries with tagging and PII classification across warehouse schemas
+    — data cataloguing and stewardship under Information & Data Management. L2 between governance and
+    data architecture, so confidence moderate.
+- tag: SCIM
+  spec_file: select-star-scim-api-openapi.yml
+  capability_id: BC-4230.50
+  capability_id_l1: BC-4230
+  capability_name: Tenant Identity Federation
+  confidence: 0.7
+  evidence: GET /scim/v2/Users 'Scim v2 users list', POST /scim/v2/Users 'Scim v2 users create', DELETE
+    /scim/v2/Users/{guid}; schemas SCIMUser, SCIMUserCreateRequest, Team
+  reason: Standard SCIM 2.0 user provisioning exposed by a SaaS vendor to its customers, matching 'lifecycle
+    of tenant user accounts via single sign-on and SCIM'. Could alternatively be read as generic IAM (BC-620.20),
+    hence 0.7.
+- tag: Tables
+  spec_file: select-star-tables-api-openapi.yml
+  capability_id: BC-610.10
+  capability_id_l1: BC-610
+  capability_name: Data Governance Management
+  confidence: 0.7
+  evidence: PATCH /v1/tables/owners/ tables_owners_partial_update; schema 'TableSerializer.GuidReferenceField.business_owner'
+  reason: Operations catalogue warehouse tables and assign business/technical owners plus usage by teams/users
+    — asset ownership and stewardship of data, i.e. data governance within a data catalog, not any line-of-business
+    capability.
+- tag: Tags
+  spec_file: select-star-tags-api-openapi.yml
+  capability_id: BC-610.10
+  capability_id_l1: BC-610
+  capability_name: Data Governance Management
+  confidence: 0.7
+  evidence: GET /v1/tags/hierarchy/ tags_hierarchy_list; PATCH /v1/tags/items/; schemas PIIType, TaggedItems
+  reason: Tagging and classification hierarchy applied to data assets (including PII types) is data classification/stewardship
+    — data governance. Not a product-tagging or marketing concept.
