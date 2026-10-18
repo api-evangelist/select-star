@@ -366,7 +366,7 @@ apis:
   humanURL: https://docs.selectstar.com/select-star-api/overview
   baseURL: https://api.production.selectstar.com
   tags:
-  - Lineage
+  - Data Lineage
   tags_raw:
   - lineage
   properties:
