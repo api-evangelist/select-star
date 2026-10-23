@@ -1684,3 +1684,9 @@ components:
 externalDocs:
   description: Select Star API reference documentation
   url: https://docs.selectstar.com/select-star-api
+x-provenance:
+  method: harvested
+  publisher: Select Star
+  source: https://api.production.selectstar.com/schema/
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
